@@ -6,7 +6,7 @@ bool SceneMgr::Init()
     sceneMap[Scenes::MapEditor] = new MapEditorScene();
     currScene = Scenes::MapEditor;
 
-    for (auto pair : sceneMap)
+    for (auto& pair : sceneMap)
     {
         pair.second->Init();
     }

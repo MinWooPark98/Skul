@@ -3,7 +3,7 @@
 #include "../Framework/InputMgr.h"
 #include "../Framework/ResourceMgr.h"
 #include "../GameObject/Tile.h"
-#include "../Ui/TextButtonUi.h"
+#include "../Ui/MapEditorUiMgr.h"
 
 MapEditorScene::MapEditorScene()
 	:Scene(Scenes::MapEditor)
@@ -31,12 +31,13 @@ void MapEditorScene::Init()
 		map.push_back(tiles);
 	}
 
-	TextButtonUi* text = new TextButtonUi;
-	text->GetSFMLText().setCharacterSize(35);
-	text->SetFont(*RESOURCE_MGR->GetFont("fonts/DS-DIGI.ttf"));
-	text->SetText("FUCK");
-	text->Init();
-	objList.push_back(text);
+	uiMgr = new MapEditorUiMgr();
+	objList.push_back(uiMgr);
+
+	for (auto obj : objList)
+	{
+		obj->Init();
+	}
 }
 
 void MapEditorScene::Release()

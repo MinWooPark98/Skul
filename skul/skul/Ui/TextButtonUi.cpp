@@ -12,6 +12,7 @@ TextButtonUi::~TextButtonUi()
 
 void TextButtonUi::Init()
 {
+	text.setCharacterSize(20);
 	text.setOutlineColor({ 255, 0, 0, 0 });
 	text.setOutlineThickness(1.5f);
 }
