@@ -1,35 +1,45 @@
 #include "SceneMgr.h"
+#include "MapEditorScene.h"
 
 bool SceneMgr::Init()
 {
-	sceneMap[currScene]->Enter();
+    sceneMap[Scenes::MapEditor] = new MapEditorScene();
+    currScene = Scenes::MapEditor;
 
-	return true;
-}
+    for (auto pair : sceneMap)
+    {
+        pair.second->Init();
+    }
 
-Scenes SceneMgr::GetCurrScene() const
-{
-	return currScene;
+    sceneMap[currScene]->Enter();
+
+    return true;
 }
 
 Scene* SceneMgr::GetScene(Scenes scene)
 {
-	return sceneMap[scene];
+    return sceneMap[scene];
 }
 
 void SceneMgr::ChangeScene(Scenes scene)
 {
-	sceneMap[currScene]->Exit();
-	currScene = scene;
-	sceneMap[currScene]->Enter();
+    sceneMap[currScene]->Exit();
+    currScene = scene;
+    sceneMap[currScene]->Enter();
+}
+
+Scene* SceneMgr::GetCurrentScene()
+{
+    return sceneMap[currScene];
 }
 
 void SceneMgr::Update(float dt)
 {
-	sceneMap[currScene]->Update(dt);
+    sceneMap[currScene]->Update(dt);
 }
 
 void SceneMgr::Draw(RenderWindow& window)
 {
-	sceneMap[currScene]->Draw(window);
+    sceneMap[currScene]->Draw(window);
 }
+

@@ -16,10 +16,10 @@ public:
 	virtual void Draw(RenderWindow& window) override;
 	virtual void SetPos(Vector2f position);
 
-	Text& GetSFMLText() { return text; }
-	void SetFont(Font& font);
-	void SetText(string text);
-	void SetOrigin(Origins origin);
-	const string GetText() const;
+	virtual Text& GetSFMLText() { return text; }
+	virtual void SetFont(Font& font);
+	virtual void SetText(string text);
+	virtual void SetOrigin(Origins origin);
+	virtual const string GetText() const;
 };
 

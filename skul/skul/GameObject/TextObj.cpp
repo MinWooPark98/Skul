@@ -16,6 +16,7 @@ void TextObj::Init()
 
 void TextObj::Update(float dt)
 {
+	Object::Update(dt);
 }
 
 void TextObj::Draw(RenderWindow& window)

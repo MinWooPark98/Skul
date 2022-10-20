@@ -14,17 +14,17 @@ ResourceMgr::~ResourceMgr()
 
 void ResourceMgr::ReleaseAll()
 {
-    for (auto it : texMap)
+    for (auto& it : texMap)
     {
         delete it.second;
     }
     texMap.clear();
-    for (auto it : fontMap)
+    for (auto& it : fontMap)
     {
         delete it.second;
     }
     fontMap.clear();
-    for (auto it : soundMap)
+    for (auto& it : soundMap)
     {
         delete it.second;
     }

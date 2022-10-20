@@ -45,12 +45,7 @@ public:
 	void SetName(string name) { this->name = name; }
 	const string& GetName() const { return name; }
 
-	virtual void SetDevMode(bool devMode)
-	{
-		isDevMode = devMode;
-	}
+	virtual void SetDevMode(bool devMode) { isDevMode = devMode; }
 
 	virtual void SetHitBox(const FloatRect rect);
 };
-
-#define PRINT(STR) std::cout<<(STR)<<std::endl

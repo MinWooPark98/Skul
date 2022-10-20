@@ -1,7 +1,7 @@
 #include "Framework.h"
 #include "InputMgr.h"
 #include "ResourceMgr.h"
-#include "../Scenes/SceneMgr.h"
+#include "../Scene/SceneMgr.h"
 #include "../DataTable/DataTableMgr.h"
 #include "SoundMgr.h"
 

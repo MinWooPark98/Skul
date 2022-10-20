@@ -16,12 +16,13 @@ private:
 public:
 	bool Init();
 
-	Scenes GetCurrScene() const;
 	Scene* GetScene(Scenes scene);
 	void ChangeScene(Scenes scene);
+	Scene* GetCurrentScene();
 
 	void Update(float dt);
 	void Draw(RenderWindow& window);
+
 };
 
 #define SCENE_MGR (SceneMgr::GetInstance())
