@@ -1,14 +1,13 @@
 #include "Framework.h"
 #include "InputMgr.h"
-#include "../Scene/SceneMgr.h"
-#include "../DataTable/DataTableMGR.h"
 #include "ResourceMgr.h"
+#include "../Scenes/SceneMgr.h"
+#include "../DataTable/DataTableMgr.h"
 #include "SoundMgr.h"
 
-Framework::Framework(int width, int height)
-	:windowSize(width, height), timeScale(1.f)
+Framework::Framework()
+    : timeScale(1.f)
 {
-	window.create(VideoMode(windowSize.x, windowSize.y), "Game");
 }
 
 Framework::~Framework()
@@ -26,13 +25,22 @@ float Framework::GetRealDT() const
     return deltaTime.asSeconds();
 }
 
-bool Framework::Init()
+const Vector2i& Framework::GetWindowSize() const
 {
+    return windowSize;
+}
+
+bool Framework::Init(int width, int height)
+{
+    windowSize = { width, height };
+    window.create(VideoMode(windowSize.x, windowSize.y), "Game");
+
     RESOURCE_MGR->LoadAll();
-    DATATABLE_MGR->Init();
     SOUND_MGR->Init();
+    DATATABLE_MGR->Init();
     SCENE_MGR->Init();
     InputMgr::Init();
+
     return true;
 }
 
@@ -43,18 +51,33 @@ bool Framework::Do()
         deltaTime = clock.restart();
         float dt = GetDT();
 
-        InputMgr::ClearInput();
+        InputMgr::Update(dt);
         sf::Event ev;
         while (window.pollEvent(ev))
         {
-            if (ev.type == sf::Event::Closed)
-                window.close();
-            InputMgr::UpdateInput(ev);
+            InputMgr::ProcessInput(ev);
         }
+        if (ev.type == sf::Event::Closed)
+        {
+            window.close();
+        }
+        if (InputMgr::GetKeyDown(Keyboard::Escape))
+        {
+            window.close();
+        }
+
         SCENE_MGR->Update(dt);
+        SOUND_MGR->Update();
+
         window.clear();
         SCENE_MGR->Draw(window);
         window.display();
     }
-    return true;
+
+	return true;
+}
+
+ RenderWindow& Framework::GetWindow() 
+{
+    return window;
 }

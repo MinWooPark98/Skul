@@ -1,10 +1,10 @@
 #include "ResourceMgr.h"
 
-string ResourceMgr::FilePath = "Resources.csv";
+string ResourceMgr::FilePath("Resources.csv");
 
 ResourceMgr::ResourceMgr()
 {
-    LoadAll();
+    //LoadAll();
 }
 
 ResourceMgr::~ResourceMgr()
@@ -14,17 +14,17 @@ ResourceMgr::~ResourceMgr()
 
 void ResourceMgr::ReleaseAll()
 {
-    for (auto& it : texMap)
+    for (auto it : texMap)
     {
         delete it.second;
     }
     texMap.clear();
-    for (auto& it : fontMap)
+    for (auto it : fontMap)
     {
         delete it.second;
     }
     fontMap.clear();
-    for (auto& it : soundMap)
+    for (auto it : soundMap)
     {
         delete it.second;
     }
@@ -39,11 +39,12 @@ bool ResourceMgr::LoadAll()
 
     auto ids = doc.GetColumn<string>(0);
     auto types = doc.GetColumn<int>(1);
-
     for (int i = 0; i < doc.GetRowCount(); ++i)
     {
         if (!Load((ResourceTypes)types[i], ids[i]))
+        {
             return false;
+        }
     }
     return true;
 }
@@ -58,9 +59,10 @@ bool ResourceMgr::Load(ResourceTypes type, string id)
         return LoadFont(id);
     case ResourceTypes::SoundBuffer:
         return LoadSoundBuffer(id);
-    default:
-        return false;
     }
+
+    // Error Msg
+    return false;
 }
 
 bool ResourceMgr::LoadTexture(string id)
@@ -69,14 +71,13 @@ bool ResourceMgr::LoadTexture(string id)
     {
         return false;
     }
-
     auto texture = new Texture();
     if (!texture->loadFromFile(id))
     {
         delete texture;
         return false;
     }
-    texMap.insert({ id, texture });
+    texMap.insert({id, texture});
     return true;
 }
 
@@ -86,7 +87,6 @@ bool ResourceMgr::LoadFont(string id)
     {
         return false;
     }
-
     auto font = new Font();
     if (!font->loadFromFile(id))
     {
@@ -103,7 +103,6 @@ bool ResourceMgr::LoadSoundBuffer(string id)
     {
         return false;
     }
-
     auto buffer = new SoundBuffer();
     if (!buffer->loadFromFile(id))
     {
@@ -114,7 +113,7 @@ bool ResourceMgr::LoadSoundBuffer(string id)
     return true;
 }
 
-Texture* ResourceMgr::GetTexture(string id) const
+Texture* ResourceMgr::GetTexture(string id)
 {
     auto it = texMap.find(id);
     if (it == texMap.end())
@@ -122,7 +121,7 @@ Texture* ResourceMgr::GetTexture(string id) const
     return it->second;
 }
 
-Font* ResourceMgr::GetFont(string id) const
+Font* ResourceMgr::GetFont(string id)
 {
     auto it = fontMap.find(id);
     if (it == fontMap.end())
@@ -130,7 +129,7 @@ Font* ResourceMgr::GetFont(string id) const
     return it->second;
 }
 
-SoundBuffer* ResourceMgr::GetSoundBuffer(string id) const
+SoundBuffer* ResourceMgr::GetSoundBuffer(string id)
 {
     auto it = soundMap.find(id);
     if (it == soundMap.end())

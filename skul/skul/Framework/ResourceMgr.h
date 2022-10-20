@@ -2,11 +2,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <map>
-#include "../3rd/SingleTon.h"
+
+#include "../3rd/Singleton.h"
 #include "../3rd/rapidcsv.h"
 
-using namespace sf;
 using namespace std;
+using namespace sf;
 
 enum class ResourceTypes
 {
@@ -21,6 +22,7 @@ private:
 	map<string, Texture*> texMap;
 	map<string, Font*> fontMap;
 	map<string, SoundBuffer*> soundMap;
+
 public:
 	ResourceMgr();
 	~ResourceMgr();
@@ -35,9 +37,10 @@ public:
 	bool LoadFont(string id);
 	bool LoadSoundBuffer(string id);
 
-	Texture* GetTexture(string id) const;
-	Font* GetFont(string id) const;
-	SoundBuffer* GetSoundBuffer(string id) const;
+	Texture* GetTexture(string id);
+	Font* GetFont(string id);
+	SoundBuffer* GetSoundBuffer(string id);
+
 };
 
 #define RESOURCE_MGR (ResourceMgr::GetInstance())

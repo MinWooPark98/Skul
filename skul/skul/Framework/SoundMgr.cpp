@@ -2,7 +2,7 @@
 #include "ResourceMgr.h"
 
 SoundMgr::SoundMgr()
-	:TotalChannels(64), volume(100.f)
+	: TotalChannels(64), volume(100.f)
 {
 }
 
@@ -14,7 +14,8 @@ SoundMgr::~SoundMgr()
 void SoundMgr::Init()
 {
 	Release();
-	for (int i = 0; i < 64; ++i)
+
+	for (int i = 0; i < TotalChannels; ++i)
 	{
 		waiting.push_back(new Sound());
 	}
@@ -27,6 +28,7 @@ void SoundMgr::Release()
 		delete sound;
 	}
 	waiting.clear();
+
 	for (auto sound : playing)
 	{
 		delete sound;

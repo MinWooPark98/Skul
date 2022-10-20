@@ -1,10 +1,10 @@
 #pragma once
-#include "../3rd/SingleTon.h"
+#include "../3rd/Singleton.h"
 #include <SFML/Audio.hpp>
 #include <list>
 
-using namespace sf;
 using namespace std;
+using namespace sf;
 
 class SoundMgr : public Singleton<SoundMgr>
 {
@@ -24,8 +24,8 @@ public:
 
 	void Play(string id, bool loop = false);
 	void StopAll();
+
 	void Update();
 };
 
 #define SOUND_MGR (SoundMgr::GetInstance())
-
