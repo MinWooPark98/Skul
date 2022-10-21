@@ -1,5 +1,5 @@
 #include "TileExampleUi.h"
-#include "../GameObject/Tile.h"
+#include "../GameObject/RectTile.h"
 #include "../GameObject/TextObj.h"
 #include "../Framework/Framework.h"
 #include "../Framework/ResourceMgr.h"
@@ -18,10 +18,10 @@ void TileExampleUi::Init()
 	Vector2i windowSize = FRAMEWORK->GetWindowSize();
 	for (int i = 0; i < 8; ++i)
 	{
-		Tile* tile = new Tile();
+		RectTile* tile = new RectTile();
 		tile->Init();
 		tile->SetSize({ 40.f, 40.f });
-		tile->SetPos({ windowSize.x * 0.9f + 48.f * (i % 2), windowSize.y * 0.45f + 48.f * (i / 2) });
+		tile->SetPos({ 48.f * (i % 2), 48.f * (i / 2) });
 		tiles.push_back(tile);
 	}
 }
@@ -48,5 +48,14 @@ void TileExampleUi::Draw(RenderWindow& window)
 	for (auto tile : tiles)
 	{
 		tile->Draw(window);
+	}
+}
+
+void TileExampleUi::SetPos(const Vector2f& pos)
+{
+	Object::SetPos(pos);
+	for (auto tile : tiles)
+	{
+		tile->Translate(pos);
 	}
 }

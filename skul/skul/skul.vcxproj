@@ -154,6 +154,10 @@
     <ClCompile Include="Framework\ResourceMgr.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="GameObject\TextObj.cpp" />
+    <ClCompile Include="GameObject\RectTile.cpp" />
+    <ClCompile Include="GameObject\TriangleTile.cpp" />
+    <ClCompile Include="Ui\ListMoverUi.cpp" />
+    <ClCompile Include="Ui\GridUi.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameObject\Object.cpp" />
     <ClCompile Include="Ui\TileExampleUi.cpp" />
@@ -180,6 +184,10 @@
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="GameObject\Object.h" />
     <ClInclude Include="GameObject\TextObj.h" />
+    <ClInclude Include="GameObject\RectTile.h" />
+    <ClInclude Include="GameObject\TriangleTile.h" />
+    <ClInclude Include="Ui\ListMoverUi.h" />
+    <ClInclude Include="Ui\GridUi.h" />
     <ClInclude Include="Ui\TileExampleUi.h" />
     <ClInclude Include="Ui\MapEditorUiMgr.h" />
     <ClInclude Include="Scene\MapEditorScene.h" />

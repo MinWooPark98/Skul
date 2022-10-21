@@ -19,8 +19,8 @@ void TextButtonUi::Init()
 	case Modes::BackWall:
 		text.setString("BackWall");
 		break;
-	case Modes::BackObject:
-		text.setString("BackObject");
+	case Modes::BackObj:
+		text.setString("BackObj");
 		break;
 	case Modes::Platform:
 		text.setString("Platform");

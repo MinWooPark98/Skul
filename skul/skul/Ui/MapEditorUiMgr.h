@@ -9,7 +9,7 @@ public:
 	{
 		None = -1,
 		BackWall,
-		BackObject,
+		BackObj,
 		Platform,
 		Player,
 		Enemies,
@@ -19,7 +19,8 @@ public:
 	};
 protected:
 	Texture* currTex;
-	
+
+	RectangleShape* exTileFrame;
 	list<TextButtonUi*> textButtons;
 	Modes mode;
 
@@ -32,6 +33,7 @@ public:
 	virtual void Reset();
 
 	virtual void Update(float dt);
+	virtual void Draw(RenderWindow& window);
 
 	void ChangeMode(TextButtonUi::Modes mode);
 };

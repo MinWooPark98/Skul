@@ -8,7 +8,7 @@ public:
 	enum class Modes
 	{
 		BackWall,
-		BackObject,
+		BackObj,
 		Platform,
 		Player,
 		Enemies,

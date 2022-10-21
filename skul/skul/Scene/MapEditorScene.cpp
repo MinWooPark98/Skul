@@ -16,23 +16,6 @@ MapEditorScene::~MapEditorScene()
 
 void MapEditorScene::Init()
 {
-	Vector2i windowSize = FRAMEWORK->GetWindowSize();
-	int row = windowSize.x / 32;
-	int column = windowSize.y / 32;
-	for (int i = 0; i < column; ++i)
-	{
-		vector<Tile*>* tiles = new vector<Tile*>;
-		for (int j = 0; j < row; ++j)
-		{
-			Tile* tile = new Tile();
-			tile->SetSize({ 24.f, 24.f });
-			tile->SetPos({ windowSize.x * 0.02f + 28.f * j, windowSize.y * 0.1f + 28.f * i });
-			tiles->push_back(tile);
-			objList.push_back(tile);
-		}
-		map.push_back(tiles);
-	}
-
 	uiMgr = new MapEditorUiMgr();
 	objList.push_back(uiMgr);
 

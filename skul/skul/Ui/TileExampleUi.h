@@ -2,12 +2,12 @@
 #include "../GameObject/Object.h"
 #include <list>
 
-class Tile;
+class RectTile;
 
 class TileExampleUi : public Object
 {
 protected:
-	list<Tile*> tiles;
+	list<RectTile*> tiles;
 
 public:
 	TileExampleUi();
@@ -20,5 +20,7 @@ public:
 
 	virtual void Update(float dt) override;
 	virtual void Draw(RenderWindow& window) override;
+
+	virtual void SetPos(const Vector2f& pos);
 };
 

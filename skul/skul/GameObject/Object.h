@@ -16,7 +16,7 @@ protected:
 	Vector2f position;
 	float rotation;
 	Vector2f scale;
-	
+
 	static int objCount;
 
 	RectangleShape hitbox;
@@ -38,6 +38,8 @@ public:
 	virtual void SetPos(const Vector2f& pos);
 	virtual const Vector2f& GetPos() const;
 	virtual void Translate(const Vector2f& delta);
+
+	virtual void SetRotation(float rotation) { this->rotation = rotation; }
 
 	virtual void Update(float dt);
 	virtual void Draw(RenderWindow& window);

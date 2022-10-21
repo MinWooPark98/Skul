@@ -64,7 +64,6 @@ void Object::Draw(RenderWindow& window)
     {
         window.draw(hitbox);
     }
-    window.draw(hitbox);
 }
 
 void Object::SetHitBox(const FloatRect rect)
