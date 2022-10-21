@@ -24,7 +24,9 @@ void MapEditorScene::Init()
 		vector<Tile*>* tiles = new vector<Tile*>;
 		for (int j = 0; j < row; ++j)
 		{
-			Tile* tile = new Tile({ 24.f, 24.f }, { windowSize.x * 0.025f + 28.f * j, windowSize.y * 0.1f + 28.f * i });
+			Tile* tile = new Tile();
+			tile->SetSize({ 24.f, 24.f });
+			tile->SetPos({ windowSize.x * 0.02f + 28.f * j, windowSize.y * 0.1f + 28.f * i });
 			tiles->push_back(tile);
 			objList.push_back(tile);
 		}

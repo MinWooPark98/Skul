@@ -72,6 +72,9 @@
     <ClCompile Include="Ui\MapEditorUiMgr.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Ui\TileExampleUi.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataTable\DataTable.h">
@@ -135,6 +138,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Ui\MapEditorUiMgr.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Ui\TileExampleUi.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

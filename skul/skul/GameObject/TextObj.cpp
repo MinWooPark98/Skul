@@ -30,6 +30,11 @@ void TextObj::SetPos(Vector2f position)
 	text.setPosition(position);
 }
 
+void TextObj::SetSize(unsigned int size)
+{
+	text.setCharacterSize(size);
+}
+
 void TextObj::SetFont(Font& font)
 {
 	text.setFont(font);

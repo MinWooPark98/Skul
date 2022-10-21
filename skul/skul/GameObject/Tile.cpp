@@ -3,19 +3,20 @@
 #include "../Framework/InputMgr.h"
 #include "../Framework/ResourceMgr.h"
 
-Tile::Tile(const Vector2f& size, const Vector2f& pos)
+Tile::Tile()
 	:isMouseOn(false)
 {
-	tile.setSize(size);
-	SetPos(pos);
-	tile.setPosition(pos);
-	tile.setFillColor({ 255, 255, 255, 0 });
-	tile.setOutlineColor(Color::White);
-	tile.setOutlineThickness(1.f);
 }
 
 Tile::~Tile()
 {
+}
+
+void Tile::Init()
+{
+	tile.setFillColor({ 255, 255, 255, 0 });
+	tile.setOutlineColor(Color::White);
+	tile.setOutlineThickness(1.f);
 }
 
 void Tile::Reset()
@@ -48,6 +49,12 @@ void Tile::Draw(RenderWindow& window)
 	window.draw(tile);
 }
 
+void Tile::SetPos(const Vector2f& pos)
+{
+	Object::SetPos(pos);
+	tile.setPosition(pos);
+}
+
 void Tile::DrawTexture(const Texture* tex)
 {
 	tile.setFillColor({ 255, 255, 255, 255 });
@@ -70,4 +77,9 @@ void Tile::MarkOff()
 {
 	tile.setOutlineColor(Color::White);
 	tile.setOutlineThickness(1.f);
+}
+
+const Texture* Tile::GetTexture() const
+{
+	return tile.getTexture();
 }

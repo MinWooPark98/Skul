@@ -17,6 +17,7 @@ public:
 	virtual void SetPos(Vector2f position);
 
 	virtual Text& GetSFMLText() { return text; }
+	virtual void SetSize(unsigned int size);
 	virtual void SetFont(Font& font);
 	virtual void SetText(string text);
 	virtual void SetOrigin(Origins origin);
