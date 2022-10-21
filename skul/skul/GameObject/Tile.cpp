@@ -2,6 +2,8 @@
 #include "../Framework/Utils.h"
 #include "../Framework/InputMgr.h"
 #include "../Framework/ResourceMgr.h"
+#include "../Ui/MapEditorUiMgr.h"
+#include "../Scene/SceneMgr.h"
 
 Tile::~Tile()
 {
@@ -10,9 +12,9 @@ Tile::~Tile()
 void Tile::Init()
 {
 	Object::Init();
-	tile->setFillColor({ 255, 255, 255, 0 });
-	tile->setOutlineColor(Color::White);
-	tile->setOutlineThickness(1.f);
+	tile->setFillColor({ 255, 255, 255, 255 });
+	tile->setOutlineColor({0, 0, 0, 255});
+	tile->setOutlineThickness(2.f);
 }
 
 void Tile::Reset()
@@ -25,7 +27,6 @@ void Tile::Update(float dt)
 {
 	Vector2f mousePos = InputMgr::GetMousePos();
 	FloatRect tileBound = tile->getGlobalBounds();
-
 	if (mousePos.x < tileBound.left || mousePos.x > tileBound.left + tileBound.width ||
 		mousePos.y < tileBound.top || mousePos.y > tileBound.top + tileBound.height)
 	{
@@ -57,28 +58,24 @@ void Tile::SetRotation(float rotation)
 	tile->setRotation(rotation);
 }
 
-void Tile::DrawTexture(const Texture* tex)
+void Tile::SetTexture(const Texture* tex)
 {
-	tile->setFillColor({ 255, 255, 255, 255 });
 	tile->setTexture(tex, true);
 }
 
-void Tile::EraseTexture()
+void Tile::SetTextureChosen()
 {
-	tile->setFillColor({ 255, 255, 255, 0 });
-	tile->setTexture(nullptr);
+	SetTexture(((MapEditorUiMgr*)(SCENE_MGR->GetScene(Scenes::MapEditor)->GetUiMgr()))->GetTexture());
 }
 
 void Tile::MarkOn()
 {	
-	tile->setOutlineColor({ 255, 0, 0, 255 });
-	tile->setOutlineThickness(2.f);
+	tile->setOutlineColor({ 0, 255, 0, 255 });
 }
 
 void Tile::MarkOff()
 {
-	tile->setOutlineColor(Color::White);
-	tile->setOutlineThickness(1.f);
+	tile->setOutlineColor({ 0, 0, 0, 255 });
 }
 
 const Texture* Tile::GetTexture() const

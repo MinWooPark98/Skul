@@ -2,12 +2,13 @@
 #include "../GameObject/Object.h"
 #include <list>
 
-class RectTile;
+class ExRectTile;
 
 class TileExampleUi : public Object
 {
 protected:
-	list<RectTile*> tiles;
+	vector<list<ExRectTile*>*> tiles;
+	int currList;
 
 public:
 	TileExampleUi();

@@ -149,6 +149,7 @@
     <ClCompile Include="DataTable\DataTable.cpp" />
     <ClCompile Include="DataTable\DataTableMGR.cpp" />
     <ClCompile Include="DataTable\StringTable.cpp" />
+    <ClCompile Include="GameObject\ExRectTile.cpp" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Framework\InputMgr.cpp" />
     <ClCompile Include="Framework\ResourceMgr.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="GameObject\TextObj.cpp" />
     <ClCompile Include="GameObject\RectTile.cpp" />
     <ClCompile Include="GameObject\TriangleTile.cpp" />
+    <ClCompile Include="GameObject\GridRectTile.cpp" />
     <ClCompile Include="Ui\ListMoverUi.cpp" />
     <ClCompile Include="Ui\GridUi.cpp" />
     <ClCompile Include="main.cpp" />
@@ -177,6 +179,7 @@
     <ClInclude Include="DataTable\DataTable.h" />
     <ClInclude Include="DataTable\DataTableMGR.h" />
     <ClInclude Include="DataTable\StringTable.h" />
+    <ClInclude Include="GameObject\ExRectTile.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Framework\InputMgr.h" />
     <ClInclude Include="Framework\ObjectPool.h" />
@@ -186,6 +189,7 @@
     <ClInclude Include="GameObject\TextObj.h" />
     <ClInclude Include="GameObject\RectTile.h" />
     <ClInclude Include="GameObject\TriangleTile.h" />
+    <ClInclude Include="GameObject\GridRectTile.h" />
     <ClInclude Include="Ui\ListMoverUi.h" />
     <ClInclude Include="Ui\GridUi.h" />
     <ClInclude Include="Ui\TileExampleUi.h" />

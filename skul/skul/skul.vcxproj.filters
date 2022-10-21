@@ -87,6 +87,12 @@
     <ClCompile Include="GameObject\TriangleTile.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\ExRectTile.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\GridRectTile.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataTable\DataTable.h">
@@ -165,6 +171,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\TriangleTile.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\ExRectTile.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\GridRectTile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

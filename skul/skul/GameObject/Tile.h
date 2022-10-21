@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "../Framework/Utils.h"
+#include <functional>
 
 class Tile : public Object
 {
@@ -22,10 +23,11 @@ public:
 	virtual void SetPos(const Vector2f& pos) override;
 	virtual void SetScale(const Vector2f& scale) { tile->setScale(scale); }
 
-	void SetRotation(float rotation);
+	virtual void SetRotation(float rotation);
 	
-	virtual void DrawTexture(const Texture* tex);
-	virtual void EraseTexture();
+	virtual void SetTexture(const Texture* tex);
+	virtual void SetTextureChosen();
+	const Texture* GetTexture() { return tile->getTexture(); }
 	
 	virtual void MarkOn();
 	virtual void MarkOff();

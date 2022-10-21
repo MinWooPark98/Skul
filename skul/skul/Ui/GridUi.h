@@ -1,12 +1,12 @@
 #pragma once
 #include "../GameObject/Object.h"
 
-class RectTile;
+class GridRectTile;
 
 class GridUi : public Object
 {
 protected:
-	vector<vector<RectTile*>*> map;
+	vector<vector<GridRectTile*>*> map;
 
 public:
 	GridUi();
