@@ -18,7 +18,7 @@ public:
 		Erase,
 	};
 protected:
-	Texture currTex;
+	const Texture* currTex;
 
 	RectangleShape* exTileFrame;
 	list<TextButtonUi*> textButtons;
@@ -36,6 +36,6 @@ public:
 	virtual void Draw(RenderWindow& window);
 
 	void ChangeMode(TextButtonUi::Modes mode);
-	void SetTexture(const Texture* tex);
-	const Texture* GetTexture() { return &currTex; }
+	void SetTexture(const Texture* tex) { currTex = tex; }
+	const Texture* GetTexture() { return currTex; }
 };

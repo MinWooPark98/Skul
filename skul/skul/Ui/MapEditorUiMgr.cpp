@@ -8,7 +8,7 @@
 #include "ListMoverUi.h"
 
 MapEditorUiMgr::MapEditorUiMgr()
-	:UiMgr(SCENE_MGR->GetScene(Scenes::MapEditor)), exTileFrame(nullptr), mode(Modes::None)
+	:UiMgr(SCENE_MGR->GetScene(Scenes::MapEditor)), currTex(nullptr), exTileFrame(nullptr), mode(Modes::None)
 {
 }
 
@@ -81,11 +81,4 @@ void MapEditorUiMgr::ChangeMode(TextButtonUi::Modes mode)
 			text->Deselected();
 	}
 	this->mode = (Modes)((int)mode);
-}
-
-void MapEditorUiMgr::SetTexture(const Texture* tex)
-{
-	if (tex == nullptr)
-		return;
-	currTex = *tex;
 }

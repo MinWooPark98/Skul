@@ -8,6 +8,5 @@ public:
 	virtual ~GridRectTile();
 
 	virtual void Update(float dt) override;
-	function<void()> ClickOn;
 };
 

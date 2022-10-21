@@ -1,7 +1,6 @@
 #include "tile.h"
 #include "../Framework/Utils.h"
 #include "../Framework/InputMgr.h"
-#include "../Framework/ResourceMgr.h"
 #include "../Ui/MapEditorUiMgr.h"
 #include "../Scene/SceneMgr.h"
 

@@ -7,6 +7,7 @@
 #include "../Ui/MapEditorUiMgr.h"
 
 TileExampleUi::TileExampleUi()
+	:currList(0)
 {
 }
 

@@ -13,9 +13,5 @@ void GridRectTile::Update(float dt)
 {
 	RectTile::Update(dt);
 	if (isMouseOn && InputMgr::GetMouseButton(Mouse::Left))
-	{
-		if (ClickOn == nullptr)
-			return;
-		ClickOn();
-	}
+		SetTextureChosen();
 }

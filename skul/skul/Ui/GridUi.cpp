@@ -28,7 +28,6 @@ void GridUi::Init()
 			tile->Init();
 			tile->SetSize({ 24.f, 24.f });
 			tile->SetPos({ windowSize.x * 0.02f + 28.f * j, windowSize.y * 0.1f + 28.f * i });
-			tile->ClickOn = bind(&RectTile::SetTexture, tile, ((MapEditorUiMgr*)(SCENE_MGR->GetScene(Scenes::MapEditor)->GetUiMgr()))->GetTexture());
 			tiles->push_back(tile);
 		}
 		map.push_back(tiles);
