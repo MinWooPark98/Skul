@@ -1,19 +1,19 @@
-#include "StringTable.h"
+#include "LanguageTable.h"
 #include "../3rd/rapidcsv.h"
 
-StringTable::StringTable()
-	: DataTable(Types::String), currentLang(Languages::KOR)
+LanguageTable::LanguageTable()
+	: DataTable(Types::Language), currentLang(Languages::KOR)
 {
 	fileNames.push_back("tables/StringTable_Kor.csv");	//
 	fileNames.push_back("tables/StringTable_Eng.csv");
 	fileNames.push_back("tables/StringTable_Jpn.csv");
 }
 
-StringTable::~StringTable()
+LanguageTable::~LanguageTable()
 {
 }
 
-void StringTable::SetLanguage(Languages lang)
+void LanguageTable::SetLanguage(Languages lang)
 {
 	Release();
 
@@ -26,14 +26,14 @@ void StringTable::SetLanguage(Languages lang)
 	{
 		if (table.find(keys[j]) != table.end())
 		{
-			//¿À·ù
+			cout << "value is empty" << endl;
 			return;
 		}
 		table.insert({ keys[j], values[j] });
 	}
 }
 
-const string& StringTable::Get(const string& id)
+const string& LanguageTable::Get(const string& id)
 {
 	auto find = table.find(id);
 	if (find == table.end())
@@ -50,12 +50,12 @@ const string& StringTable::Get(const string& id)
 //	return find->second;
 //}
 
-void StringTable::Release()
+void LanguageTable::Release()
 {
 	table.clear();
 }
 
-bool StringTable::Load()
+bool LanguageTable::Load()
 {
 	SetLanguage(currentLang);
 

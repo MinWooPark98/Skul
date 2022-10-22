@@ -8,7 +8,9 @@ class DataTable
 public:
 	enum class Types
 	{
-		String,
+		None = -1,
+		Language,
+		FilePath,
 	};
 private:
 	Types type;

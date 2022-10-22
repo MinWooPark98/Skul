@@ -1,5 +1,6 @@
 #include "DataTableMgr.h"
-#include "StringTable.h"
+#include "LanguageTable.h"
+#include "FilePathTable.h"
 
 DataTableMgr::DataTableMgr(const DataTableMgr& ref)
 {
@@ -22,14 +23,18 @@ DataTableMgr::~DataTableMgr()
 
 void DataTableMgr::Init()
 {
-    DataTable* table = new StringTable();
+    DataTable* table = new LanguageTable();
     table->Load();
-    tables.insert({ DataTable::Types::String, table });
+    tables.insert({ DataTable::Types::Language, table });
+    
+    table = new FilePathTable();
+    table->Load();
+    tables.insert({ DataTable::Types::FilePath, table });
 }
 
 void DataTableMgr::Release()
 {
-    for (auto pair : tables)
+    for (auto& pair : tables)
     {
         delete pair.second;
     }

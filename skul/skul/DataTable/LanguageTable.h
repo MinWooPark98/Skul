@@ -15,7 +15,7 @@ enum class Languages
 	COUNT,
 };
 
-class StringTable : public DataTable
+class LanguageTable : public DataTable
 {
 private:
 	//map<Languages, map<string, string>*> tables;
@@ -24,8 +24,8 @@ private:
 	Languages currentLang;
 
 public:
-	StringTable();
-	virtual ~StringTable();
+	LanguageTable();
+	virtual ~LanguageTable();
 
 	void SetLanguage(Languages lang);
 

@@ -148,7 +148,8 @@
   <ItemGroup>
     <ClCompile Include="DataTable\DataTable.cpp" />
     <ClCompile Include="DataTable\DataTableMGR.cpp" />
-    <ClCompile Include="DataTable\StringTable.cpp" />
+    <ClCompile Include="DataTable\LanguageTable.cpp" />
+    <ClCompile Include="DataTable\FilePathTable.cpp" />
     <ClCompile Include="GameObject\ExRectTile.cpp" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Framework\InputMgr.cpp" />
@@ -179,7 +180,8 @@
     <ClInclude Include="3rd\SingleTon.h" />
     <ClInclude Include="DataTable\DataTable.h" />
     <ClInclude Include="DataTable\DataTableMGR.h" />
-    <ClInclude Include="DataTable\StringTable.h" />
+    <ClInclude Include="DataTable\LanguageTable.h" />
+    <ClInclude Include="DataTable\FilePathTable.h" />
     <ClInclude Include="GameObject\ExRectTile.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Framework\InputMgr.h" />

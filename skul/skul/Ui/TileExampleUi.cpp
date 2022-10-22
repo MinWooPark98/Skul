@@ -6,6 +6,8 @@
 #include "../Scene/MapEditorScene.h"
 #include "ListMoverUi.h"
 #include <fstream>
+#include "../DataTable/DataTableMGR.h"
+#include "../DataTable/FilePathTable.h"
 
 TileExampleUi::TileExampleUi()
 	:currList(0), clickedTile(nullptr), listMover(nullptr)
@@ -19,6 +21,7 @@ TileExampleUi::~TileExampleUi()
 void TileExampleUi::Init()
 {
 	Object::Init();
+	FilePathTable* filePath = DATATABLE_MGR->Get<FilePathTable>(DataTable::Types::FilePath);
 	ifstream ifs(tileNames);
 	string tileName;
 	bool tileRemain = true;
@@ -35,7 +38,7 @@ void TileExampleUi::Init()
 			if (tiles.size() == 0 && tileList->size() == 0)
 				tile->SetTexture(nullptr);
 			else if (getline(ifs, tileName))
-				tile->SetTexture(RESOURCE_MGR->GetTexture("graphics/player3.png"));
+				tile->SetTexture(RESOURCE_MGR->GetTexture(filePath->Get(tileName)));
 			else
 			{
 				delete tile;

@@ -24,7 +24,7 @@
     <ClCompile Include="DataTable\DataTableMGR.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="DataTable\StringTable.cpp">
+    <ClCompile Include="DataTable\LanguageTable.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Scene.cpp">
@@ -96,6 +96,9 @@
     <ClCompile Include="Ui\ObjExampleUi.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="DataTable\FilePathTable.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataTable\DataTable.h">
@@ -104,7 +107,7 @@
     <ClInclude Include="DataTable\DataTableMGR.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="DataTable\StringTable.h">
+    <ClInclude Include="DataTable\LanguageTable.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="3rd\rapidcsv.h">
@@ -183,6 +186,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Ui\ObjExampleUi.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTable\FilePathTable.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
