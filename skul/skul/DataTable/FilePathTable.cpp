@@ -2,9 +2,15 @@
 #include "../3rd/rapidcsv.h"
 
 FilePathTable::FilePathTable()
-	:DataTable(Types::FilePath), currObj(ObjTypes::tile_01)
+	:DataTable(Types::FilePath), currObj(ObjTypes::Background)
 {
-	fileNames.push_back("tables/mapeditor_tile.csv");
+	fileNames.push_back("tables/mapeditor/mapeditor_background.csv");
+	fileNames.push_back("tables/mapeditor/mapeditor_backobject.csv");
+	fileNames.push_back("tables/mapeditor/mapeditor_enemy.csv");
+	fileNames.push_back("tables/mapeditor/mapeditor_npc.csv");
+	fileNames.push_back("tables/mapeditor/mapeditor_player.csv");
+	fileNames.push_back("tables/mapeditor/mapeditor_reward.csv");
+	fileNames.push_back("tables/mapeditor/mapeditor_tile.csv");
 }
 
 FilePathTable::~FilePathTable()

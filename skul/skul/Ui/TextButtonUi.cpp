@@ -16,20 +16,20 @@ void TextButtonUi::Init()
 	Object::Init();
 	switch (mode)
 	{
-	case Modes::BackWall:
-		text.setString("BackWall");
+	case Modes::BackGround:
+		text.setString("BackGround");
 		break;
-	case Modes::BackObj:
-		text.setString("BackObj");
-		break;
-	case Modes::Player:
-		text.setString("Player");
+	case Modes::BackObject:
+		text.setString("BackObject");
 		break;
 	case Modes::Enemies:
 		text.setString("Enemies");
 		break;
 	case Modes::NPC:
 		text.setString("NPC");
+		break;
+	case Modes::Player:
+		text.setString("Player");
 		break;
 	case Modes::Reward:
 		text.setString("Reward");

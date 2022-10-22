@@ -8,7 +8,13 @@ class FilePathTable : public DataTable
 public:
 	enum class ObjTypes
 	{
-		tile_01,
+		Background,
+		Backobject,
+		Enemy,
+		NPC,
+		Player,
+		Reward,
+		Tile,
 		Count,
 	};
 

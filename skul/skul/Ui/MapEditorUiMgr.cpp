@@ -7,6 +7,8 @@
 #include "ObjExampleUi.h"
 #include "../GameObject/RectTile.h"
 #include "../Scene/MapEditorScene.h"
+#include "../DataTable/DataTableMGR.h"
+#include "../DataTable/FilePathTable.h"
 
 MapEditorUiMgr::MapEditorUiMgr()
 	:UiMgr(SCENE_MGR->GetScene(Scenes::MapEditor))
@@ -21,6 +23,7 @@ void MapEditorUiMgr::Init()
 {
 	UiMgr::Init();
 	Vector2i windowSize = FRAMEWORK->GetWindowSize();
+	FilePathTable* paths = DATATABLE_MGR->Get<FilePathTable>(DataTable::Types::FilePath);
 	
 	for (int i = 0; i < (int)MapEditorScene::Modes::Count; ++i)
 	{
@@ -32,34 +35,97 @@ void MapEditorUiMgr::Init()
 		text->ChangeMode = bind(&MapEditorScene::ChangeMode, ((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor)), placeholders::_1);
 		switch ((MapEditorScene::Modes)i)
 		{
-		case MapEditorScene::Modes::BackWall:
+		case MapEditorScene::Modes::BackGround:
 			{
-				text->SetName("BackWallTextButton");
+				text->SetName("BackGroundTextButton");
 				ObjExampleUi* exTiles = new ObjExampleUi();
-				exTiles->SetName("BackWallExampleUi");
+				exTiles->SetName("BackGroundExampleUi");
+				exTiles->SetTileNames("tables/mapeditor/background.txt");
+				paths->SetObjType(FilePathTable::ObjTypes::Background);
 				exTiles->Init();
 				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
-				text->ShowSelected = bind(&TileExampleUi::SetActive, exTiles, true);
-				text->StopShowing = bind(&TileExampleUi::SetActive, exTiles, false);
+				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
+				text->StopShowing = bind(&ObjExampleUi::SetActive, exTiles, false);
 				uiObjList.push_back(exTiles);
 			}
 			break;
-		case MapEditorScene::Modes::BackObj:
-			break;
-		case MapEditorScene::Modes::Player:
+		case MapEditorScene::Modes::BackObject:
+			{
+				text->SetName("BackObjectTextButton");
+				ObjExampleUi* exTiles = new ObjExampleUi();
+				exTiles->SetName("BackObjectExampleUi");
+				exTiles->SetTileNames("tables/mapeditor/backobject.txt");
+				paths->SetObjType(FilePathTable::ObjTypes::Backobject);
+				exTiles->Init();
+				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
+				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
+				text->StopShowing = bind(&ObjExampleUi::SetActive, exTiles, false);
+				uiObjList.push_back(exTiles);
+			}
 			break;
 		case MapEditorScene::Modes::Enemies:
+			{
+				text->SetName("EnemiesTextButton");
+				ObjExampleUi* exTiles = new ObjExampleUi();
+				exTiles->SetName("EnemiesExampleUi");
+				exTiles->SetTileNames("tables/mapeditor/enemy.txt");
+				paths->SetObjType(FilePathTable::ObjTypes::Enemy);
+				exTiles->Init();
+				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
+				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
+				text->StopShowing = bind(&ObjExampleUi::SetActive, exTiles, false);
+				uiObjList.push_back(exTiles);
+			}
 			break;
 		case MapEditorScene::Modes::NPC:
+			{
+				text->SetName("NPCTextButton");
+				ObjExampleUi* exTiles = new ObjExampleUi();
+				exTiles->SetName("NPCExampleUi");
+				exTiles->SetTileNames("tables/mapeditor/npc.txt");
+				paths->SetObjType(FilePathTable::ObjTypes::NPC);
+				exTiles->Init();
+				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
+				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
+				text->StopShowing = bind(&ObjExampleUi::SetActive, exTiles, false);
+				uiObjList.push_back(exTiles);
+			}
+			break;
+		case MapEditorScene::Modes::Player:
+			{
+				text->SetName("PlayerTextButton");
+				ObjExampleUi* exTiles = new ObjExampleUi();
+				exTiles->SetName("PlayerExampleUi");
+				exTiles->SetTileNames("tables/mapeditor/player.txt");
+				paths->SetObjType(FilePathTable::ObjTypes::Player);
+				exTiles->Init();
+				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
+				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
+				text->StopShowing = bind(&ObjExampleUi::SetActive, exTiles, false);
+				uiObjList.push_back(exTiles);
+			}
 			break;
 		case MapEditorScene::Modes::Reward:
+			{
+				text->SetName("RewardTextButton");
+				ObjExampleUi* exTiles = new ObjExampleUi();
+				exTiles->SetName("RewardExampleUi");
+				exTiles->SetTileNames("tables/mapeditor/reward.txt");
+				paths->SetObjType(FilePathTable::ObjTypes::Reward);
+				exTiles->Init();
+				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
+				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
+				text->StopShowing = bind(&ObjExampleUi::SetActive, exTiles, false);
+				uiObjList.push_back(exTiles);
+			}
 			break;
 		case MapEditorScene::Modes::Tile:
 			{
 				text->SetName("TileTextButton");
 				TileExampleUi* exTiles = new TileExampleUi();
 				exTiles->SetName("TileExampleUi");
-				exTiles->SetTileNames("tables/tiles.txt");
+				exTiles->SetTileNames("tables/mapeditor/tiles.txt");
+				paths->SetObjType(FilePathTable::ObjTypes::Tile);
 				exTiles->Init();
 				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
 				text->ShowSelected = bind(&TileExampleUi::SetActive, exTiles, true);

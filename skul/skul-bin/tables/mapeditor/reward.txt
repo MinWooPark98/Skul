@@ -1,0 +1,3 @@
+reward_gold
+reward_item
+reward_head

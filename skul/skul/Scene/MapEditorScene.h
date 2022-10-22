@@ -9,11 +9,11 @@ public:
 	enum class Modes
 	{
 		None = -1,
-		BackWall,
-		BackObj,
-		Player,
+		BackGround,
+		BackObject,
 		Enemies,
 		NPC,
+		Player,
 		Reward,
 		Tile,
 		TileCollider,

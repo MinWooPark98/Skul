@@ -1,6 +1,5 @@
 #include "TileExampleUi.h"
 #include "../GameObject/ExRectTile.h"
-#include "../GameObject/TextObj.h"
 #include "../Framework/ResourceMgr.h"
 #include "../Scene/SceneMgr.h"
 #include "../Scene/MapEditorScene.h"
@@ -62,6 +61,17 @@ void TileExampleUi::Init()
 
 void TileExampleUi::Release()
 {
+	for (auto tileList : tiles)
+	{
+		for (auto tile : *tileList)
+		{
+			delete tile;
+			tile = nullptr;
+		}
+	}
+	if(listMover != nullptr)
+		delete listMover;
+	listMover = nullptr;
 }
 
 void TileExampleUi::Reset()

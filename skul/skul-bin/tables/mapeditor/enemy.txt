@@ -1,0 +1,11 @@
+enemy_0
+enemy_1
+enemy_2
+enemy_3
+enemy_4
+enemy_5
+enemy_6
+enemy_7
+enemy_8
+enemy_9
+enemy_10

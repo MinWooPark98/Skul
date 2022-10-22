@@ -2,6 +2,9 @@
 #include "../GameObject/ExRectTile.h"
 #include "../Framework/ResourceMgr.h"
 #include "ListMoverUi.h"
+#include <fstream>
+#include "../DataTable/DataTableMGR.h"
+#include "../DataTable/FilePathTable.h"
 
 ObjExampleUi::ObjExampleUi()
 	:currTile(0), clickedTile(nullptr), listMover(nullptr)
@@ -25,22 +28,33 @@ void ObjExampleUi::Init()
 	// mapDataMgr 클래스에서 objlist 정보들(background, grid, MapObjGenerator의 uselist, tileCollider) 싹 긁어서 저장
 
 	Object::Init();
+	FilePathTable* filePath = DATATABLE_MGR->Get<FilePathTable>(DataTable::Types::FilePath);
+	ifstream ifs(tileNames);
+	string tileName;
 	Vector2f frameSize = { 88.f, 184.f };
 	Vector2f tileSize;
-	for (int i = 0; i < 3; ++i)
+	while (true)
 	{
 		ExRectTile* tile = new ExRectTile();
-		Texture* tex = RESOURCE_MGR->GetTexture("graphics/player3.png");
+		tile->Init();
+		if (getline(ifs, tileName))
+			tile->SetTexture(RESOURCE_MGR->GetTexture(filePath->Get(tileName)));
+		else
+		{
+			delete tile;
+			break;
+		}
+		Texture* tex = RESOURCE_MGR->GetTexture(filePath->Get(tileName));
 		Vector2f texSize = Vector2f((*tex).getSize());
 		if (texSize.x / frameSize.x > texSize.y / frameSize.y)
 			tileSize = { frameSize.x, texSize.y / (texSize.x / frameSize.x) };
 		else
 			tileSize = { texSize.x / (texSize.y / frameSize.y), frameSize.y };
-		tile->Init();
 		tile->SetSize(tileSize);
 		tile->SetTexture(tex);
 		tiles.push_back(tile);
 	}
+	ifs.close();
 
 	listMover = new ListMoverUi();
 	listMover->Init();
@@ -53,6 +67,14 @@ void ObjExampleUi::Init()
 
 void ObjExampleUi::Release()
 {
+	for (auto tile : tiles)
+	{
+		delete tile;
+		tile = nullptr;
+	}
+	if (listMover != nullptr)
+		delete listMover;
+	listMover = nullptr;
 }
 
 void ObjExampleUi::Reset()

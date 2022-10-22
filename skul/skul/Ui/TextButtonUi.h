@@ -7,11 +7,11 @@ class TextButtonUi : public TextObj
 public:
 	enum class Modes
 	{
-		BackWall,
-		BackObj,
-		Player,
+		BackGround,
+		BackObject,
 		Enemies,
 		NPC,
+		Player,
 		Reward,
 		Tile,
 		TileCollider,

@@ -12,6 +12,7 @@ protected:
 	ListMoverUi* listMover;
 
 	ExRectTile* clickedTile;
+	string tileNames;
 
 public:
 	ObjExampleUi();
@@ -26,8 +27,8 @@ public:
 	virtual void Draw(RenderWindow& window) override;
 
 	virtual void SetPos(const Vector2f& pos);
+	void SetTileNames(string name) { tileNames = name; }
 
 	void ShowPrevTiles();
 	void ShowNextTiles();
 };
-
