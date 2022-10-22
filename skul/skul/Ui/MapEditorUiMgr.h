@@ -10,12 +10,13 @@ public:
 		None = -1,
 		BackWall,
 		BackObj,
-		Platform,
 		Player,
 		Enemies,
 		NPC,
 		Reward,
-		Erase,
+		Tile,
+		TileCollider,
+		Count,
 	};
 protected:
 	list<TextButtonUi*> textButtons;

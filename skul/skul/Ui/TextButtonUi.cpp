@@ -22,9 +22,6 @@ void TextButtonUi::Init()
 	case Modes::BackObj:
 		text.setString("BackObj");
 		break;
-	case Modes::Platform:
-		text.setString("Platform");
-		break;
 	case Modes::Player:
 		text.setString("Player");
 		break;
@@ -37,13 +34,16 @@ void TextButtonUi::Init()
 	case Modes::Reward:
 		text.setString("Reward");
 		break;
-	case Modes::Erase:
-		text.setString("Erase");
+	case Modes::Tile:
+		text.setString("Tile");
+		break;
+	case Modes::TileCollider:
+		text.setString("TileCollider");
 		break;
 	default:
 		break;
 	}
-	text.setCharacterSize(20);
+	text.setCharacterSize(15);
 	text.setOutlineColor({ 255, 0, 0, 0 });
 	text.setOutlineThickness(1.5f);
 }
@@ -88,11 +88,13 @@ void TextButtonUi::Selected()
 {
 	ChangeMode(mode);
 	isSelected = true;
-	ShowSelected();
+	if(ShowSelected != nullptr)
+		ShowSelected();
 }
 
 void TextButtonUi::Deselected()
 {
 	isSelected = false;
-	StopShowing();
+	if(StopShowing != nullptr)
+		StopShowing();
 }

@@ -25,6 +25,7 @@ public:
 	virtual void SetRotation(float rotation);
 	
 	virtual void SetFillColor(Color color) { tile->setFillColor(color); }
+	virtual void SetOutlineColor(Color color) { tile->setOutlineColor(color); }
 	virtual void SetOutlineThickness(float t) { tile->setOutlineThickness(t); }
 	
 	virtual void SetTexture(const Texture* tex);
@@ -32,8 +33,6 @@ public:
 	
 	virtual void MarkOn();
 	virtual void MarkOff();
-
-	void SetMousePos(const Vector2f& mousePos);
 
 	virtual const Texture* GetTexture() const;	// 문제 생길 수 있음 부정확해서 일단 써둠
 };

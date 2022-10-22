@@ -21,33 +21,58 @@ void MapEditorUiMgr::Init()
 	UiMgr::Init();
 	Vector2i windowSize = FRAMEWORK->GetWindowSize();
 
-	for (int i = 0; i < 8; ++i)
+	for (int i = 0; i < (int)Modes::Count; ++i)
 	{
-		TileExampleUi* exTiles = new TileExampleUi();
-		exTiles->Init();
-		exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
 		TextButtonUi* text = new TextButtonUi(TextButtonUi::Modes(i));
 		text->SetFont(*RESOURCE_MGR->GetFont("fonts/NotoSansKR-Bold.otf"));
 		text->Init();
 		text->SetOrigin(Origins::TL);
 		text->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.1f + text->GetSFMLText().getCharacterSize() * i * 1.5f });
-		text->ShowSelected = bind(&TileExampleUi::SetActive, exTiles, true);
 		text->ChangeMode = bind(&MapEditorUiMgr::ChangeMode, this, placeholders::_1);
-		text->StopShowing = bind(&TileExampleUi::SetActive, exTiles, false);
-		uiObjList.push_back(exTiles);
+		switch ((Modes)i)
+		{
+		case Modes::BackWall:
+			break;
+		case Modes::BackObj:
+			break;
+		case Modes::Player:
+			break;
+		case Modes::Enemies:
+			break;
+		case Modes::NPC:
+			break;
+		case Modes::Reward:
+			break;
+		case Modes::Tile:
+			{
+				text->SetName("TileTextButton");
+				TileExampleUi* exTiles = new TileExampleUi();
+				exTiles->SetName("TileExampleUi");
+				exTiles->Init();
+				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
+				text->ShowSelected = bind(&TileExampleUi::SetActive, exTiles, true);
+				text->StopShowing = bind(&TileExampleUi::SetActive, exTiles, false);
+				uiObjList.push_back(exTiles);
+			}
+			break;
+		case Modes::TileCollider:
+			break;
+		}
 		textButtons.push_back(text);
 		uiObjList.push_back(text);
 	}
 
 	RectTile* exTileFrame = new RectTile();
+	exTileFrame->SetName("exTileFrame");
 	exTileFrame->Init();
 	exTileFrame->SetSize({ 98.f, 250.f });
 	exTileFrame->SetPos({ windowSize.x * 0.91f - 5.f, windowSize.y * 0.45f - 5.f });
 	exTileFrame->SetFillColor({ 255, 255, 255, 0 });
-	exTileFrame->SetOutlineThickness(1.f);
+	exTileFrame->SetOutlineColor({ 255, 255, 255, 255 });
 	uiObjList.push_back(exTileFrame);
 
 	ListMoverUi* listMover = new ListMoverUi();
+	listMover->SetName("listMover");
 	listMover->Init();
 	listMover->SetSize(12);
 	listMover->SetDistance(44.f);

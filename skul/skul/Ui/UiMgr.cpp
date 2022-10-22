@@ -67,3 +67,15 @@ void UiMgr::Draw(RenderWindow& window)
             uiObj->Draw(window);
     }
 }
+
+Object* UiMgr::FindUiObject(string name)
+{
+    for (auto* obj : uiObjList)
+    {
+        if (obj->GetName() == name)
+        {
+            return obj;
+        }
+    }
+    return nullptr;
+}

@@ -9,12 +9,12 @@ public:
 	{
 		BackWall,
 		BackObj,
-		Platform,
 		Player,
 		Enemies,
 		NPC,
 		Reward,
-		Erase,
+		Tile,
+		TileCollider,
 	};
 
 protected:

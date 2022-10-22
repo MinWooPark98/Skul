@@ -2,7 +2,8 @@
 
 int Object::objCount = 0;
 
-Object::Object() : isDevMode(false)
+Object::Object()
+    :isDevMode(false), rotation(0.f), enabled(true)
 {
     id = ++objCount;
 }

@@ -1,0 +1,16 @@
+ID,KOR
+HELLO,안녕하세요
+YOU DIE,너 죽었어
+BYE,잘가
+AXE00_NAME,썩은 옷
+AXE01_NAME,보통 옷
+AXE02_NAME,좋은 옷
+AXE03_NAME,썩은 칼
+AXE04_NAME,보통 칼
+AXE05_NAME,좋은 칼
+AXE00_DESC,썩은 옷 이다.
+AXE01_DESC,보통 옷 이다.
+AXE02_DESC,좋은 옷 이다.
+AXE03_DESC,썩은 칼 이다.
+AXE04_DESC,보통 칼 이다.
+AXE05_DESC,좋은 칼 이다.

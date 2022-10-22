@@ -14,6 +14,7 @@ void TriangleTile::Init()
 	tile = new CircleShape();
 	((CircleShape*)tile)->setPointCount(3);
 	Tile::Init();
+	tile->setFillColor({ 255, 255, 255, 255 });
 }
 
 void TriangleTile::Release()

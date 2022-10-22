@@ -10,7 +10,7 @@ void Tile::Init()
 {
 	Object::Init();
 	tile->setFillColor({ 255, 255, 255, 255 });
-	tile->setOutlineColor({0, 0, 0, 255});
+	tile->setOutlineColor({ 0, 0, 0, 255 });
 	tile->setOutlineThickness(2.f);
 }
 
