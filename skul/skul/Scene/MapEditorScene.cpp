@@ -18,15 +18,23 @@ MapEditorScene::~MapEditorScene()
 
 void MapEditorScene::Init()
 {
+	for (int i = 0; i < (int)Layer::Count; ++i)
+	{
+		list<Object*>* objects = new list<Object*>;
+		layOut.insert({ (Layer)i, objects });
+	}
+
 	Vector2f windowSize = (Vector2f)FRAMEWORK->GetWindowSize();
 	RectTile* background = new RectTile;
 	background->Init();
 	background->SetSize({ windowSize.x * 2.f, windowSize.y * 2.f });
 	background->SetFillColor({ 255, 255, 255, 255 });
+	layOut[Layer::Canvas]->push_back(background);
 	objList.push_back(background);
 
 	Grid* grid = new Grid();
 	grid->Init();
+	layOut[Layer::Canvas]->push_back(grid);
 	objList.push_back(grid);
 
 	uiMgr = new MapEditorUiMgr();
@@ -45,15 +53,21 @@ void MapEditorScene::Release()
 
 void MapEditorScene::Draw(RenderWindow& window)
 {
+	window.setView(worldView);
+	for (auto& pair : layOut)
+	{
+		for (auto obj : *pair.second)
+		{
+			if(obj->GetActive())
+				obj->Draw(window);
+		}
+	}
 	window.setView(uiView);
 	uiMgr->Draw(window);
-	Scene::Draw(window);
 }
 
 void MapEditorScene::Update(float dt)
 {
-	uiMgr->Update(dt);
-
 	if (InputMgr::GetKeyDown(Keyboard::W))
 		worldView.move(0.f, -75.f);
 	if (InputMgr::GetKeyDown(Keyboard::S))
@@ -63,6 +77,7 @@ void MapEditorScene::Update(float dt)
 	if (InputMgr::GetKeyDown(Keyboard::D))
 		worldView.move(75.f, 0.f);
 	Scene::Update(dt);
+	uiMgr->Update(dt);
 }
 
 void MapEditorScene::Enter()

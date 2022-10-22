@@ -20,7 +20,21 @@ public:
 		Count,
 	};
 
+	enum class Layer
+	{
+		Canvas,
+		BackGround,
+		BackObject,
+		ActivateObject,
+		Tile,
+		Collider,
+		Player,
+		Count,
+	};
+
 protected:
+	map<Layer, list<Object*>*> layOut;
+
 	Modes mode;
 	const Texture* currTex;
 
