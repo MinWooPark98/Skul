@@ -6,9 +6,10 @@
 #include "TileExampleUi.h"
 #include "ListMoverUi.h"
 #include "../GameObject/RectTile.h"
+#include "../Scene/MapEditorScene.h"
 
 MapEditorUiMgr::MapEditorUiMgr()
-	:UiMgr(SCENE_MGR->GetScene(Scenes::MapEditor)), mode(Modes::None)
+	:UiMgr(SCENE_MGR->GetScene(Scenes::MapEditor))
 {
 }
 
@@ -20,30 +21,30 @@ void MapEditorUiMgr::Init()
 {
 	UiMgr::Init();
 	Vector2i windowSize = FRAMEWORK->GetWindowSize();
-
-	for (int i = 0; i < (int)Modes::Count; ++i)
+	
+	for (int i = 0; i < (int)MapEditorScene::Modes::Count; ++i)
 	{
 		TextButtonUi* text = new TextButtonUi(TextButtonUi::Modes(i));
 		text->SetFont(*RESOURCE_MGR->GetFont("fonts/NotoSansKR-Bold.otf"));
 		text->Init();
 		text->SetOrigin(Origins::TL);
 		text->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.1f + text->GetSFMLText().getCharacterSize() * i * 1.5f });
-		text->ChangeMode = bind(&MapEditorUiMgr::ChangeMode, this, placeholders::_1);
-		switch ((Modes)i)
+		text->ChangeMode = bind(&MapEditorScene::ChangeMode, ((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor)), placeholders::_1);
+		switch ((MapEditorScene::Modes)i)
 		{
-		case Modes::BackWall:
+		case MapEditorScene::Modes::BackWall:
 			break;
-		case Modes::BackObj:
+		case MapEditorScene::Modes::BackObj:
 			break;
-		case Modes::Player:
+		case MapEditorScene::Modes::Player:
 			break;
-		case Modes::Enemies:
+		case MapEditorScene::Modes::Enemies:
 			break;
-		case Modes::NPC:
+		case MapEditorScene::Modes::NPC:
 			break;
-		case Modes::Reward:
+		case MapEditorScene::Modes::Reward:
 			break;
-		case Modes::Tile:
+		case MapEditorScene::Modes::Tile:
 			{
 				text->SetName("TileTextButton");
 				TileExampleUi* exTiles = new TileExampleUi();
@@ -55,7 +56,7 @@ void MapEditorUiMgr::Init()
 				uiObjList.push_back(exTiles);
 			}
 			break;
-		case Modes::TileCollider:
+		case MapEditorScene::Modes::TileCollider:
 			break;
 		}
 		textButtons.push_back(text);
@@ -95,12 +96,11 @@ void MapEditorUiMgr::Draw(RenderWindow& window)
 	UiMgr::Draw(window);
 }
 
-void MapEditorUiMgr::ChangeMode(TextButtonUi::Modes mode)
+void MapEditorUiMgr::ResetButton()
 {
 	for (auto text : textButtons)
 	{
 		if (text->GetSelected())
 			text->Deselected();
 	}
-	this->mode = (Modes)((int)mode);
 }

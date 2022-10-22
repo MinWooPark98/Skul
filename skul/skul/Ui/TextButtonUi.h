@@ -37,7 +37,7 @@ public:
 
 	void Selected();
 	function<void()> ShowSelected;
-	function<void(Modes)> ChangeMode;
+	function<void(int)> ChangeMode;
 	void Deselected();
 	function<void()> StopShowing;
 };

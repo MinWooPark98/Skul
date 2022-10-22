@@ -5,7 +5,23 @@ class Tile;
 
 class MapEditorScene : public Scene
 {
+public:
+	enum class Modes
+	{
+		None = -1,
+		BackWall,
+		BackObj,
+		Player,
+		Enemies,
+		NPC,
+		Reward,
+		Tile,
+		TileCollider,
+		Count,
+	};
+
 protected:
+	Modes mode;
 	const Texture* currTex;
 
 	bool isPause;
@@ -27,5 +43,10 @@ public:
 
 	void SetTexture(const Texture* tex) { currTex = tex; }
 	const Texture* GetTexture() { return currTex; }
+
+	Modes GetMode() const { return mode; }
+	void SetMode(Modes mode) { this->mode = mode; }
+
+	void ChangeMode(int modeNum);
 };
 

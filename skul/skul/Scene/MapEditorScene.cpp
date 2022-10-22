@@ -8,7 +8,7 @@
 #include "../Scene/SceneMgr.h"
 
 MapEditorScene::MapEditorScene()
-	:Scene(Scenes::MapEditor), currTex(nullptr), isPause(false)
+	:Scene(Scenes::MapEditor), currTex(nullptr), isPause(false), mode(Modes::None)
 {
 }
 
@@ -88,4 +88,10 @@ const Vector2f& MapEditorScene::ObjMousePos() const
 {
 	Vector2f mousePos = InputMgr::GetMousePos();
 	return Vector2f(mousePos.x * (1.f / 0.9f) + (worldView.getCenter().x - FRAMEWORK->GetWindowSize().x * 0.5f), mousePos.y + worldView.getCenter().y - FRAMEWORK->GetWindowSize().y * 0.5f);
+}
+
+void MapEditorScene::ChangeMode(int modeNum)
+{
+	((MapEditorUiMgr*)uiMgr)->ResetButton();
+	SetMode((Modes)mode);
 }

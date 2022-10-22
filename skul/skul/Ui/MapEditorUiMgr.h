@@ -4,23 +4,8 @@
 
 class MapEditorUiMgr : public UiMgr
 {
-public:
-	enum class Modes
-	{
-		None = -1,
-		BackWall,
-		BackObj,
-		Player,
-		Enemies,
-		NPC,
-		Reward,
-		Tile,
-		TileCollider,
-		Count,
-	};
 protected:
 	list<TextButtonUi*> textButtons;
-	Modes mode;
 
 public:
 	MapEditorUiMgr();
@@ -33,5 +18,5 @@ public:
 	virtual void Update(float dt);
 	virtual void Draw(RenderWindow& window);
 
-	void ChangeMode(TextButtonUi::Modes mode);
+	void ResetButton();
 };

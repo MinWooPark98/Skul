@@ -86,7 +86,7 @@ bool TextButtonUi::GetSelected() const
 
 void TextButtonUi::Selected()
 {
-	ChangeMode(mode);
+	ChangeMode((int)mode);
 	isSelected = true;
 	if(ShowSelected != nullptr)
 		ShowSelected();

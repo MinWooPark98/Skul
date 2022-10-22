@@ -3,6 +3,9 @@
 
 class GridRectTile : public RectTile
 {
+protected:
+	const Texture* currTex;
+
 public:
 	GridRectTile();
 	virtual ~GridRectTile();

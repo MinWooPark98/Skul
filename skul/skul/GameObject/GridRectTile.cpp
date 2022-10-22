@@ -6,6 +6,7 @@
 #include "../Ui/UiMgr.h"
 
 GridRectTile::GridRectTile()
+	:currTex(nullptr)
 {
 }
 
@@ -44,6 +45,7 @@ void GridRectTile::Update(float dt)
 void GridRectTile::SetTexture(const Texture* tex)
 {
 	RectTile::SetTexture(tex);
+	currTex = tex;
 	if (tex == nullptr)
 		tile->setFillColor({ 255, 255, 255, 0 });
 	else

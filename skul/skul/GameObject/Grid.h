@@ -7,6 +7,7 @@ class Grid : public Object
 {
 protected:
 	vector<vector<GridRectTile*>*> map;
+	// 추후 GridTex에 있는 currTex, position 데이터 순회해가면서 저장할 예정
 
 public:
 	Grid();
