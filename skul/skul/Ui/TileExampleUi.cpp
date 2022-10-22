@@ -7,7 +7,7 @@
 #include "../Scene/MapEditorScene.h"
 
 TileExampleUi::TileExampleUi()
-	:currList(0)
+	:currList(0), clickedTile(nullptr)
 {
 }
 
@@ -53,6 +53,15 @@ void TileExampleUi::Update(float dt)
 	for (auto tile : *tiles[currList])
 	{
 		tile->Update(dt);
+		if (tile->GetClicked() && tile != clickedTile)
+		{
+			if (clickedTile != nullptr)
+			{
+				clickedTile->SetClicked(false);
+				clickedTile->ClickedOff();
+			}
+			clickedTile = tile;
+		}
 	}
 }
 

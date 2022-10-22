@@ -10,6 +10,8 @@ protected:
 	vector<list<ExRectTile*>*> tiles;
 	int currList;
 
+	ExRectTile* clickedTile;
+
 public:
 	TileExampleUi();
 	virtual ~TileExampleUi();

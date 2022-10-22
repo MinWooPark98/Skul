@@ -2,6 +2,7 @@
 #include "../Framework/InputMgr.h"
 
 ExRectTile::ExRectTile()
+	:isClicked(false)
 {
 }
 
@@ -17,7 +18,7 @@ void ExRectTile::Update(float dt)
 	if (mousePos.x < tileBound.left || mousePos.x > tileBound.left + tileBound.width ||
 		mousePos.y < tileBound.top || mousePos.y > tileBound.top + tileBound.height)
 	{
-		if (isMouseOn)
+		if (isMouseOn && !isClicked)
 		{
 			MarkOff();
 			isMouseOn = false;
@@ -25,11 +26,14 @@ void ExRectTile::Update(float dt)
 		return;
 	}
 	isMouseOn = true;
-	MarkOn();
+	if(!isClicked)
+		MarkOn();
 	if(isMouseOn && InputMgr::GetMouseButton(Mouse::Left))
 	{
 		if (ClickOn == nullptr)
 			return;
 		ClickOn(tile->getTexture());
+		isClicked = true;
+		tile->setOutlineColor({ 255, 0, 0, 255 });
 	}
 }
