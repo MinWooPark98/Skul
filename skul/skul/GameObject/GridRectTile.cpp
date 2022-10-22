@@ -14,8 +14,7 @@ GridRectTile::~GridRectTile()
 void GridRectTile::Update(float dt)
 {
 	RectTile::Update(dt);
-	Vector2f mouseWindowPos = InputMgr::GetMousePos();
-	Vector2f mousePos = Vector2f(mouseWindowPos.x * (1.f / 0.9f) , mouseWindowPos.y);
+	Vector2f mousePos = ((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->ObjMousePos();
 	FloatRect tileBound = tile->getGlobalBounds();
 	if (mousePos.x < tileBound.left || mousePos.x > tileBound.left + tileBound.width ||
 		mousePos.y < tileBound.top || mousePos.y > tileBound.top + tileBound.height)

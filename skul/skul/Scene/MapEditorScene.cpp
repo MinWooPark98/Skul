@@ -43,17 +43,27 @@ void MapEditorScene::Release()
 
 void MapEditorScene::Draw(RenderWindow& window)
 {
-	Scene::Draw(window);
 	window.setView(uiView);
 	uiMgr->Draw(window);
+	Scene::Draw(window);
 }
 
 void MapEditorScene::Update(float dt)
 {
-	Scene::Update(dt);
 	uiMgr->Update(dt);
+
+	if (InputMgr::GetKeyDown(Keyboard::W))
+		worldView.move(0.f, -75.f);
+	if (InputMgr::GetKeyDown(Keyboard::S))
+		worldView.move(0.f, 75.f);
+	if (InputMgr::GetKeyDown(Keyboard::A))
+		worldView.move(-75.f, 0.f);
 	if (InputMgr::GetKeyDown(Keyboard::D))
-		worldView.move(10.f, 0.f);
+		worldView.move(75.f, 0.f);
+
+	if (InputMgr::GetMousePos().x >= FRAMEWORK->GetWindowSize().x * 0.9f)
+		return;
+	Scene::Update(dt);
 }
 
 void MapEditorScene::Enter()
@@ -74,4 +84,10 @@ void MapEditorScene::Enter()
 
 void MapEditorScene::Exit()
 {
+}
+
+const Vector2f& MapEditorScene::ObjMousePos() const
+{
+	Vector2f mousePos = InputMgr::GetMousePos();
+	return Vector2f(mousePos.x * (1.f / 0.9f) + (worldView.getCenter().x - FRAMEWORK->GetWindowSize().x * 0.5f), mousePos.y + worldView.getCenter().y - FRAMEWORK->GetWindowSize().y * 0.5f);
 }

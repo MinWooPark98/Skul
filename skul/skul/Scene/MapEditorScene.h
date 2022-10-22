@@ -23,6 +23,8 @@ public:
 	virtual void Enter() override;
 	virtual void Exit() override;
 
+	const Vector2f& ObjMousePos() const;
+
 	void SetTexture(const Texture* tex) { currTex = tex; }
 	const Texture* GetTexture() { return currTex; }
 };
