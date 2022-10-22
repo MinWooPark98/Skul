@@ -158,6 +158,7 @@
     <ClCompile Include="GameObject\RectTile.cpp" />
     <ClCompile Include="GameObject\TriangleTile.cpp" />
     <ClCompile Include="GameObject\GridRectTile.cpp" />
+    <ClCompile Include="Ui\ObjExampleUi.cpp" />
     <ClCompile Include="Ui\ListMoverUi.cpp" />
     <ClCompile Include="GameObject\Grid.cpp" />
     <ClCompile Include="main.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="GameObject\RectTile.h" />
     <ClInclude Include="GameObject\TriangleTile.h" />
     <ClInclude Include="GameObject\GridRectTile.h" />
+    <ClInclude Include="Ui\ObjExampleUi.h" />
     <ClInclude Include="Ui\ListMoverUi.h" />
     <ClInclude Include="GameObject\Grid.h" />
     <ClInclude Include="Ui\TileExampleUi.h" />

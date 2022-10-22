@@ -68,7 +68,7 @@ void UiMgr::Draw(RenderWindow& window)
     }
 }
 
-Object* UiMgr::FindUiObject(string name)
+Object* UiMgr::FindUiObj(string name)
 {
     for (auto* obj : uiObjList)
     {

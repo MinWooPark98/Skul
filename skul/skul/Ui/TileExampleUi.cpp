@@ -32,7 +32,6 @@ void TileExampleUi::Init()
 				tile->SetTexture(RESOURCE_MGR->GetTexture("graphics/player3.png"));
 			else
 				tile->SetTexture(nullptr);
-			tile->ClickOn = bind(&MapEditorScene::SetTexture, (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor), placeholders::_1);
 			tileList->push_back(tile);
 		}
 		tiles.push_back(tileList);
@@ -61,6 +60,7 @@ void TileExampleUi::Update(float dt)
 				clickedTile->ClickedOff();
 			}
 			clickedTile = tile;
+			((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->SetTexture(clickedTile->GetTexture());
 		}
 	}
 }

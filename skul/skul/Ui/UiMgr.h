@@ -23,6 +23,6 @@ public:
 	virtual void Update(float dt);
 	virtual void Draw(RenderWindow& window);
 
-	Object* FindUiObject(string name);
+	Object* FindUiObj(string name);
 };
 

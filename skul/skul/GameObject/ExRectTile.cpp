@@ -28,11 +28,8 @@ void ExRectTile::Update(float dt)
 	isMouseOn = true;
 	if(!isClicked)
 		MarkOn();
-	if(isMouseOn && InputMgr::GetMouseButton(Mouse::Left))
+	if(InputMgr::GetMouseButton(Mouse::Left))
 	{
-		if (ClickOn == nullptr)
-			return;
-		ClickOn(tile->getTexture());
 		isClicked = true;
 		tile->setOutlineColor({ 255, 0, 0, 255 });
 	}

@@ -4,6 +4,7 @@
 #include "../Framework/Utils.h"
 #include "../Framework/Framework.h"
 #include "TileExampleUi.h"
+#include "ObjExampleUi.h"
 #include "ListMoverUi.h"
 #include "../GameObject/RectTile.h"
 #include "../Scene/MapEditorScene.h"
@@ -33,6 +34,16 @@ void MapEditorUiMgr::Init()
 		switch ((MapEditorScene::Modes)i)
 		{
 		case MapEditorScene::Modes::BackWall:
+			{
+				text->SetName("BackWallTextButton");
+				ObjExampleUi* exTiles = new ObjExampleUi();
+				exTiles->SetName("BackWallExampleUi");
+				exTiles->Init();
+				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
+				text->ShowSelected = bind(&TileExampleUi::SetActive, exTiles, true);
+				text->StopShowing = bind(&TileExampleUi::SetActive, exTiles, false);
+				uiObjList.push_back(exTiles);
+			}
 			break;
 		case MapEditorScene::Modes::BackObj:
 			break;
@@ -66,7 +77,7 @@ void MapEditorUiMgr::Init()
 	RectTile* exTileFrame = new RectTile();
 	exTileFrame->SetName("exTileFrame");
 	exTileFrame->Init();
-	exTileFrame->SetSize({ 98.f, 250.f });
+	exTileFrame->SetSize({ 98.f, 194.f });
 	exTileFrame->SetPos({ windowSize.x * 0.91f - 5.f, windowSize.y * 0.45f - 5.f });
 	exTileFrame->SetFillColor({ 255, 255, 255, 0 });
 	exTileFrame->SetOutlineColor({ 255, 255, 255, 255 });
@@ -77,7 +88,7 @@ void MapEditorUiMgr::Init()
 	listMover->Init();
 	listMover->SetSize(12);
 	listMover->SetDistance(44.f);
-	listMover->SetPos({ windowSize.x * 0.91f + 10.f, windowSize.y * 0.45f + 200.f });
+	listMover->SetPos({ windowSize.x * 0.91f + 12.f, windowSize.y * 0.45f + 200.f });
 	uiObjList.push_back(listMover);
 }
 

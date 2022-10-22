@@ -38,7 +38,7 @@ void GridRectTile::Update(float dt)
 	}
 	isMouseOn = true;
 	MarkOn();
-	if (isMouseOn && InputMgr::GetMouseButton(Mouse::Left) && SCENE_MGR->GetScene(Scenes::MapEditor)->GetUiMgr()->FindUiObject("TileExampleUi")->GetActive())
+	if (InputMgr::GetMouseButton(Mouse::Left) && SCENE_MGR->GetScene(Scenes::MapEditor)->GetUiMgr()->FindUiObj("TileExampleUi")->GetActive())
 		SetTexture(((MapEditorScene*)(SCENE_MGR->GetScene(Scenes::MapEditor)))->GetTexture());
 }
 
