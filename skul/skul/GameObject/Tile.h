@@ -22,15 +22,18 @@ public:
 	virtual void SetOrigin(Origins origin) { Utils::SetOrigin(*tile, origin); }
 	virtual void SetPos(const Vector2f& pos) override;
 	virtual void SetScale(const Vector2f& scale) { tile->setScale(scale); }
-
 	virtual void SetRotation(float rotation);
 	
+	virtual void SetFillColor(Color color) { tile->setFillColor(color); }
+	virtual void SetOutlineThickness(float t) { tile->setOutlineThickness(t); }
+	
 	virtual void SetTexture(const Texture* tex);
-	virtual void SetTextureChosen();
 	const Texture* GetTexture() { return tile->getTexture(); }
 	
 	virtual void MarkOn();
 	virtual void MarkOff();
+
+	void SetMousePos(const Vector2f& mousePos);
 
 	virtual const Texture* GetTexture() const;	// 문제 생길 수 있음 부정확해서 일단 써둠
 };

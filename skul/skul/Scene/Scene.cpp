@@ -17,19 +17,14 @@ void Scene::Release()
 {
 	for (const auto& obj : objList)
 	{
-		if (obj->GetActive())
-		{
-			obj->Release();
-			delete obj;
-		}
+		obj->Release();
+		delete obj;
 	}
 	objList.clear();
 }
 
 void Scene::Enter()
 {
-	worldView.setCenter((Vector2f)FRAMEWORK->GetWindowSize() * 0.5f);
-	worldView.setSize((Vector2f)FRAMEWORK->GetWindowSize());
 }
 
 void Scene::Update(float dt)
@@ -53,7 +48,6 @@ void Scene::Draw(RenderWindow& window)
 			obj->Draw(window);
 		}
 	}
-
 }
 
 Texture* Scene::GetTexture(const string path) const

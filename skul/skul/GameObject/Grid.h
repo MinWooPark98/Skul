@@ -3,14 +3,14 @@
 
 class GridRectTile;
 
-class GridUi : public Object
+class Grid : public Object
 {
 protected:
 	vector<vector<GridRectTile*>*> map;
 
 public:
-	GridUi();
-	virtual ~GridUi();
+	Grid();
+	virtual ~Grid();
 
 	virtual void Init() override;
 	virtual void Update(float dt) override;

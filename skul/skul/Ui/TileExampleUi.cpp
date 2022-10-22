@@ -4,7 +4,7 @@
 #include "../Framework/Framework.h"
 #include "../Framework/ResourceMgr.h"
 #include "../Scene/SceneMgr.h"
-#include "../Ui/MapEditorUiMgr.h"
+#include "../Scene/MapEditorScene.h"
 
 TileExampleUi::TileExampleUi()
 	:currList(0)
@@ -32,7 +32,7 @@ void TileExampleUi::Init()
 				tile->SetTexture(RESOURCE_MGR->GetTexture("graphics/player3.png"));
 			else
 				tile->SetTexture(nullptr);
-			tile->ClickOn = bind(&MapEditorUiMgr::SetTexture, (MapEditorUiMgr*)SCENE_MGR->GetScene(Scenes::MapEditor)->GetUiMgr(), placeholders::_1);
+			tile->ClickOn = bind(&MapEditorScene::SetTexture, (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor), placeholders::_1);
 			tileList->push_back(tile);
 		}
 		tiles.push_back(tileList);

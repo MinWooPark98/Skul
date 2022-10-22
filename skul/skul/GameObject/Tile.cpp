@@ -1,8 +1,6 @@
 #include "tile.h"
 #include "../Framework/Utils.h"
 #include "../Framework/InputMgr.h"
-#include "../Ui/MapEditorUiMgr.h"
-#include "../Scene/SceneMgr.h"
 
 Tile::~Tile()
 {
@@ -24,20 +22,7 @@ void Tile::Reset()
 
 void Tile::Update(float dt)
 {
-	Vector2f mousePos = InputMgr::GetMousePos();
-	FloatRect tileBound = tile->getGlobalBounds();
-	if (mousePos.x < tileBound.left || mousePos.x > tileBound.left + tileBound.width ||
-		mousePos.y < tileBound.top || mousePos.y > tileBound.top + tileBound.height)
-	{
-		if (isMouseOn)
-		{
-			MarkOff();
-			isMouseOn = false;
-		}
-		return;
-	}
-	isMouseOn = true;
-	MarkOn();
+	Object::Update(dt);
 }
 
 void Tile::Draw(RenderWindow& window)
@@ -60,11 +45,6 @@ void Tile::SetRotation(float rotation)
 void Tile::SetTexture(const Texture* tex)
 {
 	tile->setTexture(tex, true);
-}
-
-void Tile::SetTextureChosen()
-{
-	SetTexture(((MapEditorUiMgr*)(SCENE_MGR->GetScene(Scenes::MapEditor)->GetUiMgr()))->GetTexture());
 }
 
 void Tile::MarkOn()

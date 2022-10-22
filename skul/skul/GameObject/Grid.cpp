@@ -1,24 +1,24 @@
-#include "GridUi.h"
+#include "Grid.h"
 #include "../Framework/Framework.h"
 #include "../GameObject/GridRectTile.h"
 #include "../Scene/SceneMgr.h"
 #include "../Ui/MapEditorUiMgr.h"
 
-GridUi::GridUi()
+Grid::Grid()
 {
 }
 
-GridUi::~GridUi()
+Grid::~Grid()
 {
 }
 
-void GridUi::Init()
+void Grid::Init()
 {
 	Object::Init();
 	Vector2i windowSize = FRAMEWORK->GetWindowSize();	
 
-	int row = windowSize.x / 32;
-	int column = windowSize.y / 32;
+	int row = windowSize.x / 32 * 2;
+	int column = windowSize.y / 32 * 2;
 	for (int i = 0; i < column; ++i)
 	{
 		vector<GridRectTile*>* tiles = new vector<GridRectTile*>;
@@ -26,15 +26,15 @@ void GridUi::Init()
 		{
 			GridRectTile* tile = new GridRectTile();
 			tile->Init();
-			tile->SetSize({ 24.f, 24.f });
-			tile->SetPos({ windowSize.x * 0.02f + 28.f * j, windowSize.y * 0.1f + 28.f * i });
+			tile->SetSize({ 28.f, 28.f });
+			tile->SetPos({ 2.f + 32.f * j, 2.f + 32.f * i });
 			tiles->push_back(tile);
 		}
 		map.push_back(tiles);
 	}
 }
 
-void GridUi::Update(float dt)
+void Grid::Update(float dt)
 {
 	Object::Update(dt);
 	for (auto tiles : map)
@@ -46,7 +46,7 @@ void GridUi::Update(float dt)
 	}
 }
 
-void GridUi::Draw(RenderWindow& window)
+void Grid::Draw(RenderWindow& window)
 {
 	Object::Draw(window);
 	for (auto tiles : map)

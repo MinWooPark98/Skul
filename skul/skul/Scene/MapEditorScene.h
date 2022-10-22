@@ -6,7 +6,9 @@ class Tile;
 class MapEditorScene : public Scene
 {
 protected:
-	vector<vector<Tile*>*> map;
+	const Texture* currTex;
+
+	bool isPause;
 
 public:
 	MapEditorScene();
@@ -20,5 +22,8 @@ public:
 
 	virtual void Enter() override;
 	virtual void Exit() override;
+
+	void SetTexture(const Texture* tex) { currTex = tex; }
+	const Texture* GetTexture() { return currTex; }
 };
 

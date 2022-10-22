@@ -57,6 +57,11 @@ bool Framework::Do()
         {
             InputMgr::ProcessInput(ev);
         }
+        if (ev.type == sf::Event::Resized)
+        {
+            sf::FloatRect visibleArea(0, 0, ev.size.width, ev.size.height);
+            window.setView(sf::View(visibleArea));
+        }
         if (ev.type == sf::Event::Closed)
         {
             window.close();

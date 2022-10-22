@@ -1,6 +1,6 @@
 #include "UiMgr.h"
 
-UiMgr::UiMgr(Scene* scene) : parentScene(scene), enabled(true)
+UiMgr::UiMgr(Scene* scene) : parentScene(scene)
 {
 }
 

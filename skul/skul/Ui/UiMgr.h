@@ -9,7 +9,6 @@ protected:
 	list<Object*> uiObjList;
 	Scene* parentScene;
 
-	bool enabled;
 public:
 	UiMgr(Scene* scene);
 	virtual ~UiMgr();

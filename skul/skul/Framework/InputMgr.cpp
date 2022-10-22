@@ -72,7 +72,6 @@ void InputMgr::Update(float dt)
 		if (abs(axis.value) < 0.001f)
 			axis.value = 0.f;
 	}
-
 	mousePos = (Vector2f)Mouse::getPosition(FRAMEWORK->GetWindow());
 }
 

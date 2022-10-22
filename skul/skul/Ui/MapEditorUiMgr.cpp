@@ -4,11 +4,11 @@
 #include "../Framework/Utils.h"
 #include "../Framework/Framework.h"
 #include "TileExampleUi.h"
-#include "GridUi.h"
 #include "ListMoverUi.h"
+#include "../GameObject/RectTile.h"
 
 MapEditorUiMgr::MapEditorUiMgr()
-	:UiMgr(SCENE_MGR->GetScene(Scenes::MapEditor)), currTex(nullptr), exTileFrame(nullptr), mode(Modes::None)
+	:UiMgr(SCENE_MGR->GetScene(Scenes::MapEditor)), mode(Modes::None)
 {
 }
 
@@ -20,10 +20,6 @@ void MapEditorUiMgr::Init()
 {
 	UiMgr::Init();
 	Vector2i windowSize = FRAMEWORK->GetWindowSize();
-
-	GridUi* gridUi = new GridUi();
-	gridUi->Init();
-	uiObjList.push_back(gridUi);
 
 	for (int i = 0; i < 8; ++i)
 	{
@@ -43,11 +39,13 @@ void MapEditorUiMgr::Init()
 		uiObjList.push_back(text);
 	}
 
-	exTileFrame = new RectangleShape();
-	exTileFrame->setSize({ 98.f, 250.f });
-	exTileFrame->setPosition({ windowSize.x * 0.91f - 5.f, windowSize.y * 0.45f - 5.f });
-	exTileFrame->setFillColor({ 255, 255, 255, 0 });
-	exTileFrame->setOutlineThickness(1.f);
+	RectTile* exTileFrame = new RectTile();
+	exTileFrame->Init();
+	exTileFrame->SetSize({ 98.f, 250.f });
+	exTileFrame->SetPos({ windowSize.x * 0.91f - 5.f, windowSize.y * 0.45f - 5.f });
+	exTileFrame->SetFillColor({ 255, 255, 255, 0 });
+	exTileFrame->SetOutlineThickness(1.f);
+	uiObjList.push_back(exTileFrame);
 
 	ListMoverUi* listMover = new ListMoverUi();
 	listMover->Init();
@@ -70,7 +68,6 @@ void MapEditorUiMgr::Update(float dt)
 void MapEditorUiMgr::Draw(RenderWindow& window)
 {
 	UiMgr::Draw(window);
-	window.draw(*exTileFrame);
 }
 
 void MapEditorUiMgr::ChangeMode(TextButtonUi::Modes mode)
