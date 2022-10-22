@@ -8,6 +8,7 @@ class Tile : public Object
 protected:
 	Shape* tile;
 	bool isMouseOn;
+	bool isClicked;
 
 public:
 	virtual ~Tile();
@@ -30,6 +31,9 @@ public:
 	
 	virtual void SetTexture(const Texture* tex);
 	const Texture* GetTexture() { return tile->getTexture(); }
+
+	void SetClicked(bool isclicked) { isClicked = isclicked; }
+	bool GetClicked() const { return isClicked; }
 	
 	virtual void MarkOn();
 	virtual void MarkOff();

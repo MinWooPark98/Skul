@@ -3,6 +3,10 @@
 
 class TriangleTile : public Tile
 {
+protected:
+	float clickDelay;
+	float clickTimer;
+
 public:
 	TriangleTile();
 	virtual ~TriangleTile();
@@ -14,5 +18,7 @@ public:
 
 	void SetSize(float rad) { ((CircleShape*)tile)->setRadius(rad); }
 	float GetSize() const { return ((CircleShape*)tile)->getRadius(); }
+
+	function<void()> ClickOn;
 };
 

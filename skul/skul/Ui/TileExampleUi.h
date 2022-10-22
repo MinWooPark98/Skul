@@ -3,14 +3,17 @@
 #include <list>
 
 class ExRectTile;
+class ListMoverUi;
 
 class TileExampleUi : public Object
 {
 protected:
 	vector<list<ExRectTile*>*> tiles;
 	int currList;
+	ListMoverUi* listMover;
 
 	ExRectTile* clickedTile;
+	string tileNames;
 
 public:
 	TileExampleUi();
@@ -25,5 +28,9 @@ public:
 	virtual void Draw(RenderWindow& window) override;
 
 	virtual void SetPos(const Vector2f& pos);
+	void SetTileNames(string name) { tileNames = name; }
+
+	void ShowPrevTiles();
+	void ShowNextTiles();
 };
 

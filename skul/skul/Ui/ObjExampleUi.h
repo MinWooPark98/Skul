@@ -2,12 +2,14 @@
 #include "../GameObject/Object.h"
 
 class ExRectTile;
+class ListMoverUi;
 
 class ObjExampleUi : public Object
 {
 protected:
 	vector<ExRectTile*> tiles;
 	int currTile;
+	ListMoverUi* listMover;
 
 	ExRectTile* clickedTile;
 
@@ -24,5 +26,8 @@ public:
 	virtual void Draw(RenderWindow& window) override;
 
 	virtual void SetPos(const Vector2f& pos);
+
+	void ShowPrevTiles();
+	void ShowNextTiles();
 };
 

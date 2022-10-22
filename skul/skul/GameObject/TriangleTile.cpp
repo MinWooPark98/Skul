@@ -2,6 +2,7 @@
 #include "../Framework/InputMgr.h"
 
 TriangleTile::TriangleTile()
+	:clickDelay(0.2f), clickTimer(0.f)
 {
 }
 
@@ -40,4 +41,19 @@ void TriangleTile::Update(float dt)
 	}
 	isMouseOn = true;
 	MarkOn();
+	if (isClicked)
+	{
+		clickTimer += dt;
+		if (clickTimer >= clickDelay)
+		{
+			isClicked = false;
+			clickTimer = 0.f;
+		}
+	}
+	if (!isClicked && InputMgr::GetMouseButton(Mouse::Left))
+	{
+		isClicked = true;
+		tile->setOutlineColor({ 255, 0, 0, 255 });
+		ClickOn();
+	}
 }

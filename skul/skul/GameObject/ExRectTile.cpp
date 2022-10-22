@@ -2,7 +2,6 @@
 #include "../Framework/InputMgr.h"
 
 ExRectTile::ExRectTile()
-	:isClicked(false)
 {
 }
 

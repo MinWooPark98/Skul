@@ -1,5 +1,6 @@
 #pragma once
 #include "../GameObject/Object.h"
+#include <functional>
 
 class TriangleTile;
 
@@ -24,4 +25,10 @@ public:
 	virtual void SetPos(const Vector2f& pos) override;
 	void SetDistance(float distance);
 	void SetSize(float rad);
+
+	function<void()> ShowPrev;
+	function<void()> ShowNext;
+
+	void ShowPrevTile() { ShowPrev(); }
+	void ShowNextTile() { ShowNext(); }
 };

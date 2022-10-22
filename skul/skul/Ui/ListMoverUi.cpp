@@ -20,6 +20,8 @@ void ListMoverUi::Init()
 	listPrev->SetRotation(30);
 	listNext->SetRotation(-30);
 	listNext->Translate({ 0, listNext->GetSize() });
+	listPrev->ClickOn = bind(&ListMoverUi::ShowPrevTile, this);
+	listNext->ClickOn = bind(&ListMoverUi::ShowNextTile, this);
 }
 
 void ListMoverUi::Release()

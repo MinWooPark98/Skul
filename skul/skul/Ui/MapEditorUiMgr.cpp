@@ -5,7 +5,6 @@
 #include "../Framework/Framework.h"
 #include "TileExampleUi.h"
 #include "ObjExampleUi.h"
-#include "ListMoverUi.h"
 #include "../GameObject/RectTile.h"
 #include "../Scene/MapEditorScene.h"
 
@@ -60,6 +59,7 @@ void MapEditorUiMgr::Init()
 				text->SetName("TileTextButton");
 				TileExampleUi* exTiles = new TileExampleUi();
 				exTiles->SetName("TileExampleUi");
+				exTiles->SetTileNames("tables/tiles.txt");
 				exTiles->Init();
 				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
 				text->ShowSelected = bind(&TileExampleUi::SetActive, exTiles, true);
@@ -82,14 +82,6 @@ void MapEditorUiMgr::Init()
 	exTileFrame->SetFillColor({ 255, 255, 255, 0 });
 	exTileFrame->SetOutlineColor({ 255, 255, 255, 255 });
 	uiObjList.push_back(exTileFrame);
-
-	ListMoverUi* listMover = new ListMoverUi();
-	listMover->SetName("listMover");
-	listMover->Init();
-	listMover->SetSize(12);
-	listMover->SetDistance(44.f);
-	listMover->SetPos({ windowSize.x * 0.91f + 12.f, windowSize.y * 0.45f + 200.f });
-	uiObjList.push_back(listMover);
 }
 
 void MapEditorUiMgr::Reset()

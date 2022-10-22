@@ -1,13 +1,14 @@
 #include "TileExampleUi.h"
 #include "../GameObject/ExRectTile.h"
 #include "../GameObject/TextObj.h"
-#include "../Framework/Framework.h"
 #include "../Framework/ResourceMgr.h"
 #include "../Scene/SceneMgr.h"
 #include "../Scene/MapEditorScene.h"
+#include "ListMoverUi.h"
+#include <fstream>
 
 TileExampleUi::TileExampleUi()
-	:currList(0), clickedTile(nullptr)
+	:currList(0), clickedTile(nullptr), listMover(nullptr)
 {
 }
 
@@ -18,24 +19,42 @@ TileExampleUi::~TileExampleUi()
 void TileExampleUi::Init()
 {
 	Object::Init();
-	Vector2i windowSize = FRAMEWORK->GetWindowSize();
-	for (int i = 0; i < 3; ++i)
+	ifstream ifs(tileNames);
+	string tileName;
+	bool tileRemain = true;
+	while (tileRemain)
 	{
 		list<ExRectTile*>* tileList = new list<ExRectTile*>;
-		for (int j = 0; j < 8; ++j)
+		for (int i = 0; i < 8; ++i)
 		{
 			ExRectTile* tile = new ExRectTile();
 			tile->Init();
 			tile->SetSize({ 40.f, 40.f });
-			tile->SetPos({ 48.f * (j % 2), 48.f * (j / 2) });
-			if (j < 4)
+			tile->SetPos({ 48.f * (i % 2), 48.f * (i / 2) });
+			
+			if (tiles.size() == 0 && tileList->size() == 0)
+				tile->SetTexture(nullptr);
+			else if (getline(ifs, tileName))
 				tile->SetTexture(RESOURCE_MGR->GetTexture("graphics/player3.png"));
 			else
-				tile->SetTexture(nullptr);
+			{
+				delete tile;
+				tileRemain = false;
+				break;
+			}
 			tileList->push_back(tile);
 		}
 		tiles.push_back(tileList);
 	}
+	ifs.close();
+
+	listMover = new ListMoverUi();
+	listMover->Init();
+	listMover->SetSize(12);
+	listMover->SetDistance(44.f);
+	listMover->SetPos({ 12.f, 200.f });
+	listMover->ShowPrev = bind(&TileExampleUi::ShowPrevTiles, this);
+	listMover->ShowNext = bind(&TileExampleUi::ShowNextTiles, this);
 }
 
 void TileExampleUi::Release()
@@ -63,6 +82,7 @@ void TileExampleUi::Update(float dt)
 			((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->SetTexture(clickedTile->GetTexture());
 		}
 	}
+	listMover->Update(dt);
 }
 
 void TileExampleUi::Draw(RenderWindow& window)
@@ -71,6 +91,7 @@ void TileExampleUi::Draw(RenderWindow& window)
 	{
 		tile->Draw(window);
 	}
+	listMover->Draw(window);
 }
 
 void TileExampleUi::SetPos(const Vector2f& pos)
@@ -81,4 +102,17 @@ void TileExampleUi::SetPos(const Vector2f& pos)
 		for(auto tile : *tileList)
 			tile->Translate(pos);
 	}
+	listMover->Translate(pos);
+}
+
+void TileExampleUi::ShowPrevTiles()
+{
+	if (currList > 0)
+		currList -= 1;
+}
+
+void TileExampleUi::ShowNextTiles()
+{
+	if (currList < tiles.size() - 1)
+		currList += 1;
 }
