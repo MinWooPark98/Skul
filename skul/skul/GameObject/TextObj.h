@@ -18,6 +18,9 @@ public:
 
 	virtual Text& GetSFMLText() { return text; }
 	virtual void SetSize(unsigned int size);
+	virtual void SetFillColor(Color color) { text.setFillColor(color); }
+	virtual void SetOutlineColor(Color color) { text.setOutlineColor(color); }
+	virtual void SetOutlineThickness(float t) { text.setOutlineThickness(t); }
 	virtual void SetFont(Font& font);
 	virtual void SetText(string text);
 	virtual void SetOrigin(Origins origin);

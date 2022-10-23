@@ -17,6 +17,7 @@ ExampleOnCursor::~ExampleOnCursor()
 
 void ExampleOnCursor::Update(float dt)
 {
+	SpriteObj::Update(dt);
 	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
 	SetPos(mapEditorScene->GetObjMousePos());
 	string currObjName = (mapEditorScene->GetObjName());
@@ -24,14 +25,16 @@ void ExampleOnCursor::Update(float dt)
 	{
 		recentName = currObjName;
 		if (currObjName.empty())
+		{
 			SetColor({ 255, 255, 255, 0 });
+			return;
+		}
 		FilePathTable* filePath = DATATABLE_MGR->Get<FilePathTable>(DataTable::Types::FilePath);
 		filePath->SetObjType((FilePathTable::ObjTypes)((int)mapEditorScene->GetMode()));
 		SetTexture(*RESOURCE_MGR->GetTexture(filePath->Get(recentName)));
 		SetOrigin(Origins::MC);
 		SetColor({ 255, 255, 255, 204 });
 	}
-	SpriteObj::Update(dt);
 }
 
 void ExampleOnCursor::Draw(RenderWindow& window)

@@ -62,6 +62,8 @@ void DisplayObj::Update(float dt)
 		if (obj->GetGlobalBounds().contains(mousePos) && InputMgr::GetMouseButtonDown(Mouse::Right))
 			displays.Return(obj);
 	}
+	if (InputMgr::GetKeyDown(Keyboard::BackSpace) && displays.GetUseList().size() > 0)
+		displays.Return(displays.GetUseList().back());
 }
 
 void DisplayObj::Draw(RenderWindow& window)

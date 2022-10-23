@@ -38,7 +38,7 @@ void MapEditorScene::Init()
 	Grid* grid = new Grid();
 	grid->SetName("grid");
 	grid->Init();
-	layOut[(int)Layer::Canvas]->push_back(grid);
+	layOut[(int)Layer::Tile]->push_back(grid);
 	objList.push_back(grid);
 
 	DisplayObj* displayObj = new DisplayObj();

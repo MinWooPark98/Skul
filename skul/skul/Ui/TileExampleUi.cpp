@@ -85,6 +85,7 @@ void TileExampleUi::Reset()
 		clickedTile->SetClicked(false);
 		clickedTile->ClickedOff();
 	}
+	clickedTile = nullptr;
 	((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->ClearObjName();
 	SetActive(false);
 }

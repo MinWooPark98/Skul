@@ -21,11 +21,9 @@ public:
 	enum class Layer
 	{
 		Canvas,
-		BackGround,
 		BackObject,
-		ActivateObject,
 		Tile,
-		Player,
+		ActivateObject,
 		Collider,
 		Front,
 		Count,
