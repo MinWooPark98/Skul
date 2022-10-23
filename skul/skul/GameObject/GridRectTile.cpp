@@ -4,6 +4,9 @@
 #include "../Scene/SceneMgr.h"
 #include "../Framework/Framework.h"
 #include "../Ui/UiMgr.h"
+#include "../DataTable/DataTableMGR.h"
+#include "../DataTable/FilePathTable.h"
+#include "../Framework/ResourceMgr.h"
 
 GridRectTile::GridRectTile()
 	:currTex(nullptr)
@@ -23,7 +26,8 @@ void GridRectTile::Init()
 void GridRectTile::Update(float dt)
 {
 	RectTile::Update(dt);
-	Vector2f mousePos = ((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->ObjMousePos();
+	MapEditorScene* mapEditorScene = ((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor));
+	Vector2f mousePos = mapEditorScene->ObjMousePos();
 	FloatRect tileBound = tile->getGlobalBounds();
 	if (mousePos.x < tileBound.left || mousePos.x > tileBound.left + tileBound.width ||
 		mousePos.y < tileBound.top || mousePos.y > tileBound.top + tileBound.height ||
@@ -38,8 +42,18 @@ void GridRectTile::Update(float dt)
 	}
 	isMouseOn = true;
 	MarkOn();
-	if (InputMgr::GetMouseButton(Mouse::Left) && SCENE_MGR->GetScene(Scenes::MapEditor)->GetUiMgr()->FindUiObj("TileExampleUi")->GetActive())
-		SetTexture(((MapEditorScene*)(SCENE_MGR->GetScene(Scenes::MapEditor)))->GetTexture());
+	if (InputMgr::GetMouseButton(Mouse::Left) && mapEditorScene->GetUiMgr()->FindUiObj("TileExampleUi")->GetActive())
+	{
+		string name = mapEditorScene->GetObjName();
+		if (name.empty())
+		{
+			SetTexture(nullptr);
+			return;
+		}
+		FilePathTable* filePath = DATATABLE_MGR->Get<FilePathTable>(DataTable::Types::FilePath);
+		filePath->SetObjType((FilePathTable::ObjTypes)((int)mapEditorScene->GetMode()));
+		SetTexture(RESOURCE_MGR->GetTexture(filePath->Get(mapEditorScene->GetObjName())));
+	}
 }
 
 void GridRectTile::SetTexture(const Texture* tex)

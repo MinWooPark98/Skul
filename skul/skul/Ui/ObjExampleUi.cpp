@@ -5,6 +5,8 @@
 #include <fstream>
 #include "../DataTable/DataTableMGR.h"
 #include "../DataTable/FilePathTable.h"
+#include "../Scene/SceneMgr.h"
+#include "../Scene/MapEditorScene.h"
 
 ObjExampleUi::ObjExampleUi()
 	:currTile(0), clickedTile(nullptr), listMover(nullptr)
@@ -37,14 +39,14 @@ void ObjExampleUi::Init()
 	{
 		ExRectTile* tile = new ExRectTile();
 		tile->Init();
+		Texture* tex;
 		if (getline(ifs, tileName))
-			tile->SetTexture(RESOURCE_MGR->GetTexture(filePath->Get(tileName)));
+			tex = (RESOURCE_MGR->GetTexture(filePath->Get(tileName)));
 		else
 		{
 			delete tile;
 			break;
 		}
-		Texture* tex = RESOURCE_MGR->GetTexture(filePath->Get(tileName));
 		Vector2f texSize = Vector2f((*tex).getSize());
 		if (texSize.x / frameSize.x > texSize.y / frameSize.y)
 			tileSize = { frameSize.x, texSize.y / (texSize.x / frameSize.x) };
@@ -52,6 +54,7 @@ void ObjExampleUi::Init()
 			tileSize = { texSize.x / (texSize.y / frameSize.y), frameSize.y };
 		tile->SetSize(tileSize);
 		tile->SetTexture(tex);
+		tile->SetName(tileName);
 		tiles.push_back(tile);
 	}
 	ifs.close();
@@ -79,7 +82,14 @@ void ObjExampleUi::Release()
 
 void ObjExampleUi::Reset()
 {
-	enabled = false;
+	currTile = 0;
+	if (clickedTile != nullptr)
+	{
+		clickedTile->SetClicked(false);
+		clickedTile->ClickedOff();
+	}
+	((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->ClearObjName();
+	SetActive(false);
 }
 
 void ObjExampleUi::Update(float dt)
@@ -93,6 +103,7 @@ void ObjExampleUi::Update(float dt)
 			clickedTile->ClickedOff();
 		}
 		clickedTile = tiles[currTile];
+		((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->SetObjName(clickedTile->GetName());
 	}
 	listMover->Update(dt);
 }

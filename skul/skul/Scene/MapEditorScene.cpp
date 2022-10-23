@@ -8,7 +8,7 @@
 #include "../Scene/SceneMgr.h"
 
 MapEditorScene::MapEditorScene()
-	:Scene(Scenes::MapEditor), currTex(nullptr), isPause(false), mode(Modes::None)
+	:Scene(Scenes::MapEditor), isPause(false), mode(Modes::None)
 {
 }
 
@@ -108,5 +108,5 @@ const Vector2f& MapEditorScene::ObjMousePos() const
 void MapEditorScene::ChangeMode(int modeNum)
 {
 	((MapEditorUiMgr*)uiMgr)->ResetButton();
-	SetMode((Modes)mode);
+	SetMode((Modes)modeNum);
 }

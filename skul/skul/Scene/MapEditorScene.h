@@ -36,7 +36,7 @@ protected:
 	map<Layer, list<Object*>*> layOut;
 
 	Modes mode;
-	const Texture* currTex;
+	string objName;
 
 	bool isPause;
 
@@ -55,8 +55,9 @@ public:
 
 	const Vector2f& ObjMousePos() const;
 
-	void SetTexture(const Texture* tex) { currTex = tex; }
-	const Texture* GetTexture() { return currTex; }
+	void SetObjName(const string& name) { objName = name; }
+	const string& GetObjName() { return objName; }
+	void ClearObjName() { objName.clear(); }
 
 	Modes GetMode() const { return mode; }
 	void SetMode(Modes mode) { this->mode = mode; }

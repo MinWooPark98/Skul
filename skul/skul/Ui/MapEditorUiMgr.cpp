@@ -45,7 +45,7 @@ void MapEditorUiMgr::Init()
 				exTiles->Init();
 				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
 				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
-				text->StopShowing = bind(&ObjExampleUi::SetActive, exTiles, false);
+				text->StopShowing = bind(&ObjExampleUi::Reset, exTiles);
 				uiObjList.push_back(exTiles);
 			}
 			break;
@@ -59,7 +59,7 @@ void MapEditorUiMgr::Init()
 				exTiles->Init();
 				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
 				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
-				text->StopShowing = bind(&ObjExampleUi::SetActive, exTiles, false);
+				text->StopShowing = bind(&ObjExampleUi::Reset, exTiles);
 				uiObjList.push_back(exTiles);
 			}
 			break;
@@ -73,7 +73,7 @@ void MapEditorUiMgr::Init()
 				exTiles->Init();
 				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
 				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
-				text->StopShowing = bind(&ObjExampleUi::SetActive, exTiles, false);
+				text->StopShowing = bind(&ObjExampleUi::Reset, exTiles);
 				uiObjList.push_back(exTiles);
 			}
 			break;
@@ -87,7 +87,7 @@ void MapEditorUiMgr::Init()
 				exTiles->Init();
 				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
 				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
-				text->StopShowing = bind(&ObjExampleUi::SetActive, exTiles, false);
+				text->StopShowing = bind(&ObjExampleUi::Reset, exTiles);
 				uiObjList.push_back(exTiles);
 			}
 			break;
@@ -101,7 +101,7 @@ void MapEditorUiMgr::Init()
 				exTiles->Init();
 				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
 				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
-				text->StopShowing = bind(&ObjExampleUi::SetActive, exTiles, false);
+				text->StopShowing = bind(&ObjExampleUi::Reset, exTiles);
 				uiObjList.push_back(exTiles);
 			}
 			break;
@@ -115,7 +115,7 @@ void MapEditorUiMgr::Init()
 				exTiles->Init();
 				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
 				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
-				text->StopShowing = bind(&ObjExampleUi::SetActive, exTiles, false);
+				text->StopShowing = bind(&ObjExampleUi::Reset, exTiles);
 				uiObjList.push_back(exTiles);
 			}
 			break;
@@ -129,7 +129,7 @@ void MapEditorUiMgr::Init()
 				exTiles->Init();
 				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
 				text->ShowSelected = bind(&TileExampleUi::SetActive, exTiles, true);
-				text->StopShowing = bind(&TileExampleUi::SetActive, exTiles, false);
+				text->StopShowing = bind(&TileExampleUi::Reset, exTiles);
 				uiObjList.push_back(exTiles);
 			}
 			break;

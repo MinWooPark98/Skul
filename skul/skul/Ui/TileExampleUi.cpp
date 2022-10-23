@@ -37,7 +37,10 @@ void TileExampleUi::Init()
 			if (tiles.size() == 0 && tileList->size() == 0)
 				tile->SetTexture(nullptr);
 			else if (getline(ifs, tileName))
+			{
 				tile->SetTexture(RESOURCE_MGR->GetTexture(filePath->Get(tileName)));
+				tile->SetName(tileName);
+			}
 			else
 			{
 				delete tile;
@@ -76,7 +79,14 @@ void TileExampleUi::Release()
 
 void TileExampleUi::Reset()
 {
-	enabled = false;
+	currList = 0;
+	if (clickedTile != nullptr)
+	{
+		clickedTile->SetClicked(false);
+		clickedTile->ClickedOff();
+	}
+	((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->ClearObjName();
+	SetActive(false);
 }
 
 void TileExampleUi::Update(float dt)
@@ -92,7 +102,7 @@ void TileExampleUi::Update(float dt)
 				clickedTile->ClickedOff();
 			}
 			clickedTile = tile;
-			((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->SetTexture(clickedTile->GetTexture());
+			((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->SetObjName(clickedTile->GetName());
 		}
 	}
 	listMover->Update(dt);
