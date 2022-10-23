@@ -27,11 +27,11 @@ void GridRectTile::Update(float dt)
 {
 	RectTile::Update(dt);
 	MapEditorScene* mapEditorScene = ((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor));
-	Vector2f mousePos = mapEditorScene->ObjMousePos();
+	Vector2f mousePos = mapEditorScene->GetObjMousePos();
 	FloatRect tileBound = tile->getGlobalBounds();
 	if (mousePos.x < tileBound.left || mousePos.x > tileBound.left + tileBound.width ||
 		mousePos.y < tileBound.top || mousePos.y > tileBound.top + tileBound.height ||
-		mousePos.x >= FRAMEWORK->GetWindowSize().x * 0.9f)
+		InputMgr::GetMousePos().x >= FRAMEWORK->GetWindowSize().x * 0.9f)
 	{
 		if (isMouseOn)
 		{
@@ -42,9 +42,9 @@ void GridRectTile::Update(float dt)
 	}
 	isMouseOn = true;
 	MarkOn();
-	if (InputMgr::GetMouseButton(Mouse::Left) && mapEditorScene->GetUiMgr()->FindUiObj("TileExampleUi")->GetActive())
+	if (InputMgr::GetMouseButton(Mouse::Left) && mapEditorScene->GetMode() == MapEditorScene::Modes::Tile)
 	{
-		string name = mapEditorScene->GetObjName();
+		name = mapEditorScene->GetObjName();
 		if (name.empty())
 		{
 			SetTexture(nullptr);
@@ -52,7 +52,7 @@ void GridRectTile::Update(float dt)
 		}
 		FilePathTable* filePath = DATATABLE_MGR->Get<FilePathTable>(DataTable::Types::FilePath);
 		filePath->SetObjType((FilePathTable::ObjTypes)((int)mapEditorScene->GetMode()));
-		SetTexture(RESOURCE_MGR->GetTexture(filePath->Get(mapEditorScene->GetObjName())));
+		SetTexture(RESOURCE_MGR->GetTexture(filePath->Get(name)));
 	}
 }
 

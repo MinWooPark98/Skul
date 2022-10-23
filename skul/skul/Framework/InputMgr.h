@@ -22,8 +22,6 @@ struct AxisInfo
 	float value;
 };
 
-// 스택틱 함수를 이용해서 키보드 및 마우스 입력을 검사할 수 있는 클래스
-
 class InputMgr
 {
 private:
@@ -35,7 +33,9 @@ private:
 
 	static list<Mouse::Button> downMouse; // 
 	static list<Mouse::Button> ingMouse;  // 
-	static list<Mouse::Button> upMouse;	  // 
+	static list<Mouse::Button> upMouse;	  //
+
+	static int mouseWheelMoved;
 
 	static Vector2f mousePos;
 
@@ -51,6 +51,8 @@ public:
 	static bool GetMouseButtonDown(Mouse::Button key);
 	static bool GetMouseButton(Mouse::Button key);
 	static bool GetMouseButtonUp(Mouse::Button key);
+
+	static float GetMouseWheelMoved();
 
 	static const Vector2f& GetMousePos();
 

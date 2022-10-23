@@ -12,6 +12,9 @@ list<Keyboard::Key> InputMgr::upList;
 list<Mouse::Button> InputMgr::downMouse;
 list<Mouse::Button> InputMgr::ingMouse;
 list<Mouse::Button> InputMgr::upMouse;
+
+int InputMgr::mouseWheelMoved;
+
 Vector2f InputMgr::mousePos;
 
 void InputMgr::Init()
@@ -54,6 +57,8 @@ void InputMgr::Update(float dt)
 	downMouse.clear();
 	upMouse.clear();
 
+	mouseWheelMoved = 0.f;
+
 	for (auto& it : axisInfoMap)
 	{
 		AxisInfo& axis = it.second;
@@ -91,6 +96,11 @@ void InputMgr::ProcessInput(Event& ev)
 		{
 			ingMouse.remove(ev.mouseButton.button);
 			upMouse.push_back(ev.mouseButton.button);
+			break;
+		}
+	case Event::EventType::MouseWheelScrolled:
+		{
+			mouseWheelMoved = ev.mouseWheelScroll.delta;
 			break;
 		}
 	case Event::EventType::KeyPressed:
@@ -137,6 +147,11 @@ bool InputMgr::GetMouseButton(Mouse::Button key)
 bool InputMgr::GetMouseButtonUp(Mouse::Button key)
 {
 	return find(upMouse.begin(), upMouse.end(), key) != upMouse.end();;
+}
+
+float InputMgr::GetMouseWheelMoved()
+{
+	return mouseWheelMoved;
 }
 
 const Vector2f& InputMgr::GetMousePos()

@@ -150,6 +150,8 @@
     <ClCompile Include="DataTable\DataTableMGR.cpp" />
     <ClCompile Include="DataTable\LanguageTable.cpp" />
     <ClCompile Include="DataTable\FilePathTable.cpp" />
+    <ClCompile Include="GameObject\ExampleOnCursor.cpp" />
+    <ClCompile Include="GameObject\DisplayObj.cpp" />
     <ClCompile Include="GameObject\ExRectTile.cpp" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Framework\InputMgr.cpp" />
@@ -182,6 +184,8 @@
     <ClInclude Include="DataTable\DataTableMGR.h" />
     <ClInclude Include="DataTable\LanguageTable.h" />
     <ClInclude Include="DataTable\FilePathTable.h" />
+    <ClInclude Include="GameObject\ExampleOnCursor.h" />
+    <ClInclude Include="GameObject\DisplayObj.h" />
     <ClInclude Include="GameObject\ExRectTile.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Framework\InputMgr.h" />

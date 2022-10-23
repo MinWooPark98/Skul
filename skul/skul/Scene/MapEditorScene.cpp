@@ -6,6 +6,8 @@
 #include "../GameObject/Grid.h"
 #include "../Ui/MapEditorUiMgr.h"
 #include "../Scene/SceneMgr.h"
+#include "../GameObject/DisplayObj.h"
+#include "../GameObject/ExampleOnCursor.h"
 
 MapEditorScene::MapEditorScene()
 	:Scene(Scenes::MapEditor), isPause(false), mode(Modes::None)
@@ -21,21 +23,35 @@ void MapEditorScene::Init()
 	for (int i = 0; i < (int)Layer::Count; ++i)
 	{
 		list<Object*>* objects = new list<Object*>;
-		layOut.insert({ (Layer)i, objects });
+		layOut.push_back(objects);
 	}
 
 	Vector2f windowSize = (Vector2f)FRAMEWORK->GetWindowSize();
 	RectTile* background = new RectTile;
+	background->SetName("background");
 	background->Init();
 	background->SetSize({ windowSize.x * 2.f, windowSize.y * 2.f });
 	background->SetFillColor({ 255, 255, 255, 255 });
-	layOut[Layer::Canvas]->push_back(background);
+	layOut[(int)Layer::Canvas]->push_back(background);
 	objList.push_back(background);
 
 	Grid* grid = new Grid();
+	grid->SetName("grid");
 	grid->Init();
-	layOut[Layer::Canvas]->push_back(grid);
+	layOut[(int)Layer::Canvas]->push_back(grid);
 	objList.push_back(grid);
+
+	DisplayObj* displayObj = new DisplayObj();
+	displayObj->SetName("displayObj");
+	displayObj->Init();
+	layOut[(int)Layer::ActivateObject]->push_back(displayObj);
+	objList.push_back(displayObj);
+
+	ExampleOnCursor* exampleOnCursor = new ExampleOnCursor();
+	exampleOnCursor->SetName("exampleOnCursor");
+	exampleOnCursor->Init();
+	layOut[(int)Layer::Front]->push_back(exampleOnCursor);
+	objList.push_back(exampleOnCursor);
 
 	uiMgr = new MapEditorUiMgr();
 	uiMgr->Init();
@@ -54,9 +70,9 @@ void MapEditorScene::Release()
 void MapEditorScene::Draw(RenderWindow& window)
 {
 	window.setView(worldView);
-	for (auto& pair : layOut)
+	for (auto layers : layOut)
 	{
-		for (auto obj : *pair.second)
+		for (auto obj : *layers)
 		{
 			if(obj->GetActive())
 				obj->Draw(window);
@@ -76,6 +92,12 @@ void MapEditorScene::Update(float dt)
 		worldView.move(-75.f, 0.f);
 	if (InputMgr::GetKeyDown(Keyboard::D))
 		worldView.move(75.f, 0.f);
+	worldView.setSize(worldView.getSize() * (1.f - 0.05f * InputMgr::GetMouseWheelMoved()));
+
+	Vector2f mousePos = InputMgr::GetMousePos();
+	Vector2f windowSize = (Vector2f)FRAMEWORK->GetWindowSize();
+	objMousePos = ScreenToWorld((Vector2i)mousePos);
+
 	Scene::Update(dt);
 	uiMgr->Update(dt);
 }
@@ -99,10 +121,9 @@ void MapEditorScene::Exit()
 {
 }
 
-const Vector2f& MapEditorScene::ObjMousePos() const
+const Vector2f& MapEditorScene::GetObjMousePos() const
 {
-	Vector2f mousePos = InputMgr::GetMousePos();
-	return Vector2f(mousePos.x * (1.f / 0.9f) + (worldView.getCenter().x - FRAMEWORK->GetWindowSize().x * 0.5f), mousePos.y + worldView.getCenter().y - FRAMEWORK->GetWindowSize().y * 0.5f);
+	return objMousePos;
 }
 
 void MapEditorScene::ChangeMode(int modeNum)

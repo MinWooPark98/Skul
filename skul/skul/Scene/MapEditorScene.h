@@ -1,8 +1,6 @@
 #pragma once
 #include "Scene.h"
 
-class Tile;
-
 class MapEditorScene : public Scene
 {
 public:
@@ -27,18 +25,20 @@ public:
 		BackObject,
 		ActivateObject,
 		Tile,
-		Collider,
 		Player,
+		Collider,
+		Front,
 		Count,
 	};
 
 protected:
-	map<Layer, list<Object*>*> layOut;
+	vector<list<Object*>*> layOut;
 
 	Modes mode;
 	string objName;
 
 	bool isPause;
+	Vector2f objMousePos;
 
 public:
 	MapEditorScene();
@@ -53,7 +53,7 @@ public:
 	virtual void Enter() override;
 	virtual void Exit() override;
 
-	const Vector2f& ObjMousePos() const;
+	const Vector2f& GetObjMousePos() const;
 
 	void SetObjName(const string& name) { objName = name; }
 	const string& GetObjName() { return objName; }

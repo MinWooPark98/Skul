@@ -16,7 +16,7 @@ void SpriteObj::Draw(RenderWindow& window)
 
 void SpriteObj::SetTexture(const Texture& tex)
 {
-	sprite.setTexture(tex,true);
+	sprite.setTexture(tex, true);
 }
 
 void SpriteObj::SetOrigin(Origins origin)

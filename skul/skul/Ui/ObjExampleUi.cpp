@@ -19,16 +19,6 @@ ObjExampleUi::~ObjExampleUi()
 
 void ObjExampleUi::Init()
 {
-	// ifstream 으로 object 목록 불러오기 
-	//(monster.txt)
-	//sword
-	//arrow
-	//big
-
-	// csv파일에서 읽어온 str을 key값으로 png파일 경로 얻어서 settexture
-	// genereator에서 생성, objlist에 집어넣기
-	// mapDataMgr 클래스에서 objlist 정보들(background, grid, MapObjGenerator의 uselist, tileCollider) 싹 긁어서 저장
-
 	Object::Init();
 	FilePathTable* filePath = DATATABLE_MGR->Get<FilePathTable>(DataTable::Types::FilePath);
 	ifstream ifs(tileNames);

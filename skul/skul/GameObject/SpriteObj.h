@@ -28,6 +28,5 @@ public:
 	FloatRect GetGlobalBounds() const;
 	FloatRect GetLocalBounds() const;
 	FloatRect GetHitBounds() const;
-
 };
 
