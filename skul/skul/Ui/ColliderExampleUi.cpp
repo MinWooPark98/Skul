@@ -4,7 +4,7 @@
 #include "../Scene/SceneMgr.h"
 
 ColliderExampleUi::ColliderExampleUi()
-	:clickedTile(nullptr)
+	:currType(ColliderTypes::None)
 {
 }
 
@@ -48,30 +48,28 @@ void ColliderExampleUi::Release()
 
 void ColliderExampleUi::Reset()
 {
-	if (clickedTile != nullptr)
+	if (currType != ColliderTypes::None)
 	{
-		clickedTile->SetClicked(false);
-		clickedTile->ClickedOff();
+		tiles[(int)currType]->SetClicked(false);
+		tiles[(int)currType]->ClickedOff();
 	}
-	clickedTile = nullptr;
-	((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->ClearObjName();
+	currType = ColliderTypes::None;
 	SetActive(false);
 }
 
 void ColliderExampleUi::Update(float dt)
 {
-	for (auto tile : tiles)
+	for (int i = 0; i < (int)ColliderTypes::Count; ++i)
 	{
-		tile->Update(dt);
-		if (tile->GetClicked() && tile != clickedTile)
+		tiles[i]->Update(dt);
+		if (tiles[i]->GetClicked() && i != (int)currType)
 		{
-			if (clickedTile != nullptr)
+			if (currType != ColliderTypes::None)
 			{
-				clickedTile->SetClicked(false);
-				clickedTile->ClickedOff();
+				tiles[(int)currType]->SetClicked(false);
+				tiles[(int)currType]->ClickedOff();
 			}
-			clickedTile = tile;
-			((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->SetObjName(clickedTile->GetName());
+			currType = (ColliderTypes)i;
 		}
 	}
 }

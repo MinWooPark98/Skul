@@ -112,13 +112,13 @@ inline T* ObjectPool<T>::Get()
 		for (int i = 0; i < use.size(); ++i)
 		{
 			T* ptr = new T();
+			ptr->Init();
 			ptr->SetActive(false);
 			unuse.push_back(ptr);
 
 			if (OnCreate != nullptr)
 			{
 				OnCreate(ptr);
-				ptr->Init();
 			}
 		}
 	}

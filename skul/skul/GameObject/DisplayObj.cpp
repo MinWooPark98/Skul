@@ -58,13 +58,8 @@ void DisplayObj::Update(float dt)
 		obj->SetPos({ mousePos.x, mousePos.y + obj->GetGlobalBounds().height * 0.5f });
 	}
 	list<SpriteObj*> useList = displays.GetUseList();
-	for (auto obj : useList)
-	{
-		if (obj->GetGlobalBounds().contains(mousePos) && InputMgr::GetMouseButtonDown(Mouse::Right))
-			displays.Return(obj);
-	}
-	if (InputMgr::GetKeyDown(Keyboard::BackSpace) && displays.GetUseList().size() > 0)
-		displays.Return(displays.GetUseList().back());
+	if (InputMgr::GetKeyDown(Keyboard::BackSpace) && useList.size() > 0)
+		displays.Return(useList.back());
 }
 
 void DisplayObj::Draw(RenderWindow& window)

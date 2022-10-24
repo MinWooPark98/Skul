@@ -28,6 +28,8 @@ public:
 	virtual void SetFillColor(Color color) { tile->setFillColor(color); }
 	virtual void SetOutlineColor(Color color) { tile->setOutlineColor(color); }
 	virtual void SetOutlineThickness(float t) { tile->setOutlineThickness(t); }
+
+	FloatRect GetGlobalBounds() const { return tile->getGlobalBounds(); }
 	
 	virtual void SetTexture(const Texture* tex);
 	const Texture* GetTexture() { return tile->getTexture(); }

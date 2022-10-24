@@ -8,6 +8,7 @@
 #include "../Scene/SceneMgr.h"
 #include "../GameObject/DisplayObj.h"
 #include "../GameObject/ExampleOnCursor.h"
+#include "../GameObject/DisplayCollider.h"
 
 MapEditorScene::MapEditorScene()
 	:Scene(Scenes::MapEditor), isPause(false), mode(Modes::None)
@@ -25,6 +26,9 @@ void MapEditorScene::Init()
 		list<Object*>* objects = new list<Object*>;
 		layOut.push_back(objects);
 	}
+
+	uiMgr = new MapEditorUiMgr();
+	uiMgr->Init();
 
 	Vector2f windowSize = (Vector2f)FRAMEWORK->GetWindowSize();
 	RectTile* background = new RectTile;
@@ -53,8 +57,12 @@ void MapEditorScene::Init()
 	layOut[(int)Layer::Front]->push_back(exampleOnCursor);
 	objList.push_back(exampleOnCursor);
 
-	uiMgr = new MapEditorUiMgr();
-	uiMgr->Init();
+	DisplayCollider* displayCollider = new DisplayCollider();
+	displayCollider->SetName("displayCollider");
+	displayCollider->Init();
+	displayCollider->SetColliderChosen(uiMgr->FindUiObj("TileColliderExampleUi"));
+	layOut[(int)Layer::Collider]->push_back(displayCollider);
+	objList.push_back(displayCollider);
 }
 
 void MapEditorScene::Release()

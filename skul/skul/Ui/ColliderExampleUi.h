@@ -9,14 +9,15 @@ class ColliderExampleUi : public Object
 public:
 	enum class ColliderTypes
 	{
+		None = -1,
 		TopSide,
 		AllSide,
 		Count,
 	};
 protected:
-	list<ExRectTile*> tiles;
+	vector<ExRectTile*> tiles;
 
-	ExRectTile* clickedTile;
+	ColliderTypes currType;
 
 public:
 	ColliderExampleUi();
@@ -31,5 +32,7 @@ public:
 	virtual void Draw(RenderWindow& window) override;
 
 	virtual void SetPos(const Vector2f& pos) override;
+
+	ColliderTypes GetType() const { return currType; }
 };
 

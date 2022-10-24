@@ -31,6 +31,7 @@ void GridRectTile::Update(float dt)
 	FloatRect tileBound = tile->getGlobalBounds();
 	if (mousePos.x < tileBound.left || mousePos.x > tileBound.left + tileBound.width ||
 		mousePos.y < tileBound.top || mousePos.y > tileBound.top + tileBound.height ||
+		mapEditorScene->GetMode() != MapEditorScene::Modes::Tile ||
 		InputMgr::GetMousePos().x >= FRAMEWORK->GetWindowSize().x * 0.9f)
 	{
 		if (isMouseOn)
@@ -42,7 +43,7 @@ void GridRectTile::Update(float dt)
 	}
 	isMouseOn = true;
 	MarkOn();
-	if (InputMgr::GetMouseButton(Mouse::Left) && mapEditorScene->GetMode() == MapEditorScene::Modes::Tile)
+	if (InputMgr::GetMouseButton(Mouse::Left))
 	{
 		name = mapEditorScene->GetObjName();
 		if (name.empty())
