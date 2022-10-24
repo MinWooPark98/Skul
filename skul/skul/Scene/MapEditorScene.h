@@ -21,9 +21,11 @@ public:
 	enum class Layer
 	{
 		Canvas,
+		BackGround,
 		BackObject,
 		Tile,
 		ActivateObject,
+		Player,
 		Collider,
 		Front,
 		Count,
@@ -61,5 +63,6 @@ public:
 	void SetMode(Modes mode) { this->mode = mode; }
 
 	void ChangeMode(int modeNum);
+	vector<list<Object*>*>& GetLayout() { return layOut; }
 };
 

@@ -24,11 +24,11 @@ void ColliderExampleUi::Init()
 		switch ((ColliderTypes)i)
 		{
 		case ColliderTypes::TopSide:
-			tile->SetFillColor({ 255, 255, 0, 255 });
+			tile->SetFillColor({ 0, 0, 255, 255 });
 			tile->SetName("TopSide");
 			break;
 		case ColliderTypes::AllSide:
-			tile->SetFillColor({ 0, 0, 255, 255 });
+			tile->SetFillColor({ 255, 0, 0, 255 });
 			tile->SetName("AllSide");
 			break;
 		}

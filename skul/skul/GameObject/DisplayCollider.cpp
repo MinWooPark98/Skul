@@ -55,10 +55,10 @@ void DisplayCollider::Update(float dt)
 			delete obj;
 			return;
 		case ColliderExampleUi::ColliderTypes::TopSide:
-			obj->SetOutlineColor({ 255, 0, 0, 255 });
+			obj->SetOutlineColor({ 0, 0, 255, 255 });
 			break;
 		case ColliderExampleUi::ColliderTypes::AllSide:
-			obj->SetOutlineColor({ 0, 0, 255, 255 });
+			obj->SetOutlineColor({ 255, 0, 0, 255 });
 			break;
 		}
 		obj->SetPos(mousePos);

@@ -48,7 +48,6 @@ void MapEditorScene::Init()
 	DisplayObj* displayObj = new DisplayObj();
 	displayObj->SetName("displayObj");
 	displayObj->Init();
-	layOut[(int)Layer::ActivateObject]->push_back(displayObj);
 	objList.push_back(displayObj);
 
 	ExampleOnCursor* exampleOnCursor = new ExampleOnCursor();
