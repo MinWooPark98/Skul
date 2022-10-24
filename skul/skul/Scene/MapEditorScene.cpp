@@ -9,6 +9,7 @@
 #include "../GameObject/DisplayObj.h"
 #include "../GameObject/ExampleOnCursor.h"
 #include "../GameObject/DisplayCollider.h"
+#include "../GameObject/MapEditorDataMgr.h"
 
 MapEditorScene::MapEditorScene()
 	:Scene(Scenes::MapEditor), isPause(false), mode(Modes::None)
@@ -62,6 +63,8 @@ void MapEditorScene::Init()
 	displayCollider->SetColliderChosen(uiMgr->FindUiObj("TileColliderExampleUi"));
 	layOut[(int)Layer::Collider]->push_back(displayCollider);
 	objList.push_back(displayCollider);
+
+	dataMgr = new MapEditorDataMgr();
 }
 
 void MapEditorScene::Release()
@@ -107,6 +110,9 @@ void MapEditorScene::Update(float dt)
 
 	Scene::Update(dt);
 	uiMgr->Update(dt);
+
+	if (InputMgr::GetKeyDown(Keyboard::Enter))
+		dataMgr->SaveData();
 }
 
 void MapEditorScene::Enter()

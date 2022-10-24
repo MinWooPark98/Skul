@@ -1,20 +1,22 @@
 #pragma once
 #include "Scene.h"
 
+class MapEditorDataMgr;
+
 class MapEditorScene : public Scene
 {
 public:
 	enum class Modes
 	{
 		None = -1,
-		BackGround,
-		BackObject,
-		Enemies,
-		NPC,
-		Player,
-		Reward,
-		Tile,
-		TileCollider,
+		BackGround,		// BC
+		BackObject,		// BC
+		Enemies,		// BC
+		NPC,			// BC
+		Player,			// BC
+		Reward,			// BC
+		Tile,			// TL
+		TileCollider,	// TL
 		Count,
 	};
 
@@ -39,6 +41,8 @@ protected:
 
 	bool isPause;
 	Vector2f objMousePos;
+
+	MapEditorDataMgr* dataMgr;
 
 public:
 	MapEditorScene();

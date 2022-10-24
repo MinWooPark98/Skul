@@ -1,12 +1,15 @@
 #pragma once
 #include "Object.h"
 #include "../Framework/ObjectPool.h"
+#include <list>
 
 class SpriteObj;
 
 class DisplayObj : public Object
 {
 protected:
+	vector<list<SpriteObj*>*> objSeperated;
+
 	ObjectPool<SpriteObj> displays;
 
 public:
@@ -19,4 +22,6 @@ public:
 	virtual void Reset() override;
 
 	virtual void Update(float dt) override;
+
+	vector<list<SpriteObj*>*>& Get() { return objSeperated; }
 };

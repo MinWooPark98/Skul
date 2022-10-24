@@ -48,7 +48,7 @@ void DisplayCollider::Update(float dt)
 	{
 		DragRectTile* obj = displays.Get();
 		obj->SetFillColor({ 255, 255, 255, 0 });
-		obj->SetOutlineThickness(5.f);
+		obj->SetOutlineThickness(3.f);
 		switch (colliderChosen->GetType())
 		{
 		case ColliderExampleUi::ColliderTypes::None:
@@ -56,9 +56,11 @@ void DisplayCollider::Update(float dt)
 			return;
 		case ColliderExampleUi::ColliderTypes::TopSide:
 			obj->SetOutlineColor({ 0, 0, 255, 255 });
+			obj->SetName("TopSide");
 			break;
 		case ColliderExampleUi::ColliderTypes::AllSide:
 			obj->SetOutlineColor({ 255, 0, 0, 255 });
+			obj->SetName("AllSide");
 			break;
 		}
 		obj->SetPos(mousePos);

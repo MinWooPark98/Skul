@@ -30,14 +30,14 @@ void Grid::Init()
 			tile->SetPos({ 2.f + 32.f * j, 2.f + 32.f * i });
 			tiles->push_back(tile);
 		}
-		map.push_back(tiles);
+		grid.push_back(tiles);
 	}
 }
 
 void Grid::Update(float dt)
 {
 	Object::Update(dt);
-	for (auto tiles : map)
+	for (auto tiles : grid)
 	{
 		for (auto tile : *tiles)
 		{
@@ -49,7 +49,7 @@ void Grid::Update(float dt)
 void Grid::Draw(RenderWindow& window)
 {
 	Object::Draw(window);
-	for (auto tiles : map)
+	for (auto tiles : grid)
 	{
 		for (auto tile : *tiles)
 		{

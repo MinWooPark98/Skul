@@ -25,4 +25,5 @@ public:
 	virtual void Draw(RenderWindow& window) override;
 
 	void SetColliderChosen(Object* chosen) { colliderChosen = (ColliderExampleUi*)chosen; }
+	list<DragRectTile*> Get() { return displays.GetUseList(); }
 };
