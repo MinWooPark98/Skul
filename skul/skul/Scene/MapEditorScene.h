@@ -68,5 +68,7 @@ public:
 
 	void ChangeMode(int modeNum);
 	vector<list<Object*>*>& GetLayout() { return layOut; }
+
+	MapEditorDataMgr* GetDataMgr() { return dataMgr; }
 };
 

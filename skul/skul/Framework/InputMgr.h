@@ -53,6 +53,8 @@ public:
 	static bool GetMouseButtonUp(Mouse::Button key);
 
 	static float GetMouseWheelMoved();
+	static list<Keyboard::Key> GetKeyDownList() { return downList; }
+	static list<Keyboard::Key> GetKeyingList() { return ingList; }
 
 	static const Vector2f& GetMousePos();
 

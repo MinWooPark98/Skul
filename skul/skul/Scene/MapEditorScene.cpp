@@ -110,9 +110,6 @@ void MapEditorScene::Update(float dt)
 
 	Scene::Update(dt);
 	uiMgr->Update(dt);
-
-	if (InputMgr::GetKeyDown(Keyboard::Enter))
-		dataMgr->SaveData();
 }
 
 void MapEditorScene::Enter()

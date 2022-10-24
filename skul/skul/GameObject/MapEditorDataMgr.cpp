@@ -19,7 +19,7 @@ MapEditorDataMgr::~MapEditorDataMgr()
 	ClearData();
 }
 
-void MapEditorDataMgr::SaveData()
+void MapEditorDataMgr::SaveData(const string& filePath)
 {
 	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
 	auto& grid = ((Grid*)mapEditorScene->FindGameObj("grid"))->Get();
@@ -62,9 +62,9 @@ void MapEditorDataMgr::SaveData()
 		mapData.push_back(MapData((int)MapEditorScene::Modes::TileCollider, collider->GetName(), collider->GetPos(), collider->GetSize(), (int)Origins::TL, (int)MapEditorScene::Layer::Collider));
 	}
 
-	json j_list(mapData);
-	ofstream ofs("test.json");
-	ofs << j_list;
+	json mapObjData(mapData);
+	ofstream ofs(filePath + ".json");
+	ofs << mapObjData;
 }
 
 void MapEditorDataMgr::ClearData()
