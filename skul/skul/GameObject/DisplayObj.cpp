@@ -64,8 +64,12 @@ void DisplayObj::Update(float dt)
 		string objName = mapEditorScene->GetObjName();
 		if (objName.empty())
 			return;
-		
 		SpriteObj* obj = displays.Get();
+		FilePathTable* filePath = DATATABLE_MGR->Get<FilePathTable>(DataTable::Types::FilePath);
+		filePath->SetObjType((FilePathTable::ObjTypes)((int)mapEditorScene->GetMode()));
+		obj->SetTexture(*RESOURCE_MGR->GetTexture(filePath->Get(objName)));
+		obj->SetOrigin(Origins::BC);
+		obj->SetPos({ mousePos.x, mousePos.y + obj->GetGlobalBounds().height * 0.5f });
 		switch (mapEditorScene->GetMode())
 		{
 		case MapEditorScene::Modes::BackGround:
@@ -78,9 +82,8 @@ void DisplayObj::Update(float dt)
 			if (!(layout[(int)MapEditorScene::Layer::Player]->empty()))
 			{
 				SpriteObj* player = (SpriteObj*)layout[(int)MapEditorScene::Layer::Player]->front();
-				player->SetPos({ mousePos.x, mousePos.y + player->GetGlobalBounds().height * 0.5f });// player놈 uselist에서 return하고 걍 새로 넣는 걸로
-				delete obj;
-				return;
+				layout[(int)MapEditorScene::Layer::Player]->remove(player);
+				displays.Return(player);
 			}
 			layout[(int)MapEditorScene::Layer::Player]->push_back(obj);
 			break;
@@ -94,19 +97,5 @@ void DisplayObj::Update(float dt)
 			layout[(int)MapEditorScene::Layer::ActivateObject]->push_back(obj);
 			break;
 		}
-		FilePathTable* filePath = DATATABLE_MGR->Get<FilePathTable>(DataTable::Types::FilePath);
-		filePath->SetObjType((FilePathTable::ObjTypes)((int)mapEditorScene->GetMode()));
-		obj->SetTexture(*RESOURCE_MGR->GetTexture(filePath->Get(objName)));
-		obj->SetOrigin(Origins::BC);
-		obj->SetPos({ mousePos.x, mousePos.y + obj->GetGlobalBounds().height * 0.5f });
 	}
-}/*
-
-void DisplayObj::Draw(RenderWindow& window)
-{
-	list<SpriteObj*> useList = displays.GetUseList();
-	for (auto obj : useList)
-	{
-		obj->Draw(window);
-	}
-}*/
+}
