@@ -27,8 +27,6 @@ public:
 	virtual void Init() override;
 
 	virtual void Selected();
-	function<void()> ShowSelected;
 	function<void(int)> ChangeMode;
 	virtual void Deselected();
-	function<void()> StopShowing;
 };

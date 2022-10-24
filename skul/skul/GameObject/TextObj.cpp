@@ -52,3 +52,9 @@ const string TextObj::GetText() const
 {
 	return text.getString();
 }
+
+void TextObj::Translate(const Vector2f& pos)
+{
+	Object::Translate(pos);
+	text.setPosition(position);
+}

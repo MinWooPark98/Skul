@@ -1,5 +1,6 @@
 #pragma once
 #include "TextObj.h"
+#include <functional>
 
 class TextButton : public TextObj
 {
@@ -20,6 +21,8 @@ public:
 	bool GetSelected() const;
 
 	virtual void Selected();
+	function<void()> ShowSelected;
 	virtual void Deselected();
+	function<void()> StopShowing;
 };
 

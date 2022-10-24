@@ -10,6 +10,7 @@
 #include "../DataTable/DataTableMGR.h"
 #include "../DataTable/FilePathTable.h"
 #include "ColliderExampleUi.h"
+#include "SaveLoadButtonUi.h"
 
 MapEditorUiMgr::MapEditorUiMgr()
 	:UiMgr(SCENE_MGR->GetScene(Scenes::MapEditor))
@@ -159,6 +160,12 @@ void MapEditorUiMgr::Init()
 	exTileFrame->SetFillColor({ 255, 255, 255, 0 });
 	exTileFrame->SetOutlineColor({ 255, 255, 255, 255 });
 	uiObjList.push_back(exTileFrame);
+
+	SaveLoadButtonUi* saveLoadButton = new SaveLoadButtonUi();
+	saveLoadButton->SetName("saveLoadButton");
+	saveLoadButton->Init();
+	saveLoadButton->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.9f });
+	uiObjList.push_back(saveLoadButton);
 }
 
 void MapEditorUiMgr::Reset()

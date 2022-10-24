@@ -51,14 +51,10 @@ void TextButtonUi::Init()
 void TextButtonUi::Selected()
 {
 	ChangeMode((int)mode);
-	if(ShowSelected != nullptr)
-		ShowSelected();
 	TextButton::Selected();
 }
 
 void TextButtonUi::Deselected()
 {
-	if(StopShowing != nullptr)
-		StopShowing();
 	TextButton::Deselected();
 }

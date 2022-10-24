@@ -25,5 +25,6 @@ public:
 	virtual void SetText(string text);
 	virtual void SetOrigin(Origins origin);
 	virtual const string GetText() const;
+	virtual void Translate(const Vector2f& pos) override;
 };
 

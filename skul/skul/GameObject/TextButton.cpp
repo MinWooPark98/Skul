@@ -53,10 +53,14 @@ bool TextButton::GetSelected() const
 
 void TextButton::Selected()
 {
+	if (ShowSelected != nullptr)
+		ShowSelected();
 	isSelected = true;
 }
 
 void TextButton::Deselected()
 {
+	if (StopShowing != nullptr)
+		StopShowing();
 	isSelected = false;
 }
