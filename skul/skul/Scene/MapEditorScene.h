@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 class MapEditorDataMgr;
+class SaveLoadUi;
 
 class MapEditorScene : public Scene
 {
@@ -43,6 +44,7 @@ protected:
 	Vector2f objMousePos;
 
 	MapEditorDataMgr* dataMgr;
+	SaveLoadUi* saveLoadUi;
 
 public:
 	MapEditorScene();
@@ -51,8 +53,8 @@ public:
 	virtual void Init() override;
 	virtual void Release() override;
 
-	virtual void Draw(RenderWindow& window) override;
 	virtual void Update(float dt) override;
+	virtual void Draw(RenderWindow& window) override;
 
 	virtual void Enter() override;
 	virtual void Exit() override;
@@ -69,6 +71,10 @@ public:
 	void ChangeMode(int modeNum);
 	vector<list<Object*>*>& GetLayout() { return layOut; }
 
+	void SetPause(bool pause) { isPause = pause; }
+	bool GetPause() const { return isPause; }
+
 	MapEditorDataMgr* GetDataMgr() { return dataMgr; }
+	SaveLoadUi* GetSaveLoadUi() { return saveLoadUi; }
 };
 

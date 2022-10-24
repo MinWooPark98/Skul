@@ -7,12 +7,6 @@ class TextButton;
 class SaveLoadButtonUi : public Object
 {
 public:
-	enum class Type
-	{
-		Save,
-		Load,
-		Count,
-	};
 protected:
 	list<TextButton*> buttons;
 

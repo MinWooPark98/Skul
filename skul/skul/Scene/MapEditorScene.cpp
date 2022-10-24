@@ -10,9 +10,10 @@
 #include "../GameObject/ExampleOnCursor.h"
 #include "../GameObject/DisplayCollider.h"
 #include "../GameObject/MapEditorDataMgr.h"
+#include "../Ui/SaveLoadUi.h"
 
 MapEditorScene::MapEditorScene()
-	:Scene(Scenes::MapEditor), isPause(false), mode(Modes::None)
+	:Scene(Scenes::MapEditor), isPause(false), mode(Modes::None), dataMgr(nullptr), saveLoadUi(nullptr)
 {
 }
 
@@ -27,9 +28,6 @@ void MapEditorScene::Init()
 		list<Object*>* objects = new list<Object*>;
 		layOut.push_back(objects);
 	}
-
-	uiMgr = new MapEditorUiMgr();
-	uiMgr->Init();
 
 	Vector2f windowSize = (Vector2f)FRAMEWORK->GetWindowSize();
 	RectTile* background = new RectTile;
@@ -60,11 +58,17 @@ void MapEditorScene::Init()
 	DisplayCollider* displayCollider = new DisplayCollider();
 	displayCollider->SetName("displayCollider");
 	displayCollider->Init();
-	displayCollider->SetColliderChosen(uiMgr->FindUiObj("TileColliderExampleUi"));
 	layOut[(int)Layer::Collider]->push_back(displayCollider);
 	objList.push_back(displayCollider);
 
 	dataMgr = new MapEditorDataMgr();
+	saveLoadUi = new SaveLoadUi();
+	saveLoadUi->Init();
+
+	uiMgr = new MapEditorUiMgr();
+	uiMgr->Init();
+
+	displayCollider->SetColliderChosen(uiMgr->FindUiObj("TileColliderExampleUi"));
 }
 
 void MapEditorScene::Release()
@@ -77,23 +81,13 @@ void MapEditorScene::Release()
 	}
 }
 
-void MapEditorScene::Draw(RenderWindow& window)
-{
-	window.setView(worldView);
-	for (auto layers : layOut)
-	{
-		for (auto obj : *layers)
-		{
-			if(obj->GetActive())
-				obj->Draw(window);
-		}
-	}
-	window.setView(uiView);
-	uiMgr->Draw(window);
-}
-
 void MapEditorScene::Update(float dt)
 {
+	if (isPause)
+	{
+		saveLoadUi->Update(dt);
+		return;
+	}
 	if (InputMgr::GetKeyDown(Keyboard::W))
 		worldView.move(0.f, -75.f);
 	if (InputMgr::GetKeyDown(Keyboard::S))
@@ -110,6 +104,24 @@ void MapEditorScene::Update(float dt)
 
 	Scene::Update(dt);
 	uiMgr->Update(dt);
+}
+
+void MapEditorScene::Draw(RenderWindow& window)
+{
+	window.setView(worldView);
+	for (auto layers : layOut)
+	{
+		for (auto obj : *layers)
+		{
+			if (obj->GetActive())
+				obj->Draw(window);
+		}
+	}
+	window.setView(uiView);
+	uiMgr->Draw(window);
+
+	if (isPause)
+		saveLoadUi->Draw(window);
 }
 
 void MapEditorScene::Enter()

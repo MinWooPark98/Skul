@@ -7,7 +7,17 @@ class TextButton;
 
 class SaveLoadUi : public Object
 {
+public:
+	enum class Mode
+	{
+		None = -1,
+		Save,
+		Load,
+		Count,
+	};
 protected:
+	Mode mode;
+
 	RectangleShape frame;
 
 	TextObj* showFilePath;
@@ -25,6 +35,6 @@ public:
 	virtual void Update(float dt) override;
 	virtual void Draw(RenderWindow& window) override;
 
-	void Save();
-	void Load();
+	void SaveMode();
+	void LoadMode();
 };

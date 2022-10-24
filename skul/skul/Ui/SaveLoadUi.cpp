@@ -9,7 +9,7 @@
 #include "../Framework/InputMgr.h"
 
 SaveLoadUi::SaveLoadUi()
-	:showFilePath(nullptr), confirm(nullptr)
+	:showFilePath(nullptr), confirm(nullptr), mode(Mode::None)
 {
 }
 
@@ -29,12 +29,18 @@ void SaveLoadUi::Init()
 	showFilePath = new TextObj();
 	showFilePath->Init();
 	showFilePath->SetFont(*RESOURCE_MGR->GetFont("fonts/NotoSansKR-Bold.otf"));
-	showFilePath->SetText("filePath = " + filePath + ".json");
+	showFilePath->GetSFMLText().setCharacterSize(30);
+	showFilePath->SetPos({ windowSize.x * 0.3f, windowSize.y * 0.5f });
+	showFilePath->SetText("FilePath =   [   " + filePath + ".json   ]");
+	showFilePath->SetOrigin(Origins::ML);
 
 	confirm = new TextButton();
 	confirm->Init();
 	confirm->SetFont(*RESOURCE_MGR->GetFont("fonts/NotoSansKR-Bold.otf"));
+	confirm->SetOutlineThickness(2.f);
+	confirm->SetPos(windowSize * 0.7f);
 	confirm->SetText("Yes");
+	confirm->SetOrigin(Origins::BR);
 }
 
 void SaveLoadUi::Reset()
@@ -51,24 +57,43 @@ void SaveLoadUi::Update(float dt)
 	{
 		if (key >= Keyboard::A && key <= Keyboard::Z)
 		{
-			addChar = ((char)((int)key + 65));
+			addChar = ((char)((int)key + 97));
 			for (auto ing : ingList)
 			{
 				if (ing == Keyboard::LShift || ing == Keyboard::RShift)
 				{
-					addChar = ((char)((int)key + 97));
+					addChar = ((char)((int)key + 65));
 					break;
 				}
 			}
 			filePath = filePath + addChar;
-			showFilePath->SetText("filePath = " + filePath + ".json");
+			showFilePath->SetText("FilePath =   [   " + filePath + ".json   ]");
+			showFilePath->SetOrigin(Origins::ML);
+			break;
+		}
+		if (key == Keyboard::Backspace && !filePath.empty())
+		{
+			filePath.pop_back();
+			showFilePath->SetText("FilePath =   [   " + filePath + ".json   ]");
+			showFilePath->SetOrigin(Origins::ML);
+			break;
 		}
 	}
 	confirm->Update(dt);
 	if (confirm->GetSelected())
 	{
-		MapEditorDataMgr* dataMgr = ((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->GetDataMgr();
-		dataMgr->SaveData(filePath);
+		MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
+		MapEditorDataMgr* dataMgr = mapEditorScene->GetDataMgr();
+		switch (mode)
+		{
+		case SaveLoadUi::Mode::Save:
+			dataMgr->SaveData(filePath);
+			Reset();
+			mapEditorScene->SetPause(false);
+			break;
+		case SaveLoadUi::Mode::Load:
+			break;
+		}
 	}
 }
 
@@ -79,10 +104,14 @@ void SaveLoadUi::Draw(RenderWindow& window)
 	confirm->Draw(window);
 }
 
-void SaveLoadUi::Save()
+void SaveLoadUi::SaveMode()
 {
+	mode = Mode::Save;
+	((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->SetPause(true);
 }
 
-void SaveLoadUi::Load()
+void SaveLoadUi::LoadMode()
 {
+	mode = Mode::Load;
+	((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->SetPause(true);
 }

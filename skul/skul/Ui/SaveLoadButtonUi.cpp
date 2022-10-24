@@ -2,6 +2,9 @@
 #include "../GameObject/TextButton.h"
 #include "../Framework/ResourceMgr.h"
 #include "../Framework/Utils.h"
+#include "../Scene/SceneMgr.h"
+#include "../Scene/MapEditorScene.h"
+#include "SaveLoadUi.h"
 
 SaveLoadButtonUi::SaveLoadButtonUi()
 {
@@ -14,23 +17,24 @@ SaveLoadButtonUi::~SaveLoadButtonUi()
 void SaveLoadButtonUi::Init()
 {
 	Object::Init();
-	for (int i = 0; i < (int)Type::Count; ++i)
+	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
+	for (int i = 0; i < (int)SaveLoadUi::Mode::Count; ++i)
 	{
 		TextButton* button = new TextButton();
 		button->SetFont(*RESOURCE_MGR->GetFont("fonts/NotoSansKR-Bold.otf"));
 		button->Init();
 		button->SetOrigin(Origins::TL);
 		button->SetOutlineThickness(2.f);
-		switch ((Type)i)
+		switch ((SaveLoadUi::Mode)i)
 		{
-		case Type::Save:
+		case SaveLoadUi::Mode::Save:
 			button->SetText("Save");
 			button->SetPos({ 0.f, button->GetSFMLText().getCharacterSize() * (-1.5f) });
-			//button->ShowSelected = 
+			button->ShowSelected = bind(&SaveLoadUi::SaveMode, mapEditorScene->GetSaveLoadUi());
 			break;
-		case Type::Load:
+		case SaveLoadUi::Mode::Load:
 			button->SetText("Load");
-			//button->ShowSelected =
+			button->ShowSelected = bind(&SaveLoadUi::LoadMode, mapEditorScene->GetSaveLoadUi());
 			break;
 		}
 		buttons.push_back(button);
