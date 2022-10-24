@@ -8,6 +8,7 @@
 #include "DisplayCollider.h"
 #include "SpriteObj.h"
 #include "DragRectTile.h"
+#include <fstream>
 
 MapEditorDataMgr::MapEditorDataMgr()
 {
@@ -26,8 +27,7 @@ void MapEditorDataMgr::SaveData()
 	{
 		for (auto tile : *tiles)
 		{
-			MapData* data = new MapData((int)MapEditorScene::Modes::Tile, tile->GetName(), tile->GetPos(), tile->GetSize(), (int)Origins::TL, (int)MapEditorScene::Layer::Tile);
-			mapData.push_back(data);
+			mapData.push_back(MapData((int)MapEditorScene::Modes::Tile, tile->GetName(), tile->GetPos(), tile->GetSize(), (int)Origins::TL, (int)MapEditorScene::Layer::Tile));
 		}
 	}
 	auto& objSeperated = ((DisplayObj*)mapEditorScene->FindGameObj("displayObj"))->Get();
@@ -53,29 +53,21 @@ void MapEditorDataMgr::SaveData()
 				layer = (int)MapEditorScene::Layer::ActivateObject;
 				break;
 			}
-			MapData* data = new MapData(i, obj->GetName(), obj->GetPos(), obj->GetSize(), (int)Origins::BC, layer);
-			mapData.push_back(data);
+			mapData.push_back(MapData(i, obj->GetName(), obj->GetPos(), obj->GetSize(), (int)Origins::BC, layer));
 		}
 	}
 	auto displayCollider = ((DisplayCollider*)mapEditorScene->FindGameObj("displayCollider"))->Get();
 	for (auto collider : displayCollider)
 	{
-		MapData* data = new MapData((int)MapEditorScene::Modes::TileCollider, collider->GetName(), collider->GetPos(), collider->GetSize(), (int)Origins::TL, (int)MapEditorScene::Layer::Collider);
-		mapData.push_back(data);
+		mapData.push_back(MapData((int)MapEditorScene::Modes::TileCollider, collider->GetName(), collider->GetPos(), collider->GetSize(), (int)Origins::TL, (int)MapEditorScene::Layer::Collider));
 	}
 
-	for (auto data : mapData)
-	{
-		cout << data->objType << " " << data->objName << " " << data->xPos << ", " << data->yPos << " " << data->width << " " << data->height << " " << data->origin << " " << data->layer << endl;
-	}
+	json j_list(mapData);
+	ofstream ofs("test.json");
+	ofs << j_list;
 }
 
 void MapEditorDataMgr::ClearData()
 {
-	for (auto data : mapData)
-	{
-		delete data;
-		data = nullptr;
-	}
 	mapData.clear();
 }
