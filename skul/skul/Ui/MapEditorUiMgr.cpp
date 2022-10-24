@@ -9,6 +9,7 @@
 #include "../Scene/MapEditorScene.h"
 #include "../DataTable/DataTableMGR.h"
 #include "../DataTable/FilePathTable.h"
+#include "ColliderExampleUi.h"
 
 MapEditorUiMgr::MapEditorUiMgr()
 	:UiMgr(SCENE_MGR->GetScene(Scenes::MapEditor))
@@ -134,6 +135,16 @@ void MapEditorUiMgr::Init()
 			}
 			break;
 		case MapEditorScene::Modes::TileCollider:
+			{
+				text->SetName("TileColliderTextButton");
+				ColliderExampleUi* exTiles = new ColliderExampleUi();
+				exTiles->SetName("TileColliderExampleUi");
+				exTiles->Init();
+				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
+				text->ShowSelected = bind(&ColliderExampleUi::SetActive, exTiles, true);
+				text->StopShowing = bind(&ColliderExampleUi::Reset, exTiles);
+				uiObjList.push_back(exTiles);
+			}
 			break;
 		}
 		textButtons.push_back(text);

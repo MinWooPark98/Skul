@@ -68,6 +68,7 @@ void TileExampleUi::Release()
 	{
 		for (auto tile : *tileList)
 		{
+			tile->Release();
 			delete tile;
 			tile = nullptr;
 		}

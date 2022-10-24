@@ -40,6 +40,7 @@ void DisplayObj::Update(float dt)
 	Vector2f mousePos = mapEditorScene->GetObjMousePos();
 	if (mapEditorScene->GetMode() == MapEditorScene::Modes::None ||
 		mapEditorScene->GetMode() == MapEditorScene::Modes::Tile ||
+		mapEditorScene->GetMode() == MapEditorScene::Modes::TileCollider ||
 		InputMgr::GetMousePos().x >= FRAMEWORK->GetWindowSize().x * 0.9f)
 	{
 		return;

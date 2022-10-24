@@ -24,7 +24,7 @@ void ExampleOnCursor::Update(float dt)
 	if (recentName != currObjName)
 	{
 		recentName = currObjName;
-		if (currObjName.empty())
+		if (currObjName.empty() || mapEditorScene->GetMode() == MapEditorScene::Modes::TileCollider)
 		{
 			SetColor({ 255, 255, 255, 0 });
 			return;

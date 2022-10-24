@@ -1,0 +1,94 @@
+#include "ColliderExampleUi.h"
+#include "../GameObject/ExRectTile.h"
+#include "../Scene/MapEditorScene.h"
+#include "../Scene/SceneMgr.h"
+
+ColliderExampleUi::ColliderExampleUi()
+	:clickedTile(nullptr)
+{
+}
+
+ColliderExampleUi::~ColliderExampleUi()
+{
+}
+
+void ColliderExampleUi::Init()
+{
+	Object::Init();
+	for (int i = 0; i < (int)ColliderTypes::Count; ++i)
+	{
+		ExRectTile* tile = new ExRectTile();
+		tile->Init();
+		tile->SetSize({ 80.f, 40.f });
+		tile->SetPos({ 0.f, 48.f * (i % 2) });
+		switch ((ColliderTypes)i)
+		{
+		case ColliderTypes::TopSide:
+			tile->SetFillColor({ 255, 255, 0, 255 });
+			tile->SetName("TopSide");
+			break;
+		case ColliderTypes::AllSide:
+			tile->SetFillColor({ 0, 0, 255, 255 });
+			tile->SetName("AllSide");
+			break;
+		}
+		tiles.push_back(tile);
+	}
+}
+
+void ColliderExampleUi::Release()
+{
+	for (auto tile : tiles)
+	{
+		tile->Release();
+		delete tile;
+		tile = nullptr;
+	}
+}
+
+void ColliderExampleUi::Reset()
+{
+	if (clickedTile != nullptr)
+	{
+		clickedTile->SetClicked(false);
+		clickedTile->ClickedOff();
+	}
+	clickedTile = nullptr;
+	((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->ClearObjName();
+	SetActive(false);
+}
+
+void ColliderExampleUi::Update(float dt)
+{
+	for (auto tile : tiles)
+	{
+		tile->Update(dt);
+		if (tile->GetClicked() && tile != clickedTile)
+		{
+			if (clickedTile != nullptr)
+			{
+				clickedTile->SetClicked(false);
+				clickedTile->ClickedOff();
+			}
+			clickedTile = tile;
+			((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->SetObjName(clickedTile->GetName());
+		}
+	}
+}
+
+void ColliderExampleUi::Draw(RenderWindow& window)
+{
+	for (auto tile : tiles)
+	{
+		tile->Draw(window);
+	}
+}
+
+void ColliderExampleUi::SetPos(const Vector2f& pos)
+{
+	Object::SetPos(pos);
+	for (auto tile : tiles)
+	{
+		tile->Translate(pos);
+	}
+}

@@ -1,22 +1,26 @@
 #pragma once
 #include "../GameObject/Object.h"
+#include <list>
 
 class ExRectTile;
-class ListMoverUi;
 
-class ObjExampleUi : public Object
+class ColliderExampleUi : public Object
 {
+public:
+	enum class ColliderTypes
+	{
+		TopSide,
+		AllSide,
+		Count,
+	};
 protected:
-	vector<ExRectTile*> tiles;
-	int currTile;
-	ListMoverUi* listMover;
+	list<ExRectTile*> tiles;
 
 	ExRectTile* clickedTile;
-	string tileNames;
 
 public:
-	ObjExampleUi();
-	virtual ~ObjExampleUi();
+	ColliderExampleUi();
+	virtual ~ColliderExampleUi();
 
 	virtual void Init() override;
 	virtual void Release() override;
@@ -27,8 +31,5 @@ public:
 	virtual void Draw(RenderWindow& window) override;
 
 	virtual void SetPos(const Vector2f& pos) override;
-	void SetTileNames(string name) { tileNames = name; }
-
-	void ShowPrevTiles();
-	void ShowNextTiles();
 };
+
