@@ -3,7 +3,7 @@
 #include "MapEditorUiMgr.h"
 
 TextButtonUi::TextButtonUi(Modes mode)
-	:isMouseOn(false), isSelected(false), mode(mode)
+	:mode(mode)
 {
 }
 
@@ -13,7 +13,7 @@ TextButtonUi::~TextButtonUi()
 
 void TextButtonUi::Init()
 {
-	Object::Init();
+	TextButton::Init();
 	switch (mode)
 	{
 	case Modes::BackGround:
@@ -48,53 +48,17 @@ void TextButtonUi::Init()
 	text.setOutlineThickness(1.5f);
 }
 
-void TextButtonUi::Update(float dt)
-{
-	Vector2f mousePos = InputMgr::GetMousePos();
-	FloatRect textBound = text.getGlobalBounds();
-
-	if (mousePos.x < textBound.left || mousePos.x > textBound.left + textBound.width ||
-		mousePos.y < textBound.top || mousePos.y > textBound.top + textBound.height)
-	{
-		if (isMouseOn)
-		{
-			MouseOff();
-			isMouseOn = false;
-		}
-		return;
-	}
-	isMouseOn = true;
-	MouseOn();
-	if (InputMgr::GetMouseButtonDown(Mouse::Left))
-		Selected();
-}
-
-void TextButtonUi::MouseOn()
-{
-	text.setOutlineColor({ 255, 255, 255, 255 });
-}
-
-void TextButtonUi::MouseOff()
-{
-	text.setOutlineColor({ 255, 255, 255, 0 });
-}
-
-bool TextButtonUi::GetSelected() const
-{
-	return isSelected;
-}
-
 void TextButtonUi::Selected()
 {
 	ChangeMode((int)mode);
-	isSelected = true;
 	if(ShowSelected != nullptr)
 		ShowSelected();
+	TextButton::Selected();
 }
 
 void TextButtonUi::Deselected()
 {
-	isSelected = false;
 	if(StopShowing != nullptr)
 		StopShowing();
+	TextButton::Deselected();
 }

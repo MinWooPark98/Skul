@@ -149,6 +149,7 @@
     <ClCompile Include="GameObject\DragRectTile.cpp" />
     <ClCompile Include="GameObject\DisplayCollider.cpp" />
     <ClCompile Include="GameObject\MapEditorDataMgr.cpp" />
+    <ClCompile Include="GameObject\TextButton.cpp" />
     <ClCompile Include="Ui\ColliderExampleUi.cpp" />
     <ClCompile Include="DataTable\DataTable.cpp" />
     <ClCompile Include="DataTable\DataTableMGR.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="GameObject\DragRectTile.h" />
     <ClInclude Include="GameObject\DisplayCollider.h" />
     <ClInclude Include="GameObject\MapEditorDataMgr.h" />
+    <ClInclude Include="GameObject\TextButton.h" />
     <ClInclude Include="Ui\ColliderExampleUi.h" />
     <ClInclude Include="DataTable\DataTable.h" />
     <ClInclude Include="DataTable\DataTableMGR.h" />

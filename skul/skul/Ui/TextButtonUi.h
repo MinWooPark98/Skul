@@ -1,8 +1,8 @@
 #pragma once
-#include "../GameObject/TextObj.h"
+#include "../GameObject/TextButton.h"
 #include <functional>
 
-class TextButtonUi : public TextObj
+class TextButtonUi : public TextButton
 {
 public:
 	enum class Modes
@@ -18,9 +18,6 @@ public:
 	};
 
 protected:
-	bool isMouseOn;
-	bool isSelected;
-
 	Modes mode;
 
 public:
@@ -28,16 +25,10 @@ public:
 	virtual ~TextButtonUi();
 
 	virtual void Init() override;
-	virtual void Update(float dt) override;
 
-	void MouseOn();
-	void MouseOff();
-
-	bool GetSelected() const;
-
-	void Selected();
+	virtual void Selected();
 	function<void()> ShowSelected;
 	function<void(int)> ChangeMode;
-	void Deselected();
+	virtual void Deselected();
 	function<void()> StopShowing;
 };
