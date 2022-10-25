@@ -95,4 +95,5 @@ void DisplayCollider::Load(const MapEditorDataMgr::MapData& data)
 	obj->SetName(data.objName);
 	obj->SetPos({ data.xPos, data.yPos });
 	obj->SetSize({ data.width, data.height });
+	obj->SetCreated(true);
 }

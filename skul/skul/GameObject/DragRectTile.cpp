@@ -19,9 +19,14 @@ void DragRectTile::Update(float dt)
 	Vector2f mousePos = mapEditorScene->GetObjMousePos();
 	if (!isCreated)
 	{
-		Vector2f pos = { mousePos.x - position.x, mousePos.y - position.y };
-		SetSize(pos);
+		Vector2f size = { mousePos.x - position.x, mousePos.y - position.y };
+		SetSize(size);
 		if (InputMgr::GetMouseButtonUp(Mouse::Left))
 			isCreated = true;
 	}
+}
+
+void DragRectTile::Reset()
+{
+	isCreated = false;
 }

@@ -41,8 +41,8 @@ void MapEditorDataMgr::Reset()
 
 bool MapEditorDataMgr::SaveData(const string& filePath)
 {
-	Reset();
 	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
+	Reset();
 	auto& grid = ((Grid*)mapEditorScene->FindGameObj("grid"))->Get();
 	for (auto tiles : grid)
 	{
@@ -94,6 +94,8 @@ bool MapEditorDataMgr::SaveData(const string& filePath)
 
 bool MapEditorDataMgr::LoadData(const string& filePath)
 {
+	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
+	mapEditorScene->Reset();
 	Reset();
 	ifstream ifs(filePath + ".json");
 	if (ifs.fail())
@@ -119,7 +121,6 @@ bool MapEditorDataMgr::LoadData(const string& filePath)
 		}
 		++vecIdx;
 	}
-	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
 	auto grid = ((Grid*)mapEditorScene->FindGameObj("grid"));
 	auto displayObj = (DisplayObj*)mapEditorScene->FindGameObj("displayObj");
 	auto displayCollider = (DisplayCollider*)mapEditorScene->FindGameObj("displayCollider");

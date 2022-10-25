@@ -18,6 +18,9 @@ void Tile::Reset()
 {
 	Object::Reset();
 	isMouseOn = false;
+	isClicked = false;
+	if (tile != nullptr && tile->getTexture() != nullptr)
+		tile->setTexture(nullptr);
 }
 
 void Tile::Update(float dt)

@@ -23,6 +23,13 @@ void GridRectTile::Init()
 	tile->setFillColor({ 255, 255, 255, 0 });
 }
 
+void GridRectTile::Reset()
+{
+	RectTile::Reset();
+	currTex = nullptr;
+	name.clear();
+}
+
 void GridRectTile::Update(float dt)
 {
 	RectTile::Update(dt);

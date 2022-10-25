@@ -30,6 +30,6 @@ void ExRectTile::Update(float dt)
 	if(InputMgr::GetMouseButton(Mouse::Left))
 	{
 		isClicked = true;
-		tile->setOutlineColor({ 255, 0, 0, 255 });
+		tile->setOutlineColor({ 255, 255, 0, 255 });
 	}
 }

@@ -83,6 +83,17 @@ void MapEditorScene::Release()
 	}
 }
 
+void MapEditorScene::Reset()
+{
+	for (auto& obj : objList)
+	{
+		obj->Reset();
+	}
+	uiMgr->Reset();
+	mode = Modes::None;
+	objName.clear();
+}
+
 void MapEditorScene::Update(float dt)
 {
 	if (isPause)
@@ -90,6 +101,9 @@ void MapEditorScene::Update(float dt)
 		saveLoadUi->Update(dt);
 		return;
 	}
+	if (InputMgr::GetKeyDown(Keyboard::F5))
+		Reset();
+
 	if (InputMgr::GetKeyDown(Keyboard::W))
 		worldView.move(0.f, -75.f);
 	if (InputMgr::GetKeyDown(Keyboard::S))

@@ -50,6 +50,17 @@ void Grid::Release()
 	grid.clear();
 }
 
+void Grid::Reset()
+{
+	for (auto tiles : grid)
+	{
+		for (auto tile : *tiles)
+		{
+			tile->Reset();
+		}
+	}
+}
+
 void Grid::Update(float dt)
 {
 	Object::Update(dt);

@@ -11,5 +11,7 @@ public:
 	virtual ~DragRectTile();
 
 	virtual void Update(float dt) override;
+	virtual void Reset() override;
+	void SetCreated(bool created) { isCreated = created; }
 };
 

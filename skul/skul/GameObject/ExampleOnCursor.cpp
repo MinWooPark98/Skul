@@ -39,7 +39,10 @@ void ExampleOnCursor::Update(float dt)
 
 void ExampleOnCursor::Draw(RenderWindow& window)
 {
-	if (InputMgr::GetMousePos().x >= FRAMEWORK->GetWindowSize().x * 0.9f)
+	if (InputMgr::GetMousePos().x >= FRAMEWORK->GetWindowSize().x * 0.9f ||
+		((MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor))->GetPause())
+	{
 		return;
+	}
 	SpriteObj::Draw(window);
 }

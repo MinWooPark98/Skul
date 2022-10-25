@@ -75,10 +75,14 @@ void SaveLoadUi::Reset()
 	filePath.clear();
 	SetShowFilePath(filePath);
 	isFailed = false;
+	mode = Mode::None;
 }
 
 void SaveLoadUi::Update(float dt)
 {
+	if (mode == Mode::None)
+		return;
+
 	if (isFailed)
 	{
 		showFailureTimer -= dt;
@@ -91,20 +95,34 @@ void SaveLoadUi::Update(float dt)
 	}
 	auto downList = InputMgr::GetKeyDownList();
 	auto ingList = InputMgr::GetKeyingList();
-	char addChar;
+	char addChar = NULL;
 	for (auto key : downList)
 	{
 		if (key >= Keyboard::A && key <= Keyboard::Z)
 		{
-			addChar = ((char)((int)key + 97));
+			addChar = 'a' + ((char)key - (char)Keyboard::A);
 			for (auto ing : ingList)
 			{
 				if (ing == Keyboard::LShift || ing == Keyboard::RShift)
 				{
-					addChar = ((char)((int)key + 65));
+					addChar = 'A' + ((char)key - (char)Keyboard::A);
 					break;
 				}
 			}
+			filePath = filePath + addChar;
+			SetShowFilePath(filePath);
+			break;
+		}
+		if (key >= Keyboard::Num0 && key <= Keyboard::Num9)
+		{
+			addChar = '0' + ((char)key - (char)Keyboard::Num0);
+			filePath = filePath + addChar;
+			SetShowFilePath(filePath);
+			break;
+		}
+		if (key >= Keyboard::Numpad0 && key <= Keyboard::Numpad9)
+		{
+			addChar = '0' + ((char)key - (char)Keyboard::Numpad0);
 			filePath = filePath + addChar;
 			SetShowFilePath(filePath);
 			break;
@@ -135,7 +153,6 @@ void SaveLoadUi::Update(float dt)
 				isFailed = true;
 			break;
 		case SaveLoadUi::Mode::Load:
-			// 추가할 예정
 			if (!dataMgr->LoadData(filePath))
 				isFailed = true;
 			break;
@@ -143,14 +160,22 @@ void SaveLoadUi::Update(float dt)
 		if (isFailed)
 			showFailure->SetActive(true);
 		else
+		{
 			mapEditorScene->SetPause(false);
+			mode = Mode::None;
+		}
 		yesButton->Deselected();
+		filePath.clear();
+		SetShowFilePath(filePath);
 	}
 	noButton->Update(dt);
 	if (noButton->GetSelected())
 	{
 		mapEditorScene->SetPause(false);
 		noButton->Deselected();
+		mode = Mode::None;
+		filePath.clear();
+		SetShowFilePath(filePath);
 	}
 }
 
