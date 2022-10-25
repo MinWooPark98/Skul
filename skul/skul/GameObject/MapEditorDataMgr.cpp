@@ -19,7 +19,7 @@ MapEditorDataMgr::~MapEditorDataMgr()
 	ClearData();
 }
 
-void MapEditorDataMgr::SaveData(const string& filePath)
+bool MapEditorDataMgr::SaveData(const string& filePath)
 {
 	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
 	auto& grid = ((Grid*)mapEditorScene->FindGameObj("grid"))->Get();
@@ -64,7 +64,18 @@ void MapEditorDataMgr::SaveData(const string& filePath)
 
 	json mapObjData(mapData);
 	ofstream ofs(filePath + ".json");
+	if (ofs.fail())
+		return false;
 	ofs << mapObjData;
+	return true;
+}
+
+bool MapEditorDataMgr::LoadData(const string& filePath)
+{
+	ifstream ifs(filePath + ".json");
+	if (ifs.fail())
+		return false;
+	return true;
 }
 
 void MapEditorDataMgr::ClearData()

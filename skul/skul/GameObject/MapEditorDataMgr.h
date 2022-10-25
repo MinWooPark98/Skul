@@ -37,7 +37,8 @@ public:
 	MapEditorDataMgr();
 	~MapEditorDataMgr();
 
-	void SaveData(const string& filePath);
+	bool SaveData(const string& filePath);
+	bool LoadData(const string& filePath);
 	void ClearData();
 };
 

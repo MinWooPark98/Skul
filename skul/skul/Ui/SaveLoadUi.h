@@ -19,11 +19,15 @@ protected:
 	Mode mode;
 
 	RectangleShape frame;
-
+	TextObj* showMode;
 	TextObj* showFilePath;
 	string filePath;
+	TextObj* showFailure;
+	bool isFailed;
+	float showFailureTimer;
 
-	TextButton* confirm;
+	TextButton* yesButton;
+	TextButton* noButton;
 
 public:
 	SaveLoadUi();
@@ -34,6 +38,8 @@ public:
 
 	virtual void Update(float dt) override;
 	virtual void Draw(RenderWindow& window) override;
+
+	void SetShowFilePath(const string& filePath);
 
 	void SaveMode();
 	void LoadMode();
