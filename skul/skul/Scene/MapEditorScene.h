@@ -40,7 +40,6 @@ protected:
 	Modes mode;
 	string objName;
 
-	bool isPause;
 	Vector2f objMousePos;
 
 	MapEditorDataMgr* dataMgr;
@@ -72,9 +71,6 @@ public:
 
 	void ChangeMode(int modeNum);
 	vector<list<Object*>*>& GetLayout() { return layOut; }
-
-	void SetPause(bool pause) { isPause = pause; }
-	bool GetPause() const { return isPause; }
 
 	MapEditorDataMgr* GetDataMgr() { return dataMgr; }
 	SaveLoadUi* GetSaveLoadUi() { return saveLoadUi; }

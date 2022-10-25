@@ -4,7 +4,7 @@
 #include "../Ui/UiMgr.h"
 
 Scene::Scene(Scenes type)
-	: type(type), uiMgr(nullptr)
+	: type(type), uiMgr(nullptr), isPause(false)
 {
 }
 

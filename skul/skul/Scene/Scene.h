@@ -9,6 +9,7 @@ using namespace std;
 enum class Scenes
 {
 	MapEditor,
+	Play,
 };
 
 class UiMgr;
@@ -17,7 +18,9 @@ class Scene
 protected:
 	Scenes type;
 	list<Object*> objList;
-	//list<Object*> uiObjList;
+
+	bool isPause;
+
 	View worldView;
 	View uiView;
 	UiMgr* uiMgr;
@@ -38,6 +41,9 @@ public:
 	virtual void Draw(RenderWindow& window);
 
 	Texture* GetTexture(const string path) const;
+
+	void SetPause(bool pause) { isPause = pause; }
+	bool GetPause() const { return isPause; }
 
 	View& GetWorldView() { return worldView; }
 	View& GetUiView() { return uiView; }

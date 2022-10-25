@@ -13,7 +13,7 @@
 #include "../Ui/SaveLoadUi.h"
 
 MapEditorScene::MapEditorScene()
-	:Scene(Scenes::MapEditor), isPause(false), mode(Modes::None), dataMgr(nullptr), saveLoadUi(nullptr)
+	:Scene(Scenes::MapEditor), mode(Modes::None), dataMgr(nullptr), saveLoadUi(nullptr)
 {
 }
 
