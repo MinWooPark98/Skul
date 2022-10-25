@@ -154,7 +154,6 @@
     <ClCompile Include="GameObject\TextButton.cpp" />
     <ClCompile Include="GameObject\Player.cpp" />
     <ClCompile Include="Scene\PlayScene.cpp" />
-    <ClCompile Include="GameObject\Skul.cpp" />
     <ClCompile Include="Ui\SaveLoadUi.cpp" />
     <ClCompile Include="Ui\SaveLoadButtonUi.cpp" />
     <ClCompile Include="Ui\ColliderExampleUi.cpp" />
@@ -200,7 +199,6 @@
     <ClInclude Include="GameObject\TextButton.h" />
     <ClInclude Include="GameObject\Player.h" />
     <ClInclude Include="Scene\PlayScene.h" />
-    <ClInclude Include="GameObject\Skul.h" />
     <ClInclude Include="Ui\SaveLoadUi.h" />
     <ClInclude Include="Ui\SaveLoadButtonUi.h" />
     <ClInclude Include="Ui\ColliderExampleUi.h" />

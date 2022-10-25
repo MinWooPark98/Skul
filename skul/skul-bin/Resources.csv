@@ -1,4 +1,4 @@
-id,"type(0: Texture, 1: Font, 2: Sound "
+id,"type(0: Texture, 1: Font, 2: Sound, 3: Animation Clip)"
 fonts/NotoSansKR-Bold.otf,1
 sound/normal_bgm.wav,2
 sound/select.wav,2
@@ -77,3 +77,22 @@ graphics/mapeditor/player/player_0.png,0
 graphics/mapeditor/reward/reward_gold.png,0
 graphics/mapeditor/reward/reward_item.png,0
 graphics/mapeditor/reward/reward_head.png,0
+graphics/player/default.png,0
+animations/player/default/Idle.csv,3
+animations/player/default/IdleLeft.csv,3
+animations/player/default/Walk.csv,3
+animations/player/default/WalkLeft.csv,3
+animations/player/default/Dash.csv,3
+animations/player/default/DashLeft.csv,3
+animations/player/default/Jump.csv,3
+animations/player/default/JumpLeft.csv,3
+animations/player/default/Fall.csv,3
+animations/player/default/FallLeft.csv,3
+animations/player/default/FallRepeat.csv,3
+animations/player/default/FallRepeatLeft.csv,3
+animations/player/default/AttackA.csv,3
+animations/player/default/AttackALeft.csv,3
+animations/player/default/AttackB.csv,3
+animations/player/default/AttackBLeft.csv,3
+animations/player/default/JumpAttack.csv,3
+animations/player/default/JumpAttackLeft.csv,3

@@ -1,0 +1,6 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+Fall,0,10,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/player/default.png,7,204,30,32,15,32,0,0
+graphics/player/default.png,46,204,30,31,15,31,0,0
