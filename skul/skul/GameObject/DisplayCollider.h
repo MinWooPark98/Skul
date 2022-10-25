@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "../Framework/ObjectPool.h"
+#include "MapEditorDataMgr.h"
 
 class DragRectTile;
 class ColliderExampleUi;
@@ -26,4 +27,6 @@ public:
 
 	void SetColliderChosen(Object* chosen) { colliderChosen = (ColliderExampleUi*)chosen; }
 	list<DragRectTile*> Get() { return displays.GetUseList(); }
+
+	void Load(const MapEditorDataMgr::MapData& data);
 };

@@ -19,15 +19,36 @@ MapEditorDataMgr::~MapEditorDataMgr()
 	ClearData();
 }
 
+void MapEditorDataMgr::Init()
+{
+	for (int i = 0; i < 3; ++i)
+	{
+		mapData.push_back(list<MapData>());
+	}
+}
+
+void MapEditorDataMgr::Release()
+{
+}
+
+void MapEditorDataMgr::Reset()
+{
+	for (int i = 0; i < 3; ++i)
+	{
+		mapData[i].clear();
+	}
+}
+
 bool MapEditorDataMgr::SaveData(const string& filePath)
 {
+	Reset();
 	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
 	auto& grid = ((Grid*)mapEditorScene->FindGameObj("grid"))->Get();
 	for (auto tiles : grid)
 	{
 		for (auto tile : *tiles)
 		{
-			mapData.push_back(MapData((int)MapEditorScene::Modes::Tile, tile->GetName(), tile->GetPos(), tile->GetSize(), (int)Origins::TL, (int)MapEditorScene::Layer::Tile));
+			mapData[0].push_back(MapData((int)MapEditorScene::Modes::Tile, tile->GetName(), tile->GetPos(), tile->GetSize(), (int)Origins::TL, (int)MapEditorScene::Layer::Tile));
 		}
 	}
 	auto& objSeperated = ((DisplayObj*)mapEditorScene->FindGameObj("displayObj"))->Get();
@@ -53,13 +74,13 @@ bool MapEditorDataMgr::SaveData(const string& filePath)
 				layer = (int)MapEditorScene::Layer::ActivateObject;
 				break;
 			}
-			mapData.push_back(MapData(i, obj->GetName(), obj->GetPos(), obj->GetSize(), (int)Origins::BC, layer));
+			mapData[1].push_back(MapData(i, obj->GetName(), obj->GetPos(), obj->GetSize(), (int)Origins::BC, layer));
 		}
 	}
 	auto displayCollider = ((DisplayCollider*)mapEditorScene->FindGameObj("displayCollider"))->Get();
 	for (auto collider : displayCollider)
 	{
-		mapData.push_back(MapData((int)MapEditorScene::Modes::TileCollider, collider->GetName(), collider->GetPos(), collider->GetSize(), (int)Origins::TL, (int)MapEditorScene::Layer::Collider));
+		mapData[2].push_back(MapData((int)MapEditorScene::Modes::TileCollider, collider->GetName(), collider->GetPos(), collider->GetSize(), (int)Origins::TL, (int)MapEditorScene::Layer::Collider));
 	}
 
 	json mapObjData(mapData);
@@ -67,31 +88,62 @@ bool MapEditorDataMgr::SaveData(const string& filePath)
 	if (ofs.fail())
 		return false;
 	ofs << mapObjData;
+	ofs.close();
 	return true;
 }
 
 bool MapEditorDataMgr::LoadData(const string& filePath)
 {
+	Reset();
 	ifstream ifs(filePath + ".json");
 	if (ifs.fail())
 		return false;
-	mapData.clear();
 	json jsonData;
 	ifs >> jsonData;
-	for (auto it = jsonData.begin(); it != jsonData.end(); ++it)
+	ifs.close();
+	int vecIdx = 0;
+	for (auto vecIt = jsonData.begin(); vecIt != jsonData.end(); ++vecIt)
 	{
-		MapData data;
-		data.objType = (*it)["objType"];
-		data.objName = (*it)["objName"];
-		data.xPos = (*it)["xPos"];
-		data.yPos = (*it)["yPos"];
-		data.width = (*it)["width"];
-		data.height = (*it)["height"];
-		data.origin = (*it)["origin"];
-		data.layer = (*it)["layer"];
-		mapData.push_back(data);
+		for (auto listIt = (*vecIt).begin(); listIt != (*vecIt).end(); ++listIt)
+		{
+			MapData data;
+			data.objType = (*listIt)["objType"];
+			data.objName = (*listIt)["objName"];
+			data.xPos = (*listIt)["xPos"];
+			data.yPos = (*listIt)["yPos"];
+			data.width = (*listIt)["width"];
+			data.height = (*listIt)["height"];
+			data.origin = (*listIt)["origin"];
+			data.layer = (*listIt)["layer"];
+			mapData[vecIdx].push_back(data);
+		}
+		++vecIdx;
 	}
-
+	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
+	auto grid = ((Grid*)mapEditorScene->FindGameObj("grid"));
+	auto displayObj = (DisplayObj*)mapEditorScene->FindGameObj("displayObj");
+	auto displayCollider = (DisplayCollider*)mapEditorScene->FindGameObj("displayCollider");
+	for (int i = 0; i < 3; ++i)
+	{
+		switch (i)
+		{
+		case 0:
+			grid->Load(mapData[i]);
+			break;
+		case 1:
+			for (auto& data : mapData[i])
+			{
+				displayObj->Load(data);
+			}
+			break;
+		case 2:
+			for (auto& data : mapData[i])
+			{
+				displayCollider->Load(data);
+			}
+			break;
+		}
+	}
 	return true;
 }
 

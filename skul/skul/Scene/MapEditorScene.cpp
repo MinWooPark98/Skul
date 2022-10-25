@@ -62,6 +62,8 @@ void MapEditorScene::Init()
 	objList.push_back(displayCollider);
 
 	dataMgr = new MapEditorDataMgr();
+	dataMgr->Init();
+
 	saveLoadUi = new SaveLoadUi();
 	saveLoadUi->Init();
 

@@ -23,7 +23,7 @@ public:
 
 		int origin; // TL ~ BR
 		int layer;
-
+		
 		NLOHMANN_DEFINE_TYPE_INTRUSIVE(MapData, objType, objName, xPos, yPos, width, height, origin, layer)
 
 		MapData() {}
@@ -32,11 +32,16 @@ public:
 	};
 	
 private:
-	list<MapData> mapData;
+	vector<list<MapData>> mapData;
 
 public:
 	MapEditorDataMgr();
 	~MapEditorDataMgr();
+
+	void Init();
+	void Release();
+
+	void Reset();
 
 	bool SaveData(const string& filePath);
 	bool LoadData(const string& filePath);

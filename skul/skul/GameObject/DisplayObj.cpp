@@ -120,3 +120,18 @@ void DisplayObj::Update(float dt)
 		}
 	}
 }
+
+void DisplayObj::Load(const MapEditorDataMgr::MapData& data)
+{
+	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
+	auto& layout = mapEditorScene->GetLayout();
+	SpriteObj* obj = displays.Get();
+	obj->SetName(data.objName);
+	FilePathTable* filePath = DATATABLE_MGR->Get<FilePathTable>(DataTable::Types::FilePath);
+	filePath->SetObjType((FilePathTable::ObjTypes)data.objType);
+	obj->SetTexture(*RESOURCE_MGR->GetTexture(filePath->Get(data.objName)));
+	obj->SetOrigin((Origins)data.origin);
+	obj->SetPos({ data.xPos, data.yPos });
+	layout[(int)data.layer]->push_back(obj);
+	objSeperated[(int)data.objType]->push_back(obj);
+}

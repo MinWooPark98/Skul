@@ -29,6 +29,8 @@ public:
 	virtual void Init() = 0; //생성
 	virtual void Release();	 //해제
 
+	virtual void Reset() {}
+
 	virtual void Enter();
 	virtual void Exit() = 0;
 

@@ -82,3 +82,17 @@ void DisplayCollider::Draw(RenderWindow& window)
 		obj->Draw(window);
 	}
 }
+
+void DisplayCollider::Load(const MapEditorDataMgr::MapData& data)
+{
+	DragRectTile* obj = displays.Get();
+	obj->SetFillColor({ 255, 255, 255, 0 });
+	obj->SetOutlineThickness(3.f);
+	if (data.objName == "TopSide")
+		obj->SetOutlineColor({ 0, 0, 255, 255 });
+	else if (data.objName == "AllSide")
+		obj->SetOutlineColor({ 255, 0, 0, 255 });
+	obj->SetName(data.objName);
+	obj->SetPos({ data.xPos, data.yPos });
+	obj->SetSize({ data.width, data.height });
+}

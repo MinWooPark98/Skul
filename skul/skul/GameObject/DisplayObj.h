@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "../Framework/ObjectPool.h"
 #include <list>
+#include "MapEditorDataMgr.h"
 
 class SpriteObj;
 
@@ -23,7 +24,7 @@ public:
 
 	virtual void Update(float dt) override;
 
-	void CreateObj(const string& objName);
+	void Load(const MapEditorDataMgr::MapData& data);
 
 	vector<list<SpriteObj*>*>& Get() { return objSeperated; }
 };
