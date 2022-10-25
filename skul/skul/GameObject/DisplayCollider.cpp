@@ -52,7 +52,7 @@ void DisplayCollider::Update(float dt)
 		switch (colliderChosen->GetType())
 		{
 		case ColliderExampleUi::ColliderTypes::None:
-			delete obj;
+			displays.Return(obj);
 			return;
 		case ColliderExampleUi::ColliderTypes::TopSide:
 			obj->SetOutlineColor({ 0, 0, 255, 255 });

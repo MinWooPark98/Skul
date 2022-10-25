@@ -95,7 +95,6 @@ bool MapEditorDataMgr::SaveData(const string& filePath)
 bool MapEditorDataMgr::LoadData(const string& filePath)
 {
 	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
-	mapEditorScene->Reset();
 	Reset();
 	ifstream ifs(filePath + ".json");
 	if (ifs.fail())
@@ -103,6 +102,7 @@ bool MapEditorDataMgr::LoadData(const string& filePath)
 	json jsonData;
 	ifs >> jsonData;
 	ifs.close();
+	mapEditorScene->Reset();
 	int vecIdx = 0;
 	for (auto vecIt = jsonData.begin(); vecIt != jsonData.end(); ++vecIt)
 	{
