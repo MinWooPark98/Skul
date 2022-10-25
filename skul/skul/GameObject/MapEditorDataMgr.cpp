@@ -75,6 +75,23 @@ bool MapEditorDataMgr::LoadData(const string& filePath)
 	ifstream ifs(filePath + ".json");
 	if (ifs.fail())
 		return false;
+	mapData.clear();
+	json jsonData;
+	ifs >> jsonData;
+	for (auto it = jsonData.begin(); it != jsonData.end(); ++it)
+	{
+		MapData data;
+		data.objType = (*it)["objType"];
+		data.objName = (*it)["objName"];
+		data.xPos = (*it)["xPos"];
+		data.yPos = (*it)["yPos"];
+		data.width = (*it)["width"];
+		data.height = (*it)["height"];
+		data.origin = (*it)["origin"];
+		data.layer = (*it)["layer"];
+		mapData.push_back(data);
+	}
+
 	return true;
 }
 

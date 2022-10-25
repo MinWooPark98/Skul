@@ -26,6 +26,7 @@ public:
 
 		NLOHMANN_DEFINE_TYPE_INTRUSIVE(MapData, objType, objName, xPos, yPos, width, height, origin, layer)
 
+		MapData() {}
 		MapData(int type, string name, Vector2f pos, Vector2f size, int origin, int layer) 
 			: objType(type), objName(name), xPos(pos.x), yPos(pos.y), width(size.x), height(size.y), origin(origin), layer(layer) {}
 	};

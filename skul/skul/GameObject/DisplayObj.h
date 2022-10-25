@@ -23,5 +23,7 @@ public:
 
 	virtual void Update(float dt) override;
 
+	void CreateObj(const string& objName);
+
 	vector<list<SpriteObj*>*>& Get() { return objSeperated; }
 };
