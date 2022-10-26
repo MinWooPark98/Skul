@@ -93,10 +93,10 @@ void Animator::SetFrame(const AnimationFrame& frame)
     target->setTextureRect(frame.coord);
     target->setOrigin(frame.origin);
 
-    Vector2f scale = target->getScale();
+    //Vector2f scale = target->getScale();
     //scale.x = abs(scale.x) * (frame.flipX ? -1 : 1);
     //scale.y = abs(scale.y) * (frame.flipY ? -1 : 1);
-    target->setScale(scale);
+    //target->setScale(scale);
 }
 
 void Animator::Play(string id, bool clearQueue)

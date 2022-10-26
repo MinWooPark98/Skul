@@ -49,8 +49,8 @@ void PlayScene::Enter()
 
 	Vector2i size = FRAMEWORK->GetWindowSize();
 
-	worldView.setSize(size.x, size.y);
-	worldView.setCenter(size.x * 0.5f, size.y * 0.5f);
+	worldView.setSize(size.x * 0.5f, size.y * 0.5f);
+	worldView.setCenter(size.x * 0.5f, size.y * 0.75f);
 
 	uiView.setSize(size.x, size.y);
 	uiView.setCenter(size.x * 0.5f, size.y * 0.5f);

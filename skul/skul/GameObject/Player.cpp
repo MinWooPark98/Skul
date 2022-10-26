@@ -1,10 +1,13 @@
 #include "Player.h"
 #include "Skul/Skul.h"
+#include "../Framework/InputMgr.h"
+#include "../Framework/Utils.h"
 
 Player::Player()
 	:mainSkul(nullptr), subSkul(nullptr),
-	currState(States::None), isMoving(false), isDashing(false), isJumping(false), isAttacking(false), dashCount(0),
-	speed(200.f), direction(-1.f, 0.f), lastDirection(-1.f, 0.f)
+	currState(States::None), isMoving(false), isDashing(false), isJumping(false), dashAble(true), jumpCount(0),
+	dashTime(0.4f), dashTimer(0.f), doubleDashableTime(0.5f), doubleDashTimer(0.f), dashDelay(0.7f), dashDelayTimer(0.f), dashCount(0),
+	speed(200.f), direction(1.f, 0.f), lastDirX(1.f)
 {
 }
 
@@ -14,7 +17,8 @@ Player::~Player()
 
 void Player::Init()
 {
-	SetPos({ 1280.f / 2, 720.f / 2 });
+	SetPos({ 1280.f / 2, 720.f });
+	SetOrigin(Origins::BC);
 }
 
 void Player::Release()
@@ -27,8 +31,126 @@ void Player::Reset()
 
 void Player::Update(float dt)
 {
-	SetState(currState);
 	mainSkul->Update(dt);
+
+	if (isDashing)
+	{
+		if (dashCount > 1)
+			dashAble = false;
+
+		dashTimer += dt;
+		if (dashTimer > dashTime)
+			speed = 0.f;
+
+		doubleDashTimer += dt;
+		if (doubleDashTimer >= doubleDashableTime)
+		{
+			dashAble = false;
+			isDashing = false;
+			speed = 200.f;
+			doubleDashTimer = 0.f;
+			if (isJumping)
+				SetState(States::Fall);
+			else
+				SetState(States::Idle);
+		}
+	}
+	if (!dashAble)
+	{
+		dashDelayTimer += dt;
+		if (dashDelayTimer >= dashDelay)
+		{
+			dashAble = true;
+			dashCount = 0;
+			dashDelayTimer = 0.f;
+		}
+	}
+	if (isJumping && currState != States::Attack && direction.y > 0.f)
+		SetState(States::Fall);
+
+	if (InputMgr::GetKeyDown(Keyboard::Z) && dashCount < 2 && dashAble)
+	{
+		SetState(States::Dash);
+		cout << dashCount << endl;
+		isDashing = true;
+		if (currState == States::Dash)
+			mainSkul->Dash();
+		dashTimer = 0.f;
+		doubleDashTimer = 0.f;
+		speed = 300.f;
+		++dashCount;
+	}
+
+	if (InputMgr::GetKeyDown(Keyboard::C) && jumpCount < 2)
+	{
+		isJumping = true;
+		direction.y = -2.5f;
+		SetState(States::Jump);
+		if (currState == States::Jump)
+			mainSkul->Jump();
+		++jumpCount;
+	}
+
+	if (InputMgr::GetKeyDown(Keyboard::X))
+		SetState(States::Attack);
+
+	switch (currState)
+	{
+	case Player::States::Idle:
+		UpdateIdle(dt);
+		break;
+	case Player::States::Move:
+		UpdateMove(dt);
+		break;
+	case Player::States::Jump:
+		UpdateJump(dt);
+		break;
+	case Player::States::Attack:
+		UpdateAttack(dt);
+		break;
+	default:
+		break;
+	}
+
+	if (currState == States::Dash)
+	{
+		direction.x = lastDirX;
+		direction.y = 0.f;
+	}
+	else
+	{
+		if (currState != States::Attack)
+		{
+			direction.x = InputMgr::GetAxisRaw(Axis::Horizontal);
+			if (direction.x > 0.f)
+				sprite.setScale(1, 1);
+			else if (direction.x < 0.f)
+				sprite.setScale(-1, 1);
+		}
+		speed = 200.f;
+
+		if(position.y < 700.f)
+			direction.y += dt * 8.f;
+		if (direction.y > 5.f)
+			direction.y = 5.f;
+		if (position.y > 700.f)
+		{
+			position.y = 700.f;
+			SetState(States::Idle);
+			isJumping = false;
+			jumpCount = 0;
+			direction.y = 0.f;
+		}
+	}
+	if (!(Utils::EqualFloat(direction.x, 0.f)))
+	{
+		lastDirX = direction.x;
+		isMoving = true;
+	}
+	else
+		isMoving = false;
+
+	Translate(direction * speed * dt);
 }
 
 void Player::Draw(RenderWindow& window)
@@ -62,14 +184,11 @@ void Player::SetState(States newState)
 	case Player::States::Jump:
 		mainSkul->Jump();
 		break;
-	case Player::States::AttackA:
+	case Player::States::Attack:
 		mainSkul->AttackA();
 		break;
-	case Player::States::AttackB:
-		mainSkul->AttackB();
-		break;
-	case Player::States::JumpAttack:
-		mainSkul->JumpAttack();
+	case Player::States::Fall:
+		mainSkul->FallRepeated();
 		break;
 	default:
 		break;
@@ -78,20 +197,22 @@ void Player::SetState(States newState)
 
 void Player::UpdateIdle(float dt)
 {
+	if (isMoving)
+		SetState(States::Move);
 }
 
 void Player::UpdateMove(float dt)
 {
-}
-
-void Player::UpdateDash(float dt)
-{
+	if (!isMoving)
+		SetState(States::Idle);
 }
 
 void Player::UpdateJump(float dt)
 {
+	if (Utils::EqualFloat(direction.y, 0.f))
+		mainSkul->Fall();
 }
 
-void Player::UpdatAttack(float dt)
+void Player::UpdateAttack(float dt)
 {
 }

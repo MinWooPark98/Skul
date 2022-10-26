@@ -50,6 +50,6 @@ public:
 	static bool IsRange(float row, float height, float value);
 	static bool IsRange(const FloatRect rect, const Vector2f value);
 
-	bool EqualFloat(float a, float b) { return fabs(a - b) < numeric_limits<float>::epsilon(); }
+	static bool EqualFloat(float a, float b) { return fabs(a - b) < numeric_limits<float>::epsilon(); }
 };
 

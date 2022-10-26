@@ -13,9 +13,8 @@ public:
 		Move,
 		Dash,
 		Jump,
-		AttackA,
-		AttackB,
-		JumpAttack,
+		Attack,
+		Fall,
 	};
 	
 protected:
@@ -27,13 +26,21 @@ protected:
 	bool isMoving;
 	bool isDashing;
 	bool isJumping;
-	bool isAttacking;
 
+	float dashTime;
+	float dashTimer;
+	float doubleDashableTime;
+	float doubleDashTimer;
+	float dashDelay;
+	float dashDelayTimer;
 	int dashCount;
+	bool dashAble;
+	
+	int jumpCount;
 
 	float speed;
 	Vector2f direction;
-	Vector2f lastDirection;
+	float lastDirX;
 
 	RectangleShape attackBox;
 
@@ -55,8 +62,7 @@ public:
 
 	void UpdateIdle(float dt);
 	void UpdateMove(float dt);
-	void UpdateDash(float dt);
 	void UpdateJump(float dt);
-	void UpdatAttack(float dt);
+	void UpdateAttack(float dt);
 };
 
