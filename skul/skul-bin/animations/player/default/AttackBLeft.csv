@@ -1,8 +1,0 @@
-ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
-AttackBLeft,1,10,,,,,,
-,,,,,,,,
-TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
-graphics/player/default.png,7,376,31,29,15.5,29,1,0
-graphics/player/default.png,47,376,58,55,29,55,1,0
-graphics/player/default.png,114,376,55,48,27.5,48,1,0
-graphics/player/default.png,178,376,28,40,14,40,1,0

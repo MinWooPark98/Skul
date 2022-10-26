@@ -1,5 +1,5 @@
 ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
-FallRepeat,1,10,,,,,,
+DefaultSkulFallRepeat,1,10,,,,,,
 ,,,,,,,,
 TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
 graphics/player/default.png,7,253,32,36,16,36,0,0

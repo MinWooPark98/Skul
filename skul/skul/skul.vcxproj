@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObject\Skul\DefaultSkul.cpp" />
     <ClCompile Include="Framework\AnimationClip.cpp" />
     <ClCompile Include="Framework\Animator.cpp" />
     <ClCompile Include="GameObject\DragRectTile.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="GameObject\TextButton.cpp" />
     <ClCompile Include="GameObject\Player.cpp" />
     <ClCompile Include="Scene\PlayScene.cpp" />
+    <ClCompile Include="GameObject\Skul\Skul.cpp" />
     <ClCompile Include="Ui\SaveLoadUi.cpp" />
     <ClCompile Include="Ui\SaveLoadButtonUi.cpp" />
     <ClCompile Include="Ui\ColliderExampleUi.cpp" />
@@ -191,6 +193,7 @@
   <ItemGroup>
     <ClInclude Include="3rd\rapidcsv.h" />
     <ClInclude Include="3rd\SingleTon.h" />
+    <ClInclude Include="GameObject\Skul\DefaultSkul.h" />
     <ClInclude Include="Framework\AnimationClip.h" />
     <ClInclude Include="Framework\Animator.h" />
     <ClInclude Include="GameObject\DragRectTile.h" />
@@ -199,6 +202,7 @@
     <ClInclude Include="GameObject\TextButton.h" />
     <ClInclude Include="GameObject\Player.h" />
     <ClInclude Include="Scene\PlayScene.h" />
+    <ClInclude Include="GameObject\Skul\Skul.h" />
     <ClInclude Include="Ui\SaveLoadUi.h" />
     <ClInclude Include="Ui\SaveLoadButtonUi.h" />
     <ClInclude Include="Ui\ColliderExampleUi.h" />

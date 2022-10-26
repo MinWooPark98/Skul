@@ -1,5 +1,6 @@
 #include "PlayScene.h"
 #include "../GameObject/Player.h"
+#include "../GameObject/Skul/DefaultSkul.h"
 #include "../Framework/Framework.h"
 
 PlayScene::PlayScene()
@@ -13,9 +14,13 @@ PlayScene::~PlayScene()
 
 void PlayScene::Init()
 {
+	Skul* skul = new DefaultSkul();
+	skul->Init();
+
 	Player* player = new Player();
 	player->Init();
 	objList.push_back(player);
+	player->SetSkul(skul);
 }
 
 void PlayScene::Release()
@@ -41,7 +46,6 @@ void PlayScene::Draw(RenderWindow& window)
 void PlayScene::Enter()
 {
 	Scene::Enter();
-	FRAMEWORK->GetWindow().setMouseCursorGrabbed(true);
 
 	Vector2i size = FRAMEWORK->GetWindowSize();
 

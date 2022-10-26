@@ -94,8 +94,8 @@ void Animator::SetFrame(const AnimationFrame& frame)
     target->setOrigin(frame.origin);
 
     Vector2f scale = target->getScale();
-    scale.x = abs(scale.x) * (frame.flipX ? -1 : 1);
-    scale.y = abs(scale.y) * (frame.flipY ? -1 : 1);
+    //scale.x = abs(scale.x) * (frame.flipX ? -1 : 1);
+    //scale.y = abs(scale.y) * (frame.flipY ? -1 : 1);
     target->setScale(scale);
 }
 

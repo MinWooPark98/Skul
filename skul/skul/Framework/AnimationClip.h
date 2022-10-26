@@ -30,6 +30,8 @@ struct AnimationClip
 	LoopTypes loopType;
 	int fps;
 	vector<AnimationFrame> frames;
+
+	int GetFrameCount() { return frames.size(); }
 };
 
 struct AnimationEvent

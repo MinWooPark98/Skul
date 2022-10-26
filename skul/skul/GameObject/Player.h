@@ -1,24 +1,11 @@
 #pragma once
 #include "SpriteObj.h"
-#include "../Framework/Animator.h"
+
+class Skul;
 
 class Player : public SpriteObj
 {
 public:
-	enum class Types
-	{
-		None = -1,
-		Default,
-		Werewolf,
-	};
-	enum class Tiers
-	{
-		None = -1,
-		Normal,
-		Rare,
-		Unique,
-		Legendary,	
-	};
 	enum class States
 	{
 		None = -1,
@@ -26,21 +13,20 @@ public:
 		Move,
 		Dash,
 		Jump,
-		Fall,
 		AttackA,
 		AttackB,
 		JumpAttack,
 	};
+	
 protected:
-	Types type;
-	Tiers tier;
-	Animator* skul;
+	Skul* mainSkul;
+	Skul* subSkul;
 
 	States currState;
 
 	bool isMoving;
 	bool isDashing;
-	bool isFloating;
+	bool isJumping;
 	bool isAttacking;
 
 	int dashCount;
@@ -63,13 +49,14 @@ public:
 	virtual void Update(float dt) override;
 	virtual void Draw(RenderWindow& window) override;
 
+	void SetSkul(Skul* skul);
+
 	void SetState(States newState);
 
 	void UpdateIdle(float dt);
 	void UpdateMove(float dt);
 	void UpdateDash(float dt);
 	void UpdateJump(float dt);
-	void UpdateFall(float dt);
 	void UpdatAttack(float dt);
 };
 
