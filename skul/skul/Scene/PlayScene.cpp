@@ -21,6 +21,11 @@ void PlayScene::Init()
 	player->Init();
 	player->SetSkul(skul);
 	objList.push_back(player);
+
+	for (auto obj : objList)
+	{
+		obj->SetDevMode(true);
+	}
 }
 
 void PlayScene::Release()

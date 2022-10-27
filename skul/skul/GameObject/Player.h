@@ -41,7 +41,6 @@ protected:
 	bool isAttacking;
 
 	float speed;
-	Vector2f direction;
 	float lastDirX;
 
 	RectangleShape attackBox;
@@ -62,11 +61,9 @@ public:
 
 	void SetState(States newState);
 
-	void UpdateIdle(float dt);
-	void UpdateMove(float dt);
-	void UpdateJump(float dt);
-
 	void OnCompleteAttackA();
 	void OnCompleteAttackB();
+
+	const Vector2f& GetDirection() const { return direction; }
 };
 

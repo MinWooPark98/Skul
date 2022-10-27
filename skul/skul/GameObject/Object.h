@@ -14,9 +14,13 @@ protected:
 	bool enabled;
 
 	Vector2f position;
+	Vector2f direction;
 	float rotation;
 	Vector2f scale;
-
+	
+	float gravity;
+	bool gravityApply;
+	
 	static int objCount;
 
 	RectangleShape hitbox;
@@ -38,6 +42,8 @@ public:
 	virtual void SetPos(const Vector2f& pos);
 	virtual const Vector2f& GetPos() const;
 	virtual void Translate(const Vector2f& delta);
+
+	void SetGravity(float g) { gravity = g; }
 
 	virtual void SetRotation(float rotation) { this->rotation = rotation; }
 

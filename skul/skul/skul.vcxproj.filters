@@ -144,6 +144,9 @@
     <ClCompile Include="GameObject\Skul\DefaultSkul.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Collider.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataTable\DataTable.h">
@@ -279,6 +282,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Skul\DefaultSkul.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Collider.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

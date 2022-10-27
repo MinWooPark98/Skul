@@ -7,7 +7,7 @@ Player::Player()
 	:mainSkul(nullptr), subSkul(nullptr),
 	currState(States::None), isMoving(false), isDashing(false), isJumping(false), isAttacking(false), dashAble(true), jumpCount(0),
 	dashTime(0.2f), dashTimer(0.f), doubleDashableTime(0.4f), doubleDashTimer(0.f), dashDelay(0.65f), dashDelayTimer(0.f), dashCount(0),
-	speed(200.f), direction(1.f, 0.f), lastDirX(1.f)
+	speed(200.f), lastDirX(1.f)
 {
 }
 
@@ -18,6 +18,9 @@ Player::~Player()
 void Player::Init()
 {
 	SetPos({ 1280.f / 2, 720.f });
+	direction = { 1.f, 0.f };
+	gravityApply = true;
+	gravity = 8.f;
 	SetOrigin(Origins::BC);
 }
 
@@ -31,7 +34,21 @@ void Player::Reset()
 
 void Player::Update(float dt)
 {
+	Object::Update(dt);
 	mainSkul->Update(dt);
+	//// 임시 충돌 처리
+	//auto size = sprite.getGlobalBounds();
+	//hitbox.setSize({ size.width, size.height });
+	////
+
+	// 중력, 충돌구현으로 대체해야 함
+	if (position.y > 700.f)
+	{
+		position.y = 700.f;
+		isJumping = false;
+		jumpCount = 0;
+		direction.y = 0.f;
+	}
 
 	if (isDashing)
 	{
@@ -67,9 +84,7 @@ void Player::Update(float dt)
 			dashCount = 0;
 			dashDelayTimer = 0.f;
 		}
-	}
-	if (isJumping && currState != States::Attack && direction.y > 0.f)
-		SetState(States::Fall);
+	}	
 
 	if (InputMgr::GetKeyDown(Keyboard::Z) && dashCount < 2 && dashAble)
 	{
@@ -99,23 +114,34 @@ void Player::Update(float dt)
 		SetState(States::Attack);
 	}
 
-	switch (currState)
+	if(currState == States::Jump && Utils::EqualFloat(direction.y, 0.f))
+		mainSkul->Fall();
+
+	if (currState != States::Attack && currState != States::Dash)
 	{
-	case Player::States::Idle:
-		UpdateIdle(dt);
-		break;
-	case Player::States::Move:
-		UpdateMove(dt);
-		break;
-	case Player::States::Jump:
-		UpdateJump(dt);
-		break;
-	default:
-		break;
+		if (isJumping && direction.y > 0.f)
+			SetState(States::Fall);
+		if (!isJumping)
+		{
+			if (isMoving)
+				SetState(States::Move);
+			else
+				SetState(States::Idle);
+		}
 	}
 
+	float inputX = InputMgr::GetAxisRaw(Axis::Horizontal);
 	if (currState == States::Dash)
 	{
+		if (dashTimer >= dashTime && !(Utils::EqualFloat(inputX, 0.f)))
+		{
+			direction.x = inputX;
+			if (direction.x > 0.f)
+				sprite.setScale(1, 1);
+			else if (direction.x < 0.f)
+				sprite.setScale(-1, 1);
+			lastDirX = direction.x;
+		}
 		direction.x = lastDirX;
 		direction.y = 0.f;
 	}
@@ -125,27 +151,15 @@ void Player::Update(float dt)
 			direction.x = 0.f;
 		else
 		{
-			direction.x = InputMgr::GetAxisRaw(Axis::Horizontal);
+			direction.x = inputX;
 			if (direction.x > 0.f)
 				sprite.setScale(1, 1);
 			else if (direction.x < 0.f)
 				sprite.setScale(-1, 1);
 		}
 		speed = 200.f;
-
-		if(position.y < 700.f)
-			direction.y += dt * 8.f;
-		if (direction.y > 5.f)
-			direction.y = 5.f;
-		if (position.y > 700.f)
-		{
-			position.y = 700.f;
-			SetState(States::Idle);
-			isJumping = false;
-			jumpCount = 0;
-			direction.y = 0.f;
-		}
 	}
+
 	if (!(Utils::EqualFloat(direction.x, 0.f)))
 	{
 		lastDirX = direction.x;
@@ -204,24 +218,6 @@ void Player::SetState(States newState)
 	default:
 		break;
 	}
-}
-
-void Player::UpdateIdle(float dt)
-{
-	if (isMoving)
-		SetState(States::Move);
-}
-
-void Player::UpdateMove(float dt)
-{
-	if (!isMoving)
-		SetState(States::Idle);
-}
-
-void Player::UpdateJump(float dt)
-{
-	if (Utils::EqualFloat(direction.y, 0.f))
-		mainSkul->Fall();
 }
 
 void Player::OnCompleteAttackA()
