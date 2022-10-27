@@ -24,13 +24,6 @@ void DefaultSkul::Init()
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulJumpAttack"));
 	{
 		AnimationEvent ev;
-		ev.clipId = "DefaultSkulJump";
-		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulJump")->GetFrameCount() - 1;
-		ev.onEvent = bind(&Skul::Fall, this);
-		animator->AddEvent(ev);
-	}
-	{
-		AnimationEvent ev;
 		ev.clipId = "DefaultSkulFall";
 		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulFall")->GetFrameCount() - 1;
 		ev.onEvent = bind(&Skul::FallRepeated, this);

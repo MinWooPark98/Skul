@@ -114,9 +114,6 @@ void Player::Update(float dt)
 		SetState(States::Attack);
 	}
 
-	if(currState == States::Jump && Utils::EqualFloat(direction.y, 0.f))
-		mainSkul->Fall();
-
 	if (currState != States::Attack && currState != States::Dash)
 	{
 		if (isJumping && direction.y > 0.f)
@@ -213,7 +210,7 @@ void Player::SetState(States newState)
 			mainSkul->AttackA();
 		break;
 	case Player::States::Fall:
-		mainSkul->FallRepeated();
+		mainSkul->Fall();
 		break;
 	default:
 		break;
