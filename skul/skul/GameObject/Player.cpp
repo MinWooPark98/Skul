@@ -285,15 +285,6 @@ void Player::OnCollisionBlock(const FloatRect& blockBound)
 		direction.y = 0.f;
 		return;
 	}
-	else if (hitCenter.y + hitBound.height * 0.2f < blockBound.top && direction.y > 0.f)
-	{
-		Translate({ 0.f, blockBound.top - (hitBound.top + hitBound.height) });
-		position.y = blockBound.top;
-		isJumping = false;
-		jumpCount = 0;
-		direction.y = 0.f;
-		return;
-	}
 
 	if (hitCenter.x > blockBound.left + blockBound.width && direction.x < 0.f && hitBound.top + hitBound.height > blockBound.top)
 	{
