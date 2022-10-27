@@ -48,8 +48,10 @@ public:
 	virtual void FallRepeated() = 0;
 
 	void OnCompleteAttackA();
+	void OnCompleteAttackB();
 	void OnCompleteAttack();
 	function<void()> QuitAttackA;
+	function<void()> QuitAttackB;
 	function<void()> QuitAttack;
 };
 

@@ -19,8 +19,8 @@ void PlayScene::Init()
 
 	Player* player = new Player();
 	player->Init();
-	objList.push_back(player);
 	player->SetSkul(skul);
+	objList.push_back(player);
 }
 
 void PlayScene::Release()

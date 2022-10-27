@@ -67,5 +67,6 @@ public:
 	void UpdateJump(float dt);
 
 	void OnCompleteAttackA();
+	void OnCompleteAttackB();
 };
 

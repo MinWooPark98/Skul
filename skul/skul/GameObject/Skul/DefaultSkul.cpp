@@ -47,7 +47,7 @@ void DefaultSkul::Init()
 		AnimationEvent ev;
 		ev.clipId = "DefaultSkulAttackB";
 		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulAttackB")->GetFrameCount() - 1;
-		ev.onEvent = bind(&Skul::OnCompleteAttack, this);
+		ev.onEvent = bind(&Skul::OnCompleteAttackB, this);
 		animator->AddEvent(ev);
 	}
 	{

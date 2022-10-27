@@ -121,7 +121,9 @@ void Player::Update(float dt)
 	}
 	else
 	{
-		if (currState != States::Attack)
+		if (currState == States::Attack && !isJumping)
+			direction.x = 0.f;
+		else
 		{
 			direction.x = InputMgr::GetAxisRaw(Axis::Horizontal);
 			if (direction.x > 0.f)
@@ -166,6 +168,7 @@ void Player::SetSkul(Skul* skul)
 	mainSkul->SetTarget(&sprite);
 	SetState(States::Idle);
 	mainSkul->QuitAttackA = bind(&Player::OnCompleteAttackA, this);
+	mainSkul->QuitAttackB = bind(&Player::OnCompleteAttackB, this);
 	mainSkul->QuitAttack = bind(&Player::SetState, this, States::Idle);
 }
 
@@ -174,8 +177,6 @@ void Player::SetState(States newState)
 	if (newState == currState)
 		return;
 	currState = newState;
-	if (currState != States::Attack)
-		isAttacking = false;
 	switch (currState)
 	{
 	case Player::States::Idle:
@@ -191,6 +192,7 @@ void Player::SetState(States newState)
 		mainSkul->Jump();
 		break;
 	case Player::States::Attack:
+		isAttacking = false;
 		if (isJumping)
 			mainSkul->JumpAttack();
 		else
@@ -226,7 +228,19 @@ void Player::OnCompleteAttackA()
 {
 	if (isAttacking)
 	{
+		isAttacking = false;
 		mainSkul->AttackB();
+		return;
+	}
+	SetState(States::Idle);
+}
+
+void Player::OnCompleteAttackB()
+{
+	if (isAttacking)
+	{
+		isAttacking = false;
+		mainSkul->AttackA();
 		return;
 	}
 	SetState(States::Idle);
