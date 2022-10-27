@@ -1,5 +1,5 @@
 ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
-DefaultSkulAttackA,1,5,,,,,,
+DefaultSkulAttackA,0,5,,,,,,
 ,,,,,,,,
 TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
 graphics/player/default.png,7,306,30,42,15,42,0,0

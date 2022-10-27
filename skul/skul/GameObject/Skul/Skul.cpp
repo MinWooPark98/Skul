@@ -33,3 +33,15 @@ void Skul::Update(float dt)
 	Object::Update(dt);
 	animator->Update(dt);
 }
+
+void Skul::OnCompleteAttackA()
+{
+	if (QuitAttackA != nullptr)
+		QuitAttackA();
+}
+
+void Skul::OnCompleteAttack()
+{
+	if (QuitAttack != nullptr)
+		QuitAttack();
+}

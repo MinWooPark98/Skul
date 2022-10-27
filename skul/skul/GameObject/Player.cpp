@@ -5,8 +5,8 @@
 
 Player::Player()
 	:mainSkul(nullptr), subSkul(nullptr),
-	currState(States::None), isMoving(false), isDashing(false), isJumping(false), dashAble(true), jumpCount(0),
-	dashTime(0.4f), dashTimer(0.f), doubleDashableTime(0.5f), doubleDashTimer(0.f), dashDelay(0.7f), dashDelayTimer(0.f), dashCount(0),
+	currState(States::None), isMoving(false), isDashing(false), isJumping(false), isAttacking(false), dashAble(true), jumpCount(0),
+	dashTime(0.2f), dashTimer(0.f), doubleDashableTime(0.4f), doubleDashTimer(0.f), dashDelay(0.65f), dashDelayTimer(0.f), dashCount(0),
 	speed(200.f), direction(1.f, 0.f), lastDirX(1.f)
 {
 }
@@ -49,10 +49,13 @@ void Player::Update(float dt)
 			isDashing = false;
 			speed = 200.f;
 			doubleDashTimer = 0.f;
-			if (isJumping)
-				SetState(States::Fall);
-			else
-				SetState(States::Idle);
+			if (currState != States::Attack)
+			{
+				if (isJumping)
+					SetState(States::Fall);
+				else
+					SetState(States::Idle);
+			}
 		}
 	}
 	if (!dashAble)
@@ -71,13 +74,12 @@ void Player::Update(float dt)
 	if (InputMgr::GetKeyDown(Keyboard::Z) && dashCount < 2 && dashAble)
 	{
 		SetState(States::Dash);
-		cout << dashCount << endl;
 		isDashing = true;
 		if (currState == States::Dash)
 			mainSkul->Dash();
 		dashTimer = 0.f;
 		doubleDashTimer = 0.f;
-		speed = 300.f;
+		speed = 400.f;
 		++dashCount;
 	}
 
@@ -92,7 +94,10 @@ void Player::Update(float dt)
 	}
 
 	if (InputMgr::GetKeyDown(Keyboard::X))
+	{
+		isAttacking = true;
 		SetState(States::Attack);
+	}
 
 	switch (currState)
 	{
@@ -104,9 +109,6 @@ void Player::Update(float dt)
 		break;
 	case Player::States::Jump:
 		UpdateJump(dt);
-		break;
-	case Player::States::Attack:
-		UpdateAttack(dt);
 		break;
 	default:
 		break;
@@ -163,6 +165,8 @@ void Player::SetSkul(Skul* skul)
 	mainSkul = skul;
 	mainSkul->SetTarget(&sprite);
 	SetState(States::Idle);
+	mainSkul->QuitAttackA = bind(&Player::OnCompleteAttackA, this);
+	mainSkul->QuitAttack = bind(&Player::SetState, this, States::Idle);
 }
 
 void Player::SetState(States newState)
@@ -170,6 +174,8 @@ void Player::SetState(States newState)
 	if (newState == currState)
 		return;
 	currState = newState;
+	if (currState != States::Attack)
+		isAttacking = false;
 	switch (currState)
 	{
 	case Player::States::Idle:
@@ -185,7 +191,10 @@ void Player::SetState(States newState)
 		mainSkul->Jump();
 		break;
 	case Player::States::Attack:
-		mainSkul->AttackA();
+		if (isJumping)
+			mainSkul->JumpAttack();
+		else
+			mainSkul->AttackA();
 		break;
 	case Player::States::Fall:
 		mainSkul->FallRepeated();
@@ -213,6 +222,13 @@ void Player::UpdateJump(float dt)
 		mainSkul->Fall();
 }
 
-void Player::UpdateAttack(float dt)
+void Player::OnCompleteAttackA()
 {
+	if (isAttacking)
+	{
+		mainSkul->AttackB();
+		return;
+	}
+	SetState(States::Idle);
 }
+

@@ -38,6 +38,8 @@ protected:
 	
 	int jumpCount;
 
+	bool isAttacking;
+
 	float speed;
 	Vector2f direction;
 	float lastDirX;
@@ -63,6 +65,7 @@ public:
 	void UpdateIdle(float dt);
 	void UpdateMove(float dt);
 	void UpdateJump(float dt);
-	void UpdateAttack(float dt);
+
+	void OnCompleteAttackA();
 };
 

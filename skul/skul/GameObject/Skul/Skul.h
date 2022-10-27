@@ -46,5 +46,10 @@ public:
 	virtual void JumpAttack() = 0;
 	virtual void Fall() = 0;
 	virtual void FallRepeated() = 0;
+
+	void OnCompleteAttackA();
+	void OnCompleteAttack();
+	function<void()> QuitAttackA;
+	function<void()> QuitAttack;
 };
 

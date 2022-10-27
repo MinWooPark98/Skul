@@ -1,5 +1,6 @@
 #pragma once
 #include "Skul.h"
+#include <functional>
 
 class DefaultSkul : public Skul
 {

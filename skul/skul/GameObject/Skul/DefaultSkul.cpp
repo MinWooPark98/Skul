@@ -25,15 +25,36 @@ void DefaultSkul::Init()
 	{
 		AnimationEvent ev;
 		ev.clipId = "DefaultSkulJump";
-		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulJump")->GetFrameCount();
+		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulJump")->GetFrameCount() - 1;
 		ev.onEvent = bind(&Skul::Fall, this);
 		animator->AddEvent(ev);
 	}
 	{
 		AnimationEvent ev;
 		ev.clipId = "DefaultSkulFall";
-		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulFall")->GetFrameCount();
+		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulFall")->GetFrameCount() - 1;
 		ev.onEvent = bind(&Skul::FallRepeated, this);
+		animator->AddEvent(ev);
+	}
+	{
+		AnimationEvent ev;
+		ev.clipId = "DefaultSkulAttackA";
+		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulAttackA")->GetFrameCount() - 1;
+		ev.onEvent = bind(&Skul::OnCompleteAttackA, this);
+		animator->AddEvent(ev);
+	}
+	{
+		AnimationEvent ev;
+		ev.clipId = "DefaultSkulAttackB";
+		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulAttackB")->GetFrameCount() - 1;
+		ev.onEvent = bind(&Skul::OnCompleteAttack, this);
+		animator->AddEvent(ev);
+	}
+	{
+		AnimationEvent ev;
+		ev.clipId = "DefaultSkulJumpAttack";
+		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulJumpAttack")->GetFrameCount() - 1;
+		ev.onEvent = bind(&Skul::OnCompleteAttack, this);
 		animator->AddEvent(ev);
 	}
 }
