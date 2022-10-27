@@ -2,6 +2,7 @@
 #include "../GameObject/Player.h"
 #include "../GameObject/Skul/DefaultSkul.h"
 #include "../Framework/Framework.h"
+#include "../GameObject/Collider.h"
 
 PlayScene::PlayScene()
 	:Scene(Scenes::Play)
@@ -14,13 +15,34 @@ PlayScene::~PlayScene()
 
 void PlayScene::Init()
 {
+	for (int i = 0; i < (int)Layer::Count; ++i)
+	{
+		list<Object*>* objects = new list<Object*>;
+		layOut.push_back(objects);
+	}
+
 	Skul* skul = new DefaultSkul();
 	skul->Init();
 
 	Player* player = new Player();
 	player->Init();
 	player->SetSkul(skul);
+	layOut[(int)Layer::Player]->push_back(player);
 	objList.push_back(player);
+
+	Collider* collider = new Collider();
+	collider->Init();
+	collider->SetType(Collider::Type::TopSide);
+	layOut[(int)Layer::Collider]->push_back(collider);
+	objList.push_back(collider);
+
+	Collider* collider2 = new Collider();
+	collider2->Init();
+	//collider2->SetHitBox({ 0.f, 0.f, 100.f, 32.f });
+	collider2->SetType(Collider::Type::AllSide);
+	collider2->SetPos({ 800.f, 550.f });
+	layOut[(int)Layer::Collider]->push_back(collider2);
+	objList.push_back(collider2);
 
 	for (auto obj : objList)
 	{
@@ -40,12 +62,24 @@ void PlayScene::Reset()
 
 void PlayScene::Update(float dt)
 {
+	if (dt > 1.f)
+		return;
 	Scene::Update(dt);
 }
 
 void PlayScene::Draw(RenderWindow& window)
 {
-	Scene::Draw(window);
+	window.setView(worldView);
+	for (auto layers : layOut)
+	{
+		for (auto obj : *layers)
+		{
+			if (obj->GetActive())
+				obj->Draw(window);
+		}
+	}
+	window.setView(uiView);
+	//uiMgr->Draw(window);
 }
 
 void PlayScene::Enter()

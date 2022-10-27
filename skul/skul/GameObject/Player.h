@@ -2,6 +2,7 @@
 #include "SpriteObj.h"
 
 class Skul;
+class UnderFeetRay;
 
 class Player : public SpriteObj
 {
@@ -20,6 +21,8 @@ public:
 protected:
 	Skul* mainSkul;
 	Skul* subSkul;
+
+	vector< UnderFeetRay*> rays;
 
 	States currState;
 
@@ -65,5 +68,6 @@ public:
 	void OnCompleteAttackB();
 
 	const Vector2f& GetDirection() const { return direction; }
+	void OnCollisionBlock(const FloatRect& blockBound);
 };
 

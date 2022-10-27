@@ -56,4 +56,5 @@ public:
 	virtual void SetDevMode(bool devMode) { isDevMode = devMode; }
 
 	virtual void SetHitBox(const FloatRect rect);
+	FloatRect GetHitBounds() const { return hitbox.getGlobalBounds(); }
 };

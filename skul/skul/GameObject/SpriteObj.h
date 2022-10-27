@@ -24,9 +24,7 @@ public:
 	void SetSize(Vector2f size);
 	void SetScale(Vector2f scale);
 
-
 	FloatRect GetGlobalBounds() const;
 	FloatRect GetLocalBounds() const;
-	FloatRect GetHitBounds() const;
 };
 

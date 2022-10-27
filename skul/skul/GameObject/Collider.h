@@ -16,14 +16,12 @@ public:
 protected:
 	Type type;
 
-	Player* player;
-
 public:
 	Collider();
 	virtual ~Collider();
 
 	virtual void Init() override;
-	virtual void Update(float dt) override;
 
-	void SetPlayer(Player* player);
+	void SetType(Type type) { this->type = type; }
+	Type GetType() { return type; }
 };

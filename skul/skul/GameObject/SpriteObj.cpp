@@ -22,6 +22,7 @@ void SpriteObj::SetTexture(const Texture& tex)
 void SpriteObj::SetOrigin(Origins origin)
 {
 	Utils::SetOrigin(sprite, origin);
+	Utils::SetOrigin(hitbox, origin);
 }
 
 void SpriteObj::SetColor(Color color)
@@ -67,8 +68,3 @@ FloatRect SpriteObj::GetLocalBounds() const
 {
 	return sprite.getLocalBounds();
 }
-FloatRect SpriteObj::GetHitBounds() const
-{
-	return hitbox.getGlobalBounds();
-}
-
