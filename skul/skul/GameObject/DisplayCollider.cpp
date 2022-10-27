@@ -64,27 +64,25 @@ void DisplayCollider::Update(float dt)
 			break;
 		}
 		obj->SetPos(mousePos);
+		auto& layout = mapEditorScene->GetLayout();
+		layout[(int)MapEditorScene::Layer::Collider]->push_back(obj);
 	}
 	list<DragRectTile*> useList = displays.GetUseList();
 	for (auto obj : useList)
 	{
 		obj->Update(dt);
 		if (obj->GetGlobalBounds().contains(mousePos) && InputMgr::GetMouseButtonDown(Mouse::Right))
+		{
+			auto& layout = mapEditorScene->GetLayout();
+			layout[(int)MapEditorScene::Layer::Collider]->remove(obj);
 			displays.Return(obj);
-	}
-}
-
-void DisplayCollider::Draw(RenderWindow& window)
-{
-	list<DragRectTile*> useList = displays.GetUseList();
-	for (auto obj : useList)
-	{
-		obj->Draw(window);
+		}
 	}
 }
 
 void DisplayCollider::Load(const MapEditorDataMgr::MapData& data)
 {
+	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
 	DragRectTile* obj = displays.Get();
 	obj->SetFillColor({ 255, 255, 255, 0 });
 	obj->SetOutlineThickness(3.f);
@@ -96,4 +94,6 @@ void DisplayCollider::Load(const MapEditorDataMgr::MapData& data)
 	obj->SetPos({ data.xPos, data.yPos });
 	obj->SetSize({ data.width, data.height });
 	obj->SetCreated(true);
+	auto& layout = mapEditorScene->GetLayout();
+	layout[(int)MapEditorScene::Layer::Collider]->push_back(obj);
 }

@@ -23,7 +23,6 @@ public:
 	virtual void Reset() override;
 
 	virtual void Update(float dt) override;
-	virtual void Draw(RenderWindow& window) override;
 
 	void SetColliderChosen(Object* chosen) { colliderChosen = (ColliderExampleUi*)chosen; }
 	list<DragRectTile*> Get() { return displays.GetUseList(); }

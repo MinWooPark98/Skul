@@ -13,7 +13,7 @@
 #include "../Ui/SaveLoadUi.h"
 
 MapEditorScene::MapEditorScene()
-	:Scene(Scenes::MapEditor), mode(Modes::None), dataMgr(nullptr), saveLoadUi(nullptr)
+	:Scene(Scenes::MapEditor), mode(Modes::None), dataMgr(nullptr), saveLoadUi(nullptr), canvas(nullptr)
 {
 }
 
@@ -30,13 +30,12 @@ void MapEditorScene::Init()
 	}
 
 	Vector2f windowSize = (Vector2f)FRAMEWORK->GetWindowSize();
-	RectTile* background = new RectTile;
-	background->SetName("background");
-	background->Init();
-	background->SetSize({ windowSize.x * 2.f, windowSize.y * 2.f });
-	background->SetFillColor({ 255, 255, 255, 255 });
-	layOut[(int)Layer::Canvas]->push_back(background);
-	objList.push_back(background);
+	canvas = new RectTile;
+	canvas->SetName("background");
+	canvas->Init();
+	canvas->SetSize({ windowSize.x * 2.f, windowSize.y * 2.f });
+	canvas->SetFillColor({ 255, 255, 255, 255 });
+	objList.push_back(canvas);
 
 	Grid* grid = new Grid();
 	grid->SetName("grid");
@@ -58,7 +57,6 @@ void MapEditorScene::Init()
 	DisplayCollider* displayCollider = new DisplayCollider();
 	displayCollider->SetName("displayCollider");
 	displayCollider->Init();
-	layOut[(int)Layer::Collider]->push_back(displayCollider);
 	objList.push_back(displayCollider);
 
 	dataMgr = new MapEditorDataMgr();
@@ -85,6 +83,12 @@ void MapEditorScene::Release()
 
 void MapEditorScene::Reset()
 {
+	for (int i = 0; i < (int)Layer::Count; ++i)
+	{
+		if (i == (int)Layer::Tile || i == (int)Layer::Front)
+			continue;
+		layOut[i]->clear();
+	}
 	for (auto& obj : objList)
 	{
 		obj->Reset();
@@ -125,6 +129,7 @@ void MapEditorScene::Update(float dt)
 void MapEditorScene::Draw(RenderWindow& window)
 {
 	window.setView(worldView);
+	canvas->Draw(window);
 	for (auto layers : layOut)
 	{
 		for (auto obj : *layers)

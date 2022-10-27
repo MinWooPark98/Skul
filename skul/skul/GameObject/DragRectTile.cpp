@@ -28,5 +28,6 @@ void DragRectTile::Update(float dt)
 
 void DragRectTile::Reset()
 {
+	RectTile::Reset();
 	isCreated = false;
 }

@@ -3,6 +3,7 @@
 
 class MapEditorDataMgr;
 class SaveLoadUi;
+class RectTile;
 
 class MapEditorScene : public Scene
 {
@@ -23,7 +24,6 @@ public:
 
 	enum class Layer
 	{
-		Canvas,
 		BackGround,
 		BackObject,
 		Tile,
@@ -35,6 +35,7 @@ public:
 	};
 
 protected:
+	RectTile* canvas;
 	vector<list<Object*>*> layOut;
 
 	Modes mode;
