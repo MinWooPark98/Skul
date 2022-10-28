@@ -31,7 +31,6 @@ bool Object::GetActive() const
 void Object::Init()
 {
     Reset();
-    hitbox.setFillColor({ 255, 0, 0, 255 });
 }
 
 void Object::Release()
@@ -73,7 +72,7 @@ void Object::Draw(RenderWindow& window)
 void Object::SetHitBox(const FloatRect rect)
 {
     hitbox.setSize({ rect.width,rect.height });
-    hitbox.setFillColor(Color(255,255,255,0));
+    hitbox.setFillColor({ 255, 0, 0, 255 });
 }
 
 void Object::Translate(const Vector2f& delta)

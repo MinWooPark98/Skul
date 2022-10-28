@@ -22,7 +22,7 @@ protected:
 	Skul* mainSkul;
 	Skul* subSkul;
 
-	vector< UnderFeetRay*> rays;
+	vector<UnderFeetRay*> rays;
 
 	States currState;
 
@@ -61,13 +61,15 @@ public:
 	virtual void Draw(RenderWindow& window) override;
 
 	void SetSkul(Skul* skul);
-
 	void SetState(States newState);
+	void SetBoxes();
 
 	void OnCompleteAttackA();
 	void OnCompleteAttackB();
 
 	const Vector2f& GetDirection() const { return direction; }
 	void OnCollisionBlock(const FloatRect& blockBound);
+
+	void AttackEnemy();
 };
 

@@ -69,9 +69,13 @@ bool MapEditorDataMgr::SaveData(const string& filePath)
 				layer = (int)MapEditorScene::Layer::Player;
 				break;
 			case MapEditorScene::Modes::Enemies:
+				layer = (int)MapEditorScene::Layer::Enemy;
+				break;
 			case MapEditorScene::Modes::NPC:
+				layer = (int)MapEditorScene::Layer::NPC;
+				break;
 			case MapEditorScene::Modes::Reward:
-				layer = (int)MapEditorScene::Layer::ActivateObject;
+				layer = (int)MapEditorScene::Layer::Reward;
 				break;
 			}
 			mapData[1].push_back(MapData(i, obj->GetName(), obj->GetPos(), obj->GetSize(), (int)Origins::BC, layer));

@@ -106,15 +106,15 @@ void DisplayObj::Update(float dt)
 			objSeperated[(int)MapEditorScene::Modes::Player]->push_back(obj);
 			break;
 		case MapEditorScene::Modes::Enemies:
-			layout[(int)MapEditorScene::Layer::ActivateObject]->push_back(obj);
+			layout[(int)MapEditorScene::Layer::Enemy]->push_back(obj);
 			objSeperated[(int)MapEditorScene::Modes::Enemies]->push_back(obj);
 			break;
 		case MapEditorScene::Modes::NPC:
-			layout[(int)MapEditorScene::Layer::ActivateObject]->push_back(obj);
+			layout[(int)MapEditorScene::Layer::NPC]->push_back(obj);
 			objSeperated[(int)MapEditorScene::Modes::NPC]->push_back(obj);
 			break;
 		case MapEditorScene::Modes::Reward:
-			layout[(int)MapEditorScene::Layer::ActivateObject]->push_back(obj);
+			layout[(int)MapEditorScene::Layer::Reward]->push_back(obj);
 			objSeperated[(int)MapEditorScene::Modes::Reward]->push_back(obj);
 			break;
 		}

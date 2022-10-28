@@ -1,5 +1,8 @@
 #include "DefaultSkul.h"
 #include "../../Framework/ResourceMgr.h"
+#include "../Player.h"
+#include "../../Scene/SceneMgr.h"
+#include "../../Scene/PlayScene.h"
 
 DefaultSkul::DefaultSkul()
 	:Skul(Types::Default, Tiers::Normal)
@@ -22,6 +25,8 @@ void DefaultSkul::Init()
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulAttackA"));
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulAttackB"));
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulJumpAttack"));
+	PlayScene* playScene = (PlayScene*)SCENE_MGR->GetCurrentScene();
+	Player* player = (Player*)playScene->FindGameObj("player");
 	{
 		AnimationEvent ev;
 		ev.clipId = "DefaultSkulFall";
@@ -35,6 +40,11 @@ void DefaultSkul::Init()
 		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulAttackA")->GetFrameCount() - 1;
 		ev.onEvent = bind(&Skul::OnCompleteAttackA, this);
 		animator->AddEvent(ev);
+		AnimationEvent ev2;
+		ev2.clipId = "DefaultSkulAttackA";
+		ev2.frame = 2;
+		ev2.onEvent = bind(&Player::AttackEnemy, player);
+		animator->AddEvent(ev2);
 	}
 	{
 		AnimationEvent ev;
@@ -42,6 +52,11 @@ void DefaultSkul::Init()
 		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulAttackB")->GetFrameCount() - 1;
 		ev.onEvent = bind(&Skul::OnCompleteAttackB, this);
 		animator->AddEvent(ev);
+		AnimationEvent ev2;
+		ev2.clipId = "DefaultSkulAttackB";
+		ev2.frame = 1;
+		ev2.onEvent = bind(&Player::AttackEnemy, player);
+		animator->AddEvent(ev2);
 	}
 	{
 		AnimationEvent ev;
@@ -49,5 +64,10 @@ void DefaultSkul::Init()
 		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulJumpAttack")->GetFrameCount() - 1;
 		ev.onEvent = bind(&Skul::OnCompleteAttack, this);
 		animator->AddEvent(ev);
+		AnimationEvent ev2;
+		ev2.clipId = "DefaultSkulJumpAttack";
+		ev2.frame = 1;
+		ev2.onEvent = bind(&Player::AttackEnemy, player);
+		animator->AddEvent(ev2);
 	}
 }

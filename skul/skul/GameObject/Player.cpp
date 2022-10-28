@@ -33,6 +33,11 @@ void Player::Init()
 		ray->SetRayLength(1.0f);
 		rays.push_back(ray);
 	}
+	// 임시 hitbox size (default skul hitbox size 아래 사이즈로 고정)
+	SetHitBox({ 0.f, 0.f, 20.f, 32.f });
+	attackBox.setOutlineColor({ 0, 255, 0, 255 });
+	attackBox.setOutlineThickness(2.f);
+	attackBox.setFillColor({ 255, 255, 255, 0 });
 	isDevMode = true;
 }
 
@@ -50,10 +55,7 @@ void Player::Update(float dt)
 	if (direction.y > 5.f)
 		direction.y = 5.f;
 	mainSkul->Update(dt);
-	// 임시 hitbox size
-	//hitbox.setSize({ sprite.getGlobalBounds().width, sprite.getGlobalBounds().height });
-	hitbox.setSize({ 20, 32 });
-	Utils::SetOrigin(hitbox, Origins::BC);
+	SetBoxes();
 	FloatRect hitBound = hitbox.getGlobalBounds();
 	rays[0]->SetStartPos({ hitBound.left, hitBound.top + hitBound.height });
 	rays[1]->SetStartPos({ hitBound.left + hitBound.width * 0.5f, hitBound.top + hitBound.height });
@@ -69,7 +71,6 @@ void Player::Update(float dt)
 			const FloatRect& colliderBound = collider->GetHitBounds();
 			if (rays[i]->RayHit(colliderBound))
 			{
-				cout << position.y << endl;
 				if (rays[i]->RayHitDistance(colliderBound) <= 0.f && rays[i]->RayHitDistance(colliderBound) > hitBound.height * (-0.3f))
 				{
 					position.y = colliderBound.top;
@@ -205,6 +206,8 @@ void Player::Update(float dt)
 void Player::Draw(RenderWindow& window)
 {
 	SpriteObj::Draw(window);
+	if(isDevMode)
+		window.draw(attackBox);
 }
 
 void Player::SetSkul(Skul* skul)
@@ -251,6 +254,15 @@ void Player::SetState(States newState)
 	}
 }
 
+void Player::SetBoxes()
+{
+	if(currState != States::Attack)
+		attackBox.setSize({ 0.f, 0.f });
+	Utils::SetOrigin(hitbox, Origins::BC);
+	attackBox.setPosition(position);
+	Utils::SetOrigin(attackBox, Origins::BC);
+}
+
 void Player::OnCompleteAttackA()
 {
 	if (isAttacking)
@@ -295,5 +307,17 @@ void Player::OnCollisionBlock(const FloatRect& blockBound)
 	{
 		Translate({ blockBound.left - (hitBound.left + hitBound.width), 0.f });
 		return;
+	}
+}
+
+void Player::AttackEnemy()
+{
+	attackBox.setSize({ sprite.getGlobalBounds().width, sprite.getGlobalBounds().height });
+	cout << attackBox.getSize().x << " " << attackBox.getSize().y << endl;
+	PlayScene* playScene = (PlayScene*)SCENE_MGR->GetCurrentScene();
+	auto& layOut = playScene->GetLayout();
+	for (auto enemy : *layOut[(int)PlayScene::Layer::Enemy])
+	{
+		// 적과 충돌 검사
 	}
 }

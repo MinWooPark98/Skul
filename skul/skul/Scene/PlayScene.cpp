@@ -21,28 +21,39 @@ void PlayScene::Init()
 		layOut.push_back(objects);
 	}
 
-	Skul* skul = new DefaultSkul();
-	skul->Init();
-
 	Player* player = new Player();
 	player->Init();
-	player->SetSkul(skul);
+	player->SetName("player");
 	layOut[(int)Layer::Player]->push_back(player);
 	objList.push_back(player);
 
+	Skul* skul = new DefaultSkul();
+	skul->Init();
+	player->SetSkul(skul);
+
 	Collider* collider = new Collider();
 	collider->Init();
+	collider->SetPos({ 0.f, 700.f });
+	collider->SetHitBox({ 0.f, 0.f, 1280.f, 64.f });
 	collider->SetType(Collider::Type::TopSide);
 	layOut[(int)Layer::Collider]->push_back(collider);
 	objList.push_back(collider);
 
 	Collider* collider2 = new Collider();
 	collider2->Init();
-	//collider2->SetHitBox({ 0.f, 0.f, 100.f, 32.f });
 	collider2->SetType(Collider::Type::AllSide);
 	collider2->SetPos({ 800.f, 550.f });
+	collider2->SetHitBox({ 0.f, 0.f, 100.f, 32.f });
 	layOut[(int)Layer::Collider]->push_back(collider2);
 	objList.push_back(collider2);
+
+	Collider* collider3 = new Collider();
+	collider3->Init();
+	collider3->SetPos({ 340.f, 550.f });
+	collider3->SetHitBox({ 0.f, 0.f, 300.f, 32.f });
+	collider3->SetType(Collider::Type::TopSide);
+	layOut[(int)Layer::Collider]->push_back(collider3);
+	objList.push_back(collider3);
 
 	for (auto obj : objList)
 	{
