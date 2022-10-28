@@ -2,7 +2,7 @@
 #include "SpriteObj.h"
 
 class Skul;
-class UnderFeetRay;
+class RayCast;
 
 class Player : public SpriteObj
 {
@@ -22,7 +22,7 @@ protected:
 	Skul* mainSkul;
 	Skul* subSkul;
 
-	vector<UnderFeetRay*> rays;
+	vector<RayCast*> rays;
 
 	States currState;
 
@@ -70,6 +70,7 @@ public:
 	const Vector2f& GetDirection() const { return direction; }
 	void OnCollisionBlock(const FloatRect& blockBound);
 
-	void AttackEnemy();
+	RectangleShape& GetAttackBox() { return attackBox; }
+	void MeleeAttack();
 };
 

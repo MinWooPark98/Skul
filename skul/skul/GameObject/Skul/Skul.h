@@ -2,6 +2,8 @@
 #include "../../Framework/Animator.h"
 #include "../Object.h"
 
+class Player;
+
 class Skul : public Object
 {
 public:

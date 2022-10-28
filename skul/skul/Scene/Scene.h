@@ -15,8 +15,24 @@ enum class Scenes
 class UiMgr;
 class Scene
 {
+public:
+	enum class Layer
+	{
+		BackGround,
+		BackObject,
+		Tile,
+		Reward,
+		NPC,
+		Enemy,
+		Player,
+		Collider,
+		Front,
+		Count,
+	};
+
 protected:
 	Scenes type;
+	vector<list<Object*>*> layOut;
 	list<Object*> objList;
 
 	bool isPause;
@@ -56,5 +72,7 @@ public:
 	void DelGameObject(Object* obj);
 	Object* FindGameObj(string name);
 	UiMgr* GetUiMgr() { return uiMgr; }
+
+	vector<list<Object*>*>& GetLayout() { return layOut; }
 };
 

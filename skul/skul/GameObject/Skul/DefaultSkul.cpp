@@ -43,7 +43,7 @@ void DefaultSkul::Init()
 		AnimationEvent ev2;
 		ev2.clipId = "DefaultSkulAttackA";
 		ev2.frame = 2;
-		ev2.onEvent = bind(&Player::AttackEnemy, player);
+		ev2.onEvent = bind(&Player::MeleeAttack, player);
 		animator->AddEvent(ev2);
 	}
 	{
@@ -55,7 +55,7 @@ void DefaultSkul::Init()
 		AnimationEvent ev2;
 		ev2.clipId = "DefaultSkulAttackB";
 		ev2.frame = 1;
-		ev2.onEvent = bind(&Player::AttackEnemy, player);
+		ev2.onEvent = bind(&Player::MeleeAttack, player);
 		animator->AddEvent(ev2);
 	}
 	{
@@ -67,7 +67,7 @@ void DefaultSkul::Init()
 		AnimationEvent ev2;
 		ev2.clipId = "DefaultSkulJumpAttack";
 		ev2.frame = 1;
-		ev2.onEvent = bind(&Player::AttackEnemy, player);
+		ev2.onEvent = bind(&Player::MeleeAttack, player);
 		animator->AddEvent(ev2);
 	}
 }

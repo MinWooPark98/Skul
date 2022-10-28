@@ -2,7 +2,7 @@
 #include "Skul/Skul.h"
 #include "../Framework/InputMgr.h"
 #include "../Framework/Utils.h"
-#include "UnderFeetRay.h"
+#include "../Framework/RayCast.h"
 #include "../Scene/SceneMgr.h"
 #include "../Scene/PlayScene.h"
 #include "Collider.h"
@@ -29,8 +29,10 @@ void Player::Init()
 	SetOrigin(Origins::BC);
 	for (int i = 0; i < 3; ++i)
 	{
-		UnderFeetRay* ray = new UnderFeetRay();
+		RayCast* ray = new RayCast();
+		ray->SetDirection({ 0.f, 1.f });
 		ray->SetRayLength(1.0f);
+		ray->SetLayerMask((int)Scene::Layer::Collider);
 		rays.push_back(ray);
 	}
 	// 임시 hitbox size (default skul hitbox size 아래 사이즈로 고정)
@@ -51,9 +53,7 @@ void Player::Reset()
 
 void Player::Update(float dt)
 {
-	Object::Update(dt);
-	if (direction.y > 5.f)
-		direction.y = 5.f;
+	gravityApply = true;
 	mainSkul->Update(dt);
 	SetBoxes();
 	FloatRect hitBound = hitbox.getGlobalBounds();
@@ -62,25 +62,28 @@ void Player::Update(float dt)
 	rays[2]->SetStartPos({hitBound.left + hitBound.width, hitBound.top + hitBound.height });
 	PlayScene* playScene = (PlayScene*)SCENE_MGR->GetCurrentScene();
 	auto& layOut = playScene->GetLayout();
-	for(auto collider : *layOut[(int)PlayScene::Layer::Collider])
-	{ 
-		for (int i = 0; i < 3; ++i)
+	for (int i = 0; i < 3; ++i)
+	{
+		if (direction.y <= 0.f)
+			break;
+		rays[i]->Update(dt);
+		if (rays[i]->RayHit())
 		{
-			if (direction.y <= 0.f)
-				break;
-			const FloatRect& colliderBound = collider->GetHitBounds();
-			if (rays[i]->RayHit(colliderBound))
+			auto collider = rays[i]->GetClosestObj();
+			auto colliderBound = collider->GetHitBounds();
+			if (Utils::EqualFloat(rays[i]->RayHitDistance(), 0.f) && rays[i]->GetStartPos().y - colliderBound.top < hitBound.height * 0.2f)
 			{
-				if (rays[i]->RayHitDistance(colliderBound) <= 0.f && rays[i]->RayHitDistance(colliderBound) > hitBound.height * (-0.3f))
-				{
-					position.y = colliderBound.top;
-					isJumping = false;
-					jumpCount = 0;
-					direction.y = 0.f;
-					break;
-				}
+				gravityApply = false;
+				position.y = colliderBound.top;
+				isJumping = false;
+				jumpCount = 0;
+				direction.y = 0.f;
+				break;
 			}
 		}
+	}
+	for(auto collider : *layOut[(int)PlayScene::Layer::Collider])
+	{ 
 		if (((Collider*)collider)->GetType() == Collider::Type::AllSide)
 			OnCollisionBlock(collider->GetHitBounds());
 	}
@@ -200,6 +203,9 @@ void Player::Update(float dt)
 	else
 		isMoving = false;
 
+	Object::Update(dt);
+	if (direction.y > 5.f)
+		direction.y = 5.f;
 	Translate(direction * speed * dt);
 }
 
@@ -260,7 +266,6 @@ void Player::SetBoxes()
 		attackBox.setSize({ 0.f, 0.f });
 	Utils::SetOrigin(hitbox, Origins::BC);
 	attackBox.setPosition(position);
-	Utils::SetOrigin(attackBox, Origins::BC);
 }
 
 void Player::OnCompleteAttackA()
@@ -291,12 +296,14 @@ void Player::OnCollisionBlock(const FloatRect& blockBound)
 	if (!hitBound.intersects(blockBound))
 		return;
 	Vector2f hitCenter(hitBound.left + hitBound.width * 0.5f, hitBound.top + hitBound.height * 0.5f);
-	if (hitCenter.y - hitBound.height * 0.2f > blockBound.top + blockBound.height && direction.y < 0.f)
+	if (hitCenter.y - hitBound.height * 0.3f > blockBound.top + blockBound.height && direction.y < 0.f)
 	{
 		Translate({ 0.f, blockBound.top + blockBound.height - hitBound.top });
 		direction.y = 0.f;
 		return;
 	}
+	if (hitCenter.y + hitBound.height * 0.3f <= blockBound.top)
+		return;
 
 	if (hitCenter.x > blockBound.left + blockBound.width && direction.x < 0.f && hitBound.top + hitBound.height > blockBound.top)
 	{
@@ -310,10 +317,10 @@ void Player::OnCollisionBlock(const FloatRect& blockBound)
 	}
 }
 
-void Player::AttackEnemy()
+void Player::MeleeAttack()
 {
 	attackBox.setSize({ sprite.getGlobalBounds().width, sprite.getGlobalBounds().height });
-	cout << attackBox.getSize().x << " " << attackBox.getSize().y << endl;
+	Utils::SetOrigin(attackBox, Origins::BC);
 	PlayScene* playScene = (PlayScene*)SCENE_MGR->GetCurrentScene();
 	auto& layOut = playScene->GetLayout();
 	for (auto enemy : *layOut[(int)PlayScene::Layer::Enemy])

@@ -33,9 +33,9 @@ void PlayScene::Init()
 
 	Collider* collider = new Collider();
 	collider->Init();
+	collider->SetType(Collider::Type::TopSide);
 	collider->SetPos({ 0.f, 700.f });
 	collider->SetHitBox({ 0.f, 0.f, 1280.f, 64.f });
-	collider->SetType(Collider::Type::TopSide);
 	layOut[(int)Layer::Collider]->push_back(collider);
 	objList.push_back(collider);
 
@@ -49,9 +49,9 @@ void PlayScene::Init()
 
 	Collider* collider3 = new Collider();
 	collider3->Init();
+	collider3->SetType(Collider::Type::TopSide);
 	collider3->SetPos({ 340.f, 550.f });
 	collider3->SetHitBox({ 0.f, 0.f, 300.f, 32.f });
-	collider3->SetType(Collider::Type::TopSide);
 	layOut[(int)Layer::Collider]->push_back(collider3);
 	objList.push_back(collider3);
 
