@@ -30,6 +30,10 @@ protected:
 	vector<RayCast*> rays;
 	Object* platform;
 
+	float stiffDuration;
+	float stiffTimer;
+	float stiffDistance;
+
 	bool playerDetected;
 
 public:
@@ -44,8 +48,12 @@ public:
 	virtual void Update(float dt) override;
 	virtual void Draw(RenderWindow& window) override;
 
+	Object* GetPlatform() const { return platform; }
+
 	virtual void SetState(States newState) = 0;
+	void SetPlayerDetected(bool detected) { playerDetected = detected; }
 
 	void OnCollisionBlock(const FloatRect& blockBound);
+	void OnHit();
 };
 

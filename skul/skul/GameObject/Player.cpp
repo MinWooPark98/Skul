@@ -5,6 +5,7 @@
 #include "../Framework/RayCast.h"
 #include "../Scene/SceneMgr.h"
 #include "Collider.h"
+#include "Enemy/Enemy.h"
 
 Player::Player()
 	:mainSkul(nullptr), subSkul(nullptr),
@@ -39,7 +40,6 @@ void Player::Init()
 	attackBox.setOutlineColor({ 0, 255, 0, 255 });
 	attackBox.setOutlineThickness(2.f);
 	attackBox.setFillColor({ 255, 255, 255, 0 });
-	isDevMode = true;
 }
 
 void Player::Release()
@@ -327,6 +327,7 @@ void Player::MeleeAttack()
 	auto& layOut = playScene->GetLayout();
 	for (auto enemy : *layOut[(int)Scene::Layer::Enemy])
 	{
-		// 적과 충돌 검사
+		if (attackBox.getGlobalBounds().intersects(enemy->GetHitBounds()))
+			((Enemy*)enemy)->OnHit();
 	}
 }

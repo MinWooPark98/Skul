@@ -4,10 +4,15 @@
 class SwordsMan : public Enemy
 {
 protected:
-	RayCast* detectRange;
+	RayCast* detectingRay;
 
+	float detectRange;
+	float attackRange;
 	float lastDirX;
 	float speed;
+	
+	float normalSpeed;
+	float chasingSpeed;
 
 	float attackDelay;
 	float attackTimer;

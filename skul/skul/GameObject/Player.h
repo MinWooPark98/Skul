@@ -68,6 +68,7 @@ public:
 	void OnCompleteAttackB();
 
 	const Vector2f& GetDirection() const { return direction; }
+	float GetLastDirX() const { return lastDirX; }
 	void OnCollisionBlock(const FloatRect& blockBound);
 
 	RectangleShape& GetAttackBox() { return attackBox; }

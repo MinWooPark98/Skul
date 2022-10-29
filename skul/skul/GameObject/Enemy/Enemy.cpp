@@ -3,9 +3,10 @@
 #include "../../Framework/RayCast.h"
 #include "../../Scene/SceneMgr.h"
 #include "../Collider.h"
+#include "../Player.h"
 
 Enemy::Enemy(Types type)
-	:type(type), currState(States::None), animator(nullptr), platform(nullptr), playerDetected(false)
+	:type(type), currState(States::None), animator(nullptr), platform(nullptr), playerDetected(false), stiffDuration(0.5f), stiffTimer(0.f)
 {
 }
 
@@ -43,6 +44,12 @@ void Enemy::Reset()
 
 void Enemy::Update(float dt)
 {
+	if (currState == States::Hit)
+	{
+		stiffTimer += dt;
+		if (stiffTimer >= stiffDuration)
+			SetState(States::Idle);
+	}
 	gravityApply = true;
 	platform = nullptr;
 	if (animator != nullptr)
@@ -116,4 +123,17 @@ void Enemy::OnCollisionBlock(const FloatRect& blockBound)
 		direction.x *= -1.f;
 		return;
 	}
+}
+
+void Enemy::OnHit()
+{
+	SetState(States::Hit);
+	stiffTimer = 0.f;
+	Object* player = SCENE_MGR->GetCurrentScene()->FindGameObj("player");
+	auto hitDirX = Utils::UnitizationFloat(((Player*)player)->GetLastDirX());
+	if (hitDirX < 0.f)
+		sprite.setScale(1, 1);
+	else if (hitDirX > 0.f)
+		sprite.setScale(-1, 1);
+	Translate({ hitDirX * stiffDistance, 0.f });
 }

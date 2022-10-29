@@ -7,7 +7,8 @@
 #include "../Player.h"
 
 SwordsMan::SwordsMan()
-	:Enemy(Types::SwordsMan), detectRange(nullptr), lastDirX(1.f), speed(100.f), attackDelay(2.f), attackTimer(2.f), changeDirDelay(3.f), changeDirTimer(0.f)
+	:Enemy(Types::SwordsMan), detectingRay(nullptr), detectRange(320.f), attackRange(50.f), lastDirX(1.f), speed(0.f), normalSpeed(100.f), chasingSpeed(150.f),
+	attackDelay(2.f), attackTimer(2.f), changeDirDelay(3.f), changeDirTimer(0.f)
 {
 }
 
@@ -34,15 +35,16 @@ void SwordsMan::Init()
 		ev2.onEvent = bind(&SwordsMan::OnCompleteAttack, this);
 		animator->AddEvent(ev2);
 	}
-	detectRange = new RayCast();
-	detectRange->SetLayerMask((int)Scene::Layer::Player);
-	detectRange->SetDirection({ lastDirX, 0.f });
-	detectRange->SetRayLength(FRAMEWORK->GetWindowSize().x * 0.5f);
+	detectingRay = new RayCast();
+	detectingRay->SetLayerMask((int)Scene::Layer::Player);
+	detectingRay->SetDirection({ lastDirX, 0.f });
+	detectingRay->SetRayLength(detectRange);
 	SetHitBox({ 0.f, 0.f, 30.f, 50.f });
 	attackBox.setOutlineColor({ 0, 255, 0, 255 });
 	attackBox.setOutlineThickness(2.f);
 	attackBox.setFillColor({ 255, 255, 255, 0 });
-	isDevMode = true;
+	speed = normalSpeed;
+	stiffDistance = 5.f;
 }
 
 void SwordsMan::Release()
@@ -64,62 +66,75 @@ void SwordsMan::Update(float dt)
 	attackBox.setPosition(position);
 
 	FloatRect hitBound = hitbox.getGlobalBounds();
-	detectRange->SetStartPos({ hitBound.left + hitBound.width * 0.5f, hitBound.top + hitBound.height * 0.5f });
-	detectRange->SetDirection(direction);
-	detectRange->Update(dt);
+	detectingRay->SetStartPos({ hitBound.left + hitBound.width * 0.5f, hitBound.top + hitBound.height * 0.5f });
+	detectingRay->SetDirection(direction);
+	detectingRay->Update(dt);
 
-	if (detectRange->RayHit())
+	if (currState != States::Hit)
 	{
-		attackTimer += dt;
-		speed = 150.f;
-		if (!playerDetected)
-			playerDetected = true;
-		if (detectRange->RayHitDistance() < 50.f)
+		if (detectingRay->RayHit())
 		{
-			if (attackTimer >= attackDelay)
-				SetState(States::Attack);
+			attackTimer += dt;
+			speed = chasingSpeed;
+			if (!playerDetected)
+			{
+				playerDetected = true;
+				Scene* currScene = SCENE_MGR->GetCurrentScene();
+				auto& layOut = currScene->GetLayout();
+				for (auto& obj : *layOut[(int)Scene::Layer::Enemy])
+				{
+					Enemy* enemy = (Enemy*)obj;
+					if (enemy->GetPlatform() == platform)
+						enemy->SetPlayerDetected(true);
+				}
+			}
+			if (detectingRay->RayHitDistance() < attackRange)
+			{
+				if (attackTimer >= attackDelay)
+					SetState(States::Attack);
+			}
+			direction.x = Utils::UnitizationFloat((detectingRay->GetClosestObj()->GetPos().x) - position.x);
 		}
-		direction.x = Utils::UnitizationFloat((detectRange->GetClosestObj()->GetPos().x) - position.x);
-	}
-	else
-	{
-		speed = 100.f;
-		changeDirTimer += dt;
-		if (changeDirTimer >= changeDirDelay)
+		else
+		{
+			speed = normalSpeed;
+			changeDirTimer += dt;
+			if (changeDirTimer >= changeDirDelay)
+			{
+				if (Utils::EqualFloat(direction.x, 0.f))
+				{
+					int dirDraw = Utils::RandomRange(0, 2);
+					if (dirDraw == 0)
+						direction.x = -1.f;
+					else
+						direction.x = 1.f;
+					lastDirX = direction.x;
+				}
+				else
+					direction.x = 0.f;
+				detectingRay->SetDirection({ lastDirX, 0.f });
+				changeDirTimer = 0.f;
+			}
+		}
+		if (platform == nullptr)
+			direction.x = 0.f;
+
+		if (currState != States::Attack)
 		{
 			if (Utils::EqualFloat(direction.x, 0.f))
-			{
-				int dirDraw = Utils::RandomRange(0, 2);
-				if (dirDraw == 0)
-					direction.x = -1.f;
-				else
-					direction.x = 1.f;
-				lastDirX = direction.x;
-			}
+				SetState(States::Idle);
 			else
-				direction.x = 0.f;
-			detectRange->SetDirection({ lastDirX, 0.f });
-			changeDirTimer = 0.f;
+				SetState(States::Move);
 		}
-	}
-	if (platform == nullptr)
-		direction.x = 0.f;
-	
-	if (currState != States::Attack)
-	{
-		if (Utils::EqualFloat(direction.x, 0.f))
-			SetState(States::Idle);
-		else
-			SetState(States::Move);
-	}
 
-	if (direction.x > 0.f)
-		sprite.setScale(1, 1);
-	else if (direction.x < 0.f)
-		sprite.setScale(-1, 1);
+		if (currState != States::Attack)
+			Translate(speed * direction * dt);
 
-	if(currState != States::Attack)
-		Translate(speed * direction * dt);
+		if (direction.x > 0.f)
+			sprite.setScale(1, 1);
+		else if (direction.x < 0.f)
+			sprite.setScale(-1, 1);
+	}
 }
 
 void SwordsMan::Draw(RenderWindow& window)
@@ -131,7 +146,7 @@ void SwordsMan::Draw(RenderWindow& window)
 
 void SwordsMan::SetState(States newState)
 {
-	if (newState == currState)
+	if (newState != States::Hit && newState == currState)
 		return;
 	currState = newState;
 	switch (currState)
@@ -159,16 +174,12 @@ void SwordsMan::MeleeAttack()
 	Utils::SetOrigin(attackBox, Origins::BC);
 	Scene* playScene = SCENE_MGR->GetCurrentScene();
 	Player* player = (Player*)playScene->FindGameObj("player");
+	attackTimer = 0.f;
 	//if (attackBox.getGlobalBounds().intersects(player->GetHitBounds()))
 	//	player->SetActive(false); // 임시 테스트
 }
 
 void SwordsMan::OnCompleteAttack()
 {
-	attackTimer = 0.f;
 	SetState(States::Idle);
-	/*if (Utils::EqualFloat(direction.x, 0.f))
-		SetState(States::Idle);
-	else
-		SetState(States::Move);*/
 }

@@ -13,6 +13,5 @@ Collider::~Collider()
 void Collider::Init()
 {
 	Object::Init();
-	isDevMode = true;
 }
 
