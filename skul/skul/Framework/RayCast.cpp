@@ -133,14 +133,16 @@ void RayCast::Update(float dt)
 			else
 			{
 				float angleDug = angleDir + (angleDir > M_PI ? -M_PI : M_PI);
-				if (angleDug < angleTR || angleDug > angleBR)
+				info->hittingPoint = startPos;
+				// »ó´ë ÁÂÇ¥
+				/*if (angleDug < angleTR || angleDug > angleBR)
 					info->hittingPoint = Vector2f(-(targetRight - startPos.x), (targetRight - startPos.x) * tan(angleDug));
 				else if (angleDug < angleTL)
 					info->hittingPoint = Vector2f((targetTop - startPos.y) / tan(angleDug), (targetTop - startPos.y));
 				else if (angleDug < angleBL)
 					info->hittingPoint = Vector2f(-(targetLeft - startPos.x), (targetLeft - startPos.x) * tan(angleDug));
 				else
-					info->hittingPoint = Vector2f((targetBottom - startPos.y) / tan(angleDug), (targetBottom - startPos.y));
+					info->hittingPoint = Vector2f((targetBottom - startPos.y) / tan(angleDug), (targetBottom - startPos.y));*/
 			}
 			if (closestObj == nullptr)
 				closestObj = info;

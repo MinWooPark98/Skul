@@ -71,7 +71,7 @@ void Player::Update(float dt)
 		{
 			auto collider = rays[i]->GetClosestObj();
 			auto colliderBound = collider->GetHitBounds();
-			if (Utils::EqualFloat(rays[i]->RayHitDistance(), 0.f) && rays[i]->GetStartPos().y - colliderBound.top < hitBound.height * 0.2f)
+			if (Utils::EqualFloat(rays[i]->RayHitDistance(), 0.f) && rays[i]->GetHittingPoint().y - colliderBound.top < hitBound.height * 0.2f)
 			{
 				gravityApply = false;
 				position.y = colliderBound.top;
