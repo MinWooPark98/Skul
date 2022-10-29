@@ -1,0 +1,10 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+SwordsManIdle,1,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/enemy/swordsman/idle.png,0,0,34,55,17,55,0,0
+graphics/enemy/swordsman/idle.png,34,0,34,55,17,55,0,0
+graphics/enemy/swordsman/idle.png,68,0,34,55,17,55,0,0
+graphics/enemy/swordsman/idle.png,102,0,34,55,17,55,0,0
+graphics/enemy/swordsman/idle.png,136,0,34,55,17,55,0,0
+graphics/enemy/swordsman/idle.png,170,0,34,55,17,55,0,0

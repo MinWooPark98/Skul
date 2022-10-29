@@ -146,7 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameObject\Enemy.cpp" />
+    <ClCompile Include="GameObject\Enemy\Enemy.cpp" />
     <ClCompile Include="GameObject\Collider.cpp" />
     <ClCompile Include="GameObject\Skul\DefaultSkul.cpp" />
     <ClCompile Include="Framework\AnimationClip.cpp" />
@@ -159,6 +159,7 @@
     <ClCompile Include="Framework\RayCast.cpp" />
     <ClCompile Include="Scene\PlayScene.cpp" />
     <ClCompile Include="GameObject\Skul\Skul.cpp" />
+    <ClCompile Include="GameObject\Enemy\SwordsMan.cpp" />
     <ClCompile Include="Ui\SaveLoadUi.cpp" />
     <ClCompile Include="Ui\SaveLoadButtonUi.cpp" />
     <ClCompile Include="Ui\ColliderExampleUi.cpp" />
@@ -196,7 +197,7 @@
   <ItemGroup>
     <ClInclude Include="3rd\rapidcsv.h" />
     <ClInclude Include="3rd\SingleTon.h" />
-    <ClInclude Include="GameObject\Enemy.h" />
+    <ClInclude Include="GameObject\Enemy\Enemy.h" />
     <ClInclude Include="GameObject\Collider.h" />
     <ClInclude Include="GameObject\Skul\DefaultSkul.h" />
     <ClInclude Include="Framework\AnimationClip.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Framework\RayCast.h" />
     <ClInclude Include="Scene\PlayScene.h" />
     <ClInclude Include="GameObject\Skul\Skul.h" />
+    <ClInclude Include="GameObject\Enemy\SwordsMan.h" />
     <ClInclude Include="Ui\SaveLoadUi.h" />
     <ClInclude Include="Ui\SaveLoadButtonUi.h" />
     <ClInclude Include="Ui\ColliderExampleUi.h" />

@@ -44,6 +44,8 @@ public:
 	void SetRayLength(float len) { rayLength = len; }
 	void SetLayerMask(int layer) { layerMask = layer; }
 
+	float GetRayLength() const { return rayLength; }
+
 	const Vector2f& GetStartPos() const { return startPos; }
 };
 

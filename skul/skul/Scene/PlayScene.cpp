@@ -3,6 +3,7 @@
 #include "../GameObject/Skul/DefaultSkul.h"
 #include "../Framework/Framework.h"
 #include "../GameObject/Collider.h"
+#include "../GameObject/Enemy/SwordsMan.h"
 
 PlayScene::PlayScene()
 	:Scene(Scenes::Play)
@@ -33,7 +34,7 @@ void PlayScene::Init()
 
 	Collider* collider = new Collider();
 	collider->Init();
-	collider->SetType(Collider::Type::TopSide);
+	collider->SetType(Collider::Type::AllSide);
 	collider->SetPos({ 0.f, 700.f });
 	collider->SetHitBox({ 0.f, 0.f, 1280.f, 64.f });
 	layOut[(int)Layer::Collider]->push_back(collider);
@@ -54,6 +55,28 @@ void PlayScene::Init()
 	collider3->SetHitBox({ 0.f, 0.f, 300.f, 32.f });
 	layOut[(int)Layer::Collider]->push_back(collider3);
 	objList.push_back(collider3);
+
+	Collider* collider4 = new Collider();
+	collider4->Init();
+	collider4->SetType(Collider::Type::AllSide);
+	collider4->SetPos({ 850.f, 550.f });
+	collider4->SetHitBox({ 0.f, 0.f, 32.f, 400.f });
+	layOut[(int)Layer::Collider]->push_back(collider4);
+	objList.push_back(collider4);
+
+	Collider* collider5 = new Collider();
+	collider5->Init();
+	collider5->SetType(Collider::Type::AllSide);
+	collider5->SetPos({ 300.f, 550.f });
+	collider5->SetHitBox({ 0.f, 0.f, 32.f, 400.f });
+	layOut[(int)Layer::Collider]->push_back(collider5);
+	objList.push_back(collider5);
+
+	SwordsMan* enemy1 = new SwordsMan();
+	enemy1->Init();
+	enemy1->SetPos({ 800.f, 700.f });
+	layOut[(int)Layer::Enemy]->push_back(enemy1);
+	objList.push_back(enemy1);
 
 	for (auto obj : objList)
 	{

@@ -1,0 +1,9 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+SwordsManAttack,0,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/enemy/swordsman/attack.png,0,0,65,65,32.5,65,0,0
+graphics/enemy/swordsman/attack.png,65,0,65,65,32.5,65,0,0
+graphics/enemy/swordsman/attack.png,130,0,65,65,32.5,65,0,0
+graphics/enemy/swordsman/attack.png,195,0,65,65,32.5,65,0,0
+graphics/enemy/swordsman/attack.png,260,0,65,65,32.5,65,0,0

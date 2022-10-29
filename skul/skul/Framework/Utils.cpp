@@ -94,6 +94,13 @@ float Utils::Angle(const Vector2f& dir)
 	return atan2(dir.y, dir.x) * (180.f / M_PI);
 }
 
+float Utils::UnitizationFloat(float value)
+{
+	if (Utils::EqualFloat(value, 0.f))
+		return 0.f;
+	return value / fabs(value);
+}
+
 float Utils::Clamp(float value, float min, float max)
 {
 	return (value < min) ? min : ((value > max) ? max : value);

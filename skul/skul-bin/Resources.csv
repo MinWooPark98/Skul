@@ -87,3 +87,11 @@ animations/player/default/FallRepeat.csv,3
 animations/player/default/AttackA.csv,3
 animations/player/default/AttackB.csv,3
 animations/player/default/JumpAttack.csv,3
+graphics/enemy/swordsman/idle.png,0
+graphics/enemy/swordsman/attack.png,0
+graphics/enemy/swordsman/hit.png,0
+graphics/enemy/swordsman/walk.png,0
+animations/enemy/swordsman/Idle.csv,3
+animations/enemy/swordsman/Attack.csv,3
+animations/enemy/swordsman/Hit.csv,3
+animations/enemy/swordsman/Walk.csv,3

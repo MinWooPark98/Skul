@@ -4,7 +4,6 @@
 #include "../Framework/Utils.h"
 #include "../Framework/RayCast.h"
 #include "../Scene/SceneMgr.h"
-#include "../Scene/PlayScene.h"
 #include "Collider.h"
 
 Player::Player()
@@ -56,37 +55,6 @@ void Player::Update(float dt)
 	gravityApply = true;
 	mainSkul->Update(dt);
 	SetBoxes();
-	FloatRect hitBound = hitbox.getGlobalBounds();
-	rays[0]->SetStartPos({ hitBound.left, hitBound.top + hitBound.height });
-	rays[1]->SetStartPos({ hitBound.left + hitBound.width * 0.5f, hitBound.top + hitBound.height });
-	rays[2]->SetStartPos({hitBound.left + hitBound.width, hitBound.top + hitBound.height });
-	PlayScene* playScene = (PlayScene*)SCENE_MGR->GetCurrentScene();
-	auto& layOut = playScene->GetLayout();
-	for (int i = 0; i < 3; ++i)
-	{
-		if (direction.y <= 0.f)
-			break;
-		rays[i]->Update(dt);
-		if (rays[i]->RayHit())
-		{
-			auto collider = rays[i]->GetClosestObj();
-			auto colliderBound = collider->GetHitBounds();
-			if (Utils::EqualFloat(rays[i]->RayHitDistance(), 0.f) && rays[i]->GetHittingPoint().y - colliderBound.top < hitBound.height * 0.2f)
-			{
-				gravityApply = false;
-				position.y = colliderBound.top;
-				isJumping = false;
-				jumpCount = 0;
-				direction.y = 0.f;
-				break;
-			}
-		}
-	}
-	for(auto collider : *layOut[(int)PlayScene::Layer::Collider])
-	{ 
-		if (((Collider*)collider)->GetType() == Collider::Type::AllSide)
-			OnCollisionBlock(collider->GetHitBounds());
-	}
 
 	if (isDashing)
 	{
@@ -178,6 +146,7 @@ void Player::Update(float dt)
 			lastDirX = direction.x;
 		}
 		direction.x = lastDirX;
+		gravityApply = false;
 		direction.y = 0.f;
 	}
 	else
@@ -203,9 +172,42 @@ void Player::Update(float dt)
 	else
 		isMoving = false;
 
+	FloatRect hitBound = hitbox.getGlobalBounds();
+	rays[0]->SetStartPos({ hitBound.left, hitBound.top + hitBound.height });
+	rays[1]->SetStartPos({ hitBound.left + hitBound.width * 0.5f, hitBound.top + hitBound.height });
+	rays[2]->SetStartPos({ hitBound.left + hitBound.width, hitBound.top + hitBound.height });
+	for (int i = 0; i < 3; ++i)
+	{
+		if (direction.y < 0.f)
+			break;
+		rays[i]->Update(dt);
+		if (rays[i]->RayHit())
+		{
+			auto collider = rays[i]->GetClosestObj();
+			auto colliderBound = collider->GetHitBounds();
+			if (Utils::EqualFloat(rays[i]->RayHitDistance(), 0.f) && rays[i]->GetHittingPoint().y - colliderBound.top < hitBound.height * 0.2f)
+			{
+				gravityApply = false;
+				direction.y = 0.f;
+				position.y = colliderBound.top;
+				isJumping = false;
+				jumpCount = 0;
+				break;
+			}
+		}
+	}
+	Scene* playScene = SCENE_MGR->GetCurrentScene();
+	auto& layOut = playScene->GetLayout();
+	for (auto collider : *layOut[(int)Scene::Layer::Collider])
+	{
+		if (((Collider*)collider)->GetType() == Collider::Type::AllSide)
+			OnCollisionBlock(collider->GetHitBounds());
+	}
+
 	Object::Update(dt);
 	if (direction.y > 5.f)
 		direction.y = 5.f;
+
 	Translate(direction * speed * dt);
 }
 
@@ -321,9 +323,9 @@ void Player::MeleeAttack()
 {
 	attackBox.setSize({ sprite.getGlobalBounds().width, sprite.getGlobalBounds().height });
 	Utils::SetOrigin(attackBox, Origins::BC);
-	PlayScene* playScene = (PlayScene*)SCENE_MGR->GetCurrentScene();
+	Scene* playScene = SCENE_MGR->GetCurrentScene();
 	auto& layOut = playScene->GetLayout();
-	for (auto enemy : *layOut[(int)PlayScene::Layer::Enemy])
+	for (auto enemy : *layOut[(int)Scene::Layer::Enemy])
 	{
 		// 적과 충돌 검사
 	}

@@ -1,0 +1,6 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+SwordsManHit,0,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/enemy/swordsman/hit.png,0,0,46,47,23,47,0,0
+graphics/enemy/swordsman/hit.png,46,0,46,47,23,47,0,0

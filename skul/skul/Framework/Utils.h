@@ -46,6 +46,7 @@ public:
 	static float Angle(const Vector2f& start, const Vector2f& end);
 	static float Angle(const Vector2f& dir);
 
+	static float UnitizationFloat(float value);
 	static float Clamp(float value, float min, float max);
 	static bool IsRange(float row, float height, float value);
 	static bool IsRange(const FloatRect rect, const Vector2f value);

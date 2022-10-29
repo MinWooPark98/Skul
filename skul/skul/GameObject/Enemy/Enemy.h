@@ -1,5 +1,6 @@
 #pragma once
-#include "SpriteObj.h"
+#include "../SpriteObj.h"
+#include <list>
 
 class Animator;
 class RayCast;
@@ -10,20 +11,29 @@ public:
 	enum class Types
 	{
 		None,
-		Sword,
+		SwordsMan,
+	};
+	enum class States
+	{
+		None = -1,
+		Idle,
+		Move,
+		Attack,
+		Hit,
 	};
 
 protected:
 	Types type;
+	States currState;
 
 	Animator* animator;
-	vector<RayCast*> underFeetRays;
+	vector<RayCast*> rays;
+	Object* platform;
 
 	bool playerDetected;
-	vector<RayCast*> detectRay;
 
 public:
-	Enemy();
+	Enemy(Types type);
 	virtual ~Enemy();
 
 	virtual void Init() override;
@@ -33,5 +43,9 @@ public:
 
 	virtual void Update(float dt) override;
 	virtual void Draw(RenderWindow& window) override;
+
+	virtual void SetState(States newState) = 0;
+
+	void OnCollisionBlock(const FloatRect& blockBound);
 };
 
