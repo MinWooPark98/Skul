@@ -96,7 +96,7 @@ void PlayScene::Reset()
 
 void PlayScene::Update(float dt)
 {
-	if (dt > 1.f)
+	if (dt > 0.5f)
 		return;
 	Scene::Update(dt);
 }

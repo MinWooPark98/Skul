@@ -76,16 +76,15 @@ void SwordsMan::Update(float dt)
 	detectingRay->SetDirection(direction);
 	detectingRay->Update(dt);
 
+	attackTimer += dt;
 	if (currState != States::Hit)
 	{
+		Scene* currScene = SCENE_MGR->GetCurrentScene();
 		if (detectingRay->RayHit())
 		{
-			attackTimer += dt;
-			speed = chasingSpeed;
 			if (!playerDetected)
 			{
 				playerDetected = true;
-				Scene* currScene = SCENE_MGR->GetCurrentScene();
 				auto& layOut = currScene->GetLayout();
 				for (auto& obj : *layOut[(int)Scene::Layer::Enemy])
 				{
@@ -99,7 +98,12 @@ void SwordsMan::Update(float dt)
 				if (attackTimer >= attackDelay)
 					SetState(States::Attack);
 			}
-			direction.x = Utils::UnitizationFloat((detectingRay->GetClosestObj()->GetPos().x) - position.x);
+		}
+		Player* player = (Player*)currScene->FindGameObj("player");
+		if (player->GetPlatform() == platform)
+		{
+			speed = chasingSpeed;
+			direction.x = Utils::UnitizationFloat((player->GetPos().x) - position.x);
 		}
 		else
 		{

@@ -11,7 +11,7 @@ Player::Player()
 	:mainSkul(nullptr), subSkul(nullptr),
 	currState(States::None), isMoving(false), isDashing(false), isJumping(false), isAttacking(false), dashAble(true), jumpCount(0),
 	dashTime(0.2f), dashTimer(0.f), doubleDashableTime(0.4f), doubleDashTimer(0.f), dashDelay(0.65f), dashDelayTimer(0.f), dashCount(0),
-	speed(200.f), lastDirX(1.f), attackDmg(25), totalHp(100), currHp(100)
+	speed(200.f), lastDirX(1.f), attackDmg(25), totalHp(100), currHp(100), platform(nullptr)
 {
 }
 
@@ -53,6 +53,7 @@ void Player::Reset()
 void Player::Update(float dt)
 {
 	gravityApply = true;
+	platform = nullptr;
 	mainSkul->Update(dt);
 	SetBoxes();
 
@@ -192,6 +193,7 @@ void Player::Update(float dt)
 				position.y = colliderBound.top;
 				isJumping = false;
 				jumpCount = 0;
+				platform = collider;
 				break;
 			}
 		}

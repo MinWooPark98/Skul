@@ -52,6 +52,8 @@ protected:
 	int totalHp;
 	int currHp;
 
+	Object* platform;
+
 public:
 	Player();
 	virtual ~Player();
@@ -73,6 +75,7 @@ public:
 
 	const Vector2f& GetDirection() const { return direction; }
 	float GetLastDirX() const { return lastDirX; }
+	Object* GetPlatform() const { return platform; }
 	void OnCollisionBlock(const FloatRect& blockBound);
 
 	RectangleShape& GetAttackBox() { return attackBox; }
