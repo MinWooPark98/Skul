@@ -13,6 +13,7 @@ public:
 	{
 		None,
 		SwordsMan,
+		NormalEnt,
 	};
 	enum class States
 	{

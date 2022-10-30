@@ -4,6 +4,7 @@
 #include "../Framework/Framework.h"
 #include "../GameObject/Collider.h"
 #include "../GameObject/Enemy/SwordsMan.h"
+#include "../GameObject/Enemy/NormalEnt.h"
 #include "../GameObject/MapEditorDataMgr.h"
 #include <fstream>
 #include "../GameObject/RectTile.h"
@@ -88,6 +89,8 @@ void PlayScene::Init()
 			{
 				if (data.objName == "enemy_0")
 					obj = new SwordsMan();
+				if (data.objName == "enemy_5")
+					obj = new NormalEnt();
 			}
 			break;
 		case MapEditorScene::Modes::Player:

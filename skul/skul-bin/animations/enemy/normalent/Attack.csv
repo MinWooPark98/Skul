@@ -1,0 +1,8 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+NormalEntAttack,0,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/enemy/normalent/attack.png,0,0,55,49,27.5,49,0,0
+graphics/enemy/normalent/attack.png,55,0,55,49,27.5,49,0,0
+graphics/enemy/normalent/attack.png,110,0,55,49,27.5,49,0,0
+graphics/enemy/normalent/attack.png,165,0,55,49,27.5,49,0,0

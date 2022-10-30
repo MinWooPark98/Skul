@@ -1,0 +1,9 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+NormalEntIdle,1,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/enemy/normalent/idle.png,0,0,56,65,28,65,0,0
+graphics/enemy/normalent/idle.png,56,0,56,65,28,65,0,0
+graphics/enemy/normalent/idle.png,112,0,56,65,28,65,0,0
+graphics/enemy/normalent/idle.png,168,0,56,65,28,65,0,0
+graphics/enemy/normalent/idle.png,224,0,56,65,28,65,0,0

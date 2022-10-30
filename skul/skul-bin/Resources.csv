@@ -42,6 +42,13 @@ graphics/mapeditor/background/background_0.png,0
 graphics/mapeditor/background/background_1.png,0
 graphics/mapeditor/background/background_2.png,0
 graphics/mapeditor/background/background_3.png,0
+graphics/mapeditor/background/background_4.png,0
+graphics/mapeditor/background/background_5.png,0
+graphics/mapeditor/background/background_6.png,0
+graphics/mapeditor/background/background_7.png,0
+graphics/mapeditor/background/background_8.png,0
+graphics/mapeditor/background/background_9.png,0
+graphics/mapeditor/background/background_10.png,0
 graphics/mapeditor/backobject/backobject_0.png,0
 graphics/mapeditor/backobject/backobject_1.png,0
 graphics/mapeditor/backobject/backobject_2.png,0
@@ -95,3 +102,11 @@ animations/enemy/swordsman/Idle.csv,3
 animations/enemy/swordsman/Attack.csv,3
 animations/enemy/swordsman/Hit.csv,3
 animations/enemy/swordsman/Walk.csv,3
+graphics/enemy/normalent/idle.png,0
+graphics/enemy/normalent/attack.png,0
+graphics/enemy/normalent/hit.png,0
+graphics/enemy/normalent/walk.png,0
+animations/enemy/normalent/Idle.csv,3
+animations/enemy/normalent/Attack.csv,3
+animations/enemy/normalent/Hit.csv,3
+animations/enemy/normalent/Walk.csv,3

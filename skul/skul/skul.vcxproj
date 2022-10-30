@@ -159,6 +159,7 @@
     <ClCompile Include="Framework\RayCast.cpp" />
     <ClCompile Include="GameObject\PlaySceneLoader.cpp" />
     <ClCompile Include="GameObject\PlaySceneGrid.cpp" />
+    <ClCompile Include="GameObject\Enemy\NormalEnt.cpp" />
     <ClCompile Include="Ui\EnemyHpBarUi.cpp" />
     <ClCompile Include="Scene\PlayScene.cpp" />
     <ClCompile Include="GameObject\Skul\Skul.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Framework\RayCast.h" />
     <ClInclude Include="GameObject\PlaySceneLoader.h" />
     <ClInclude Include="GameObject\PlaySceneGrid.h" />
+    <ClInclude Include="GameObject\Enemy\NormalEnt.h" />
     <ClInclude Include="Ui\EnemyHpBarUi.h" />
     <ClInclude Include="Scene\PlayScene.h" />
     <ClInclude Include="GameObject\Skul\Skul.h" />

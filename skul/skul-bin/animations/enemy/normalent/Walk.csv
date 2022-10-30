@@ -1,0 +1,10 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+NormalEntWalk,1,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/enemy/normalent/walk.png,0,0,52,65,26,65,0,0
+graphics/enemy/normalent/walk.png,52,0,52,65,26,65,0,0
+graphics/enemy/normalent/walk.png,104,0,52,65,26,65,0,0
+graphics/enemy/normalent/walk.png,156,0,52,65,26,65,0,0
+graphics/enemy/normalent/walk.png,208,0,52,65,26,65,0,0
+graphics/enemy/normalent/walk.png,260,0,52,65,26,65,0,0
