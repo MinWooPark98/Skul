@@ -9,7 +9,7 @@
 
 Player::Player()
 	:mainSkul(nullptr), subSkul(nullptr),
-	currState(States::None), isMoving(false), isDashing(false), isJumping(false), isAttacking(false), dashAble(true), jumpCount(0),
+	currState(States::None), isMoving(false), isDashing(false), isJumping(false), isAttacking(false), jumpingDown(false), dashAble(true), jumpCount(0),
 	dashTime(0.2f), dashTimer(0.f), doubleDashableTime(0.4f), doubleDashTimer(0.f), dashDelay(0.65f), dashDelayTimer(0.f), dashCount(0),
 	speed(200.f), lastDirX(1.f), attackDmg(25), totalHp(100), currHp(100), platform(nullptr)
 {
@@ -108,7 +108,10 @@ void Player::Update(float dt)
 	if (InputMgr::GetKeyDown(Keyboard::C) && jumpCount < 2)
 	{
 		isJumping = true;
-		direction.y = -2.5f;
+		if (InputMgr::GetKey(Keyboard::Down))
+			jumpingDown = true;
+		else
+			direction.y = -2.5f;
 		SetState(States::Jump);
 		if (currState == States::Jump)
 			mainSkul->Jump();
@@ -188,6 +191,11 @@ void Player::Update(float dt)
 			auto colliderBound = collider->GetHitBounds();
 			if (Utils::EqualFloat(rays[i]->RayHitDistance(), 0.f) && rays[i]->GetHittingPoint().y - colliderBound.top < hitBound.height * 0.2f)
 			{
+				if (jumpingDown && ((Collider*)collider)->GetType() == Collider::Type::TopSide)
+				{
+					platform = collider;
+					break;
+				}
 				gravityApply = false;
 				direction.y = 0.f;
 				position.y = colliderBound.top;
@@ -198,6 +206,10 @@ void Player::Update(float dt)
 			}
 		}
 	}
+
+	if (platform == nullptr)
+		jumpingDown = false;
+
 	Scene* playScene = SCENE_MGR->GetCurrentScene();
 	auto& layOut = playScene->GetLayout();
 	for (auto collider : *layOut[(int)Scene::Layer::Collider])

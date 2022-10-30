@@ -29,6 +29,7 @@ protected:
 	bool isMoving;
 	bool isDashing;
 	bool isJumping;
+	bool jumpingDown;
 
 	float dashTime;
 	float dashTimer;
