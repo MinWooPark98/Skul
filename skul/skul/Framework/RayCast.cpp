@@ -18,7 +18,9 @@ void RayCast::Reset()
 	rayHit = false;
 	rayCollidedObjs.clear();
 	closestObj = nullptr;
-}
+	drawRay[0] = startPos;
+	drawRay[1] = startPos + direction * rayLength;
+};
 
 void RayCast::Update(float dt)
 {
@@ -165,4 +167,28 @@ const Vector2f& RayCast::GetHittingPoint() const
 	if (!rayHit)
 		throw;
 	return closestObj->hittingPoint;
+}
+
+void RayCast::SetStartPos(const Vector2f& pos)
+{
+	startPos = pos;
+	SetDrawRay();
+}
+
+void RayCast::SetDirection(const Vector2f& dir)
+{
+	direction = dir;
+	SetDrawRay();
+}
+
+void RayCast::SetRayLength(float len)
+{
+	rayLength = len;
+	SetDrawRay();
+}
+
+void RayCast::SetDrawRay()
+{
+	drawRay[0] = startPos;
+	drawRay[1] = startPos + direction * rayLength;
 }

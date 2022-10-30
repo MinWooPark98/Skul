@@ -54,6 +54,7 @@ public:
 	const string& GetName() const { return name; }
 
 	virtual void SetDevMode(bool devMode) { isDevMode = devMode; }
+	virtual void SwitchDevMode() { isDevMode = !isDevMode; }
 
 	virtual void SetHitBox(const FloatRect rect);
 	FloatRect GetHitBounds() const { return hitbox.getGlobalBounds(); }

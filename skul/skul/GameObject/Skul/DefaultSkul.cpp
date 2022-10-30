@@ -40,11 +40,6 @@ void DefaultSkul::Init()
 		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulAttackA")->GetFrameCount() - 1;
 		ev.onEvent = bind(&Skul::OnCompleteAttackA, this);
 		animator->AddEvent(ev);
-		AnimationEvent ev2;
-		ev2.clipId = "DefaultSkulAttackA";
-		ev2.frame = 2;
-		ev2.onEvent = bind(&Player::MeleeAttack, player);
-		animator->AddEvent(ev2);
 	}
 	{
 		AnimationEvent ev;
@@ -52,11 +47,6 @@ void DefaultSkul::Init()
 		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulAttackB")->GetFrameCount() - 1;
 		ev.onEvent = bind(&Skul::OnCompleteAttackB, this);
 		animator->AddEvent(ev);
-		AnimationEvent ev2;
-		ev2.clipId = "DefaultSkulAttackB";
-		ev2.frame = 1;
-		ev2.onEvent = bind(&Player::MeleeAttack, player);
-		animator->AddEvent(ev2);
 	}
 	{
 		AnimationEvent ev;
@@ -64,10 +54,24 @@ void DefaultSkul::Init()
 		ev.frame = ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulJumpAttack")->GetFrameCount() - 1;
 		ev.onEvent = bind(&Skul::OnCompleteAttack, this);
 		animator->AddEvent(ev);
-		AnimationEvent ev2;
-		ev2.clipId = "DefaultSkulJumpAttack";
-		ev2.frame = 1;
-		ev2.onEvent = bind(&Player::MeleeAttack, player);
-		animator->AddEvent(ev2);
 	}
+}
+
+void DefaultSkul::SetAnimEvent(Player* player)
+{
+	AnimationEvent ev;
+	ev.clipId = "DefaultSkulAttackA";
+	ev.frame = 2;
+	ev.onEvent = bind(&Player::MeleeAttack, player);
+	animator->AddEvent(ev);
+	AnimationEvent ev2;
+	ev2.clipId = "DefaultSkulAttackB";
+	ev2.frame = 1;
+	ev2.onEvent = bind(&Player::MeleeAttack, player);
+	animator->AddEvent(ev2);
+	AnimationEvent ev3;
+	ev3.clipId = "DefaultSkulJumpAttack";
+	ev3.frame = 1;
+	ev3.onEvent = bind(&Player::MeleeAttack, player);
+	animator->AddEvent(ev3);
 }

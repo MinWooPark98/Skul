@@ -157,6 +157,8 @@
     <ClCompile Include="GameObject\TextButton.cpp" />
     <ClCompile Include="GameObject\Player.cpp" />
     <ClCompile Include="Framework\RayCast.cpp" />
+    <ClCompile Include="GameObject\PlaySceneLoader.cpp" />
+    <ClCompile Include="GameObject\PlaySceneGrid.cpp" />
     <ClCompile Include="Ui\EnemyHpBarUi.cpp" />
     <ClCompile Include="Scene\PlayScene.cpp" />
     <ClCompile Include="GameObject\Skul\Skul.cpp" />
@@ -209,6 +211,8 @@
     <ClInclude Include="GameObject\TextButton.h" />
     <ClInclude Include="GameObject\Player.h" />
     <ClInclude Include="Framework\RayCast.h" />
+    <ClInclude Include="GameObject\PlaySceneLoader.h" />
+    <ClInclude Include="GameObject\PlaySceneGrid.h" />
     <ClInclude Include="Ui\EnemyHpBarUi.h" />
     <ClInclude Include="Scene\PlayScene.h" />
     <ClInclude Include="GameObject\Skul\Skul.h" />

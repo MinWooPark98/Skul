@@ -152,7 +152,10 @@ void SwordsMan::Draw(RenderWindow& window)
 {
 	Enemy::Draw(window);
 	if (isDevMode)
+	{
 		window.draw(attackBox);
+		detectingRay->Draw(window);
+	}
 }
 
 void SwordsMan::SetState(States newState)

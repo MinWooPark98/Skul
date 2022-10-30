@@ -22,6 +22,8 @@ private:
 	Vector2f direction;
 	float rayLength;
 
+	Vertex drawRay[2];
+
 	bool rayHit;
 	int layerMask;
 	CollidedInfo* closestObj;
@@ -33,16 +35,19 @@ public:
 
 	void Reset();
 	void Update(float dt);
+	void Draw(RenderWindow& window) { window.draw(drawRay, 2, Lines); }
 
 	bool RayHit() const { return rayHit; }
 	float RayHitDistance() const;
 	const Vector2f& GetHittingPoint() const;
 	Object* GetClosestObj() { return closestObj->collidedObj; }
 
-	void SetStartPos(const Vector2f& pos) { startPos = pos; }
-	void SetDirection(const Vector2f& dir) { direction = dir; }
-	void SetRayLength(float len) { rayLength = len; }
+	void SetStartPos(const Vector2f& pos);
+	void SetDirection(const Vector2f& dir);
+	void SetRayLength(float len);
 	void SetLayerMask(int layer) { layerMask = layer; }
+
+	void SetDrawRay();
 
 	float GetRayLength() const { return rayLength; }
 

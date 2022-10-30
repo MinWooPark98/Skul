@@ -64,6 +64,6 @@ public:
 	int GetCurrHp() const { return currHp; }
 
 	void OnCollisionBlock(const FloatRect& blockBound);
-	void OnHit(float dmg);
+	void OnHit(int dmg);
 };
 

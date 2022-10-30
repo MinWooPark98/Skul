@@ -27,7 +27,7 @@ void Enemy::Init()
 	{
 		RayCast* ray = new RayCast();
 		ray->SetDirection({ 0.f, 1.f });
-		ray->SetRayLength(1.0f);
+		ray->SetRayLength(10.f);
 		ray->SetLayerMask((int)Scene::Layer::Collider);
 		rays.push_back(ray);
 	}
@@ -71,7 +71,7 @@ void Enemy::Update(float dt)
 		{
 			auto collider = rays[i]->GetClosestObj();
 			auto colliderBound = collider->GetHitBounds();
-			if (Utils::EqualFloat(rays[i]->RayHitDistance(), 0.f) && rays[i]->GetHittingPoint().y - colliderBound.top < hitBound.height * 0.2f)
+			if (Utils::EqualFloat(rays[i]->RayHitDistance(), 0.f) && rays[i]->GetHittingPoint().y - colliderBound.top < 25.f)
 			{
 				gravityApply = false;
 				direction.y = 0.f;
@@ -90,14 +90,19 @@ void Enemy::Update(float dt)
 	}
 
 	SpriteObj::Update(dt);
-	if (direction.y > 5.f)
-		direction.y = 5.f;
+	if (direction.y > 2.5f)
+		direction.y = 2.5f;
 }
 
 void Enemy::Draw(RenderWindow& window)
 {
 	SpriteObj::Draw(window);
 	hpBar->Draw(window);
+	if (isDevMode)
+	{
+		for (auto ray : rays)
+			ray->Draw(window);
+	}
 }
 
 void Enemy::OnCollisionBlock(const FloatRect& blockBound)
@@ -129,7 +134,7 @@ void Enemy::OnCollisionBlock(const FloatRect& blockBound)
 	}
 }
 
-void Enemy::OnHit(float dmg)
+void Enemy::OnHit(int dmg)
 {
 	SetState(States::Hit);
 	stiffTimer = 0.f;

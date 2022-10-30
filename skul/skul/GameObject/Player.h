@@ -81,6 +81,6 @@ public:
 
 	RectangleShape& GetAttackBox() { return attackBox; }
 	void MeleeAttack();
-	void OnHit(float dmg);
+	void OnHit(int dmg);
 };
 

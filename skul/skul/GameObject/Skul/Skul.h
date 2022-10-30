@@ -55,5 +55,7 @@ public:
 	function<void()> QuitAttackA;
 	function<void()> QuitAttackB;
 	function<void()> QuitAttack;
+
+	virtual void SetAnimEvent(Player* player) = 0;
 };
 

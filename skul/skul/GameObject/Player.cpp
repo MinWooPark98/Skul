@@ -22,6 +22,7 @@ Player::~Player()
 void Player::Init()
 {
 	SpriteObj::Init();
+	SetName("player");
 	SetPos({ 1280.f / 2, 650.f });
 	direction = { 1.f, 0.f };
 	gravityApply = true;
@@ -31,7 +32,7 @@ void Player::Init()
 	{
 		RayCast* ray = new RayCast();
 		ray->SetDirection({ 0.f, 1.f });
-		ray->SetRayLength(1.0f);
+		ray->SetRayLength(10.f);
 		ray->SetLayerMask((int)Scene::Layer::Collider);
 		rays.push_back(ray);
 	}
@@ -189,7 +190,7 @@ void Player::Update(float dt)
 		{
 			auto collider = rays[i]->GetClosestObj();
 			auto colliderBound = collider->GetHitBounds();
-			if (Utils::EqualFloat(rays[i]->RayHitDistance(), 0.f) && rays[i]->GetHittingPoint().y - colliderBound.top < hitBound.height * 0.2f)
+			if (Utils::EqualFloat(rays[i]->RayHitDistance(), 0.f) && rays[i]->GetHittingPoint().y - colliderBound.top < 25.f)
 			{
 				if (jumpingDown && ((Collider*)collider)->GetType() == Collider::Type::TopSide)
 				{
@@ -219,8 +220,8 @@ void Player::Update(float dt)
 	}
 
 	Object::Update(dt);
-	if (direction.y > 5.f)
-		direction.y = 5.f;
+	if (direction.y > 2.5f)
+		direction.y = 2.5f;
 
 	Translate(direction * speed * dt);
 }
@@ -228,8 +229,12 @@ void Player::Update(float dt)
 void Player::Draw(RenderWindow& window)
 {
 	SpriteObj::Draw(window);
-	if(isDevMode)
+	if (isDevMode)
+	{
 		window.draw(attackBox);
+		for (auto ray : rays)
+			ray->Draw(window);
+	}
 }
 
 void Player::SetSkul(Skul* skul)
@@ -240,6 +245,7 @@ void Player::SetSkul(Skul* skul)
 	mainSkul->QuitAttackA = bind(&Player::OnCompleteAttackA, this);
 	mainSkul->QuitAttackB = bind(&Player::OnCompleteAttackB, this);
 	mainSkul->QuitAttack = bind(&Player::SetState, this, States::Idle);
+	mainSkul->SetAnimEvent(this);
 }
 
 void Player::SetState(States newState)
@@ -335,7 +341,8 @@ void Player::OnCollisionBlock(const FloatRect& blockBound)
 
 void Player::MeleeAttack()
 {
-	attackBox.setSize({ sprite.getGlobalBounds().width, sprite.getGlobalBounds().height });
+	auto attackBound = sprite.getGlobalBounds();
+	attackBox.setSize({ attackBound.width, attackBound.height });
 	Utils::SetOrigin(attackBox, Origins::BC);
 	Scene* playScene = SCENE_MGR->GetCurrentScene();
 	auto& layOut = playScene->GetLayout();
@@ -346,7 +353,7 @@ void Player::MeleeAttack()
 	}
 }
 
-void Player::OnHit(float dmg)
+void Player::OnHit(int dmg)
 {
 	currHp -= dmg;
 	if (currHp <= 0)

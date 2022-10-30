@@ -19,4 +19,6 @@ public:
 	virtual void JumpAttack() override { animator->Play("DefaultSkulJumpAttack"); }
 	virtual void Fall() override { animator->Play("DefaultSkulFall"); }
 	virtual void FallRepeated() override { animator->Play("DefaultSkulFallRepeat"); }
+
+	virtual void SetAnimEvent(Player* player);
 };

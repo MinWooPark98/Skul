@@ -4,6 +4,15 @@
 #include "../Framework/Framework.h"
 #include "../GameObject/Collider.h"
 #include "../GameObject/Enemy/SwordsMan.h"
+#include "../GameObject/MapEditorDataMgr.h"
+#include <fstream>
+#include "../GameObject/RectTile.h"
+#include "../GameObject/PlaySceneGrid.h"
+#include "MapEditorScene.h"
+#include "../Framework/InputMgr.h"
+#include "../Datatable/FilePathTable.h"
+#include "../DataTable/DataTableMGR.h"
+#include "../Framework/ResourceMgr.h"
 
 PlayScene::PlayScene()
 	:Scene(Scenes::Play)
@@ -22,65 +31,98 @@ void PlayScene::Init()
 		layOut.push_back(objects);
 	}
 
-	Player* player = new Player();
-	player->Init();
-	player->SetName("player");
-	layOut[(int)Layer::Player]->push_back(player);
-	objList.push_back(player);
-
-	Skul* skul = new DefaultSkul();
-	skul->Init();
-	player->SetSkul(skul);
-
-	Collider* collider = new Collider();
-	collider->Init();
-	collider->SetType(Collider::Type::AllSide);
-	collider->SetPos({ 0.f, 700.f });
-	collider->SetHitBox({ 0.f, 0.f, 1280.f, 64.f });
-	layOut[(int)Layer::Collider]->push_back(collider);
-	objList.push_back(collider);
-
-	Collider* collider2 = new Collider();
-	collider2->Init();
-	collider2->SetType(Collider::Type::AllSide);
-	collider2->SetPos({ 800.f, 550.f });
-	collider2->SetHitBox({ 0.f, 0.f, 100.f, 32.f });
-	layOut[(int)Layer::Collider]->push_back(collider2);
-	objList.push_back(collider2);
-
-	Collider* collider3 = new Collider();
-	collider3->Init();
-	collider3->SetType(Collider::Type::TopSide);
-	collider3->SetPos({ 340.f, 550.f });
-	collider3->SetHitBox({ 0.f, 0.f, 300.f, 32.f });
-	layOut[(int)Layer::Collider]->push_back(collider3);
-	objList.push_back(collider3);
-
-	Collider* collider4 = new Collider();
-	collider4->Init();
-	collider4->SetType(Collider::Type::AllSide);
-	collider4->SetPos({ 850.f, 550.f });
-	collider4->SetHitBox({ 0.f, 0.f, 32.f, 400.f });
-	layOut[(int)Layer::Collider]->push_back(collider4);
-	objList.push_back(collider4);
-
-	Collider* collider5 = new Collider();
-	collider5->Init();
-	collider5->SetType(Collider::Type::AllSide);
-	collider5->SetPos({ 300.f, 550.f });
-	collider5->SetHitBox({ 0.f, 0.f, 32.f, 400.f });
-	layOut[(int)Layer::Collider]->push_back(collider5);
-	objList.push_back(collider5);
-
-	SwordsMan* enemy1 = new SwordsMan();
-	enemy1->Init();
-	enemy1->SetPos({ 800.f, 700.f });
-	layOut[(int)Layer::Enemy]->push_back(enemy1);
-	objList.push_back(enemy1);
-
-	for (auto obj : objList)
+	vector<list<MapEditorDataMgr::MapData>> mapData;
+	for (int i = 0; i < 3; ++i)
 	{
-		obj->SetDevMode(true);
+		mapData.push_back(list<MapEditorDataMgr::MapData>());
+	}
+	ifstream ifs("test.json");
+	if (ifs.fail())
+		return;
+	json jsonData;
+	ifs >> jsonData;
+	ifs.close();
+	int vecIdx = 0;
+	for (auto vecIt = jsonData.begin(); vecIt != jsonData.end(); ++vecIt)
+	{
+		for (auto listIt = (*vecIt).begin(); listIt != (*vecIt).end(); ++listIt)
+		{
+			MapEditorDataMgr::MapData data;
+			data.objType = (*listIt)["objType"];
+			data.objName = (*listIt)["objName"];
+			data.xPos = (*listIt)["xPos"];
+			data.yPos = (*listIt)["yPos"];
+			data.width = (*listIt)["width"];
+			data.height = (*listIt)["height"];
+			data.origin = (*listIt)["origin"];
+			data.layer = (*listIt)["layer"];
+			mapData[vecIdx].push_back(data);
+		}
+		++vecIdx;
+	}
+	PlaySceneGrid* grid = new PlaySceneGrid();
+	grid->Load(mapData[0]);
+	layOut[(int)Layer::Tile]->push_back(grid);
+	objList.push_back(grid);
+	
+	for (auto& data : mapData[1])
+	{
+		Object* obj = nullptr;
+		switch ((MapEditorScene::Modes)data.objType)
+		{
+		case MapEditorScene::Modes::BackGround:
+		case MapEditorScene::Modes::BackObject:
+			{
+				obj = new SpriteObj();
+				FilePathTable* filePath = DATATABLE_MGR->Get<FilePathTable>(DataTable::Types::FilePath);
+				filePath->SetObjType((FilePathTable::ObjTypes)data.objType);
+				((SpriteObj*)obj)->SetTexture(*RESOURCE_MGR->GetTexture(filePath->Get(data.objName)));
+				((SpriteObj*)obj)->SetOrigin((Origins)data.origin);
+			}
+			break;
+		case MapEditorScene::Modes::Reward:
+			break;
+		case MapEditorScene::Modes::NPC:
+			break;
+		case MapEditorScene::Modes::Enemies:
+			{
+				if (data.objName == "enemy_0")
+					obj = new SwordsMan();
+			}
+			break;
+		case MapEditorScene::Modes::Player:
+			{
+				obj = new Player();
+
+				Skul* skul = new DefaultSkul();
+				skul->Init();
+				((Player*)obj)->SetSkul(skul);
+			}
+			break;
+		default:
+			break;
+		}
+		if (obj != nullptr)
+		{
+			obj->Init();
+			obj->SetPos({ data.xPos, data.yPos });
+			layOut[(int)data.layer]->push_back(obj);
+			objList.push_back(obj);
+		}
+	}
+
+	for (auto& data : mapData[2])
+	{
+		Collider* collider = new Collider();
+		collider->Init();
+		if (data.objName == "TopSide")
+			collider->SetType(Collider::Type::TopSide);
+		else
+			collider->SetType(Collider::Type::AllSide);
+		collider->SetPos({ data.xPos, data.yPos });
+		collider->SetHitBox({ 0.f, 0.f, data.width, data.height });
+		layOut[data.layer]->push_back(collider);
+		objList.push_back(collider);
 	}
 }
 
@@ -96,9 +138,18 @@ void PlayScene::Reset()
 
 void PlayScene::Update(float dt)
 {
-	if (dt > 0.5f)
+	if (dt >= 0.05f)
 		return;
 	Scene::Update(dt);
+	worldView.setCenter(FindGameObj("player")->GetPos());
+
+	if (InputMgr::GetKeyDown(Keyboard::F1))
+	{
+		for (auto obj : objList)
+		{
+			obj->SwitchDevMode();
+		}
+	}
 }
 
 void PlayScene::Draw(RenderWindow& window)
