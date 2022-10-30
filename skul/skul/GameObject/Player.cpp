@@ -106,7 +106,7 @@ void Player::Update(float dt)
 			sprite.setScale(-1, 1);
 		dashTimer = 0.f;
 		doubleDashTimer = 0.f;
-		speed = 500.f;
+		speed = 400.f;
 		++dashCount;
 	}
 
@@ -355,7 +355,9 @@ void Player::MeleeAttack()
 
 void Player::OnHit(int dmg)
 {
-	currHp -= dmg;
+	if (currState != States::Dash)
+		currHp -= dmg;
+		
 	if (currHp <= 0)
 	{
 		SetActive(false);
