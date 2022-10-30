@@ -54,7 +54,6 @@ void Enemy::Update(float dt)
 			SetState(States::Idle);
 	}
 	gravityApply = true;
-	platform = nullptr;
 	if (animator != nullptr)
 		animator->Update(dt);
 	Utils::SetOrigin(hitbox, Origins::BC);
@@ -80,6 +79,12 @@ void Enemy::Update(float dt)
 				break;
 			}
 		}
+		if (platform != nullptr)
+		{
+			direction.x *= -1;
+			Translate(direction * hitBound.width * 0.5f);
+		}
+		platform = nullptr;
 	}
 	Scene* playScene = SCENE_MGR->GetCurrentScene();
 	auto& layOut = playScene->GetLayout();

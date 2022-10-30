@@ -54,7 +54,6 @@ void Player::Reset()
 void Player::Update(float dt)
 {
 	gravityApply = true;
-	platform = nullptr;
 	mainSkul->Update(dt);
 	SetBoxes();
 
@@ -206,6 +205,7 @@ void Player::Update(float dt)
 				break;
 			}
 		}
+		platform = nullptr;
 	}
 
 	if (platform == nullptr)
