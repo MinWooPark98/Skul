@@ -5,6 +5,7 @@
 #include "../../Framework/ResourceMgr.h"
 #include "../../Scene/SceneMgr.h"
 #include "../Player.h"
+#include "../../Ui/EnemyHpBarUi.h"
 
 SwordsMan::SwordsMan()
 	:Enemy(Types::SwordsMan), detectingRay(nullptr), detectRange(320.f), attackRange(50.f), lastDirX(1.f), speed(0.f), normalSpeed(100.f), chasingSpeed(150.f),
@@ -45,6 +46,11 @@ void SwordsMan::Init()
 	attackBox.setFillColor({ 255, 255, 255, 0 });
 	speed = normalSpeed;
 	stiffDistance = 5.f;
+	totalHp = 100;
+	currHp = totalHp;
+	hpBar->SetEnemy(this);
+	hpBar->Init();
+	attackDmg = 20;
 }
 
 void SwordsMan::Release()
@@ -135,6 +141,7 @@ void SwordsMan::Update(float dt)
 		else if (direction.x < 0.f)
 			sprite.setScale(-1, 1);
 	}
+	hpBar->SetPos(position);
 }
 
 void SwordsMan::Draw(RenderWindow& window)
@@ -175,8 +182,8 @@ void SwordsMan::MeleeAttack()
 	Scene* playScene = SCENE_MGR->GetCurrentScene();
 	Player* player = (Player*)playScene->FindGameObj("player");
 	attackTimer = 0.f;
-	//if (attackBox.getGlobalBounds().intersects(player->GetHitBounds()))
-	//	player->SetActive(false); // 임시 테스트
+	if (attackBox.getGlobalBounds().intersects(player->GetHitBounds()))
+		player->OnHit(attackDmg);
 }
 
 void SwordsMan::OnCompleteAttack()

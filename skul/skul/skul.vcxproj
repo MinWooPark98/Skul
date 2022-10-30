@@ -157,6 +157,7 @@
     <ClCompile Include="GameObject\TextButton.cpp" />
     <ClCompile Include="GameObject\Player.cpp" />
     <ClCompile Include="Framework\RayCast.cpp" />
+    <ClCompile Include="Ui\EnemyHpBarUi.cpp" />
     <ClCompile Include="Scene\PlayScene.cpp" />
     <ClCompile Include="GameObject\Skul\Skul.cpp" />
     <ClCompile Include="GameObject\Enemy\SwordsMan.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="GameObject\TextButton.h" />
     <ClInclude Include="GameObject\Player.h" />
     <ClInclude Include="Framework\RayCast.h" />
+    <ClInclude Include="Ui\EnemyHpBarUi.h" />
     <ClInclude Include="Scene\PlayScene.h" />
     <ClInclude Include="GameObject\Skul\Skul.h" />
     <ClInclude Include="GameObject\Enemy\SwordsMan.h" />

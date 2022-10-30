@@ -4,6 +4,7 @@
 
 class Animator;
 class RayCast;
+class EnemyHpBarUi;
 
 class Enemy : public SpriteObj
 {
@@ -30,11 +31,17 @@ protected:
 	vector<RayCast*> rays;
 	Object* platform;
 
+	bool playerDetected;
+
 	float stiffDuration;
 	float stiffTimer;
 	float stiffDistance;
 
-	bool playerDetected;
+	int totalHp;
+	int currHp;
+	EnemyHpBarUi* hpBar;
+
+	int attackDmg;
 
 public:
 	Enemy(Types type);
@@ -52,8 +59,11 @@ public:
 
 	virtual void SetState(States newState) = 0;
 	void SetPlayerDetected(bool detected) { playerDetected = detected; }
+	
+	int GetTotalHp() const { return totalHp; }
+	int GetCurrHp() const { return currHp; }
 
 	void OnCollisionBlock(const FloatRect& blockBound);
-	void OnHit();
+	void OnHit(float dmg);
 };
 

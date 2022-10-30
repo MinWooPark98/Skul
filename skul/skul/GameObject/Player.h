@@ -47,6 +47,10 @@ protected:
 	float lastDirX;
 
 	RectangleShape attackBox;
+	int attackDmg;
+
+	int totalHp;
+	int currHp;
 
 public:
 	Player();
@@ -73,5 +77,6 @@ public:
 
 	RectangleShape& GetAttackBox() { return attackBox; }
 	void MeleeAttack();
+	void OnHit(float dmg);
 };
 

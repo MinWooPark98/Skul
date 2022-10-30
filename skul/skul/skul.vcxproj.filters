@@ -156,6 +156,9 @@
     <ClCompile Include="GameObject\Enemy\SwordsMan.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Ui\EnemyHpBarUi.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataTable\DataTable.h">
@@ -303,6 +306,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Enemy\SwordsMan.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Ui\EnemyHpBarUi.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,9 +4,11 @@
 #include "../../Scene/SceneMgr.h"
 #include "../Collider.h"
 #include "../Player.h"
+#include "../../Ui/EnemyHpBarUi.h"
 
 Enemy::Enemy(Types type)
-	:type(type), currState(States::None), animator(nullptr), platform(nullptr), playerDetected(false), stiffDuration(0.5f), stiffTimer(0.f)
+	:type(type), currState(States::None), animator(nullptr), platform(nullptr), playerDetected(false), stiffDuration(0.5f), stiffTimer(0.f), stiffDistance(0.f),
+	totalHp(0), currHp(0), hpBar(nullptr), attackDmg(0)
 {
 }
 
@@ -31,6 +33,7 @@ void Enemy::Init()
 	}
 	animator = new Animator();
 	animator->SetTarget(&sprite);
+	hpBar = new EnemyHpBarUi();
 }
 
 void Enemy::Release()
@@ -94,6 +97,7 @@ void Enemy::Update(float dt)
 void Enemy::Draw(RenderWindow& window)
 {
 	SpriteObj::Draw(window);
+	hpBar->Draw(window);
 }
 
 void Enemy::OnCollisionBlock(const FloatRect& blockBound)
@@ -125,7 +129,7 @@ void Enemy::OnCollisionBlock(const FloatRect& blockBound)
 	}
 }
 
-void Enemy::OnHit()
+void Enemy::OnHit(float dmg)
 {
 	SetState(States::Hit);
 	stiffTimer = 0.f;
@@ -136,4 +140,11 @@ void Enemy::OnHit()
 	else if (hitDirX > 0.f)
 		sprite.setScale(-1, 1);
 	Translate({ hitDirX * stiffDistance, 0.f });
+	currHp -= dmg;
+	if (currHp <= 0)
+	{
+		SetActive(false);
+		return;
+	}
+	hpBar->Update();
 }
