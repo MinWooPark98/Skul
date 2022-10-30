@@ -100,9 +100,13 @@ void Player::Update(float dt)
 		isDashing = true;
 		if (currState == States::Dash)
 			mainSkul->Dash();
+		if (direction.x > 0.f)
+			sprite.setScale(1, 1);
+		else if (direction.x < 0.f)
+			sprite.setScale(-1, 1);
 		dashTimer = 0.f;
 		doubleDashTimer = 0.f;
-		speed = 400.f;
+		speed = 500.f;
 		++dashCount;
 	}
 
@@ -144,10 +148,6 @@ void Player::Update(float dt)
 		if (dashTimer >= dashTime && !(Utils::EqualFloat(inputX, 0.f)))
 		{
 			direction.x = inputX;
-			if (direction.x > 0.f)
-				sprite.setScale(1, 1);
-			else if (direction.x < 0.f)
-				sprite.setScale(-1, 1);
 			lastDirX = direction.x;
 		}
 		direction.x = lastDirX;
@@ -161,9 +161,9 @@ void Player::Update(float dt)
 		else
 		{
 			direction.x = inputX;
-			if (direction.x > 0.f)
+			if (lastDirX > 0.f)
 				sprite.setScale(1, 1);
-			else if (direction.x < 0.f)
+			else if (lastDirX < 0.f)
 				sprite.setScale(-1, 1);
 		}
 		speed = 200.f;
