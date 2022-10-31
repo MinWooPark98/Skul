@@ -191,7 +191,7 @@ void Player::Update(float dt)
 			auto colliderBound = collider->GetHitBounds();
 			if (Utils::EqualFloat(rays[i]->RayHitDistance(), 0.f) && rays[i]->GetHittingPoint().y - colliderBound.top < 25.f)
 			{
-				if (jumpingDown && ((Collider*)collider)->GetType() == Collider::Type::TopSide)
+				if (jumpingDown && ((Collider*)collider)->GetType() == Collider::Types::TopSide)
 				{
 					platform = collider;
 					break;
@@ -215,7 +215,7 @@ void Player::Update(float dt)
 	auto& layOut = playScene->GetLayout();
 	for (auto collider : *layOut[(int)Scene::Layer::Collider])
 	{
-		if (((Collider*)collider)->GetType() == Collider::Type::AllSide)
+		if (((Collider*)collider)->GetType() == Collider::Types::AllSide)
 			OnCollisionBlock(collider->GetHitBounds());
 	}
 

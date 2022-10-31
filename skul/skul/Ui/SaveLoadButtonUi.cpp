@@ -1,5 +1,5 @@
 #include "SaveLoadButtonUi.h"
-#include "../GameObject/TextButton.h"
+#include "../GameObject/TextMouseButton.h"
 #include "../Framework/ResourceMgr.h"
 #include "../Framework/Utils.h"
 #include "../Scene/SceneMgr.h"
@@ -20,7 +20,7 @@ void SaveLoadButtonUi::Init()
 	MapEditorScene* mapEditorScene = (MapEditorScene*)SCENE_MGR->GetScene(Scenes::MapEditor);
 	for (int i = 0; i < (int)SaveLoadUi::Mode::Count; ++i)
 	{
-		TextButton* button = new TextButton();
+		TextMouseButton* button = new TextMouseButton();
 		button->SetFont(*RESOURCE_MGR->GetFont("fonts/NotoSansKR-Bold.otf"));
 		button->Init();
 		button->SetOrigin(Origins::TL);

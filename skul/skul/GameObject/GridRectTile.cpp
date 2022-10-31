@@ -26,6 +26,7 @@ void GridRectTile::Init()
 void GridRectTile::Reset()
 {
 	RectTile::Reset();
+	tile->setFillColor({ 255, 255, 255, 0 });
 	currTex = nullptr;
 	name.clear();
 }

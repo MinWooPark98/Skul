@@ -40,7 +40,7 @@ void PlayScene::Init()
 	{
 		mapData.push_back(list<MapEditorDataMgr::MapData>());
 	}
-	ifstream ifs("test.json");
+	ifstream ifs("playscene1.json");
 	if (ifs.fail())
 		return;
 	json jsonData;
@@ -130,9 +130,9 @@ void PlayScene::Init()
 		Collider* collider = new Collider();
 		collider->Init();
 		if (data.objName == "TopSide")
-			collider->SetType(Collider::Type::TopSide);
+			collider->SetType(Collider::Types::TopSide);
 		else
-			collider->SetType(Collider::Type::AllSide);
+			collider->SetType(Collider::Types::AllSide);
 		collider->SetPos({ data.xPos, data.yPos });
 		collider->SetHitBox({ 0.f, 0.f, data.width, data.height });
 		layOut[data.layer]->push_back(collider);
@@ -156,6 +156,22 @@ void PlayScene::Update(float dt)
 		return;
 	Scene::Update(dt);
 	worldView.setCenter(FindGameObj("player")->GetPos());
+
+	Vector2i size = FRAMEWORK->GetWindowSize();
+	Vector2f worldViewCenter = worldView.getCenter();
+	if (worldViewCenter.x < size.x * 0.25f)
+		worldViewCenter.x = size.x * 0.25f;
+
+	if (worldViewCenter.y < size.y * 0.25f)
+		worldViewCenter.y = size.y * 0.25f;
+
+	if (worldViewCenter.x > size.x * 1.75f)
+		worldViewCenter.x = size.x * 1.75f;
+
+	if (worldViewCenter.y > size.y * 1.75f)
+		worldViewCenter.y = size.y * 1.75f;
+
+	worldView.setCenter(worldViewCenter);
 
 	if (InputMgr::GetKeyDown(Keyboard::F1))
 	{
@@ -188,7 +204,6 @@ void PlayScene::Enter()
 	Vector2i size = FRAMEWORK->GetWindowSize();
 
 	worldView.setSize(size.x * 0.5f, size.y * 0.5f);
-	worldView.setCenter(size.x * 0.5f, size.y * 0.75f);
 
 	uiView.setSize(size.x, size.y);
 	uiView.setCenter(size.x * 0.5f, size.y * 0.5f);

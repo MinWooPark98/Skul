@@ -117,7 +117,7 @@
     <ClCompile Include="GameObject\MapEditorDataMgr.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\TextButton.cpp">
+    <ClCompile Include="GameObject\TextMouseButton.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Ui\SaveLoadButtonUi.cpp">
@@ -178,6 +178,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameObject\NPC\FoxHuman.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\TitleScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\TextButtons.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -290,7 +296,7 @@
     <ClInclude Include="GameObject\MapEditorDataMgr.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\TextButton.h">
+    <ClInclude Include="GameObject\TextMouseButton.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Ui\SaveLoadButtonUi.h">
@@ -351,6 +357,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\NPC\FoxHuman.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\TitleScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\TextButtons.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

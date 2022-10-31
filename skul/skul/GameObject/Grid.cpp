@@ -30,7 +30,7 @@ void Grid::Init()
 			GridRectTile* tile = new GridRectTile();
 			tile->Init();
 			tile->SetSize({ 28.f, 28.f });
-			tile->SetPos({ 2.f + 32.f * j, 2.f + 32.f * i });
+			tile->SetPos({ 32.f * j, 32.f * i });
 			tiles->push_back(tile);
 		}
 		grid.push_back(tiles);

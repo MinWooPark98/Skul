@@ -6,7 +6,7 @@ class Player;
 class Collider : public Object
 {
 public:
-	enum class Type
+	enum class Types
 	{
 		None = -1,
 		TopSide,
@@ -14,7 +14,7 @@ public:
 	};
 
 protected:
-	Type type;
+	Types type;
 
 public:
 	Collider();
@@ -22,6 +22,8 @@ public:
 
 	virtual void Init() override;
 
-	void SetType(Type type) { this->type = type; }
-	Type GetType() { return type; }
+	void SetType(Types type);
+	Types GetType() { return type; }
+
+	virtual void SetHitBox(const FloatRect rect);
 };

@@ -3,7 +3,7 @@
 #include <list>
 
 class TextObj;
-class TextButton;
+class TextMouseButton;
 
 class SaveLoadUi : public Object
 {
@@ -26,8 +26,8 @@ protected:
 	bool isFailed;
 	float showFailureTimer;
 
-	TextButton* yesButton;
-	TextButton* noButton;
+	TextMouseButton* yesButton;
+	TextMouseButton* noButton;
 
 public:
 	SaveLoadUi();

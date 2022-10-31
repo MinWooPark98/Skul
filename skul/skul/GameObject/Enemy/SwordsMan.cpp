@@ -111,17 +111,21 @@ void SwordsMan::Update(float dt)
 			changeDirTimer += dt;
 			if (changeDirTimer >= changeDirDelay)
 			{
-				if (Utils::EqualFloat(direction.x, 0.f))
+				int dirDraw = Utils::RandomRange(0, 4);
+				switch (dirDraw)
 				{
-					int dirDraw = Utils::RandomRange(0, 2);
-					if (dirDraw == 0)
-						direction.x = -1.f;
-					else
-						direction.x = 1.f;
+				case 0:
+					direction.x = -1.f;
 					lastDirX = direction.x;
-				}
-				else
+					break;
+				case 1:
+					direction.x = 1.f;
+					lastDirX = direction.x;
+					break;
+				default:
 					direction.x = 0.f;
+					break;
+				}
 				detectingRay->SetDirection({ lastDirX, 0.f });
 				changeDirTimer = 0.f;
 			}

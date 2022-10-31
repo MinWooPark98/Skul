@@ -33,7 +33,7 @@ void MapEditorScene::Init()
 	canvas = new RectTile;
 	canvas->SetName("background");
 	canvas->Init();
-	canvas->SetSize({ windowSize.x * 2.f, windowSize.y * 2.f });
+	canvas->SetSize({ windowSize.x * 2.f - 2.f, windowSize.y * 2.f - 2.f });
 	canvas->SetFillColor({ 255, 255, 255, 255 });
 	objList.push_back(canvas);
 

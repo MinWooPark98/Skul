@@ -65,16 +65,17 @@ void Enemy::Update(float dt)
 	{
 		if (direction.y < 0.f)
 			break;
-		rays[i]->Update(dt);
-		if (rays[i]->RayHit())
+		int idx = direction.x > 0.f ? 2 - i : i;
+		rays[idx]->Update(dt);
+		if (rays[idx]->RayHit())
 		{
-			auto collider = rays[i]->GetClosestObj();
+			auto collider = rays[idx]->GetClosestObj();
 			auto colliderBound = collider->GetHitBounds();
-			if (Utils::EqualFloat(rays[i]->RayHitDistance(), 0.f) && rays[i]->GetHittingPoint().y - colliderBound.top < 25.f)
+			if (Utils::EqualFloat(rays[idx]->RayHitDistance(), 0.f) && rays[idx]->GetHittingPoint().y - colliderBound.top < 25.f)
 			{
 				gravityApply = false;
 				direction.y = 0.f;
-				platform = rays[i]->GetClosestObj();
+				platform = rays[idx]->GetClosestObj();
 				position.y = colliderBound.top;
 				break;
 			}
@@ -90,7 +91,7 @@ void Enemy::Update(float dt)
 	auto& layOut = playScene->GetLayout();
 	for (auto collider : *layOut[(int)Scene::Layer::Collider])
 	{
-		if (((Collider*)collider)->GetType() == Collider::Type::AllSide)
+		if (((Collider*)collider)->GetType() == Collider::Types::AllSide)
 			OnCollisionBlock(collider->GetHitBounds());
 	}
 

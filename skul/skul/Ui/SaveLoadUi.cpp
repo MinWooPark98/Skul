@@ -1,6 +1,6 @@
 #include "SaveLoadUi.h"
 #include "../GameObject/RectTile.h"
-#include "../GameObject/TextButton.h"
+#include "../GameObject/TextMouseButton.h"
 #include "../Framework/ResourceMgr.h"
 #include "../Framework/Framework.h"
 #include "../Scene/SceneMgr.h"
@@ -49,7 +49,7 @@ void SaveLoadUi::Init()
 	showFailure->SetText("Wrong filepath");
 	showFailure->SetOrigin(Origins::MR);
 
-	yesButton = new TextButton();
+	yesButton = new TextMouseButton();
 	yesButton->Init();
 	yesButton->SetFont(*RESOURCE_MGR->GetFont("fonts/NotoSansKR-Bold.otf"));
 	yesButton->SetOutlineColor({ 255, 255, 255, 0 });
@@ -58,7 +58,7 @@ void SaveLoadUi::Init()
 	yesButton->SetOrigin(Origins::BR);
 	yesButton->SetPos({ windowSize.x * 0.8f - yesButton->GetSFMLText().getCharacterSize() * 2.f, windowSize.y * 0.8f});
 
-	noButton = new TextButton();
+	noButton = new TextMouseButton();
 	noButton->Init();
 	noButton->SetFont(*RESOURCE_MGR->GetFont("fonts/NotoSansKR-Bold.otf"));
 	noButton->SetOutlineColor({ 255, 255, 255, 0 });
@@ -94,7 +94,7 @@ void SaveLoadUi::Update(float dt)
 		}
 	}
 	auto downList = InputMgr::GetKeyDownList();
-	auto ingList = InputMgr::GetKeyingList();
+	auto ingList = InputMgr::GetKeyIngList();
 	char addChar = NULL;
 	for (auto key : downList)
 	{

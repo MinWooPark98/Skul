@@ -155,7 +155,7 @@
     <ClCompile Include="GameObject\DragRectTile.cpp" />
     <ClCompile Include="GameObject\DisplayCollider.cpp" />
     <ClCompile Include="GameObject\MapEditorDataMgr.cpp" />
-    <ClCompile Include="GameObject\TextButton.cpp" />
+    <ClCompile Include="GameObject\TextMouseButton.cpp" />
     <ClCompile Include="GameObject\Player.cpp" />
     <ClCompile Include="Framework\RayCast.cpp" />
     <ClCompile Include="GameObject\PlaySceneLoader.cpp" />
@@ -163,6 +163,8 @@
     <ClCompile Include="GameObject\Enemy\NormalEnt.cpp" />
     <ClCompile Include="GameObject\NPC\NPC.cpp" />
     <ClCompile Include="GameObject\NPC\Ogre.cpp" />
+    <ClCompile Include="Scene\TitleScene.cpp" />
+    <ClCompile Include="GameObject\TextButtons.cpp" />
     <ClCompile Include="Ui\EnemyHpBarUi.cpp" />
     <ClCompile Include="Scene\PlayScene.cpp" />
     <ClCompile Include="GameObject\Skul\Skul.cpp" />
@@ -214,7 +216,7 @@
     <ClInclude Include="GameObject\DragRectTile.h" />
     <ClInclude Include="GameObject\DisplayCollider.h" />
     <ClInclude Include="GameObject\MapEditorDataMgr.h" />
-    <ClInclude Include="GameObject\TextButton.h" />
+    <ClInclude Include="GameObject\TextMouseButton.h" />
     <ClInclude Include="GameObject\Player.h" />
     <ClInclude Include="Framework\RayCast.h" />
     <ClInclude Include="GameObject\PlaySceneLoader.h" />
@@ -222,6 +224,8 @@
     <ClInclude Include="GameObject\Enemy\NormalEnt.h" />
     <ClInclude Include="GameObject\NPC\NPC.h" />
     <ClInclude Include="GameObject\NPC\Ogre.h" />
+    <ClInclude Include="Scene\TitleScene.h" />
+    <ClInclude Include="GameObject\TextButtons.h" />
     <ClInclude Include="Ui\EnemyHpBarUi.h" />
     <ClInclude Include="Scene\PlayScene.h" />
     <ClInclude Include="GameObject\Skul\Skul.h" />

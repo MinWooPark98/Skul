@@ -1,12 +1,14 @@
 #include "SceneMgr.h"
+#include "TitleScene.h"
 #include "MapEditorScene.h"
 #include "PlayScene.h"
 
 bool SceneMgr::Init()
 {
+    sceneMap[Scenes::Title] = new TitleScene();
     sceneMap[Scenes::MapEditor] = new MapEditorScene();
     sceneMap[Scenes::Play] = new PlayScene();
-    currScene = Scenes::Play;
+    currScene = Scenes::Title;
 
     for (auto& pair : sceneMap)
     {

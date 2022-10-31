@@ -13,7 +13,7 @@ TextButtonUi::~TextButtonUi()
 
 void TextButtonUi::Init()
 {
-	TextButton::Init();
+	TextMouseButton::Init();
 	switch (mode)
 	{
 	case Modes::BackGround:
@@ -51,10 +51,10 @@ void TextButtonUi::Init()
 void TextButtonUi::Selected()
 {
 	ChangeMode((int)mode);
-	TextButton::Selected();
+	TextMouseButton::Selected();
 }
 
 void TextButtonUi::Deselected()
 {
-	TextButton::Deselected();
+	TextMouseButton::Deselected();
 }

@@ -1,14 +1,14 @@
 #pragma once
-#include "../GameObject/TextButton.h"
+#include "../GameObject/Object.h"
 #include <list>
 
-class TextButton;
+class TextMouseButton;
 
 class SaveLoadButtonUi : public Object
 {
 public:
 protected:
-	list<TextButton*> buttons;
+	list<TextMouseButton*> buttons;
 
 public:
 	SaveLoadButtonUi();

@@ -8,7 +8,7 @@
 #include "../../Ui/EnemyHpBarUi.h"
 
 NormalEnt::NormalEnt()
-	:Enemy(Types::NormalEnt), detectingRay(nullptr), detectRange(160.f), attackRange(50.f), lastDirX(1.f), speed(0.f), normalSpeed(60.f), chasingSpeed(100.f),
+	:Enemy(Types::NormalEnt), detectingRay(nullptr), detectRange(160.f), attackRange(40.f), lastDirX(1.f), speed(0.f), normalSpeed(60.f), chasingSpeed(100.f),
 	attackDelay(3.f), attackTimer(3.f), changeDirDelay(4.f), changeDirTimer(0.f)
 {
 }
@@ -72,10 +72,10 @@ void NormalEnt::Update(float dt)
 	attackBox.setPosition(position);
 
 	FloatRect hitBound = hitbox.getGlobalBounds();
-	detectingRay->SetStartPos({ hitBound.left + hitBound.width * 0.5f, hitBound.top + hitBound.height * 0.5f });
+	detectingRay->SetStartPos({ hitBound.left + hitBound.width * 0.5f, hitBound.top + hitBound.height * 0.6f });
 	detectingRay->SetDirection(direction);
 	detectingRay->Update(dt);
-
+	
 	attackTimer += dt;
 	if (currState != States::Hit)
 	{
@@ -111,17 +111,21 @@ void NormalEnt::Update(float dt)
 			changeDirTimer += dt;
 			if (changeDirTimer >= changeDirDelay)
 			{
-				if (Utils::EqualFloat(direction.x, 0.f))
+				int dirDraw = Utils::RandomRange(0, 4);
+				switch (dirDraw)
 				{
-					int dirDraw = Utils::RandomRange(0, 2);
-					if (dirDraw == 0)
-						direction.x = -1.f;
-					else
-						direction.x = 1.f;
+				case 0:
+					direction.x = -1.f;
 					lastDirX = direction.x;
-				}
-				else
+					break;
+				case 1:
+					direction.x = 1.f;
+					lastDirX = direction.x;
+					break;
+				default:
 					direction.x = 0.f;
+					break;
+				}
 				detectingRay->SetDirection({ lastDirX, 0.f });
 				changeDirTimer = 0.f;
 			}

@@ -8,6 +8,7 @@ using namespace std;
 
 enum class Scenes
 {
+	Title,
 	MapEditor,
 	Play,
 };

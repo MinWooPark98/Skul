@@ -1,8 +1,8 @@
 #pragma once
-#include "../GameObject/TextButton.h"
+#include "../GameObject/TextMouseButton.h"
 #include <functional>
 
-class TextButtonUi : public TextButton
+class TextButtonUi : public TextMouseButton
 {
 public:
 	enum class Modes
