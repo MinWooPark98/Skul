@@ -46,8 +46,8 @@ void Skul::OnCompleteAttackB()
 		QuitAttackB();
 }
 
-void Skul::OnCompleteAttack()
+void Skul::OnCompleteAction()
 {
-	if (QuitAttack != nullptr)
-		QuitAttack();
+	if (QuitAction != nullptr)
+		QuitAction();
 }

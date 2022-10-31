@@ -1,0 +1,8 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+DefaultSkulIdle_no_head,1,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/player/default/default_no_head.png,5,13,36,24,11,24,0,0
+graphics/player/default/default_no_head.png,46,13,42,29,15,29,0,0
+graphics/player/default/default_no_head.png,93,13,44,28,17,28,0,0
+graphics/player/default/default_no_head.png,142,13,42,27,15,27,0,0

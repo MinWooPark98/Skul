@@ -23,6 +23,8 @@ public:
 	const IntRect& GetTextureRect()const;
 	void SetSize(Vector2f size);
 	void SetScale(Vector2f scale);
+	void SetHitBoxOrigin(Origins origin) { Utils::SetOrigin(hitbox, origin); }
+	void Rotate() { sprite.rotate(rotation); }
 
 	FloatRect GetGlobalBounds() const;
 	FloatRect GetLocalBounds() const;

@@ -16,6 +16,8 @@ public:
 		Jump,
 		Attack,
 		Fall,
+		SkillA,
+		SkillB,
 	};
 	
 protected:
@@ -66,6 +68,8 @@ public:
 	
 	virtual void Update(float dt) override;
 	virtual void Draw(RenderWindow& window) override;
+
+	virtual void SwitchDevMode() override;
 
 	void SetSkul(Skul* skul);
 	void SetState(States newState);

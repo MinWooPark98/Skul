@@ -1,0 +1,9 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+DefaultSkulAttackA_no_head,0,8,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/player/default/default_no_head.png,5,281,34,46,17,46,0,0
+graphics/player/default/default_no_head.png,44,281,35,45,17.5,45,0,0
+graphics/player/default/default_no_head.png,84,281,63,57,31.5,57,0,0
+graphics/player/default/default_no_head.png,152,281,61,40,30.5,40,0,0
+graphics/player/default/default_no_head.png,218,281,41,29,20.5,29,0,0

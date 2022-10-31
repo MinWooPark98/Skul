@@ -2,8 +2,8 @@ ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
 DefaultSkulAttackA,0,8,,,,,,
 ,,,,,,,,
 TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
-graphics/player/default.png,7,306,30,42,15,42,0,0
-graphics/player/default.png,46,306,31,41,15.5,41,0,0
-graphics/player/default.png,86,306,59,53,29.5,53,0,0
-graphics/player/default.png,154,306,57,36,28.5,36,0,0
-graphics/player/default.png,220,306,37,31,18.5,31,0,0
+graphics/player/default/default.png,7,306,30,42,15,42,0,0
+graphics/player/default/default.png,46,306,31,41,15.5,41,0,0
+graphics/player/default/default.png,86,306,59,53,29.5,53,0,0
+graphics/player/default/default.png,154,306,57,36,28.5,36,0,0
+graphics/player/default/default.png,220,306,37,31,18.5,31,0,0

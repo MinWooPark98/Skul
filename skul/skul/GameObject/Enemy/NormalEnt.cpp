@@ -103,7 +103,8 @@ void NormalEnt::Update(float dt)
 		if (player->GetPlatform() == platform)
 		{
 			speed = chasingSpeed;
-			direction.x = Utils::UnitizationFloat((player->GetPos().x) - position.x);
+			if (fabs(player->GetPos().x - position.x) >= player->GetHitBounds().width * 0.5f)
+				direction.x = Utils::UnitizationFloat((player->GetPos().x) - position.x);
 		}
 		else
 		{

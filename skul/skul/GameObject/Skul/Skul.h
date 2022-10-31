@@ -48,13 +48,15 @@ public:
 	virtual void JumpAttack() = 0;
 	virtual void Fall() = 0;
 	virtual void FallRepeated() = 0;
+	virtual void SkillA() = 0;
+	virtual void SkillB() = 0;
 
 	void OnCompleteAttackA();
 	void OnCompleteAttackB();
-	void OnCompleteAttack();
+	void OnCompleteAction();
 	function<void()> QuitAttackA;
 	function<void()> QuitAttackB;
-	function<void()> QuitAttack;
+	function<void()> QuitAction;
 
 	virtual void SetAnimEvent(Player* player) = 0;
 };

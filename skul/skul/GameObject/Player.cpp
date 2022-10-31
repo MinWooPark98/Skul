@@ -53,8 +53,17 @@ void Player::Reset()
 
 void Player::Update(float dt)
 {
-	gravityApply = true;
 	mainSkul->Update(dt);
+
+	if (InputMgr::GetKeyDown(Keyboard::A))
+		SetState(States::SkillA);
+	else if (InputMgr::GetKeyDown(Keyboard::S))
+		SetState(States::SkillB);
+
+	if (currState == States::SkillA || currState == States::SkillB)
+		return;
+
+	gravityApply = true;
 	SetBoxes();
 
 	if (isDashing)
@@ -140,8 +149,10 @@ void Player::Update(float dt)
 				SetState(States::Idle);
 		}
 	}
-
-	float inputX = InputMgr::GetAxisRaw(Axis::Horizontal);
+	float inputX = 0.f;
+	if(!InputMgr::GetKey(Keyboard::A) && !InputMgr::GetKey(Keyboard::D))
+		inputX = InputMgr::GetAxisRaw(Axis::Horizontal);
+	
 	if (currState == States::Dash)
 	{
 		if (dashTimer >= dashTime && !(Utils::EqualFloat(inputX, 0.f)))
@@ -229,12 +240,19 @@ void Player::Update(float dt)
 void Player::Draw(RenderWindow& window)
 {
 	SpriteObj::Draw(window);
+	mainSkul->Draw(window);
 	if (isDevMode)
 	{
 		window.draw(attackBox);
 		for (auto ray : rays)
 			ray->Draw(window);
 	}
+}
+
+void Player::SwitchDevMode()
+{
+	Object::SwitchDevMode();
+	mainSkul->SwitchDevMode();
 }
 
 void Player::SetSkul(Skul* skul)
@@ -244,7 +262,7 @@ void Player::SetSkul(Skul* skul)
 	SetState(States::Idle);
 	mainSkul->QuitAttackA = bind(&Player::OnCompleteAttackA, this);
 	mainSkul->QuitAttackB = bind(&Player::OnCompleteAttackB, this);
-	mainSkul->QuitAttack = bind(&Player::SetState, this, States::Idle);
+	mainSkul->QuitAction = bind(&Player::SetState, this, States::Idle);
 	mainSkul->SetAnimEvent(this);
 }
 
@@ -276,6 +294,12 @@ void Player::SetState(States newState)
 		break;
 	case Player::States::Fall:
 		mainSkul->Fall();
+		break;
+	case Player::States::SkillA:
+		mainSkul->SkillA();
+		break;
+	case Player::States::SkillB:
+		mainSkul->SkillB();
 		break;
 	default:
 		break;

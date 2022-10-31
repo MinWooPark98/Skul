@@ -2,7 +2,7 @@ ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
 DefaultSkulIdle,1,7,,,,,,
 ,,,,,,,,
 TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
-graphics/player/default.png,7,15,36,32,12,32,0,0
-graphics/player/default.png,52,15,38,33,14,33,0,0
-graphics/player/default.png,99,15,40,32,16,32,0,0
-graphics/player/default.png,148,15,38,30,14,30,0,0
+graphics/player/default/default.png,7,15,36,32,12,32,0,0
+graphics/player/default/default.png,52,15,38,33,14,33,0,0
+graphics/player/default/default.png,99,15,40,32,16,32,0,0
+graphics/player/default/default.png,148,15,38,30,14,30,0,0

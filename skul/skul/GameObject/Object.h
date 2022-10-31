@@ -44,6 +44,8 @@ public:
 	virtual void Translate(const Vector2f& delta);
 
 	void SetGravity(float g) { gravity = g; }
+	void SetGravityApply(bool apply) { gravityApply = apply; }
+	bool GetGravityApply() const { return gravityApply; }
 
 	virtual void SetRotation(float rotation) { this->rotation = rotation; }
 
@@ -52,6 +54,9 @@ public:
 
 	void SetName(string name) { this->name = name; }
 	const string& GetName() const { return name; }
+
+	void SetDirection(const Vector2f& dir) { direction = dir; }
+	const Vector2f& GetDirection() const { return direction; }
 
 	virtual void SetDevMode(bool devMode) { isDevMode = devMode; }
 	virtual void SwitchDevMode() { isDevMode = !isDevMode; }

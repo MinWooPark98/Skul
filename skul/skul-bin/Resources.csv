@@ -84,7 +84,7 @@ graphics/mapeditor/player/player_0.png,0
 graphics/mapeditor/reward/reward_gold.png,0
 graphics/mapeditor/reward/reward_item.png,0
 graphics/mapeditor/reward/reward_head.png,0
-graphics/player/default.png,0
+graphics/player/default/default.png,0
 animations/player/default/Idle.csv,3
 animations/player/default/Walk.csv,3
 animations/player/default/Dash.csv,3
@@ -117,3 +117,15 @@ animations/npc/witch/Idle.csv,3
 animations/npc/ogre/Idle.csv,3
 animations/npc/foxhuman/Idle.csv,3
 graphics/title.png,0
+animations/player/default/SkillA.csv,3
+graphics/player/default/default_no_head.png,0
+animations/player/default/Idle_no_head.csv,3
+animations/player/default/Walk_no_head.csv,3
+animations/player/default/Dash_no_head.csv,3
+animations/player/default/Jump_no_head.csv,3
+animations/player/default/Fall_no_head.csv,3
+animations/player/default/FallRepeat_no_head.csv,3
+animations/player/default/AttackA_no_head.csv,3
+animations/player/default/AttackB_no_head.csv,3
+animations/player/default/JumpAttack_no_head.csv,3
+graphics/player/default/head.png,0

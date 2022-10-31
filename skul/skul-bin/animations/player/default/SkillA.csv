@@ -1,0 +1,8 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+DefaultSkulSkillA,0,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/player/default/default.png,7,518,27,29,13.5,29,0,0
+graphics/player/default/default.png,43,518,61,36,30.5,36,0,0
+graphics/player/default/default.png,113,518,32,35,16,35,0,0
+graphics/player/default/default.png,154,518,28,23,14,23,0,0

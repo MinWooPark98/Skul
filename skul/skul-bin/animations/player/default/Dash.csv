@@ -2,4 +2,4 @@ ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
 DefaultSkulDash,0,10,,,,,,
 ,,,,,,,,
 TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
-graphics/player/default.png,7,114,38,24,19,24,0,0
+graphics/player/default/default.png,7,114,38,24,19,24,0,0

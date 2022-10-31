@@ -1,0 +1,12 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+DefaultSkulWalk_no_head,1,10,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/player/default/default_no_head.png,5,55,42,28,21,28,0,0
+graphics/player/default/default_no_head.png,52,55,44,30,22,30,0,0
+graphics/player/default/default_no_head.png,101,55,42,31,21,31,0,0
+graphics/player/default/default_no_head.png,148,55,37,31,18.5,31,0,0
+graphics/player/default/default_no_head.png,190,55,37,33,18.5,33,0,0
+graphics/player/default/default_no_head.png,232,55,43,36,21.5,36,0,0
+graphics/player/default/default_no_head.png,280,55,42,32,21,32,0,0
+graphics/player/default/default_no_head.png,327,55,42,30,21,30,0,0
