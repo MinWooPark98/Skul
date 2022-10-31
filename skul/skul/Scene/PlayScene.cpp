@@ -14,6 +14,9 @@
 #include "../Datatable/FilePathTable.h"
 #include "../DataTable/DataTableMGR.h"
 #include "../Framework/ResourceMgr.h"
+#include "../GameObject/NPC/Witch.h"
+#include "../GameObject/NPC/Ogre.h"
+#include "../GameObject/NPC/FoxHuman.h"
 
 PlayScene::PlayScene()
 	:Scene(Scenes::Play)
@@ -28,7 +31,7 @@ void PlayScene::Init()
 {
 	for (int i = 0; i < (int)Layer::Count; ++i)
 	{
-		list<Object*>* objects = new list<Object*>;
+		list<Object*>* objects = new list<Object*>();
 		layOut.push_back(objects);
 	}
 
@@ -84,12 +87,20 @@ void PlayScene::Init()
 		case MapEditorScene::Modes::Reward:
 			break;
 		case MapEditorScene::Modes::NPC:
+			{
+				if (data.objName == "npc_0")
+					obj = new Witch();
+				else if (data.objName == "npc_1")
+					obj = new FoxHuman();
+				else if (data.objName == "npc_2")
+					obj = new Ogre();
+			}
 			break;
 		case MapEditorScene::Modes::Enemies:
 			{
 				if (data.objName == "enemy_0")
 					obj = new SwordsMan();
-				if (data.objName == "enemy_5")
+				else if (data.objName == "enemy_5")
 					obj = new NormalEnt();
 			}
 			break;

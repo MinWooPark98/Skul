@@ -1,0 +1,12 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+OgreIdle,1,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/npc/ogre/idle.png,0,0,227,151,113.5,151,0,0
+graphics/npc/ogre/idle.png,227,0,227,151,113.5,151,0,0
+graphics/npc/ogre/idle.png,454,0,227,151,113.5,151,0,0
+graphics/npc/ogre/idle.png,681,0,227,151,113.5,151,0,0
+graphics/npc/ogre/idle.png,908,0,227,151,113.5,151,0,0
+graphics/npc/ogre/idle.png,1135,0,227,151,113.5,151,0,0
+graphics/npc/ogre/idle.png,1362,0,227,151,113.5,151,0,0
+graphics/npc/ogre/idle.png,1589,0,227,151,113.5,151,0,0

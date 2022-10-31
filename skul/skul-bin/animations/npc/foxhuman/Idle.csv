@@ -1,0 +1,12 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+FoxHumanIdle,1,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/npc/foxhuman/idle.png,0,0,217,144,108.5,144,0,0
+graphics/npc/foxhuman/idle.png,217,0,217,144,108.5,144,0,0
+graphics/npc/foxhuman/idle.png,434,0,217,144,108.5,144,0,0
+graphics/npc/foxhuman/idle.png,651,0,217,144,108.5,144,0,0
+graphics/npc/foxhuman/idle.png,868,0,217,144,108.5,144,0,0
+graphics/npc/foxhuman/idle.png,1085,0,217,144,108.5,144,0,0
+graphics/npc/foxhuman/idle.png,1302,0,217,144,108.5,144,0,0
+graphics/npc/foxhuman/idle.png,1519,0,217,144,108.5,144,0,0

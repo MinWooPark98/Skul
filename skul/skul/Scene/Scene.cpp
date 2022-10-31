@@ -2,6 +2,7 @@
 #include "../Framework/ResourceMgr.h"
 #include "../Framework/Framework.h"
 #include "../Ui/UiMgr.h"
+#include "../Framework/InputMgr.h"
 
 Scene::Scene(Scenes type)
 	: type(type), uiMgr(nullptr), isPause(false)
@@ -29,6 +30,10 @@ void Scene::Enter()
 
 void Scene::Update(float dt)
 {
+	Vector2f mousePos = InputMgr::GetMousePos();
+	Vector2f windowSize = (Vector2f)FRAMEWORK->GetWindowSize();
+	objMousePos = ScreenToWorld((Vector2i)mousePos);
+
 	for (const auto& obj : objList)
 	{
 		if (obj->GetActive())

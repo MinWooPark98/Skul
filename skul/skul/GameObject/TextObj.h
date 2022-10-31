@@ -26,5 +26,7 @@ public:
 	virtual void SetOrigin(Origins origin);
 	virtual const string GetText() const;
 	virtual void Translate(const Vector2f& pos) override;
+
+	void AsciiToUnicode();	// 한글 깨질 때 사용
 };
 

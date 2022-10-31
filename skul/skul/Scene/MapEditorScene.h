@@ -28,8 +28,6 @@ protected:
 	Modes mode;
 	string objName;
 
-	Vector2f objMousePos;
-
 	MapEditorDataMgr* dataMgr;
 	SaveLoadUi* saveLoadUi;
 
@@ -47,8 +45,6 @@ public:
 
 	virtual void Enter() override;
 	virtual void Exit() override;
-
-	const Vector2f& GetObjMousePos() const;
 
 	void SetObjName(const string& name) { objName = name; }
 	const string& GetObjName() { return objName; }

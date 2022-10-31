@@ -58,3 +58,10 @@ void TextObj::Translate(const Vector2f& pos)
 	Object::Translate(pos);
 	text.setPosition(position);
 }
+
+void TextObj::AsciiToUnicode()
+{
+	static locale loc("");
+	auto& facet = use_facet<std::codecvt<wchar_t, char, mbstate_t>>(loc);
+	text.setString(wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).from_bytes(text.getString()));
+}

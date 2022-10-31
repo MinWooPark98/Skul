@@ -36,6 +36,7 @@ protected:
 	list<Object*> objList;
 
 	bool isPause;
+	Vector2f objMousePos;
 
 	View worldView;
 	View uiView;
@@ -72,6 +73,7 @@ public:
 	void DelGameObject(Object* obj);
 	Object* FindGameObj(string name);
 	UiMgr* GetUiMgr() { return uiMgr; }
+	const Vector2f& GetObjMousePos() const { return objMousePos; }
 
 	vector<list<Object*>*>& GetLayout() { return layOut; }
 };

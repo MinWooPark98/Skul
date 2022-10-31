@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObject\NPC\FoxHuman.cpp" />
     <ClCompile Include="GameObject\Enemy\Enemy.cpp" />
     <ClCompile Include="GameObject\Collider.cpp" />
     <ClCompile Include="GameObject\Skul\DefaultSkul.cpp" />
@@ -160,6 +161,8 @@
     <ClCompile Include="GameObject\PlaySceneLoader.cpp" />
     <ClCompile Include="GameObject\PlaySceneGrid.cpp" />
     <ClCompile Include="GameObject\Enemy\NormalEnt.cpp" />
+    <ClCompile Include="GameObject\NPC\NPC.cpp" />
+    <ClCompile Include="GameObject\NPC\Ogre.cpp" />
     <ClCompile Include="Ui\EnemyHpBarUi.cpp" />
     <ClCompile Include="Scene\PlayScene.cpp" />
     <ClCompile Include="GameObject\Skul\Skul.cpp" />
@@ -197,10 +200,12 @@
     <ClCompile Include="Scene\SceneMgr.cpp" />
     <ClCompile Include="Ui\TextButtonUi.cpp" />
     <ClCompile Include="Ui\UiMgr.cpp" />
+    <ClCompile Include="GameObject\NPC\Witch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rd\rapidcsv.h" />
     <ClInclude Include="3rd\SingleTon.h" />
+    <ClInclude Include="GameObject\NPC\FoxHuman.h" />
     <ClInclude Include="GameObject\Enemy\Enemy.h" />
     <ClInclude Include="GameObject\Collider.h" />
     <ClInclude Include="GameObject\Skul\DefaultSkul.h" />
@@ -215,6 +220,8 @@
     <ClInclude Include="GameObject\PlaySceneLoader.h" />
     <ClInclude Include="GameObject\PlaySceneGrid.h" />
     <ClInclude Include="GameObject\Enemy\NormalEnt.h" />
+    <ClInclude Include="GameObject\NPC\NPC.h" />
+    <ClInclude Include="GameObject\NPC\Ogre.h" />
     <ClInclude Include="Ui\EnemyHpBarUi.h" />
     <ClInclude Include="Scene\PlayScene.h" />
     <ClInclude Include="GameObject\Skul\Skul.h" />
@@ -252,6 +259,7 @@
     <ClInclude Include="Scene\SceneMgr.h" />
     <ClInclude Include="Ui\TextButtonUi.h" />
     <ClInclude Include="Ui\UiMgr.h" />
+    <ClInclude Include="GameObject\NPC\Witch.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

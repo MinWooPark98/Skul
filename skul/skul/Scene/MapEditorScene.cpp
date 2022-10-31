@@ -118,10 +118,6 @@ void MapEditorScene::Update(float dt)
 		worldView.move(75.f, 0.f);
 	worldView.setSize(worldView.getSize() * (1.f - 0.05f * InputMgr::GetMouseWheelMoved()));
 
-	Vector2f mousePos = InputMgr::GetMousePos();
-	Vector2f windowSize = (Vector2f)FRAMEWORK->GetWindowSize();
-	objMousePos = ScreenToWorld((Vector2i)mousePos);
-
 	Scene::Update(dt);
 	uiMgr->Update(dt);
 }
@@ -162,11 +158,6 @@ void MapEditorScene::Enter()
 
 void MapEditorScene::Exit()
 {
-}
-
-const Vector2f& MapEditorScene::GetObjMousePos() const
-{
-	return objMousePos;
 }
 
 void MapEditorScene::ChangeMode(int modeNum)
