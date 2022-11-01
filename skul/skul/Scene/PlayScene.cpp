@@ -207,8 +207,8 @@ void PlayScene::Draw(RenderWindow& window)
 				obj->Draw(window);
 		}
 	}
-	window.setView(uiView);
-	//uiMgr->Draw(window);
+	/*window.setView(uiView);
+	uiMgr->Draw(window);*/
 }
 
 void PlayScene::Enter()
@@ -219,8 +219,8 @@ void PlayScene::Enter()
 
 	worldView.setSize(size.x * 0.5f, size.y * 0.5f);
 
-	uiView.setSize(size.x, size.y);
-	uiView.setCenter(size.x * 0.5f, size.y * 0.5f);
+	uiView.setSize(size.x * 0.5f, size.y * 0.5f);
+	uiView.setCenter(size.x * 0.25f, size.y * 0.25f);
 }
 
 void PlayScene::Exit()

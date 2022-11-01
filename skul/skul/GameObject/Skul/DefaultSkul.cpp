@@ -18,6 +18,13 @@ DefaultSkul::~DefaultSkul()
 
 void DefaultSkul::Init()
 {
+	type = Types::Default;
+	tier = Tiers::Normal;
+
+	SetSymbol(RESOURCE_MGR->GetTexture("graphics/player/default/symbol.png"));
+	SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/default/skull_throw.png"));
+	SetSkillBIcon(RESOURCE_MGR->GetTexture("graphics/player/default/rebone.png"));
+
 	head = new SpriteObj();
 	head->Init();
 	head->SetRotation(10.f);
@@ -313,6 +320,7 @@ bool DefaultSkul::HeadOnCollision(const FloatRect& blockBound)
 	FloatRect hitBound = head->GetHitBounds();
 	if (!hitBound.intersects(blockBound))
 		return false;
+	isHeadFlying = false;
 	head->SetGravityApply(true);
 	headSpeed *= 0.5f;
 	Vector2f hitCenter(hitBound.left + hitBound.width * 0.5f, hitBound.top + hitBound.height * 0.5f);
@@ -323,7 +331,7 @@ bool DefaultSkul::HeadOnCollision(const FloatRect& blockBound)
 		head->SetDirection({ headDir.x, 0.f });
 		return true;
 	}
-	if (hitCenter.y + hitBound.height * 0.3f < blockBound.top && direction.y > 0.f)
+	else if (hitCenter.y + hitBound.height * 0.3f < blockBound.top && direction.y > 0.f)
 	{
 		head->Translate({ 0.f, blockBound.top - (hitBound.top + hitBound.height) });
 		head->SetDirection({ headDir.x, 0.f });
@@ -342,4 +350,5 @@ bool DefaultSkul::HeadOnCollision(const FloatRect& blockBound)
 		head->SetDirection({ -headDir.x, headDir.y });
 		return true;
 	}
+	return false;
 }

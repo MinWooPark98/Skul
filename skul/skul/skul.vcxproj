@@ -146,6 +146,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ui\PlayerUi.cpp" />
+    <ClCompile Include="Ui\MonsterSceneUiMgr.cpp" />
     <ClCompile Include="Scene\BossScene.cpp" />
     <ClCompile Include="GameObject\NPC\FoxHuman.cpp" />
     <ClCompile Include="GameObject\Enemy\Enemy.cpp" />
@@ -211,6 +213,8 @@
   <ItemGroup>
     <ClInclude Include="3rd\rapidcsv.h" />
     <ClInclude Include="3rd\SingleTon.h" />
+    <ClInclude Include="Ui\PlayerUi.h" />
+    <ClInclude Include="Ui\MonsterSceneUiMgr.h" />
     <ClInclude Include="Scene\BossScene.h" />
     <ClInclude Include="GameObject\NPC\FoxHuman.h" />
     <ClInclude Include="GameObject\Enemy\Enemy.h" />

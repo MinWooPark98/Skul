@@ -138,3 +138,8 @@ graphics/gate/bossgate/idle.png,0
 animations/gate/MonsterGateIdle.csv,3
 animations/gate/NpcGateIdle.csv,3
 animations/gate/BossGateIdle.csv,3
+graphics/player/default/symbol.png,0
+graphics/player/player_ui_frame.png,0
+graphics/player/player_skill2_frame.png,0
+graphics/player/default/skull_throw.png,0
+graphics/player/default/rebone.png,0

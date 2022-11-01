@@ -27,6 +27,10 @@ protected:
 	Animator* animator;
 	Player* player;
 
+	const Texture* symbol;
+	const Texture* skillAIcon;
+	const Texture* skillBIcon;
+
 public:
 	Skul(Types type, Tiers tier);
 	virtual ~Skul();
@@ -63,5 +67,15 @@ public:
 
 	virtual void SetPlayer(Player* player) { this->player = player; }
 	virtual void SetAnimEvent(Player* player) = 0;
+
+	void SetSymbol(const Texture* tex) { symbol = tex; }
+	const Texture* GetSymbol() const { return symbol; }
+	void SetSkillAIcon(const Texture* tex) { skillAIcon = tex; }
+	const Texture* GetSkillAIcon() const { return skillAIcon; }
+	void SetSkillBIcon(const Texture* tex) { skillBIcon = tex; }
+	const Texture* GetSkillBIcon() const { return skillBIcon; }
+
+	Types GetType() const { return type; }
+	Tiers GetTier() const { return tier; }
 };
 

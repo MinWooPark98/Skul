@@ -27,4 +27,5 @@ void Witch::Activate()
 	Scene* currScene = SCENE_MGR->GetCurrentScene();
 	Player* player = (Player*)currScene->FindGameObj("player");
 	player->SetNormalSpeed(player->GetNormalSpeed() * 1.5f);
+	player->SetDashSpeed(player->GetDashSpeed() * 1.5f);
 }

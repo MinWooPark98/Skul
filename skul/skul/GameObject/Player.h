@@ -1,5 +1,6 @@
 #pragma once
 #include "SpriteObj.h"
+#include <functional>
 
 class Skul;
 class RayCast;
@@ -81,10 +82,13 @@ public:
 
 	void SetNormalSpeed(float speed) { normalSpeed = speed; }
 	float GetNormalSpeed() const { return normalSpeed; }
+	void SetDashSpeed(float speed) { dashSpeed = speed; }
+	float GetDashSpeed() const { return dashSpeed; }
 	void SetJumpableCount(int count) { jumpableCount = count; }
 	int SetJumpableCount() const { return jumpableCount; }
 	void SetAttackDmg(int dmg) { attackDmg = dmg; }
 	int GetAttackDmg() const { return attackDmg; }
+	float GetHpRatio() const { return (float)currHp / totalHp; }
 
 	void OnCompleteAttackA();
 	void OnCompleteAttackB();
@@ -93,6 +97,10 @@ public:
 	float GetLastDirX() const { return lastDirX; }
 	Object* GetPlatform() const { return platform; }
 	void OnCollisionBlock(const FloatRect& blockBound);
+
+	const Skul* GetMainSkul() const { return mainSkul; }
+
+	function<void()> ResetPlayerUi;
 
 	RectangleShape& GetAttackBox() { return attackBox; }
 	void MeleeAttack();

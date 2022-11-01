@@ -265,6 +265,8 @@ void Player::SetSkul(Skul* skul)
 	mainSkul->QuitAttackB = bind(&Player::OnCompleteAttackB, this);
 	mainSkul->QuitAction = bind(&Player::SetState, this, States::Idle);
 	mainSkul->SetAnimEvent(this);
+	if (ResetPlayerUi != nullptr)
+		ResetPlayerUi();
 }
 
 void Player::SetState(States newState)

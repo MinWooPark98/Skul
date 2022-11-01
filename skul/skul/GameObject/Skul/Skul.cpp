@@ -1,7 +1,7 @@
 #include "Skul.h"
 
 Skul::Skul(Types type, Tiers tier)
-	:type(type), tier(tier), animator(nullptr), player(nullptr)
+	:type(type), tier(tier), animator(nullptr), player(nullptr), symbol(nullptr)
 {
 }
 
