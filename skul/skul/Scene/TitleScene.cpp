@@ -44,7 +44,7 @@ void TitleScene::Update(float dt)
 		switch (buttons->GetVecIdx())
 		{
 		case 0:
-			SCENE_MGR->ChangeScene(Scenes::Play);
+			SCENE_MGR->ChangeScene(Scenes::MonsterScene);
 			break;
 		case 1:
 			SCENE_MGR->ChangeScene(Scenes::MapEditor);

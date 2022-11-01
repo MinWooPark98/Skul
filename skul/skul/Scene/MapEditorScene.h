@@ -17,6 +17,7 @@ public:
 		NPC,			// BC
 		Player,			// BC
 		Reward,			// BC
+		Gate,			// BC
 		Tile,			// TL
 		TileCollider,	// TL
 		Count,

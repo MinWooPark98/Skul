@@ -77,6 +77,9 @@ bool MapEditorDataMgr::SaveData(const string& filePath)
 			case MapEditorScene::Modes::Reward:
 				layer = (int)MapEditorScene::Layer::Reward;
 				break;
+			case MapEditorScene::Modes::Gate:
+				layer = (int)MapEditorScene::Layer::Gate;
+				break;
 			}
 			mapData[1].push_back(MapData(i, obj->GetName(), obj->GetPos(), obj->GetSize(), (int)Origins::BC, layer));
 		}

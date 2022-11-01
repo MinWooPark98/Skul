@@ -14,6 +14,7 @@ public:
 		NPC,
 		Player,
 		Reward,
+		Gate,
 		Tile,
 		Count,
 	};

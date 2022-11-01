@@ -3,6 +3,7 @@
 #include "../../Framework/ResourceMgr.h"
 #include "../../Scene/SceneMgr.h"
 #include "../TextObj.h"
+#include "../Player.h"
 
 Ogre::Ogre()
 	:NPC(Types::Ogre)
@@ -23,4 +24,7 @@ void Ogre::Init()
 
 void Ogre::Activate()
 {
+	Scene* currScene = SCENE_MGR->GetCurrentScene();
+	Player* player = (Player*)currScene->FindGameObj("player");
+	player->SetJumpableCount(player->SetJumpableCount() + 1);
 }

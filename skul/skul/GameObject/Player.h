@@ -28,6 +28,9 @@ protected:
 
 	States currState;
 
+	float normalSpeed;
+	float dashSpeed;
+
 	bool isMoving;
 	bool isDashing;
 	bool isJumping;
@@ -43,6 +46,7 @@ protected:
 	bool dashAble;
 	
 	int jumpCount;
+	int jumpableCount;
 
 	bool isAttacking;
 
@@ -74,6 +78,13 @@ public:
 	void SetSkul(Skul* skul);
 	void SetState(States newState);
 	void SetBoxes();
+
+	void SetNormalSpeed(float speed) { normalSpeed = speed; }
+	float GetNormalSpeed() const { return normalSpeed; }
+	void SetJumpableCount(int count) { jumpableCount = count; }
+	int SetJumpableCount() const { return jumpableCount; }
+	void SetAttackDmg(int dmg) { attackDmg = dmg; }
+	int GetAttackDmg() const { return attackDmg; }
 
 	void OnCompleteAttackA();
 	void OnCompleteAttackB();

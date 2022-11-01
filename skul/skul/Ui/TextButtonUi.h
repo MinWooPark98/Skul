@@ -13,6 +13,7 @@ public:
 		NPC,
 		Player,
 		Reward,
+		Gate,
 		Tile,
 		TileCollider,
 	};

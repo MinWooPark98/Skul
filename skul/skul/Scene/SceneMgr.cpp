@@ -1,13 +1,17 @@
 #include "SceneMgr.h"
 #include "TitleScene.h"
 #include "MapEditorScene.h"
-#include "PlayScene.h"
+#include "MonsterScene.h"
+#include "NpcScene.h"
+#include "BossScene.h"
 
 bool SceneMgr::Init()
 {
     sceneMap[Scenes::Title] = new TitleScene();
     sceneMap[Scenes::MapEditor] = new MapEditorScene();
-    sceneMap[Scenes::Play] = new PlayScene();
+    sceneMap[Scenes::MonsterScene] = new MonsterScene();
+    sceneMap[Scenes::NpcScene] = new NpcScene();
+    sceneMap[Scenes::BossScene] = new BossScene();
     currScene = Scenes::Title;
 
     for (auto& pair : sceneMap)

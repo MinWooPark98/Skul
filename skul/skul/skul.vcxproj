@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Scene\BossScene.cpp" />
     <ClCompile Include="GameObject\NPC\FoxHuman.cpp" />
     <ClCompile Include="GameObject\Enemy\Enemy.cpp" />
     <ClCompile Include="GameObject\Collider.cpp" />
@@ -163,6 +164,9 @@
     <ClCompile Include="GameObject\Enemy\NormalEnt.cpp" />
     <ClCompile Include="GameObject\NPC\NPC.cpp" />
     <ClCompile Include="GameObject\NPC\Ogre.cpp" />
+    <ClCompile Include="GameObject\Gate.cpp" />
+    <ClCompile Include="Scene\MonsterScene.cpp" />
+    <ClCompile Include="Scene\NpcScene.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="GameObject\TextButtons.cpp" />
     <ClCompile Include="Ui\EnemyHpBarUi.cpp" />
@@ -207,6 +211,7 @@
   <ItemGroup>
     <ClInclude Include="3rd\rapidcsv.h" />
     <ClInclude Include="3rd\SingleTon.h" />
+    <ClInclude Include="Scene\BossScene.h" />
     <ClInclude Include="GameObject\NPC\FoxHuman.h" />
     <ClInclude Include="GameObject\Enemy\Enemy.h" />
     <ClInclude Include="GameObject\Collider.h" />
@@ -224,6 +229,9 @@
     <ClInclude Include="GameObject\Enemy\NormalEnt.h" />
     <ClInclude Include="GameObject\NPC\NPC.h" />
     <ClInclude Include="GameObject\NPC\Ogre.h" />
+    <ClInclude Include="GameObject\Gate.h" />
+    <ClInclude Include="Scene\MonsterScene.h" />
+    <ClInclude Include="Scene\NpcScene.h" />
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="GameObject\TextButtons.h" />
     <ClInclude Include="Ui\EnemyHpBarUi.h" />

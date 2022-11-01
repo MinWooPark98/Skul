@@ -3,6 +3,7 @@
 #include "../../Framework/ResourceMgr.h"
 #include "../../Scene/SceneMgr.h"
 #include "../TextObj.h"
+#include "../Player.h"
 
 Witch::Witch()
 	:NPC(Types::Witch)
@@ -23,4 +24,7 @@ void Witch::Init()
 
 void Witch::Activate()
 {
+	Scene* currScene = SCENE_MGR->GetCurrentScene();
+	Player* player = (Player*)currScene->FindGameObj("player");
+	player->SetNormalSpeed(player->GetNormalSpeed() * 1.5f);
 }

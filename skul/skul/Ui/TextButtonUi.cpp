@@ -34,6 +34,9 @@ void TextButtonUi::Init()
 	case Modes::Reward:
 		text.setString("Reward");
 		break;
+	case Modes::Gate:
+		text.setString("Gate");
+		break;
 	case Modes::Tile:
 		text.setString("Tile");
 		break;

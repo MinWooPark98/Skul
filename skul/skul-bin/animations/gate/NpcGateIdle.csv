@@ -1,0 +1,12 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+NpcGateIdle,1,10,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/gate/npcgate/idle.png,0,0,215,159,107.5,159,0,0
+graphics/gate/npcgate/idle.png,215,0,215,159,107.5,159,0,0
+graphics/gate/npcgate/idle.png,430,0,215,159,107.5,159,0,0
+graphics/gate/npcgate/idle.png,645,0,215,159,107.5,159,0,0
+graphics/gate/npcgate/idle.png,860,0,215,159,107.5,159,0,0
+graphics/gate/npcgate/idle.png,1075,0,215,159,107.5,159,0,0
+graphics/gate/npcgate/idle.png,1290,0,215,159,107.5,159,0,0
+graphics/gate/npcgate/idle.png,1505,0,215,159,107.5,159,0,0

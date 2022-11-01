@@ -20,7 +20,7 @@ void DisplayObj::Init()
 {
 	Object::Init();
 	displays.Init();
-	for (int i = 0; i < 6; ++i)
+	for (int i = 0; i < 7; ++i)
 	{
 		list<SpriteObj*>* objs = new list<SpriteObj*>;
 		objSeperated.push_back(objs);
@@ -116,6 +116,10 @@ void DisplayObj::Update(float dt)
 		case MapEditorScene::Modes::Reward:
 			layout[(int)MapEditorScene::Layer::Reward]->push_back(obj);
 			objSeperated[(int)MapEditorScene::Modes::Reward]->push_back(obj);
+			break;
+		case MapEditorScene::Modes::Gate:
+			layout[(int)MapEditorScene::Layer::Gate]->push_back(obj);
+			objSeperated[(int)MapEditorScene::Modes::Gate]->push_back(obj);
 			break;
 		}
 	}

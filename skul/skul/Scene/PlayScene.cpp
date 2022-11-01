@@ -17,9 +17,10 @@
 #include "../GameObject/NPC/Witch.h"
 #include "../GameObject/NPC/Ogre.h"
 #include "../GameObject/NPC/FoxHuman.h"
+#include "../GameObject/Gate.h"
 
-PlayScene::PlayScene()
-	:Scene(Scenes::Play)
+PlayScene::PlayScene(Scenes scene)
+	:Scene(scene)
 {
 }
 
@@ -40,7 +41,11 @@ void PlayScene::Init()
 	{
 		mapData.push_back(list<MapEditorDataMgr::MapData>());
 	}
-	ifstream ifs("playscene1.json");
+
+	if (mapFilePath.empty())
+		return;
+
+	ifstream ifs(mapFilePath);
 	if (ifs.fail())
 		return;
 	json jsonData;
@@ -83,6 +88,15 @@ void PlayScene::Init()
 				((SpriteObj*)obj)->SetTexture(*RESOURCE_MGR->GetTexture(filePath->Get(data.objName)));
 				((SpriteObj*)obj)->SetOrigin((Origins)data.origin);
 			}
+			break;
+		case MapEditorScene::Modes::Gate:
+			obj = new Gate();
+			if (data.objName == "gate_0")
+				((Gate*)obj)->SetType(Gate::Types::Monster);
+			else if (data.objName == "gate_1")
+				((Gate*)obj)->SetType(Gate::Types::NPC);
+			else if (data.objName == "gate_2")
+				((Gate*)obj)->SetType(Gate::Types::Boss);
 			break;
 		case MapEditorScene::Modes::Reward:
 			break;

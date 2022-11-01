@@ -9,9 +9,9 @@
 
 Player::Player()
 	:mainSkul(nullptr), subSkul(nullptr),
-	currState(States::None), isMoving(false), isDashing(false), isJumping(false), isAttacking(false), jumpingDown(false), dashAble(true), jumpCount(0),
+	currState(States::None), isMoving(false), isDashing(false), isJumping(false), isAttacking(false), jumpingDown(false), dashAble(true), jumpCount(0), jumpableCount(2),
 	dashTime(0.2f), dashTimer(0.f), doubleDashableTime(0.4f), doubleDashTimer(0.f), dashDelay(0.65f), dashDelayTimer(0.f), dashCount(0),
-	speed(200.f), lastDirX(1.f), attackDmg(25), totalHp(100), currHp(100), platform(nullptr)
+	speed(200.f), lastDirX(1.f), attackDmg(25), totalHp(100), currHp(100), platform(nullptr), normalSpeed(200.f), dashSpeed(400.f)
 {
 }
 
@@ -80,7 +80,7 @@ void Player::Update(float dt)
 		{
 			dashAble = false;
 			isDashing = false;
-			speed = 200.f;
+			speed = normalSpeed;
 			doubleDashTimer = 0.f;
 			if (currState != States::Attack)
 			{
@@ -114,11 +114,11 @@ void Player::Update(float dt)
 			sprite.setScale(-1, 1);
 		dashTimer = 0.f;
 		doubleDashTimer = 0.f;
-		speed = 400.f;
+		speed = dashSpeed;
 		++dashCount;
 	}
 
-	if (InputMgr::GetKeyDown(Keyboard::C) && jumpCount < 2)
+	if (InputMgr::GetKeyDown(Keyboard::C) && jumpCount < jumpableCount)
 	{
 		isJumping = true;
 		if (InputMgr::GetKey(Keyboard::Down))
@@ -176,7 +176,7 @@ void Player::Update(float dt)
 			else if (lastDirX < 0.f)
 				sprite.setScale(-1, 1);
 		}
-		speed = 200.f;
+		speed = normalSpeed;
 	}
 
 	if (!(Utils::EqualFloat(direction.x, 0.f)))

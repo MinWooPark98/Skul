@@ -10,6 +10,7 @@ FilePathTable::FilePathTable()
 	fileNames.push_back("tables/mapeditor/mapeditor_npc.csv");
 	fileNames.push_back("tables/mapeditor/mapeditor_player.csv");
 	fileNames.push_back("tables/mapeditor/mapeditor_reward.csv");
+	fileNames.push_back("tables/mapeditor/mapeditor_gate.csv");
 	fileNames.push_back("tables/mapeditor/mapeditor_tile.csv");
 }
 

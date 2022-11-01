@@ -1,0 +1,12 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+BossGateIdle,1,10,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/gate/bossgate/idle.png,0,0,221,158,110.5,158,0,0
+graphics/gate/bossgate/idle.png,221,0,221,158,110.5,158,0,0
+graphics/gate/bossgate/idle.png,442,0,221,158,110.5,158,0,0
+graphics/gate/bossgate/idle.png,663,0,221,158,110.5,158,0,0
+graphics/gate/bossgate/idle.png,884,0,221,158,110.5,158,0,0
+graphics/gate/bossgate/idle.png,1105,0,221,158,110.5,158,0,0
+graphics/gate/bossgate/idle.png,1326,0,221,158,110.5,158,0,0
+graphics/gate/bossgate/idle.png,1547,0,221,158,110.5,158,0,0

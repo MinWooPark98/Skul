@@ -10,7 +10,9 @@ enum class Scenes
 {
 	Title,
 	MapEditor,
-	Play,
+	MonsterScene,
+	NpcScene,
+	BossScene,
 };
 
 class UiMgr;
@@ -22,6 +24,7 @@ public:
 		BackGround,
 		BackObject,
 		Tile,
+		Gate,
 		Reward,
 		NPC,
 		Enemy,

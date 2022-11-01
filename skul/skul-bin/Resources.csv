@@ -129,3 +129,12 @@ animations/player/default/AttackA_no_head.csv,3
 animations/player/default/AttackB_no_head.csv,3
 animations/player/default/JumpAttack_no_head.csv,3
 graphics/player/default/head.png,0
+graphics/mapeditor/gate/gate_0.png,0
+graphics/mapeditor/gate/gate_1.png,0
+graphics/mapeditor/gate/gate_2.png,0
+graphics/gate/monstergate/idle.png,0
+graphics/gate/npcgate/idle.png,0
+graphics/gate/bossgate/idle.png,0
+animations/gate/MonsterGateIdle.csv,3
+animations/gate/NpcGateIdle.csv,3
+animations/gate/BossGateIdle.csv,3

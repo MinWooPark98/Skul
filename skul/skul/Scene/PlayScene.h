@@ -3,8 +3,11 @@
 
 class PlayScene : public Scene
 {
+protected:
+	string mapFilePath;
+
 public:
-	PlayScene();
+	PlayScene(Scenes scene);
 	virtual ~PlayScene();
 
 	virtual void Init() override;
@@ -17,5 +20,7 @@ public:
 
 	virtual void Enter() override;
 	virtual void Exit() override;
+
+	void SetMapFilePath(const string& path) { mapFilePath = path; }
 };
 

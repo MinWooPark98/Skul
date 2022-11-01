@@ -121,6 +121,20 @@ void MapEditorUiMgr::Init()
 				uiObjList.push_back(exTiles);
 			}
 			break;
+		case MapEditorScene::Modes::Gate:
+			{
+				text->SetName("GateTextButton");
+				ObjExampleUi* exTiles = new ObjExampleUi();
+				exTiles->SetName("GateExampleUi");
+				exTiles->SetTileNames("tables/mapeditor/gate.txt");
+				paths->SetObjType(FilePathTable::ObjTypes::Gate);
+				exTiles->Init();
+				exTiles->SetPos({ windowSize.x * 0.91f, windowSize.y * 0.45f });
+				text->ShowSelected = bind(&ObjExampleUi::SetActive, exTiles, true);
+				text->StopShowing = bind(&ObjExampleUi::Reset, exTiles);
+				uiObjList.push_back(exTiles);
+			}
+			break;
 		case MapEditorScene::Modes::Tile:
 			{
 				text->SetName("TileTextButton");

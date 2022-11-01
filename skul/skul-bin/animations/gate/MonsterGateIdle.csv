@@ -1,0 +1,12 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+MonsterGateIdle,1,10,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/gate/monstergate/idle.png,0,0,176,128,88,128,0,0
+graphics/gate/monstergate/idle.png,176,0,176,128,88,128,0,0
+graphics/gate/monstergate/idle.png,352,0,176,128,88,128,0,0
+graphics/gate/monstergate/idle.png,528,0,176,128,88,128,0,0
+graphics/gate/monstergate/idle.png,704,0,176,128,88,128,0,0
+graphics/gate/monstergate/idle.png,880,0,176,128,88,128,0,0
+graphics/gate/monstergate/idle.png,1056,0,176,128,88,128,0,0
+graphics/gate/monstergate/idle.png,1232,0,176,128,88,128,0,0

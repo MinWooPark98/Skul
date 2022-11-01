@@ -3,6 +3,7 @@
 #include "../../Framework/ResourceMgr.h"
 #include "../../Scene/SceneMgr.h"
 #include "../TextObj.h"
+#include "../Player.h"
 
 FoxHuman::FoxHuman()
 	:NPC(Types::FoxHuman)
@@ -23,4 +24,7 @@ void FoxHuman::Init()
 
 void FoxHuman::Activate()
 {
+	Scene* currScene = SCENE_MGR->GetCurrentScene();
+	Player* player = (Player*)currScene->FindGameObj("player");
+	player->SetAttackDmg(player->GetAttackDmg() * 1.5f);
 }
