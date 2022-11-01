@@ -25,6 +25,7 @@ protected:
 	Tiers tier;
 
 	Animator* animator;
+	Player* player;
 
 public:
 	Skul(Types type, Tiers tier);
@@ -53,11 +54,14 @@ public:
 
 	void OnCompleteAttackA();
 	void OnCompleteAttackB();
+	virtual void OnCompleteSkillA() {}
+	virtual void OnCompleteSkillB() {}
 	void OnCompleteAction();
 	function<void()> QuitAttackA;
 	function<void()> QuitAttackB;
 	function<void()> QuitAction;
 
+	virtual void SetPlayer(Player* player) { this->player = player; }
 	virtual void SetAnimEvent(Player* player) = 0;
 };
 

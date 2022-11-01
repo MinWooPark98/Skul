@@ -42,6 +42,7 @@ public:
 	virtual void SkillB() override;
 
 	virtual void SetAnimEvent(Player* player);
+	virtual void OnCompleteSkillA() override;
 
 	bool HeadOnCollision(const FloatRect& blockBound);
 };

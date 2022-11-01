@@ -4,6 +4,7 @@
 #include "../../Scene/SceneMgr.h"
 #include "../../Scene/PlayScene.h"
 #include "../SpriteObj.h"
+#include "../Enemy/Enemy.h"
 
 DefaultSkul::DefaultSkul()
 	:Skul(Types::Default, Tiers::Normal), head(nullptr), isHeadFlying(false), headSpeed(500.f), isHeadOn(true),
@@ -47,8 +48,6 @@ void DefaultSkul::Init()
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulAttackA_no_head"));
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulAttackB_no_head"));
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulJumpAttack_no_head"));
-	Scene* playScene = SCENE_MGR->GetCurrentScene();
-	Player* player = (Player*)playScene->FindGameObj("player");
 	{
 		AnimationEvent ev;
 		ev.clipId = "DefaultSkulFall";
@@ -116,6 +115,8 @@ void DefaultSkul::Update(float dt)
 		{
 			isHeadFlying = false;
 			flyingTimer = 0.f;
+			head->SetDirection({ 0.f, 0.f });
+			head->SetGravityApply(true);
 		}
 	}
 	else
@@ -131,22 +132,20 @@ void DefaultSkul::Update(float dt)
 		separateTimer += dt;
 		Scene* currScene = SCENE_MGR->GetCurrentScene();
 		if (separateTimer > separateTime)
-		{
-			isHeadOn = true;
-			separateTimer = 0.f;
-			head->SetActive(false);
-			head->SetDirection({ 0.f, 0.f });
-			Player* player = (Player*)currScene->FindGameObj("player");
-			player->SetState(Player::States::Idle);
-			animator->Play("DefaultSkulIdle");
-		}
+			OnCompleteSkillA();
+
 		auto& layOut = currScene->GetLayout();
 		if (!enemyCollided)
 		{
 			for (auto obj : *layOut[(int)Scene::Layer::Enemy])
 			{
+				if (!obj->GetActive())
+					continue;
 				if (HeadOnCollision(obj->GetHitBounds()))
+				{
 					enemyCollided = true;
+					((Enemy*)obj)->OnHit(40);
+				}
 			}
 		}
 		for (auto obj : *layOut[(int)Scene::Layer::Collider])
@@ -156,9 +155,11 @@ void DefaultSkul::Update(float dt)
 		}
 		if (head->GetDirection().y > 5.f)
 			head->SetDirection({ head->GetDirection().x, 5.f });
-		if(headSpeed > 0.f)
+
+		if (headSpeed > 0.f)
 			head->Rotate();
-		cout << headSpeed << endl;
+		else if (head->GetHitBounds().intersects(player->GetHitBounds()))
+			OnCompleteSkillA();
 		head->Translate(head->GetDirection() * headSpeed * dt);
 	}
 }
@@ -249,8 +250,6 @@ void DefaultSkul::FallRepeated()
 
 void DefaultSkul::SkillA()
 {
-	Scene* playScene = SCENE_MGR->GetCurrentScene();
-	Player* player = (Player*)playScene->FindGameObj("player");
 	if (isHeadOn)
 	{
 		isHeadOn = false;
@@ -269,20 +268,13 @@ void DefaultSkul::SkillA()
 
 void DefaultSkul::SkillB()
 {
-	Scene* playScene = SCENE_MGR->GetCurrentScene();
-	Player* player = (Player*)playScene->FindGameObj("player");
 	if (!isHeadOn)
 	{
-		isHeadOn = true;
-		isHeadFlying = false;
-		flyingTimer = 0.f;
-		separateTimer = 0.f;
-		head->SetDirection({ 0.f, 0.f });
-		head->SetActive(false);
+		OnCompleteSkillA();
 		player->SetPos({ head->GetPos().x, head->GetPos().y - player->GetHitBounds().height });
-		animator->Play("DefaultSkulIdle");
 	}
-	player->SetState(Player::States::Idle);
+	else
+		player->SetState(Player::States::Idle);
 }
 
 void DefaultSkul::SetAnimEvent(Player* player)
@@ -302,6 +294,18 @@ void DefaultSkul::SetAnimEvent(Player* player)
 	ev3.frame = 1;
 	ev3.onEvent = bind(&Player::MeleeAttack, player);
 	animator->AddEvent(ev3);
+}
+
+void DefaultSkul::OnCompleteSkillA()
+{
+	isHeadOn = true;
+	isHeadFlying = false;
+	flyingTimer = 0.f;
+	separateTimer = 0.f;
+	head->SetDirection({ 0.f, 0.f });
+	head->SetActive(false);
+	player->SetState(Player::States::Idle);
+	animator->Play("DefaultSkulIdle");
 }
 
 bool DefaultSkul::HeadOnCollision(const FloatRect& blockBound)

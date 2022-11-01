@@ -258,6 +258,7 @@ void Player::SwitchDevMode()
 void Player::SetSkul(Skul* skul)
 {
 	mainSkul = skul;
+	mainSkul->SetPlayer(this);
 	mainSkul->SetTarget(&sprite);
 	SetState(States::Idle);
 	mainSkul->QuitAttackA = bind(&Player::OnCompleteAttackA, this);
@@ -372,6 +373,8 @@ void Player::MeleeAttack()
 	auto& layOut = playScene->GetLayout();
 	for (auto enemy : *layOut[(int)Scene::Layer::Enemy])
 	{
+		if (!enemy->GetActive())
+			continue;
 		if (attackBox.getGlobalBounds().intersects(enemy->GetHitBounds()))
 			((Enemy*)enemy)->OnHit(attackDmg);
 	}
