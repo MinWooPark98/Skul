@@ -6,6 +6,7 @@
 #include "../Scene/SceneMgr.h"
 #include "Collider.h"
 #include "Enemy/Enemy.h"
+#include "../Framework/SoundMgr.h"
 
 Player::Player()
 	:mainSkul(nullptr), subSkul(nullptr),
@@ -23,7 +24,6 @@ void Player::Init()
 {
 	SpriteObj::Init();
 	SetName("player");
-	SetPos({ 1280.f / 2, 650.f });
 	direction = { 1.f, 0.f };
 	gravityApply = true;
 	gravity = 8.f;
@@ -49,6 +49,20 @@ void Player::Release()
 
 void Player::Reset()
 {
+	SpriteObj::Reset();
+	isMoving = false;
+	isDashing = false;
+	isJumping = false;
+	isAttacking = false;
+	speed = normalSpeed;
+	currHp = totalHp;
+	dashTimer = 0.f;
+	dashCount = 0;
+	doubleDashTimer = 0.f;
+	dashDelayTimer = 0.f;
+	jumpCount = 0;
+	platform = nullptr;
+	SetPos(startPos);
 }
 
 void Player::Update(float dt)
@@ -378,17 +392,22 @@ void Player::MeleeAttack()
 		if (!enemy->GetActive())
 			continue;
 		if (attackBox.getGlobalBounds().intersects(enemy->GetHitBounds()))
+		{
 			((Enemy*)enemy)->OnHit(attackDmg);
+			SOUND_MGR->Play("sound/Hit.wav");
+		}
 	}
 }
 
 void Player::OnHit(int dmg)
 {
-	if (currState != States::Dash)
-		currHp -= dmg;
+	if (currState == States::Dash)
+		return;
+	currHp -= dmg;
 		
 	if (currHp <= 0)
 	{
+		SOUND_MGR->Play("sound/Dead.wav");
 		SetActive(false);
 		return;
 	}

@@ -3,6 +3,8 @@
 #include "../Framework/Framework.h"
 #include "../Ui/UiMgr.h"
 #include "../Framework/InputMgr.h"
+#include "../Scene/SceneMgr.h"
+#include "../Framework/SoundMgr.h"
 
 Scene::Scene(Scenes type)
 	: type(type), uiMgr(nullptr), isPause(false)
@@ -28,6 +30,11 @@ void Scene::Enter()
 {
 }
 
+void Scene::Exit()
+{
+	SOUND_MGR->StopAll();
+}
+
 void Scene::Update(float dt)
 {
 	Vector2f mousePos = InputMgr::GetMousePos();
@@ -41,6 +48,8 @@ void Scene::Update(float dt)
 			obj->Update(dt);
 		}
 	}
+	if (InputMgr::GetKeyDown(Keyboard::Escape))
+		SCENE_MGR->ChangeScene(Scenes::Title);
 }
 
 void Scene::Draw(RenderWindow& window)

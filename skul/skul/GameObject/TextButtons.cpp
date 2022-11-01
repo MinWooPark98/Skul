@@ -3,6 +3,7 @@
 #include "../Framework/ResourceMgr.h"
 #include "../Framework/Utils.h"
 #include "../Framework/InputMgr.h"
+#include "../Framework/SoundMgr.h"
 
 TextButtons::TextButtons()
 	:vecIdx(0), textSize(30), buttonDistance(0.f)
@@ -11,6 +12,28 @@ TextButtons::TextButtons()
 
 TextButtons::~TextButtons()
 {
+	Release();
+}
+
+void TextButtons::Release()
+{
+	for (auto button : buttons)
+	{
+		delete button;
+		button = nullptr;
+	}
+	buttons.clear();
+}
+
+void TextButtons::Reset()
+{
+	Object::Reset();
+	if (!buttons.empty())
+	{
+		buttons[vecIdx]->SetFillColor({ 255, 255, 255, 150 });
+		vecIdx = 0;
+		buttons[vecIdx]->SetFillColor({ 255, 255, 255, 255 });
+	}
 }
 
 void TextButtons::AddButton(const string& text)
@@ -20,6 +43,7 @@ void TextButtons::AddButton(const string& text)
 	newButton->SetFont(*RESOURCE_MGR->GetFont("fonts/NotoSansKR-Bold.otf"));
 	newButton->SetSize(textSize);
 	newButton->SetText(text);
+	newButton->AsciiToUnicode();
 	newButton->SetOrigin(Origins::MC);
 	newButton->SetPos({ position.x, position.y + (textSize + buttonDistance) * buttons.size() });
 	if (buttons.empty())
@@ -46,12 +70,14 @@ void TextButtons::Update(float dt)
 		buttons[vecIdx]->SetFillColor({ 255, 255, 255, 150 });
 		vecIdx -= 1;
 		buttons[vecIdx]->SetFillColor({ 255, 255, 255, 255 });
+		SOUND_MGR->Play("sound/Select.wav");
 	}
 	else if (InputMgr::GetKeyDown(Keyboard::Down) && vecIdx < buttons.size() - 1)
 	{
 		buttons[vecIdx]->SetFillColor({ 255, 255, 255, 150 });
 		vecIdx += 1;
 		buttons[vecIdx]->SetFillColor({255, 255, 255, 255});
+		SOUND_MGR->Play("sound/Select.wav");
 	}
 }
 

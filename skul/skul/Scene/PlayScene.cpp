@@ -18,6 +18,10 @@
 #include "../GameObject/NPC/Ogre.h"
 #include "../GameObject/NPC/FoxHuman.h"
 #include "../GameObject/Gate.h"
+#include "../Scene/SceneMgr.h"
+#include "../GameObject/PlayerDataStorage.h"
+#include "../Framework/SoundMgr.h"
+#include "../Ui/UiMgr.h"
 
 PlayScene::PlayScene(Scenes scene)
 	:Scene(scene)
@@ -36,14 +40,14 @@ void PlayScene::Init()
 		layOut.push_back(objects);
 	}
 
+	if (mapFilePath.empty())
+		return;
+
 	vector<list<MapEditorDataMgr::MapData>> mapData;
 	for (int i = 0; i < 3; ++i)
 	{
 		mapData.push_back(list<MapEditorDataMgr::MapData>());
 	}
-
-	if (mapFilePath.empty())
-		return;
 
 	ifstream ifs(mapFilePath);
 	if (ifs.fail())
@@ -73,7 +77,7 @@ void PlayScene::Init()
 	grid->Load(mapData[0]);
 	layOut[(int)Layer::Tile]->push_back(grid);
 	objList.push_back(grid);
-	
+
 	for (auto& data : mapData[1])
 	{
 		Object* obj = nullptr;
@@ -116,11 +120,13 @@ void PlayScene::Init()
 					obj = new SwordsMan();
 				else if (data.objName == "enemy_5")
 					obj = new NormalEnt();
+				((Enemy*)obj)->SetStartPos({ data.xPos, data.yPos });
 			}
 			break;
 		case MapEditorScene::Modes::Player:
 			{
 				obj = new Player();
+				((Player*)obj)->SetStartPos({ data.xPos, data.yPos });
 
 				Skul* skul = new DefaultSkul();
 				skul->Init();
@@ -161,7 +167,12 @@ void PlayScene::Release()
 
 void PlayScene::Reset()
 {
-	Scene::Reset();
+	for (auto obj : objList)
+	{
+		obj->Reset();
+	}
+	if (uiMgr != nullptr)
+		uiMgr->Reset();
 }
 
 void PlayScene::Update(float dt)
@@ -207,13 +218,12 @@ void PlayScene::Draw(RenderWindow& window)
 				obj->Draw(window);
 		}
 	}
-	/*window.setView(uiView);
-	uiMgr->Draw(window);*/
 }
 
 void PlayScene::Enter()
 {
 	Scene::Enter();
+	Reset();
 
 	Vector2i size = FRAMEWORK->GetWindowSize();
 
@@ -221,8 +231,11 @@ void PlayScene::Enter()
 
 	uiView.setSize(size.x * 0.5f, size.y * 0.5f);
 	uiView.setCenter(size.x * 0.25f, size.y * 0.25f);
+	SOUND_MGR->Play("sound/PlayScene.wav", true);
 }
 
 void PlayScene::Exit()
 {
+	Scene::Exit();
+	SCENE_MGR->GetPlayerDataStorage()->Save();
 }

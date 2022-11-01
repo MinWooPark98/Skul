@@ -9,6 +9,17 @@ PlaySceneGrid::PlaySceneGrid()
 
 PlaySceneGrid::~PlaySceneGrid()
 {
+	Release();
+}
+
+void PlaySceneGrid::Release()
+{
+	for (auto tile : grid)
+	{
+		delete tile;
+		tile = nullptr;
+	}
+	grid.clear();
 }
 
 void PlaySceneGrid::Load(const list<MapEditorDataMgr::MapData>& data)

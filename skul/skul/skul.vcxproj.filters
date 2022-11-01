@@ -198,10 +198,16 @@
     <ClCompile Include="Scene\BossScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Ui\MonsterSceneUiMgr.cpp">
+    <ClCompile Include="Ui\PlaySceneUiMgr.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Ui\PlayerUi.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Ui\GameOverUi.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\PlayerDataStorage.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -395,10 +401,16 @@
     <ClInclude Include="Scene\BossScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Ui\MonsterSceneUiMgr.h">
+    <ClInclude Include="Ui\PlaySceneUiMgr.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Ui\PlayerUi.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Ui\GameOverUi.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\PlayerDataStorage.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

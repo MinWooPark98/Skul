@@ -11,6 +11,8 @@ public:
 	PlaySceneGrid();
 	virtual ~PlaySceneGrid();
 
+	virtual void Release() override;
+
 	virtual void Draw(RenderWindow& window) override;
 	void Load(const list<MapEditorDataMgr::MapData>& data);
 };

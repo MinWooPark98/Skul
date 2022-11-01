@@ -20,11 +20,13 @@ void Ogre::Init()
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("OgreIdle"));
 	animator->Play("OgreIdle");
 	SetHitBox({ 0.f, 0.f, 227.f, 151.f });
+	effectLimitCnt = 2;
 }
 
 void Ogre::Activate()
 {
 	Scene* currScene = SCENE_MGR->GetCurrentScene();
 	Player* player = (Player*)currScene->FindGameObj("player");
-	player->SetJumpableCount(player->SetJumpableCount() + 1);
+	player->SetJumpableCount(player->GetJumpableCount() + 1);
+	++effectCnt;
 }

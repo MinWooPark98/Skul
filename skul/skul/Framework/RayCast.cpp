@@ -33,6 +33,9 @@ void RayCast::Update(float dt)
 			continue;
 		for (auto& obj : *layOut[i])
 		{
+			if (!obj->GetActive())
+				return;
+
 			auto targetBound = obj->GetHitBounds();
 
 			float targetLeft = targetBound.left;

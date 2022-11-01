@@ -42,7 +42,12 @@ void Enemy::Release()
 
 void Enemy::Reset()
 {
+	SpriteObj::Reset();
 	playerDetected = false;
+	currHp = totalHp;
+	if(hpBar != nullptr)
+		hpBar->Reset();
+	SetPos(startPos);
 }
 
 void Enemy::Update(float dt)

@@ -6,7 +6,7 @@
 #include "../../Framework/InputMgr.h"
 
 NPC::NPC(Types type)
-	:type(type), animator(nullptr), activate(nullptr)
+	:type(type), animator(nullptr), activate(nullptr), effectLimitCnt(0), effectCnt(0)
 {
 }
 
@@ -31,6 +31,11 @@ void NPC::Init()
 	activate->SetOrigin(Origins::TC);
 }
 
+void NPC::Reset()
+{
+	effectCnt = 0;
+}
+
 void NPC::Release()
 {
 	SpriteObj::Release();
@@ -47,7 +52,7 @@ void NPC::Update(float dt)
 	if (player->GetHitBounds().intersects(GetHitBounds()))
 	{
 		activate->SetActive(true);
-		if (InputMgr::GetKeyDown(Keyboard::F))
+		if (InputMgr::GetKeyDown(Keyboard::F) && effectCnt < effectLimitCnt)
 			Activate();
 	}
 	else

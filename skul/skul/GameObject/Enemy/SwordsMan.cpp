@@ -6,6 +6,7 @@
 #include "../../Scene/SceneMgr.h"
 #include "../Player.h"
 #include "../../Ui/EnemyHpBarUi.h"
+#include "../../Framework/SoundMgr.h"
 
 SwordsMan::SwordsMan()
 	:Enemy(Types::SwordsMan), detectingRay(nullptr), detectRange(320.f), attackRange(50.f), lastDirX(1.f), speed(0.f), normalSpeed(100.f), chasingSpeed(150.f),
@@ -178,6 +179,7 @@ void SwordsMan::SetState(States newState)
 		break;
 	case Enemy::States::Attack:
 		animator->Play("SwordsManAttack");
+		SOUND_MGR->Play("sound/Atk_Sword.wav");
 		break;
 	case Enemy::States::Hit:
 		animator->Play("SwordsManHit");
@@ -194,6 +196,8 @@ void SwordsMan::MeleeAttack()
 	Scene* playScene = SCENE_MGR->GetCurrentScene();
 	Player* player = (Player*)playScene->FindGameObj("player");
 	attackTimer = 0.f;
+	if (!player->GetActive())
+		return;
 	if (attackBox.getGlobalBounds().intersects(player->GetHitBounds()))
 		player->OnHit(attackDmg);
 }

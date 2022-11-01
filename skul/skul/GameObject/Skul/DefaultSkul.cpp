@@ -5,6 +5,7 @@
 #include "../../Scene/PlayScene.h"
 #include "../SpriteObj.h"
 #include "../Enemy/Enemy.h"
+#include "../../Framework/SoundMgr.h"
 
 DefaultSkul::DefaultSkul()
 	:Skul(Types::Default, Tiers::Normal), head(nullptr), isHeadFlying(false), headSpeed(500.f), isHeadOn(true),
@@ -201,6 +202,7 @@ void DefaultSkul::Move()
 
 void DefaultSkul::Dash()
 {
+	Skul::Dash();
 	if (isHeadOn)
 		animator->Play("DefaultSkulDash");
 	else
@@ -209,6 +211,7 @@ void DefaultSkul::Dash()
 
 void DefaultSkul::Jump()
 {
+	Skul::Jump();
 	if (isHeadOn)
 		animator->Play("DefaultSkulJump");
 	else
@@ -217,6 +220,7 @@ void DefaultSkul::Jump()
 
 void DefaultSkul::AttackA()
 {
+	Skul::AttackA();
 	if (isHeadOn)
 		animator->Play("DefaultSkulAttackA");
 	else
@@ -225,6 +229,7 @@ void DefaultSkul::AttackA()
 
 void DefaultSkul::AttackB()
 {
+	Skul::AttackB();
 	if (isHeadOn)
 		animator->Play("DefaultSkulAttackB");
 	else
@@ -233,6 +238,7 @@ void DefaultSkul::AttackB()
 
 void DefaultSkul::JumpAttack()
 {
+	Skul::JumpAttack();
 	if (isHeadOn)
 		animator->Play("DefaultSkulJumpAttack");
 	else
@@ -268,6 +274,7 @@ void DefaultSkul::SkillA()
 		head->SetPos({ player->GetPos().x, player->GetPos().y - player->GetHitBounds().height });
 		head->SetDirection({ player->GetLastDirX(), 0.f });
 		animator->Play("DefaultSkulSkillA");
+		SOUND_MGR->Play("sound/Atk_Throw.wav");
 		return;
 	}
 	player->SetState(Player::States::Idle);
@@ -279,6 +286,7 @@ void DefaultSkul::SkillB()
 	{
 		OnCompleteSkillA();
 		player->SetPos({ head->GetPos().x, head->GetPos().y - player->GetHitBounds().height });
+		SOUND_MGR->Play("sound/Skul_Reborn.wav");
 	}
 	else
 		player->SetState(Player::States::Idle);

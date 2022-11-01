@@ -21,11 +21,15 @@ protected:
 
 	TextObj* activate;
 
+	int effectLimitCnt;
+	int effectCnt;
+
 public:
 	NPC(Types type);
 	virtual ~NPC();
 
 	virtual void Init() override;
+	virtual void Reset() override;
 	virtual void Release() override;
 	virtual void Update(float dt) override;
 	virtual void Draw(RenderWindow& window) override;

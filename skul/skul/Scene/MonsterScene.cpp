@@ -1,5 +1,5 @@
 #include "MonsterScene.h"
-#include "../Ui/MonsterSceneUiMgr.h"
+#include "../Ui/PlaySceneUiMgr.h"
 
 MonsterScene::MonsterScene()
 	:PlayScene(Scenes::MonsterScene)
@@ -14,7 +14,7 @@ MonsterScene::~MonsterScene()
 void MonsterScene::Init()
 {
 	PlayScene::Init();
-	uiMgr = new MonsterSceneUiMgr();
+	uiMgr = new PlaySceneUiMgr(this);
 	uiMgr->Init();
 }
 

@@ -11,6 +11,7 @@
 #include "../GameObject/DisplayCollider.h"
 #include "../GameObject/MapEditorDataMgr.h"
 #include "../Ui/SaveLoadUi.h"
+#include "../Framework/SoundMgr.h"
 
 MapEditorScene::MapEditorScene()
 	:Scene(Scenes::MapEditor), mode(Modes::None), dataMgr(nullptr), saveLoadUi(nullptr), canvas(nullptr)
@@ -154,10 +155,13 @@ void MapEditorScene::Enter()
 
 	uiView.setSize(size.x, size.y);
 	uiView.setCenter(size.x * 0.5f, size.y * 0.5f);
+
+	SOUND_MGR->Play("sound/MapEditorScene.wav", true);
 }
 
 void MapEditorScene::Exit()
 {
+	Reset();
 }
 
 void MapEditorScene::ChangeMode(int modeNum)

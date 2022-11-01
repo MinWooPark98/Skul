@@ -20,6 +20,7 @@ public:
 	void SetEnemy(const Enemy* enemy);
 
 	void Init();
+	void Reset();
 	void Update();
 	void Draw(RenderWindow& window);
 	void SetPos(const Vector2f& pos);

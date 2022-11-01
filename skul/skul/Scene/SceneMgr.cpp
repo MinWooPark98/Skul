@@ -4,6 +4,7 @@
 #include "MonsterScene.h"
 #include "NpcScene.h"
 #include "BossScene.h"
+#include "../GameObject/PlayerDataStorage.h"
 
 bool SceneMgr::Init()
 {
@@ -18,6 +19,8 @@ bool SceneMgr::Init()
     {
         pair.second->Init();
     }
+
+    playerData = new PlayerDataStorage();
 
     sceneMap[currScene]->Enter();
 

@@ -44,6 +44,9 @@ protected:
 
 	int attackDmg;
 
+	// юс╫ц
+	Vector2f startPos;
+
 public:
 	Enemy(Types type);
 	virtual ~Enemy();
@@ -60,6 +63,8 @@ public:
 
 	virtual void SetState(States newState) = 0;
 	void SetPlayerDetected(bool detected) { playerDetected = detected; }
+
+	void SetStartPos(const Vector2f& pos) { startPos = pos; }
 	
 	int GetTotalHp() const { return totalHp; }
 	int GetCurrHp() const { return currHp; }

@@ -62,6 +62,9 @@ protected:
 
 	Object* platform;
 
+	// юс╫ц
+	Vector2f startPos;
+
 public:
 	Player();
 	virtual ~Player();
@@ -80,18 +83,27 @@ public:
 	void SetState(States newState);
 	void SetBoxes();
 
+	void SetTotalHp(int hp) { totalHp = hp; }
+	int GetTotalHp() const { return totalHp; }
+	void SetCurrHp(int hp) { currHp = hp; }
+	int GetCurrHp() const { return currHp; }
+	float GetHpRatio() const { return (float)currHp / totalHp; }
+
 	void SetNormalSpeed(float speed) { normalSpeed = speed; }
 	float GetNormalSpeed() const { return normalSpeed; }
 	void SetDashSpeed(float speed) { dashSpeed = speed; }
 	float GetDashSpeed() const { return dashSpeed; }
+
 	void SetJumpableCount(int count) { jumpableCount = count; }
-	int SetJumpableCount() const { return jumpableCount; }
+	int GetJumpableCount() const { return jumpableCount; }
+
 	void SetAttackDmg(int dmg) { attackDmg = dmg; }
 	int GetAttackDmg() const { return attackDmg; }
-	float GetHpRatio() const { return (float)currHp / totalHp; }
 
 	void OnCompleteAttackA();
 	void OnCompleteAttackB();
+
+	void SetStartPos(const Vector2f& pos) { startPos = pos; }
 
 	const Vector2f& GetDirection() const { return direction; }
 	float GetLastDirX() const { return lastDirX; }

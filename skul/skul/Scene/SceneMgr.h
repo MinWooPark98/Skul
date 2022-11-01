@@ -4,6 +4,8 @@
 #include <map>
 #include "../3rd/Singleton.h"
 
+class PlayerDataStorage;
+
 using namespace sf;
 using namespace std;
 
@@ -12,6 +14,8 @@ class SceneMgr : public Singleton<SceneMgr>
 private:
 	map<Scenes, Scene*> sceneMap;
 	Scenes currScene;
+
+	PlayerDataStorage* playerData;
 
 public:
 	bool Init();
@@ -23,6 +27,7 @@ public:
 	void Update(float dt);
 	void Draw(RenderWindow& window);
 
+	PlayerDataStorage* GetPlayerDataStorage() { return playerData; }
 };
 
 #define SCENE_MGR (SceneMgr::GetInstance())

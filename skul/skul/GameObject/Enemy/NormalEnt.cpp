@@ -6,6 +6,7 @@
 #include "../../Scene/SceneMgr.h"
 #include "../Player.h"
 #include "../../Ui/EnemyHpBarUi.h"
+#include "../../Framework/SoundMgr.h"
 
 NormalEnt::NormalEnt()
 	:Enemy(Types::NormalEnt), detectingRay(nullptr), detectRange(160.f), attackRange(40.f), lastDirX(1.f), speed(0.f), normalSpeed(60.f), chasingSpeed(100.f),
@@ -102,9 +103,12 @@ void NormalEnt::Update(float dt)
 		Player* player = (Player*)currScene->FindGameObj("player");
 		if (player->GetPlatform() == platform)
 		{
-			speed = chasingSpeed;
-			if (fabs(player->GetPos().x - position.x) >= player->GetHitBounds().width * 0.5f)
-				direction.x = Utils::UnitizationFloat((player->GetPos().x) - position.x);
+			if (player->GetActive())
+			{
+				speed = chasingSpeed;
+				if (fabs(player->GetPos().x - position.x) >= player->GetHitBounds().width * 0.5f)
+					direction.x = Utils::UnitizationFloat((player->GetPos().x) - position.x);
+			}
 		}
 		else
 		{
@@ -178,6 +182,7 @@ void NormalEnt::SetState(States newState)
 		break;
 	case Enemy::States::Attack:
 		animator->Play("NormalEntAttack");
+		SOUND_MGR->Play("sound/Atk_Stomp.wav");
 		break;
 	case Enemy::States::Hit:
 		animator->Play("NormalEntHit");
@@ -194,6 +199,8 @@ void NormalEnt::MeleeAttack()
 	Scene* playScene = SCENE_MGR->GetCurrentScene();
 	Player* player = (Player*)playScene->FindGameObj("player");
 	attackTimer = 0.f;
+	if (!player->GetActive())
+		return;
 	if (attackBox.getGlobalBounds().intersects(player->GetHitBounds()))
 		player->OnHit(attackDmg);
 }

@@ -4,6 +4,7 @@
 
 Tile::~Tile()
 {
+	Release();
 }
 
 void Tile::Init()
@@ -12,6 +13,13 @@ void Tile::Init()
 	tile->setFillColor({ 255, 255, 255, 255 });
 	tile->setOutlineColor({ 0, 0, 0, 255 });
 	tile->setOutlineThickness(2.f);
+}
+
+void Tile::Release()
+{
+	if (tile != nullptr)
+		delete tile;
+	tile = nullptr;
 }
 
 void Tile::Reset()

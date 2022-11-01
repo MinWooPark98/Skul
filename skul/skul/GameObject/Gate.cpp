@@ -100,7 +100,8 @@ void Gate::Activate()
 		SCENE_MGR->ChangeScene(Scenes::NpcScene);
 		break;
 	case Gate::Types::Boss:
-		SCENE_MGR->ChangeScene(Scenes::BossScene);
+		// º¸½º ¸Ê ¾øÀ½
+		SCENE_MGR->ChangeScene(Scenes::Title);
 		break;
 	default:
 		break;

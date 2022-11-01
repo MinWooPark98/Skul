@@ -25,6 +25,11 @@ void EnemyHpBarUi::Init()
 	
 }
 
+void EnemyHpBarUi::Reset()
+{
+	currHpBar.setSize(totalHpBar.getSize());
+}
+
 void EnemyHpBarUi::Update()
 {
 	Vector2f totalHpBarSize = totalHpBar.getSize();

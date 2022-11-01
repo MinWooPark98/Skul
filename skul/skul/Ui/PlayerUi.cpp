@@ -32,6 +32,11 @@ void PlayerUi::Init()
 
 void PlayerUi::Update(float dt)
 {
+	if (!player->GetActive())
+	{
+		currHpBar.setSize({ 0.f, 0.f });
+		return;
+	}
 	currHpBar.setSize({ 120.f * player->GetHpRatio(), 9.f });
 }
 

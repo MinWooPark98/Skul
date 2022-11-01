@@ -1,7 +1,7 @@
 id,"type(0: Texture, 1: Font, 2: Sound, 3: Animation Clip)"
 fonts/NotoSansKR-Bold.otf,1
-sound/normal_bgm.wav,2
-sound/select.wav,2
+sound/MainTitle.wav,2
+sound/PlayScene.wav,2
 graphics/mapeditor/tile/0_Tile01_0.png,0
 graphics/mapeditor/tile/0_Tile01_1.png,0
 graphics/mapeditor/tile/0_Tile01_2.png,0
@@ -143,3 +143,17 @@ graphics/player/player_ui_frame.png,0
 graphics/player/player_skill2_frame.png,0
 graphics/player/default/skull_throw.png,0
 graphics/player/default/rebone.png,0
+graphics/popup_frame.png,0
+sound/MapEditorScene.wav,2
+sound/Skul_Atk_0.wav,2
+sound/Skul_Atk_1.wav,2
+sound/Dash.wav,2
+sound/Skul_Jump_Atk.wav,2
+sound/Jump.wav,2
+sound/Atk_Throw.wav,2
+sound/Skul_Reborn.wav,2
+sound/Dead.wav,2
+sound/Select.wav,2
+sound/Atk_Sword.wav,2
+sound/Atk_Stomp.wav,2
+sound/Hit.wav,2

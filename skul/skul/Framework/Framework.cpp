@@ -66,10 +66,6 @@ bool Framework::Do()
         {
             window.close();
         }
-        if (InputMgr::GetKeyDown(Keyboard::Escape))
-        {
-            window.close();
-        }
 
         SCENE_MGR->Update(dt);
         SOUND_MGR->Update();

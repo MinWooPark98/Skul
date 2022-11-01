@@ -1,7 +1,8 @@
 #include "Skul.h"
+#include "../../Framework/SoundMgr.h"
 
 Skul::Skul(Types type, Tiers tier)
-	:type(type), tier(tier), animator(nullptr), player(nullptr), symbol(nullptr)
+	:type(type), tier(tier), animator(nullptr), player(nullptr), symbol(nullptr), skillAIcon(nullptr), skillBIcon(nullptr)
 {
 }
 
@@ -50,4 +51,29 @@ void Skul::OnCompleteAction()
 {
 	if (QuitAction != nullptr)
 		QuitAction();
+}
+
+void Skul::Dash()
+{
+	SOUND_MGR->Play("sound/Dash.wav");
+}
+
+void Skul::Jump()
+{
+	SOUND_MGR->Play("sound/Jump.wav");
+}
+
+void Skul::AttackA()
+{
+	SOUND_MGR->Play("sound/Skul_Atk_0.wav");
+}
+
+void Skul::AttackB()
+{
+	SOUND_MGR->Play("sound/Skul_Atk_1.wav");
+}
+
+void Skul::JumpAttack()
+{
+	SOUND_MGR->Play("sound/Skul_Jump_Atk.wav");
 }
