@@ -71,10 +71,9 @@ void SwordsMan::Update(float dt)
 		attackBox.setSize({ 0.f, 0.f });
 	Utils::SetOrigin(hitbox, Origins::BC);
 	attackBox.setPosition(position);
-
 	FloatRect hitBound = hitbox.getGlobalBounds();
 	detectingRay->SetStartPos({ hitBound.left + hitBound.width * 0.5f, hitBound.top + hitBound.height * 0.5f });
-	detectingRay->SetDirection(direction);
+	detectingRay->SetDirection({ lastDirX, 0.f });
 	detectingRay->Update(dt);
 
 	attackTimer += dt;
@@ -118,17 +117,14 @@ void SwordsMan::Update(float dt)
 				{
 				case 0:
 					direction.x = -1.f;
-					lastDirX = direction.x;
 					break;
 				case 1:
 					direction.x = 1.f;
-					lastDirX = direction.x;
 					break;
 				default:
 					direction.x = 0.f;
 					break;
 				}
-				detectingRay->SetDirection({ lastDirX, 0.f });
 				changeDirTimer = 0.f;
 			}
 		}
@@ -151,6 +147,8 @@ void SwordsMan::Update(float dt)
 		else if (direction.x < 0.f)
 			sprite.setScale(-1, 1);
 	}
+	if (!Utils::EqualFloat(direction.x, 0.f))
+		lastDirX = direction.x;
 	hpBar->SetPos(position);
 }
 

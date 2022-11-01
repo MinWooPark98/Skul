@@ -74,7 +74,7 @@ void NormalEnt::Update(float dt)
 
 	FloatRect hitBound = hitbox.getGlobalBounds();
 	detectingRay->SetStartPos({ hitBound.left + hitBound.width * 0.5f, hitBound.top + hitBound.height * 0.6f });
-	detectingRay->SetDirection(direction);
+	detectingRay->SetDirection({ lastDirX, 0.f });
 	detectingRay->Update(dt);
 	
 	attackTimer += dt;
@@ -121,17 +121,14 @@ void NormalEnt::Update(float dt)
 				{
 				case 0:
 					direction.x = -1.f;
-					lastDirX = direction.x;
 					break;
 				case 1:
 					direction.x = 1.f;
-					lastDirX = direction.x;
 					break;
 				default:
 					direction.x = 0.f;
 					break;
 				}
-				detectingRay->SetDirection({ lastDirX, 0.f });
 				changeDirTimer = 0.f;
 			}
 		}
@@ -154,6 +151,8 @@ void NormalEnt::Update(float dt)
 		else if (direction.x < 0.f)
 			sprite.setScale(-1, 1);
 	}
+	if (!Utils::EqualFloat(direction.x, 0.f))
+		lastDirX = direction.x;
 	hpBar->SetPos(position);
 }
 
