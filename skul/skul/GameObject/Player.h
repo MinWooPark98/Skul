@@ -3,6 +3,7 @@
 #include <functional>
 
 class Skul;
+class SkulSet;
 class RayCast;
 
 class Player : public SpriteObj
@@ -25,12 +26,13 @@ protected:
 	Skul* mainSkul;
 	Skul* subSkul;
 
+	SkulSet* skulSet;
+
 	vector<RayCast*> rays;
 
 	States currState;
 
-	float normalSpeed;
-	float dashSpeed;
+	float speed;
 
 	bool isMoving;
 	bool isDashing;
@@ -44,6 +46,7 @@ protected:
 	float dashDelay;
 	float dashDelayTimer;
 	int dashCount;
+	int dashableCount;
 	bool dashAble;
 	
 	int jumpCount;
@@ -51,7 +54,7 @@ protected:
 
 	bool isAttacking;
 
-	float speed;
+	float currSpeed;
 	float lastDirX;
 
 	RectangleShape attackBox;
@@ -63,6 +66,9 @@ protected:
 	Object* platform;
 
 	// юс╫ц
+	float speedAdd;
+	int attackAdd;
+
 	Vector2f startPos;
 
 public:
@@ -77,9 +83,12 @@ public:
 	virtual void Update(float dt) override;
 	virtual void Draw(RenderWindow& window) override;
 
+	virtual void SetPos(const Vector2f& pos);
+
 	virtual void SwitchDevMode() override;
 
-	void SetSkul(Skul* skul);
+	void SetMainSkul(Skul* skul);
+	void SwitchSkul();
 	void SetState(States newState);
 	void SetBoxes();
 
@@ -89,16 +98,19 @@ public:
 	int GetCurrHp() const { return currHp; }
 	float GetHpRatio() const { return (float)currHp / totalHp; }
 
-	void SetNormalSpeed(float speed) { normalSpeed = speed; }
-	float GetNormalSpeed() const { return normalSpeed; }
-	void SetDashSpeed(float speed) { dashSpeed = speed; }
-	float GetDashSpeed() const { return dashSpeed; }
-
 	void SetJumpableCount(int count) { jumpableCount = count; }
 	int GetJumpableCount() const { return jumpableCount; }
 
+	void SetSpeed(float speed) { this->speed = speed; }
+	float GetSpeed() const { return speed; }
 	void SetAttackDmg(int dmg) { attackDmg = dmg; }
 	int GetAttackDmg() const { return attackDmg; }
+
+	void ResetStat();
+
+	void SetSpeedAdd(float add) { speedAdd = add; }
+	void SetAttackAdd(int add) { attackAdd = add; }
+	void BuffApply();
 
 	void OnCompleteAttackA();
 	void OnCompleteAttackB();
@@ -115,7 +127,8 @@ public:
 	function<void()> ResetPlayerUi;
 
 	RectangleShape& GetAttackBox() { return attackBox; }
-	void MeleeAttack();
+	void MeleeAttack(int dmg);
+	void NormalAttack() { MeleeAttack(attackDmg); }
 	void OnHit(int dmg);
 };
 

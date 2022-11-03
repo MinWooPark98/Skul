@@ -1,6 +1,5 @@
 #pragma once
 #include "Skul.h"
-#include <functional>
 
 class SpriteObj;
 
@@ -27,7 +26,10 @@ public:
 	virtual void Update(float dt) override;
 	virtual void Draw(RenderWindow& window) override;
 
+	virtual void SetDevMode(bool mode) override;
 	virtual void SwitchDevMode() override;
+
+	virtual void SwitchSkul() override;
 
 	virtual void Idle() override;
 	virtual void Move() override;
@@ -41,7 +43,7 @@ public:
 	virtual void SkillA() override;
 	virtual void SkillB() override;
 
-	virtual void SetAnimEvent(Player* player);
+	virtual void SetAnimEvent();
 	virtual void OnCompleteSkillA() override;
 
 	bool HeadOnCollision(const FloatRect& blockBound);

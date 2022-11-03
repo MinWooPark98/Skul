@@ -8,7 +8,7 @@
 #include "../../Framework/SoundMgr.h"
 
 DefaultSkul::DefaultSkul()
-	:Skul(Types::Default, Tiers::Normal), head(nullptr), isHeadFlying(false), headSpeed(500.f), isHeadOn(true),
+	:Skul(OffensiveTypes::Balance, Types::Default, Tiers::Normal), head(nullptr), isHeadFlying(false), headSpeed(500.f), isHeadOn(true),
 	flyingDuration(0.8f), flyingTimer(0.f), separateTime(2.f), separateTimer(0.f), enemyCollided(false)
 {
 }
@@ -19,9 +19,6 @@ DefaultSkul::~DefaultSkul()
 
 void DefaultSkul::Init()
 {
-	type = Types::Default;
-	tier = Tiers::Normal;
-
 	SetSymbol(RESOURCE_MGR->GetTexture("graphics/player/default/symbol.png"));
 	SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/default/skull_throw.png"));
 	SetSkillBIcon(RESOURCE_MGR->GetTexture("graphics/player/default/rebone.png"));
@@ -178,10 +175,22 @@ void DefaultSkul::Draw(RenderWindow& window)
 		head->Draw(window);
 }
 
+void DefaultSkul::SetDevMode(bool mode)
+{
+	Skul::SetDevMode(mode);
+	head->SetDevMode(mode);
+}
+
 void DefaultSkul::SwitchDevMode()
 {
 	Object::SwitchDevMode();
 	head->SwitchDevMode();
+}
+
+void DefaultSkul::SwitchSkul()
+{
+	OnCompleteSkillA();
+	SetDevMode(player->GetDevMode());
 }
 
 void DefaultSkul::Idle()
@@ -285,29 +294,29 @@ void DefaultSkul::SkillB()
 	if (!isHeadOn)
 	{
 		OnCompleteSkillA();
-		player->SetPos({ head->GetPos().x, head->GetPos().y - player->GetHitBounds().height });
+		player->SetPos({ head->GetPos().x, head->GetHitBounds().top + head->GetHitBounds().height });
 		SOUND_MGR->Play("sound/Skul_Reborn.wav");
 	}
 	else
 		player->SetState(Player::States::Idle);
 }
 
-void DefaultSkul::SetAnimEvent(Player* player)
+void DefaultSkul::SetAnimEvent()
 {
 	AnimationEvent ev;
 	ev.clipId = "DefaultSkulAttackA";
 	ev.frame = 2;
-	ev.onEvent = bind(&Player::MeleeAttack, player);
+	ev.onEvent = bind(&Player::NormalAttack, player);
 	animator->AddEvent(ev);
 	AnimationEvent ev2;
 	ev2.clipId = "DefaultSkulAttackB";
 	ev2.frame = 1;
-	ev2.onEvent = bind(&Player::MeleeAttack, player);
+	ev2.onEvent = bind(&Player::NormalAttack, player);
 	animator->AddEvent(ev2);
 	AnimationEvent ev3;
 	ev3.clipId = "DefaultSkulJumpAttack";
 	ev3.frame = 1;
-	ev3.onEvent = bind(&Player::MeleeAttack, player);
+	ev3.onEvent = bind(&Player::NormalAttack, player);
 	animator->AddEvent(ev3);
 }
 

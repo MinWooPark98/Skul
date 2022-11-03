@@ -7,12 +7,15 @@
 #include "Collider.h"
 #include "Enemy/Enemy.h"
 #include "../Framework/SoundMgr.h"
+#include "Skul/SkulSet.h"
+#include "../DataTable/DataTableMGR.h"
+#include "../DataTable/StatTable.h"
 
 Player::Player()
 	:mainSkul(nullptr), subSkul(nullptr),
 	currState(States::None), isMoving(false), isDashing(false), isJumping(false), isAttacking(false), jumpingDown(false), dashAble(true), jumpCount(0), jumpableCount(2),
-	dashTime(0.2f), dashTimer(0.f), doubleDashableTime(0.4f), doubleDashTimer(0.f), dashDelay(0.65f), dashDelayTimer(0.f), dashCount(0),
-	speed(200.f), lastDirX(1.f), attackDmg(25), totalHp(100), currHp(100), platform(nullptr), normalSpeed(200.f), dashSpeed(400.f)
+	dashTime(0.2f), dashTimer(0.f), doubleDashableTime(0.4f), doubleDashTimer(0.f), dashDelay(0.65f), dashDelayTimer(0.f), dashCount(0), dashableCount(0),
+	currSpeed(200.f), lastDirX(1.f), attackDmg(25), totalHp(100), currHp(100), platform(nullptr), speed(200.f), skulSet(nullptr), speedAdd(0.f), attackAdd(0)
 {
 }
 
@@ -22,7 +25,6 @@ Player::~Player()
 
 void Player::Init()
 {
-	SpriteObj::Init();
 	SetName("player");
 	direction = { 1.f, 0.f };
 	gravityApply = true;
@@ -41,20 +43,29 @@ void Player::Init()
 	attackBox.setOutlineColor({ 0, 255, 0, 255 });
 	attackBox.setOutlineThickness(2.f);
 	attackBox.setFillColor({ 255, 255, 255, 0 });
+
+	skulSet = new SkulSet();
+	skulSet->Init();
+	SetMainSkul(skulSet->Get(Skul::Types::Default, Skul::Tiers::Normal));
+
+	SpriteObj::Init();
 }
 
 void Player::Release()
 {
+	SpriteObj::Init();
 }
 
 void Player::Reset()
 {
 	SpriteObj::Reset();
+	SetMainSkul(skulSet->Get(Skul::Types::Default, Skul::Tiers::Normal));
+	subSkul = nullptr;
 	isMoving = false;
 	isDashing = false;
 	isJumping = false;
 	isAttacking = false;
-	speed = normalSpeed;
+	currSpeed = speed;
 	currHp = totalHp;
 	dashTimer = 0.f;
 	dashCount = 0;
@@ -63,38 +74,59 @@ void Player::Reset()
 	jumpCount = 0;
 	platform = nullptr;
 	SetPos(startPos);
+	skulSet->Reset();
 }
 
 void Player::Update(float dt)
 {
+	if (InputMgr::GetKeyDown(Keyboard::Space))
+	{
+		if (subSkul == nullptr)
+			SetMainSkul(skulSet->Get(Skul::Types::Werewolf, Skul::Tiers::Normal));
+		else
+			SwitchSkul();
+	}
+
 	mainSkul->Update(dt);
 
 	if (InputMgr::GetKeyDown(Keyboard::A))
+	{
 		SetState(States::SkillA);
+		direction.y = 0.f;
+	}
 	else if (InputMgr::GetKeyDown(Keyboard::S))
+	{
 		SetState(States::SkillB);
+		direction.y = 0.f;
+	}
 
 	if (currState == States::SkillA || currState == States::SkillB)
+	{
+		if (lastDirX > 0.f)
+			sprite.setScale(1, 1);
+		else if (lastDirX < 0.f)
+			sprite.setScale(-1, 1);
 		return;
+	}
 
 	gravityApply = true;
 	SetBoxes();
 
 	if (isDashing)
 	{
-		if (dashCount > 1)
+		if (dashCount >= dashableCount)
 			dashAble = false;
 
 		dashTimer += dt;
 		if (dashTimer > dashTime)
-			speed = 0.f;
+			currSpeed = 0.f;
 
 		doubleDashTimer += dt;
 		if (doubleDashTimer >= doubleDashableTime)
 		{
 			dashAble = false;
 			isDashing = false;
-			speed = normalSpeed;
+			currSpeed = speed;
 			doubleDashTimer = 0.f;
 			if (currState != States::Attack)
 			{
@@ -116,7 +148,7 @@ void Player::Update(float dt)
 		}
 	}	
 
-	if (InputMgr::GetKeyDown(Keyboard::Z) && dashCount < 2 && dashAble)
+	if (InputMgr::GetKeyDown(Keyboard::Z) && dashCount < dashableCount && dashAble)
 	{
 		SetState(States::Dash);
 		isDashing = true;
@@ -128,7 +160,7 @@ void Player::Update(float dt)
 			sprite.setScale(-1, 1);
 		dashTimer = 0.f;
 		doubleDashTimer = 0.f;
-		speed = dashSpeed;
+		currSpeed = speed * 2.f;
 		++dashCount;
 	}
 
@@ -190,7 +222,7 @@ void Player::Update(float dt)
 			else if (lastDirX < 0.f)
 				sprite.setScale(-1, 1);
 		}
-		speed = normalSpeed;
+		currSpeed = speed;
 	}
 
 	if (!(Utils::EqualFloat(direction.x, 0.f)))
@@ -248,7 +280,7 @@ void Player::Update(float dt)
 	if (direction.y > 2.5f)
 		direction.y = 2.5f;
 
-	Translate(direction * speed * dt);
+	Translate(direction * currSpeed * dt);
 }
 
 void Player::Draw(RenderWindow& window)
@@ -263,24 +295,58 @@ void Player::Draw(RenderWindow& window)
 	}
 }
 
+void Player::SetPos(const Vector2f& pos)
+{
+	SpriteObj::SetPos(pos);
+	attackBox.setPosition(pos);
+}
+
 void Player::SwitchDevMode()
 {
 	Object::SwitchDevMode();
 	mainSkul->SwitchDevMode();
 }
 
-void Player::SetSkul(Skul* skul)
+void Player::SetMainSkul(Skul* skul)
 {
+	if (mainSkul != nullptr)
+	{
+		if (subSkul == nullptr)
+			subSkul = mainSkul;
+		//else
+			// mainSkul, subSkul 다 꽉 차 있으면, 현재 mainSkul의 type, tier을 담은 머리 아이템 배출하는 기능 추가해야 함
+	}
 	mainSkul = skul;
 	mainSkul->SetPlayer(this);
 	mainSkul->SetTarget(&sprite);
+	ResetStat();
 	SetState(States::Idle);
+	mainSkul->Idle();
 	mainSkul->QuitAttackA = bind(&Player::OnCompleteAttackA, this);
 	mainSkul->QuitAttackB = bind(&Player::OnCompleteAttackB, this);
 	mainSkul->QuitAction = bind(&Player::SetState, this, States::Idle);
-	mainSkul->SetAnimEvent(this);
 	if (ResetPlayerUi != nullptr)
 		ResetPlayerUi();
+
+	cout << speed << endl;
+	cout << attackDmg << endl;
+	cout << dashableCount << endl;
+}
+
+void Player::SwitchSkul()
+{
+	if (subSkul == nullptr)
+		return;
+	Skul* temp = mainSkul;
+	mainSkul = subSkul;
+	subSkul = temp;
+	ResetStat();
+	ResetPlayerUi();
+	mainSkul->SwitchSkul();
+
+	cout << speed << endl;
+	cout << attackDmg << endl;
+	cout << dashableCount << endl;
 }
 
 void Player::SetState(States newState)
@@ -329,6 +395,22 @@ void Player::SetBoxes()
 		attackBox.setSize({ 0.f, 0.f });
 	Utils::SetOrigin(hitbox, Origins::BC);
 	attackBox.setPosition(position);
+}
+
+void Player::ResetStat()
+{
+	auto statTable = DATATABLE_MGR->Get<StatTable>(DataTable::Types::Stat);
+	auto& stat = statTable->Get((int)mainSkul->GetOffType(), (int)mainSkul->GetTier());
+	speed = stat.speed;
+	attackDmg = stat.attackDmg;
+	dashableCount = stat.dashableCount;
+	BuffApply();
+}
+
+void Player::BuffApply()
+{
+	speed += speedAdd;
+	attackDmg += attackAdd;
 }
 
 void Player::OnCompleteAttackA()
@@ -380,7 +462,7 @@ void Player::OnCollisionBlock(const FloatRect& blockBound)
 	}
 }
 
-void Player::MeleeAttack()
+void Player::MeleeAttack(int dmg)
 {
 	auto attackBound = sprite.getGlobalBounds();
 	attackBox.setSize({ attackBound.width, attackBound.height });
@@ -393,8 +475,7 @@ void Player::MeleeAttack()
 			continue;
 		if (attackBox.getGlobalBounds().intersects(enemy->GetHitBounds()))
 		{
-			((Enemy*)enemy)->OnHit(attackDmg);
-			SOUND_MGR->Play("sound/Hit.wav");
+			((Enemy*)enemy)->OnHit(dmg);
 		}
 	}
 }

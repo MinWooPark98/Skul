@@ -7,8 +7,7 @@ private:
 	int totalHp;
 	int currHp;
 	int attackDmg;
-	float normalSpeed;
-	float dashSpeed;
+	float speed;
 	int jumpableCnt;
 
 public:

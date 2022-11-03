@@ -147,6 +147,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameObject\PlayerDataStorage.cpp" />
+    <ClCompile Include="GameObject\Skul\SkulSet.cpp" />
+    <ClCompile Include="DataTable\StatTable.cpp" />
     <ClCompile Include="Ui\GameOverUi.cpp" />
     <ClCompile Include="Ui\PlayerUi.cpp" />
     <ClCompile Include="Ui\PlaySceneUiMgr.cpp" />
@@ -211,11 +213,14 @@
     <ClCompile Include="Ui\TextButtonUi.cpp" />
     <ClCompile Include="Ui\UiMgr.cpp" />
     <ClCompile Include="GameObject\NPC\Witch.cpp" />
+    <ClCompile Include="GameObject\Skul\WerewolfNormal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rd\rapidcsv.h" />
     <ClInclude Include="3rd\SingleTon.h" />
     <ClInclude Include="GameObject\PlayerDataStorage.h" />
+    <ClInclude Include="GameObject\Skul\SkulSet.h" />
+    <ClInclude Include="DataTable\StatTable.h" />
     <ClInclude Include="Ui\GameOverUi.h" />
     <ClInclude Include="Ui\PlayerUi.h" />
     <ClInclude Include="Ui\PlaySceneUiMgr.h" />
@@ -280,6 +285,7 @@
     <ClInclude Include="Ui\TextButtonUi.h" />
     <ClInclude Include="Ui\UiMgr.h" />
     <ClInclude Include="GameObject\NPC\Witch.h" />
+    <ClInclude Include="GameObject\Skul\WerewolfNormal.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

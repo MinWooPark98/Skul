@@ -1,6 +1,7 @@
 #include "DataTableMgr.h"
 #include "LanguageTable.h"
 #include "FilePathTable.h"
+#include "StatTable.h"
 
 DataTableMgr::DataTableMgr(const DataTableMgr& ref)
 {
@@ -30,6 +31,10 @@ void DataTableMgr::Init()
     table = new FilePathTable();
     table->Load();
     tables.insert({ DataTable::Types::FilePath, table });
+
+    table = new StatTable();
+    table->Load();
+    tables.insert({ DataTable::Types::Stat, table });
 }
 
 void DataTableMgr::Release()

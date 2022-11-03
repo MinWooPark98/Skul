@@ -1,6 +1,5 @@
 #include "PlayScene.h"
 #include "../GameObject/Player.h"
-#include "../GameObject/Skul/DefaultSkul.h"
 #include "../Framework/Framework.h"
 #include "../GameObject/Collider.h"
 #include "../GameObject/Enemy/SwordsMan.h"
@@ -127,10 +126,6 @@ void PlayScene::Init()
 			{
 				obj = new Player();
 				((Player*)obj)->SetStartPos({ data.xPos, data.yPos });
-
-				Skul* skul = new DefaultSkul();
-				skul->Init();
-				((Player*)obj)->SetSkul(skul);
 			}
 			break;
 		default:

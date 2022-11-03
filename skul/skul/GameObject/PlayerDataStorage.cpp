@@ -3,7 +3,7 @@
 #include "Player.h"
 
 PlayerDataStorage::PlayerDataStorage()
-	:totalHp(0), currHp(0), attackDmg(0), normalSpeed(0.f), dashSpeed(0.f), jumpableCnt(0)
+	:totalHp(0), currHp(0), attackDmg(0), speed(0.f), jumpableCnt(0)
 {
 }
 
@@ -18,8 +18,7 @@ void PlayerDataStorage::Save()
 	totalHp = player->GetTotalHp();
 	currHp = player->GetCurrHp();
 	attackDmg = player->GetAttackDmg();
-	normalSpeed = player->GetNormalSpeed();
-	dashSpeed = player->GetDashSpeed();
+	speed = player->GetSpeed();
 	jumpableCnt = player->GetJumpableCount();
 }
 
@@ -30,7 +29,6 @@ void PlayerDataStorage::Load()
 	player->SetTotalHp(totalHp);
 	player->SetCurrHp(currHp);
 	player->SetAttackDmg(attackDmg);
-	player->SetNormalSpeed(normalSpeed);
-	player->SetDashSpeed(dashSpeed);
+	player->SetSpeed(speed);
 	player->SetJumpableCount(jumpableCnt);
 }

@@ -7,6 +7,13 @@ class Player;
 class Skul : public Object
 {
 public:
+	enum class OffensiveTypes
+	{
+		None = -1,
+		Balance,
+		Speed,
+		Power,
+	};
 	enum class Types
 	{
 		Default,
@@ -21,6 +28,7 @@ public:
 	};
 
 protected:
+	OffensiveTypes offType;
 	Types type;
 	Tiers tier;
 
@@ -32,7 +40,7 @@ protected:
 	const Texture* skillBIcon;
 
 public:
-	Skul(Types type, Tiers tier);
+	Skul(OffensiveTypes offType, Types type, Tiers tier);
 	virtual ~Skul();
 
 	virtual void Init() override;
@@ -56,6 +64,8 @@ public:
 	virtual void SkillA() = 0;
 	virtual void SkillB() = 0;
 
+	virtual void SwitchSkul() {}
+
 	void OnCompleteAttackA();
 	void OnCompleteAttackB();
 	virtual void OnCompleteSkillA() {}
@@ -65,8 +75,8 @@ public:
 	function<void()> QuitAttackB;
 	function<void()> QuitAction;
 
-	virtual void SetPlayer(Player* player) { this->player = player; }
-	virtual void SetAnimEvent(Player* player) = 0;
+	virtual void SetPlayer(Player* player);
+	virtual void SetAnimEvent() = 0;
 
 	void SetSymbol(const Texture* tex) { symbol = tex; }
 	const Texture* GetSymbol() const { return symbol; }
@@ -75,6 +85,7 @@ public:
 	void SetSkillBIcon(const Texture* tex) { skillBIcon = tex; }
 	const Texture* GetSkillBIcon() const { return skillBIcon; }
 
+	OffensiveTypes GetOffType() const{ return offType; }
 	Types GetType() const { return type; }
 	Tiers GetTier() const { return tier; }
 };

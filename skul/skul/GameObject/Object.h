@@ -59,6 +59,7 @@ public:
 	const Vector2f& GetDirection() const { return direction; }
 
 	virtual void SetDevMode(bool devMode) { isDevMode = devMode; }
+	virtual bool GetDevMode() const { return isDevMode; }
 	virtual void SwitchDevMode() { isDevMode = !isDevMode; }
 
 	virtual void SetHitBox(const FloatRect rect);

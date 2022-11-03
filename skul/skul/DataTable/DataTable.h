@@ -11,6 +11,7 @@ public:
 		None = -1,
 		Language,
 		FilePath,
+		Stat,
 	};
 private:
 	Types type;

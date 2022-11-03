@@ -1,8 +1,8 @@
 #include "Skul.h"
 #include "../../Framework/SoundMgr.h"
 
-Skul::Skul(Types type, Tiers tier)
-	:type(type), tier(tier), animator(nullptr), player(nullptr), symbol(nullptr), skillAIcon(nullptr), skillBIcon(nullptr)
+Skul::Skul(OffensiveTypes offType, Types type, Tiers tier)
+	:offType(offType), type(type), tier(tier), animator(nullptr), player(nullptr), symbol(nullptr), skillAIcon(nullptr), skillBIcon(nullptr)
 {
 }
 
@@ -51,6 +51,14 @@ void Skul::OnCompleteAction()
 {
 	if (QuitAction != nullptr)
 		QuitAction();
+}
+
+void Skul::SetPlayer(Player* player)
+{
+	if (this->player != nullptr)
+		return;
+	this->player = player;
+	SetAnimEvent();
 }
 
 void Skul::Dash()

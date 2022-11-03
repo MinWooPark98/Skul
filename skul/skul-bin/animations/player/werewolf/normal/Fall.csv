@@ -1,0 +1,6 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+WerewolfNormalFall,0,6,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/player/werewolf/normal/werewolf(normal).png,7,239,43,47,21.5,47,0,0
+graphics/player/werewolf/normal/werewolf(normal).png,59,239,50,47,25,47,0,0

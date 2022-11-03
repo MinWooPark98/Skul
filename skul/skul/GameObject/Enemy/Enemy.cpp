@@ -5,6 +5,7 @@
 #include "../Collider.h"
 #include "../Player.h"
 #include "../../Ui/EnemyHpBarUi.h"
+#include "../../Framework/SoundMgr.h"
 
 Enemy::Enemy(Types type)
 	:type(type), currState(States::None), animator(nullptr), platform(nullptr), playerDetected(false), stiffDuration(0.7f), stiffTimer(0.f), stiffDistance(0.f),
@@ -43,6 +44,8 @@ void Enemy::Release()
 void Enemy::Reset()
 {
 	SpriteObj::Reset();
+	if(animator != nullptr)
+		SetState(States::Idle);
 	playerDetected = false;
 	currHp = totalHp;
 	if(hpBar != nullptr)
@@ -157,6 +160,7 @@ void Enemy::OnHit(int dmg)
 		sprite.setScale(-1, 1);
 	Translate({ hitDirX * stiffDistance, 0.f });
 	currHp -= dmg;
+	SOUND_MGR->Play("sound/Hit.wav");
 	if (currHp <= 0)
 	{
 		SetActive(false);

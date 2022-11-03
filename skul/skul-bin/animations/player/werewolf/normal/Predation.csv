@@ -1,0 +1,11 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+WerewolfNormalPredation,0,10,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/player/werewolf/normal/werewolf(normal).png,7,586,31,43,15.5,43,0,0
+graphics/player/werewolf/normal/werewolf(normal).png,47,586,36,48,18,48,0,0
+graphics/player/werewolf/normal/werewolf(normal).png,92,586,36,49,18,49,0,0
+graphics/player/werewolf/normal/werewolf(normal).png,137,586,105,64,52.5,64,0,0
+graphics/player/werewolf/normal/werewolf(normal).png,251,586,97,65,48.5,65,0,0
+graphics/player/werewolf/normal/werewolf(normal).png,357,586,51,32,25.5,32,0,0
+graphics/player/werewolf/normal/werewolf(normal).png,417,586,52,31,26,31,0,0

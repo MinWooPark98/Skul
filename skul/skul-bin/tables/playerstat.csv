@@ -1,0 +1,13 @@
+"OffensiveTypes(Balance: 0, Speed: 1, Power: 2)","Tiers(Normal: 0, Rare: 1, Unique: 2, Legendary: 3)",speed,attackDmg,dashableCount
+0,0,200.f,30,2
+0,1,210.f,35,2
+0,2,220.f,40,2
+0,3,230.f,45,2
+1,0,250.f,20,2
+1,1,260.f,25,2
+1,2,270.f,30,2
+1,3,280.f,35,2
+2,0,160.f,40,1
+2,1,170.f,45,1
+2,2,180.f,50,1
+2,3,190.f,55,1
