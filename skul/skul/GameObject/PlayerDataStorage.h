@@ -1,18 +1,28 @@
 #pragma once
+#include "Skul/Skul.h"
 
 class PlayerDataStorage
 {
-	// 스탯, 공격력 등등 skul에 따라 저장되어야 하는데 아직 완성하지 못해서 임시로 player에 있는 체력, 공격력, 이동속도 등만 저장
+public:
+	struct SkulData
+	{
+		Skul::OffensiveTypes offType;
+		Skul::Types type;
+		Skul::Tiers tier;
+	};
 private:
+	SkulData* mainSkul;
+	SkulData* subSkul;
 	int totalHp;
 	int currHp;
-	int attackDmg;
-	float speed;
-	int jumpableCnt;
+	float speedAdd;
+	int attackAdd;
 
 public:
 	PlayerDataStorage();
 	~PlayerDataStorage();
+
+	void Reset();
 
 	void Save();
 	void Load();

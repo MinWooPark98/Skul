@@ -46,7 +46,6 @@ void Player::Init()
 
 	skulSet = new SkulSet();
 	skulSet->Init();
-	SetMainSkul(skulSet->Get(Skul::Types::Default, Skul::Tiers::Normal));
 
 	SpriteObj::Init();
 }
@@ -59,7 +58,8 @@ void Player::Release()
 void Player::Reset()
 {
 	SpriteObj::Reset();
-	SetMainSkul(skulSet->Get(Skul::Types::Default, Skul::Tiers::Normal));
+	mainSkul = nullptr;
+	subSkul = nullptr;
 	subSkul = nullptr;
 	isMoving = false;
 	isDashing = false;
@@ -82,7 +82,7 @@ void Player::Update(float dt)
 	if (InputMgr::GetKeyDown(Keyboard::Space))
 	{
 		if (subSkul == nullptr)
-			SetMainSkul(skulSet->Get(Skul::Types::Werewolf, Skul::Tiers::Normal));
+			SetMainSkul(Skul::Types::Werewolf, Skul::Tiers::Normal);
 		else
 			SwitchSkul();
 	}
@@ -307,7 +307,7 @@ void Player::SwitchDevMode()
 	mainSkul->SwitchDevMode();
 }
 
-void Player::SetMainSkul(Skul* skul)
+void Player::SetMainSkul(Skul::Types type, Skul::Tiers tier)
 {
 	if (mainSkul != nullptr)
 	{
@@ -316,7 +316,7 @@ void Player::SetMainSkul(Skul* skul)
 		//else
 			// mainSkul, subSkul 다 꽉 차 있으면, 현재 mainSkul의 type, tier을 담은 머리 아이템 배출하는 기능 추가해야 함
 	}
-	mainSkul = skul;
+	mainSkul = skulSet->Get(type, tier);
 	mainSkul->SetPlayer(this);
 	mainSkul->SetTarget(&sprite);
 	ResetStat();
@@ -331,6 +331,13 @@ void Player::SetMainSkul(Skul* skul)
 	cout << speed << endl;
 	cout << attackDmg << endl;
 	cout << dashableCount << endl;
+}
+
+void Player::SetSubSkul(Skul::Types type, Skul::Tiers tier)
+{
+	subSkul = skulSet->Get(type, tier);
+	subSkul->SetPlayer(this);
+	subSkul->SetTarget(&sprite);
 }
 
 void Player::SwitchSkul()

@@ -1,8 +1,8 @@
 #pragma once
 #include "SpriteObj.h"
 #include <functional>
+#include "Skul/Skul.h"
 
-class Skul;
 class SkulSet;
 class RayCast;
 
@@ -87,7 +87,8 @@ public:
 
 	virtual void SwitchDevMode() override;
 
-	void SetMainSkul(Skul* skul);
+	void SetMainSkul(Skul::Types type, Skul::Tiers tier);
+	void SetSubSkul(Skul::Types type, Skul::Tiers tier);
 	void SwitchSkul();
 	void SetState(States newState);
 	void SetBoxes();
@@ -109,7 +110,9 @@ public:
 	void ResetStat();
 
 	void SetSpeedAdd(float add) { speedAdd = add; }
+	float GetSpeedAdd() const { return speedAdd; }
 	void SetAttackAdd(int add) { attackAdd = add; }
+	int GetAttackAdd() const { return attackAdd; }
 	void BuffApply();
 
 	void OnCompleteAttackA();
@@ -123,6 +126,7 @@ public:
 	void OnCollisionBlock(const FloatRect& blockBound);
 
 	const Skul* GetMainSkul() const { return mainSkul; }
+	const Skul* GetSubSkul() const { return subSkul; }
 
 	function<void()> ResetPlayerUi;
 
