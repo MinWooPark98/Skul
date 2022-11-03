@@ -161,6 +161,7 @@ void MapEditorScene::Enter()
 
 void MapEditorScene::Exit()
 {
+	Scene::Exit();
 	Reset();
 }
 
