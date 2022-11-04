@@ -81,6 +81,36 @@ void WerewolfRare::Init()
 	}
 }
 
+void WerewolfRare::Dash()
+{
+	Werewolf::Dash();
+	animator->Play("WerewolfRareDash");
+}
+
+void WerewolfRare::Jump()
+{
+	Werewolf::Jump();
+	animator->Play("WerewolfRareJump");
+}
+
+void WerewolfRare::AttackA()
+{
+	Werewolf::AttackA();
+	animator->Play("WerewolfRareAttackA");
+}
+
+void WerewolfRare::AttackB()
+{
+	Werewolf::AttackB();
+	animator->Play("WerewolfRareAttackB");
+}
+
+void WerewolfRare::JumpAttack()
+{
+	Werewolf::JumpAttack();
+	animator->Play("WerewolfRareJumpAttack");
+}
+
 void WerewolfRare::SkillA()
 {
 	switch (skillA)

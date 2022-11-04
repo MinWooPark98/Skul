@@ -1,5 +1,5 @@
 ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
-Cocoon,0,12,,,,,,
+Cocoon,0,14,,,,,,
 ,,,,,,,,
 TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
 graphics/npc/arachne/cocoon.png,0,0,51,54,25.5,54,0,0

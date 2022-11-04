@@ -4,6 +4,7 @@
 #include "../../Scene/PlayScene.h"
 #include "../../Scene/SceneMgr.h"
 #include "../Collider.h"
+#include "../../Framework/SoundMgr.h"
 
 Werewolf::Werewolf()
 	:Skul(OffensiveTypes::Speed, Types::Werewolf, Tiers::None)
@@ -19,6 +20,21 @@ void Werewolf::Init()
 	Skul::Init();
 	skillSet.push_back(Skills::Predation);
 	skillSet.push_back(Skills::Ripper);
+}
+
+void Werewolf::AttackA()
+{
+	SOUND_MGR->Play("sound/Atk_Sword_Small.wav");
+}
+
+void Werewolf::AttackB()
+{
+	SOUND_MGR->Play("sound/Atk_Sword_Small.wav");
+}
+
+void Werewolf::JumpAttack()
+{
+	SOUND_MGR->Play("sound/Atk_Sword_Small.wav");
 }
 
 void Werewolf::Predation()
@@ -40,10 +56,12 @@ void Werewolf::Predation()
 			break;
 		}
 	}
+	SOUND_MGR->Play("sound/Atk_Sword_Large.wav");
 	player->MeleeAttack(player->GetAttackDmg() * 2);
 }
 
 void Werewolf::Ripper()
 {
+	SOUND_MGR->Play("sound/Atk_Sword_Large.wav");
 	player->MeleeAttack(player->GetAttackDmg() * 2);
 }

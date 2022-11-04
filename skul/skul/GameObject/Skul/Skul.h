@@ -71,9 +71,9 @@ public:
 	virtual void Move() = 0;
 	virtual void Dash();
 	virtual void Jump();
-	virtual void AttackA();
-	virtual void AttackB();
-	virtual void JumpAttack();
+	virtual void AttackA() = 0;
+	virtual void AttackB() = 0;
+	virtual void JumpAttack() = 0;
 	virtual void Fall() = 0;
 	virtual void FallRepeated() = 0;
 	virtual void SkillA() = 0;

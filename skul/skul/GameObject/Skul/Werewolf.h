@@ -9,6 +9,10 @@ public:
 
 	virtual void Init() override;
 
+	virtual void AttackA() override;
+	virtual void AttackB() override;
+	virtual void JumpAttack() override;
+
 	void Predation();
 	void Ripper();
 };

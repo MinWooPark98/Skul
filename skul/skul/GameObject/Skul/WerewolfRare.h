@@ -9,19 +9,19 @@ public:
 
 	virtual void Init() override;
 
-	virtual void Idle() { animator->Play("WerewolfRareIdle"); }
-	virtual void Move() { animator->Play("WerewolfRareWalk"); }
-	virtual void Dash() { animator->Play("WerewolfRareDash"); }
-	virtual void Jump() { animator->Play("WerewolfRareJump"); }
-	virtual void AttackA() { animator->Play("WerewolfRareAttackA"); }
-	virtual void AttackB() { animator->Play("WerewolfRareAttackB"); }
-	virtual void JumpAttack() { animator->Play("WerewolfRareJumpAttack"); }
-	virtual void Fall() { animator->Play("WerewolfRareFall"); }
-	virtual void FallRepeated() { animator->Play("WerewolfRareFallRepeat"); }
-	virtual void SkillA();
-	virtual void SkillB();
+	virtual void Idle() override { animator->Play("WerewolfRareIdle"); }
+	virtual void Move() override { animator->Play("WerewolfRareWalk"); }
+	virtual void Dash() override;
+	virtual void Jump() override;
+	virtual void AttackA() override;
+	virtual void AttackB() override;
+	virtual void JumpAttack() override;
+	virtual void Fall() override { animator->Play("WerewolfRareFall"); }
+	virtual void FallRepeated() override { animator->Play("WerewolfRareFallRepeat"); }
+	virtual void SkillA() override;
+	virtual void SkillB() override;
 
 	virtual void SetSkillA(Skills skill) override;
-	virtual void SetAnimEvent();
+	virtual void SetAnimEvent() override;
 };
 

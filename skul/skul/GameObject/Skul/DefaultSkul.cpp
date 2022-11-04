@@ -235,7 +235,7 @@ void DefaultSkul::Jump()
 
 void DefaultSkul::AttackA()
 {
-	Skul::AttackA();
+	SOUND_MGR->Play("sound/Skul_Atk_0.wav");
 	if (isHeadOn)
 		animator->Play("DefaultSkulAttackA");
 	else
@@ -244,7 +244,7 @@ void DefaultSkul::AttackA()
 
 void DefaultSkul::AttackB()
 {
-	Skul::AttackB();
+	SOUND_MGR->Play("sound/Skul_Atk_1.wav");
 	if (isHeadOn)
 		animator->Play("DefaultSkulAttackB");
 	else
@@ -253,7 +253,7 @@ void DefaultSkul::AttackB()
 
 void DefaultSkul::JumpAttack()
 {
-	Skul::JumpAttack();
+	SOUND_MGR->Play("sound/Skul_Jump_Atk.wav");
 	if (isHeadOn)
 		animator->Play("DefaultSkulJumpAttack");
 	else

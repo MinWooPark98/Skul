@@ -81,6 +81,36 @@ void WerewolfLegendary::Init()
 	}
 }
 
+void WerewolfLegendary::Dash()
+{
+	Werewolf::Dash();
+	animator->Play("WerewolfLegendaryDash");
+}
+
+void WerewolfLegendary::Jump()
+{
+	Werewolf::Jump();
+	animator->Play("WerewolfLegendaryJump");
+}
+
+void WerewolfLegendary::AttackA()
+{
+	Werewolf::AttackA();
+	animator->Play("WerewolfLegendaryAttackA");
+}
+
+void WerewolfLegendary::AttackB()
+{
+	Werewolf::AttackB();
+	animator->Play("WerewolfLegendaryAttackB");
+}
+
+void WerewolfLegendary::JumpAttack()
+{
+	Werewolf::JumpAttack();
+	animator->Play("WerewolfLegendaryJumpAttack");
+}
+
 void WerewolfLegendary::SkillA()
 {
 	switch (skillA)

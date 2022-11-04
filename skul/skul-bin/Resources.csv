@@ -225,3 +225,8 @@ animations/npc/Arachne/Idle.csv,3
 animations/npc/Arachne/Ready.csv,3
 animations/npc/Arachne/Attack.csv,3
 animations/npc/Arachne/Cocoon.csv,3
+sound/Arachne_Cocoon.wav,2
+sound/Arachne_CocoonAwake.wav,2
+sound/Arachne_CocoonAwakeDone.wav,2
+sound/Atk_Sword_Small.wav,2
+sound/Atk_Sword_Large.wav,2

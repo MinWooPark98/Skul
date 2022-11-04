@@ -4,6 +4,7 @@
 #include "../../Scene/SceneMgr.h"
 #include "../TextObj.h"
 #include "../Player.h"
+#include "../../Framework/SoundMgr.h"
 
 Arachne::Arachne()
 	:NPC(Types::Arachne), isActive(false), cocoonAnim(nullptr)
@@ -75,6 +76,8 @@ void Arachne::EvolveSkul()
 {
 	animator->Play("ArachneAttack");
 	cocoonAnim->Play("Cocoon");
+	SOUND_MGR->Play("sound/Arachne_Cocoon.wav");
+	SOUND_MGR->Play("sound/Arachne_CocoonAwake.wav");
 }
 
 void Arachne::OnCompleteEvolve()
@@ -82,6 +85,7 @@ void Arachne::OnCompleteEvolve()
 	player->SetForcedMode(false);
 	player->EvolveSkul();
 	animator->Play("ArachneIdle");
+	SOUND_MGR->Play("sound/Arachne_CocoonAwakeDone.wav");
 	cocoonAnim->Stop();
 }
 

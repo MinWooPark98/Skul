@@ -87,6 +87,36 @@ void WerewolfNormal::Reset()
 	SetRandomSkillA();
 }
 
+void WerewolfNormal::Dash()
+{
+	Werewolf::Dash();
+	animator->Play("WerewolfNormalDash");
+}
+
+void WerewolfNormal::Jump()
+{
+	Werewolf::Jump();
+	animator->Play("WerewolfNormalJump");
+}
+
+void WerewolfNormal::AttackA()
+{
+	Werewolf::AttackA();
+	animator->Play("WerewolfNormalAttackA");
+}
+
+void WerewolfNormal::AttackB()
+{
+	Werewolf::AttackB();
+	animator->Play("WerewolfNormalAttackB");
+}
+
+void WerewolfNormal::JumpAttack()
+{
+	Werewolf::JumpAttack();
+	animator->Play("WerewolfNormalJumpAttack");
+}
+
 void WerewolfNormal::SkillA()
 {
 	switch (skillA)

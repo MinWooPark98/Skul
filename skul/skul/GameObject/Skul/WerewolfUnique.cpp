@@ -81,6 +81,36 @@ void WerewolfUnique::Init()
 	}
 }
 
+void WerewolfUnique::Dash()
+{
+	Werewolf::Dash();
+	animator->Play("WerewolfUniqueDash");
+}
+
+void WerewolfUnique::Jump()
+{
+	Werewolf::Jump();
+	animator->Play("WerewolfUniqueJump");
+}
+
+void WerewolfUnique::AttackA()
+{
+	Werewolf::AttackA();
+	animator->Play("WerewolfUniqueAttackA");
+}
+
+void WerewolfUnique::AttackB()
+{
+	Werewolf::AttackB();
+	animator->Play("WerewolfUniqueAttackB");
+}
+
+void WerewolfUnique::JumpAttack()
+{
+	Werewolf::JumpAttack();
+	animator->Play("WerewolfUniqueJumpAttack");
+}
+
 void WerewolfUnique::SkillA()
 {
 	switch (skillA)

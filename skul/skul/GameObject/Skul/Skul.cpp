@@ -94,18 +94,3 @@ void Skul::Jump()
 {
 	SOUND_MGR->Play("sound/Jump.wav");
 }
-
-void Skul::AttackA()
-{
-	SOUND_MGR->Play("sound/Skul_Atk_0.wav");
-}
-
-void Skul::AttackB()
-{
-	SOUND_MGR->Play("sound/Skul_Atk_1.wav");
-}
-
-void Skul::JumpAttack()
-{
-	SOUND_MGR->Play("sound/Skul_Jump_Atk.wav");
-}
