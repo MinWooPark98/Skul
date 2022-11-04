@@ -1,5 +1,6 @@
 #include "Skul.h"
 #include "../../Framework/SoundMgr.h"
+#include "../../Framework/Utils.h"
 
 Skul::Skul(OffensiveTypes offType, Types type, Tiers tier)
 	:offType(offType), type(type), tier(tier), animator(nullptr), player(nullptr), symbol(nullptr),
@@ -27,7 +28,11 @@ void Skul::Release()
 
 void Skul::Reset()
 {
+	Object::Reset();
+	player = nullptr;
 	animator->Stop();
+	skillA = Skills::None;
+	skillB = Skills::None;
 }
 
 void Skul::Update(float dt)
@@ -58,8 +63,26 @@ void Skul::SetPlayer(Player* player)
 {
 	if (this->player != nullptr)
 		return;
+	if (tier >= Tiers::Unique && skillB == Skills::None)
+		SetRandomSkillB();
 	this->player = player;
 	SetAnimEvent();
+}
+
+void Skul::SetRandomSkillA()
+{
+	SetSkillA(skillSet[Utils::RandomRange(0, skillSet.size())]);
+}
+
+void Skul::SetRandomSkillB()
+{
+	if (tier < Tiers::Unique)
+		return;
+	int vecIdx = -1;
+	do {
+		vecIdx = Utils::RandomRange(0, skillSet.size());
+	} while (skillSet[vecIdx] == skillA);
+	SetSkillB(skillSet[vecIdx]);
 }
 
 void Skul::Dash()

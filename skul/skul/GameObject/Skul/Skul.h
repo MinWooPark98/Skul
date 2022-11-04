@@ -94,6 +94,8 @@ public:
 	virtual void SetAnimEvent() = 0;
 	virtual void SetSkillA(Skills skill) { skillA = skill; }
 	virtual void SetSkillB(Skills skill) { skillB = skill; }
+	virtual void SetRandomSkillA();
+	virtual void SetRandomSkillB();
 
 	void SetSymbol(const Texture* tex) { symbol = tex; }
 	const Texture* GetSymbol() const { return symbol; }

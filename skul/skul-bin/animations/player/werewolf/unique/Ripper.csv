@@ -1,0 +1,11 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+WerewolfUniqueRipper,0,10,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/player/werewolf/unique/werewolf(unique).png,7,797,46,56,23,56,0,0
+graphics/player/werewolf/unique/werewolf(unique).png,62,797,66,58,33,58,0,0
+graphics/player/werewolf/unique/werewolf(unique).png,137,797,54,60,27,60,0,0
+graphics/player/werewolf/unique/werewolf(unique).png,200,797,53,58,26.5,58,0,0
+graphics/player/werewolf/unique/werewolf(unique).png,262,797,67,51,33.5,51,0,0
+graphics/player/werewolf/unique/werewolf(unique).png,338,797,67,47,33.5,47,0,0
+graphics/player/werewolf/unique/werewolf(unique).png,414,797,67,46,33.5,46,0,0

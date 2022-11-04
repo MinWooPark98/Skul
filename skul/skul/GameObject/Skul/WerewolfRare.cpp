@@ -105,10 +105,10 @@ void WerewolfRare::SetSkillA(Skills skill)
 	switch (skillA)
 	{
 	case WerewolfRare::Skills::Predation:
-		SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/werewolf/rare/predation_2.png"));
+		SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/werewolf/rare/Predation_2.png"));
 		break;
 	case WerewolfRare::Skills::Ripper:
-		SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/werewolf/rare/ripper_2.png"));
+		SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/werewolf/rare/Ripper_2.png"));
 		break;
 	}
 	if (player != nullptr && player->ResetPlayerUi != nullptr)

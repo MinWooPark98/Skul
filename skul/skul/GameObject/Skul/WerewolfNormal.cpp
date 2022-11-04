@@ -84,7 +84,7 @@ void WerewolfNormal::Init()
 void WerewolfNormal::Reset()
 {
 	Werewolf::Reset();
-	SetSkillA(skillSet[Utils::RandomRange(0, skillSet.size())]);
+	SetRandomSkillA();
 }
 
 void WerewolfNormal::SkillA()
@@ -111,10 +111,10 @@ void WerewolfNormal::SetSkillA(Skills skill)
 	switch (skillA)
 	{
 	case WerewolfNormal::Skills::Predation:
-		SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/werewolf/normal/predation.png"));
+		SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/werewolf/normal/Predation.png"));
 		break;
 	case WerewolfNormal::Skills::Ripper:
-		SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/werewolf/normal/ripper.png"));
+		SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/werewolf/normal/Ripper.png"));
 		break;
 	}
 	if(player != nullptr && player->ResetPlayerUi != nullptr)

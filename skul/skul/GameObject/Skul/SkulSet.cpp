@@ -2,6 +2,7 @@
 #include "DefaultSkul.h"
 #include "WerewolfNormal.h"
 #include "WerewolfRare.h"
+#include "WerewolfUnique.h"
 
 SkulSet::SkulSet()
 {
@@ -22,7 +23,7 @@ void SkulSet::Init()
 		map<Skul::Tiers, Skul*>* werewolf = new map<Skul::Tiers, Skul*>;
 		werewolf->insert({ Skul::Tiers::Normal, new WerewolfNormal() });
 		werewolf->insert({ Skul::Tiers::Rare, new WerewolfRare() });
-		// werewolf->insert({ Skul::Tiers::Unique, new WerewolfUnique() });
+		werewolf->insert({ Skul::Tiers::Unique, new WerewolfUnique() });
 		// werewolf->insert({ Skul::Tiers::Legendary, new WerewolfLegendary() });
 		skulSet.insert({ Skul::Types::Werewolf, werewolf });
 	}

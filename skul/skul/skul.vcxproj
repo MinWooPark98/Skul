@@ -216,6 +216,7 @@
     <ClCompile Include="GameObject\Skul\WerewolfNormal.cpp" />
     <ClCompile Include="GameObject\Skul\WerewolfRare.cpp" />
     <ClCompile Include="GameObject\Skul\Werewolf.cpp" />
+    <ClCompile Include="GameObject\Skul\WerewolfUnique.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rd\rapidcsv.h" />
@@ -290,6 +291,7 @@
     <ClInclude Include="GameObject\Skul\WerewolfNormal.h" />
     <ClInclude Include="GameObject\Skul\WerewolfRare.h" />
     <ClInclude Include="GameObject\Skul\Werewolf.h" />
+    <ClInclude Include="GameObject\Skul\WerewolfUnique.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
