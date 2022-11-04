@@ -15,7 +15,8 @@ Player::Player()
 	:mainSkul(nullptr), subSkul(nullptr),
 	currState(States::None), isMoving(false), isDashing(false), isJumping(false), isAttacking(false), jumpingDown(false), dashAble(true), jumpCount(0), jumpableCount(2),
 	dashTime(0.2f), dashTimer(0.f), doubleDashableTime(0.4f), doubleDashTimer(0.f), dashDelay(0.65f), dashDelayTimer(0.f), dashCount(0), dashableCount(0),
-	currSpeed(200.f), lastDirX(1.f), attackDmg(25), totalHp(100), currHp(100), platform(nullptr), speed(200.f), skulSet(nullptr), speedAdd(0.f), attackAdd(0)
+	currSpeed(200.f), lastDirX(1.f), attackDmg(25), totalHp(100), currHp(100), platform(nullptr), speed(200.f), skulSet(nullptr), speedAdd(0.f), attackAdd(0),
+	isForcedMode(false), forcedAnimUpdate(true)
 {
 }
 
@@ -79,10 +80,18 @@ void Player::Reset()
 
 void Player::Update(float dt)
 {
+	if (isForcedMode)
+	{
+		if(forcedAnimUpdate)
+			mainSkul->Update(dt);
+		Translate(direction * speed * dt);
+		return;
+	}
+
 	if (InputMgr::GetKeyDown(Keyboard::Space))
 	{
 		if (subSkul == nullptr)
-			SetMainSkul(Skul::Types::Werewolf, Skul::Tiers::Normal);
+			ObtainMainSkul(Skul::Types::Werewolf, Skul::Tiers::Normal);
 		else
 			SwitchSkul();
 	}
@@ -310,7 +319,7 @@ void Player::SwitchDevMode()
 	mainSkul->SwitchDevMode();
 }
 
-void Player::SetMainSkul(Skul::Types type, Skul::Tiers tier)
+void Player::ObtainMainSkul(Skul::Types type, Skul::Tiers tier)
 {
 	if (mainSkul != nullptr)
 	{
@@ -319,17 +328,22 @@ void Player::SetMainSkul(Skul::Types type, Skul::Tiers tier)
 		//else
 			// mainSkul, subSkul 다 꽉 차 있으면, 현재 mainSkul의 type, tier을 담은 머리 아이템 배출하는 기능 추가해야 함
 	}
-	mainSkul = skulSet->Get(type, tier);
-	mainSkul->SetPlayer(this);
-	mainSkul->SetTarget(&sprite);
+	SetMainSkul(skulSet->Get(type, tier));
 	mainSkul->QuitAttackA = bind(&Player::OnCompleteAttackA, this);
 	mainSkul->QuitAttackB = bind(&Player::OnCompleteAttackB, this);
 	mainSkul->QuitAction = bind(&Player::SetState, this, States::Idle);
+	if (ResetPlayerUi != nullptr)
+		ResetPlayerUi();
+}
+
+void Player::SetMainSkul(Skul* skul)
+{
+	mainSkul = skul;
+	mainSkul->SetPlayer(this);
+	mainSkul->SetTarget(&sprite);
 	ResetStat();
 	SetState(States::Idle);
 	mainSkul->Idle();
-	if (ResetPlayerUi != nullptr)
-		ResetPlayerUi();
 }
 
 void Player::SetSubSkul(Skul::Types type, Skul::Tiers tier)
@@ -337,6 +351,9 @@ void Player::SetSubSkul(Skul::Types type, Skul::Tiers tier)
 	subSkul = skulSet->Get(type, tier);
 	subSkul->SetPlayer(this);
 	subSkul->SetTarget(&sprite);
+	subSkul->QuitAttackA = bind(&Player::OnCompleteAttackA, this);
+	subSkul->QuitAttackB = bind(&Player::OnCompleteAttackB, this);
+	subSkul->QuitAction = bind(&Player::SetState, this, States::Idle);
 }
 
 void Player::SwitchSkul()
@@ -344,31 +361,30 @@ void Player::SwitchSkul()
 	if (subSkul == nullptr)
 		return;
 	Skul* temp = mainSkul;
-	mainSkul = subSkul;
+	SetMainSkul(subSkul);
 	subSkul = temp;
-	ResetStat();
 	ResetPlayerUi();
-	SetState(States::Idle);
-	mainSkul->Idle();
 	mainSkul->SwitchSkul();
+}
+
+bool Player::Evolvable()
+{
+	if (!skulSet->Evolvable(mainSkul))
+		return false;
+	return true;
 }
 
 bool Player::EvolveSkul()
 {
-	if (!skulSet->Evolvable(mainSkul))
+	if (!Evolvable())
 		return false;
 	Skul* newSkul = skulSet->Get(mainSkul->GetType(), (Skul::Tiers)((int)mainSkul->GetTier() + 1));
 	newSkul->SetSkillA(mainSkul->GetSkillA());
 	newSkul->SetSkillB(mainSkul->GetSkillB());
-	mainSkul = newSkul;
-	mainSkul->SetPlayer(this);
-	mainSkul->SetTarget(&sprite);
+	SetMainSkul(newSkul);
 	mainSkul->QuitAttackA = bind(&Player::OnCompleteAttackA, this);
 	mainSkul->QuitAttackB = bind(&Player::OnCompleteAttackB, this);
 	mainSkul->QuitAction = bind(&Player::SetState, this, States::Idle);
-	ResetStat();
-	SetState(States::Idle);
-	mainSkul->Idle();
 	ResetPlayerUi();
 	mainSkul->SwitchSkul();
 	return true;

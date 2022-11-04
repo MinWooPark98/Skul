@@ -3,6 +3,7 @@
 
 class Animator;
 class TextObj;
+class Player;
 
 class NPC : public SpriteObj
 {
@@ -13,6 +14,7 @@ public:
 		Witch,
 		Ogre,
 		FoxHuman,
+		Arachne,
 	};
 
 protected:
@@ -23,6 +25,8 @@ protected:
 
 	int effectLimitCnt;
 	int effectCnt;
+
+	Player* player;
 
 public:
 	NPC(Types type);

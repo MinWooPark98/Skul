@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObject\NPC\Arachne.cpp" />
     <ClCompile Include="GameObject\PlayerDataStorage.cpp" />
     <ClCompile Include="GameObject\Skul\SkulSet.cpp" />
     <ClCompile Include="DataTable\StatTable.cpp" />
@@ -222,6 +223,7 @@
   <ItemGroup>
     <ClInclude Include="3rd\rapidcsv.h" />
     <ClInclude Include="3rd\SingleTon.h" />
+    <ClInclude Include="GameObject\NPC\Arachne.h" />
     <ClInclude Include="GameObject\PlayerDataStorage.h" />
     <ClInclude Include="GameObject\Skul\SkulSet.h" />
     <ClInclude Include="DataTable\StatTable.h" />

@@ -4,9 +4,10 @@
 #include "../../Framework/ResourceMgr.h"
 #include "../../Scene/SceneMgr.h"
 #include "../../Framework/InputMgr.h"
+#include "../Player.h"
 
 NPC::NPC(Types type)
-	:type(type), animator(nullptr), activate(nullptr), effectLimitCnt(0), effectCnt(0)
+	:type(type), animator(nullptr), activate(nullptr), effectLimitCnt(0), effectCnt(0), player(nullptr)
 {
 }
 
@@ -48,7 +49,7 @@ void NPC::Update(float dt)
 		animator->Update(dt);
 	Utils::SetOrigin(hitbox, Origins::BC);
 	Scene* currScene = SCENE_MGR->GetCurrentScene();
-	Object* player = currScene->FindGameObj("player");
+	player = (Player*)currScene->FindGameObj("player");
 	if (player->GetHitBounds().intersects(GetHitBounds()))
 	{
 		activate->SetActive(true);

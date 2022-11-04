@@ -1,0 +1,12 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+ArachneAttack,0,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/npc/arachne/attack.png,0,0,201,109,130,102,0,0
+graphics/npc/arachne/attack.png,201,0,201,109,130,102,0,0
+graphics/npc/arachne/attack.png,402,0,201,109,130,102,0,0
+graphics/npc/arachne/attack.png,603,0,201,109,130,102,0,0
+graphics/npc/arachne/attack.png,804,0,201,109,130,102,0,0
+graphics/npc/arachne/attack.png,1005,0,201,109,130,102,0,0
+graphics/npc/arachne/attack.png,1206,0,201,109,130,102,0,0
+graphics/npc/arachne/attack.png,1407,0,201,109,130,102,0,0

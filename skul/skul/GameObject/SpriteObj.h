@@ -18,6 +18,7 @@ public:
 	void SetColor(Color color);
 	Vector2f GetSize()const;
 
+	Sprite& GetSprite() { return sprite; }
 	virtual void SetPos(const Vector2f& pos) override;
 	void SetTextureRect(const IntRect& rect);
 	const IntRect& GetTextureRect()const;

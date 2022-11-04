@@ -16,6 +16,7 @@
 #include "../GameObject/NPC/Witch.h"
 #include "../GameObject/NPC/Ogre.h"
 #include "../GameObject/NPC/FoxHuman.h"
+#include "../GameObject/NPC/Arachne.h"
 #include "../GameObject/Gate.h"
 #include "../Scene/SceneMgr.h"
 #include "../GameObject/PlayerDataStorage.h"
@@ -111,6 +112,8 @@ void PlayScene::Init()
 					obj = new FoxHuman();
 				else if (data.objName == "npc_2")
 					obj = new Ogre();
+				else if (data.objName == "npc_3")
+					obj = new Arachne();
 			}
 			break;
 		case MapEditorScene::Modes::Enemies:

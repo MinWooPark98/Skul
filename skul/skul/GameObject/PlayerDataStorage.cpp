@@ -55,7 +55,7 @@ void PlayerDataStorage::Load()
 	player->SetCurrHp(currHp);
 	player->SetSpeedAdd(speedAdd);
 	player->SetAttackAdd(attackAdd);
-	player->SetMainSkul(mainSkul->type, mainSkul->tier);
+	player->ObtainMainSkul(mainSkul->type, mainSkul->tier);
 	player->GetMainSkul()->SetSkillA(mainSkul->skillA);
 	player->GetMainSkul()->SetSkillB(mainSkul->skillB);
 	if (subSkul == nullptr)

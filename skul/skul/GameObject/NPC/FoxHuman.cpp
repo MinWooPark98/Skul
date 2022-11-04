@@ -25,8 +25,6 @@ void FoxHuman::Init()
 
 void FoxHuman::Activate()
 {
-	Scene* currScene = SCENE_MGR->GetCurrentScene();
-	Player* player = (Player*)currScene->FindGameObj("player");
-	player->SetMainSkul(Skul::Types::Werewolf, Skul::Tiers::Normal);
+	player->ObtainMainSkul(Skul::Types::Werewolf, Skul::Tiers::Normal);
 	++effectCnt;
 }

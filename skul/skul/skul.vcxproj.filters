@@ -231,6 +231,9 @@
     <ClCompile Include="GameObject\Skul\WerewolfLegendary.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\NPC\Arachne.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataTable\DataTable.h">
@@ -453,6 +456,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Skul\WerewolfLegendary.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\NPC\Arachne.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

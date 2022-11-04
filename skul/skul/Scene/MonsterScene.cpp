@@ -18,7 +18,7 @@ void MonsterScene::Init()
 {
 	PlayScene::Init();
 	Player* player = (Player*)FindGameObj("player");
-	player->SetMainSkul(Skul::Types::Default, Skul::Tiers::Normal);
+	player->ObtainMainSkul(Skul::Types::Default, Skul::Tiers::Normal);
 
 	uiMgr = new PlaySceneUiMgr(this);
 	uiMgr->Init();
@@ -28,7 +28,7 @@ void MonsterScene::Reset()
 {
 	PlayScene::Reset();
 	Player* player = (Player*)FindGameObj("player");
-	player->SetMainSkul(Skul::Types::Default, Skul::Tiers::Normal);
+	player->ObtainMainSkul(Skul::Types::Default, Skul::Tiers::Normal);
 }
 
 void MonsterScene::Update(float dt)

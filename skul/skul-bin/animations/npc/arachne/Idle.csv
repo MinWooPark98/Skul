@@ -1,0 +1,13 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+ArachneIdle,1,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/npc/arachne/idle.png,0,0,142,128,71,128,0,0
+graphics/npc/arachne/idle.png,142,0,142,128,71,128,0,0
+graphics/npc/arachne/idle.png,284,0,142,128,71,128,0,0
+graphics/npc/arachne/idle.png,426,0,142,128,71,128,0,0
+graphics/npc/arachne/idle.png,568,0,142,128,71,128,0,0
+graphics/npc/arachne/idle.png,710,0,142,128,71,128,0,0
+graphics/npc/arachne/idle.png,852,0,142,128,71,128,0,0
+graphics/npc/arachne/idle.png,994,0,142,128,71,128,0,0
+graphics/npc/arachne/idle.png,1136,0,142,128,71,128,0,0

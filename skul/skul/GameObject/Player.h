@@ -71,6 +71,9 @@ protected:
 
 	Vector2f startPos;
 
+	bool isForcedMode;
+	bool forcedAnimUpdate;
+
 public:
 	Player();
 	virtual ~Player();
@@ -87,9 +90,11 @@ public:
 
 	virtual void SwitchDevMode() override;
 
-	void SetMainSkul(Skul::Types type, Skul::Tiers tier);
+	void ObtainMainSkul(Skul::Types type, Skul::Tiers tier);
+	void SetMainSkul(Skul* skul);
 	void SetSubSkul(Skul::Types type, Skul::Tiers tier);
 	void SwitchSkul();
+	bool Evolvable();
 	bool EvolveSkul();
 	void SetState(States newState);
 	void SetBoxes();
@@ -135,5 +140,8 @@ public:
 	void MeleeAttack(int dmg);
 	void NormalAttack() { MeleeAttack(attackDmg); }
 	void OnHit(int dmg);
+
+	void SetForcedMode(bool force) { isForcedMode = force; }
+	void SetForcedAnimUpdate(bool update) { forcedAnimUpdate = update; }
 };
 

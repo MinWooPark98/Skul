@@ -1,0 +1,10 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+ArachneReady,0,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/npc/arachne/ready.png,0,0,142,128,71,128,0,0
+graphics/npc/arachne/ready.png,142,0,142,128,71,128,0,0
+graphics/npc/arachne/ready.png,284,0,142,128,71,128,0,0
+graphics/npc/arachne/ready.png,426,0,142,128,71,128,0,0
+graphics/npc/arachne/ready.png,568,0,142,128,71,128,0,0
+graphics/npc/arachne/ready.png,710,0,142,128,71,128,0,0

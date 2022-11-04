@@ -25,8 +25,6 @@ void Witch::Init()
 
 void Witch::Activate()
 {
-	Scene* currScene = SCENE_MGR->GetCurrentScene();
-	Player* player = (Player*)currScene->FindGameObj("player");
 	switch (Utils::RandomRange(0, 2))
 	{
 	case 0:

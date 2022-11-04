@@ -217,3 +217,11 @@ animations/player/werewolf/legendary/Ripper.csv,3
 graphics/player/werewolf/legendary/symbol.png,0
 graphics/player/werewolf/legendary/Predation_4.png,0
 graphics/player/werewolf/legendary/Ripper_4.png,0
+graphics/npc/arachne/idle.png,0
+graphics/npc/arachne/ready.png,0
+graphics/npc/arachne/attack.png,0
+graphics/npc/arachne/cocoon.png,0
+animations/npc/Arachne/Idle.csv,3
+animations/npc/Arachne/Ready.csv,3
+animations/npc/Arachne/Attack.csv,3
+animations/npc/Arachne/Cocoon.csv,3
