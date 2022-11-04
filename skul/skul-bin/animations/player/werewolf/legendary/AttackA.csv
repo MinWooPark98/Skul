@@ -1,0 +1,10 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+WerewolfLegendaryAttackA,0,12,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/player/werewolf/legendary/werewolf(legendary).png,7,482,55,60,27.5,60,0,0
+graphics/player/werewolf/legendary/werewolf(legendary).png,71,482,54,58,27,58,0,0
+graphics/player/werewolf/legendary/werewolf(legendary).png,134,482,95,68,47.5,68,0,0
+graphics/player/werewolf/legendary/werewolf(legendary).png,238,492,96,60,48,60,0,0
+graphics/player/werewolf/legendary/werewolf(legendary).png,343,505,68,46,34,46,0,0
+graphics/player/werewolf/legendary/werewolf(legendary).png,445,482,67,46,33.5,46,0,0

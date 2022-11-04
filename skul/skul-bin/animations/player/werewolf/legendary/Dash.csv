@@ -1,0 +1,7 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+WerewolfLegendaryDash,0,10,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/player/werewolf/legendary/werewolf(legendary).png,7,173,77,50,38.5,50,0,0
+graphics/player/werewolf/legendary/werewolf(legendary).png,93,173,66,49,33,49,0,0
+graphics/player/werewolf/legendary/werewolf(legendary).png,168,173,66,48,33,48,0,0
