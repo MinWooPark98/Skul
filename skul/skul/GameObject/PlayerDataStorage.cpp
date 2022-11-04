@@ -30,15 +30,21 @@ void PlayerDataStorage::Save()
 	speedAdd = player->GetSpeedAdd();
 	attackAdd = player->GetAttackAdd();
 	mainSkul = new SkulData();
-	mainSkul->offType = player->GetMainSkul()->GetOffType();
-	mainSkul->type = player->GetMainSkul()->GetType();
-	mainSkul->tier = player->GetMainSkul()->GetTier();
+	auto currMainSkul = player->GetMainSkul();
+	mainSkul->offType = currMainSkul->GetOffType();
+	mainSkul->type = currMainSkul->GetType();
+	mainSkul->tier = currMainSkul->GetTier();
+	mainSkul->skillA = currMainSkul->GetSkillA();
+	mainSkul->skillB = currMainSkul->GetSkillB();
 	if (player->GetSubSkul() == nullptr)
 		return;
 	subSkul = new SkulData();
-	subSkul->offType = player->GetSubSkul()->GetOffType();
-	subSkul->type = player->GetSubSkul()->GetType();
-	subSkul->tier = player->GetSubSkul()->GetTier();
+	auto currSubSkul = player->GetSubSkul();
+	subSkul->offType = currSubSkul->GetOffType();
+	subSkul->type = currSubSkul->GetType();
+	subSkul->tier = currSubSkul->GetTier();
+	subSkul->skillA = currSubSkul->GetSkillA();
+	subSkul->skillB = currSubSkul->GetSkillB();
 }
 
 void PlayerDataStorage::Load()
@@ -50,6 +56,11 @@ void PlayerDataStorage::Load()
 	player->SetSpeedAdd(speedAdd);
 	player->SetAttackAdd(attackAdd);
 	player->SetMainSkul(mainSkul->type, mainSkul->tier);
-	if (subSkul != nullptr)
-		player->SetSubSkul(subSkul->type, subSkul->tier);
+	player->GetMainSkul()->SetSkillA(mainSkul->skillA);
+	player->GetMainSkul()->SetSkillB(mainSkul->skillB);
+	if (subSkul == nullptr)
+		return;
+	player->SetSubSkul(subSkul->type, subSkul->tier);
+	player->GetSubSkul()->SetSkillA(subSkul->skillA);
+	player->GetSubSkul()->SetSkillB(subSkul->skillB);
 }

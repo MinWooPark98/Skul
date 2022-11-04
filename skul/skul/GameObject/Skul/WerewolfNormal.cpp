@@ -1,14 +1,9 @@
 #include "WerewolfNormal.h"
 #include "../../Framework/ResourceMgr.h"
 #include "../Player.h"
-#include "../../Scene/SceneMgr.h"
-#include "../../Scene/PlayScene.h"
 #include "../../Framework/SoundMgr.h"
-#include "../../Scene/SceneMgr.h"
-#include "../Collider.h"
 
 WerewolfNormal::WerewolfNormal()
-	:Skul(OffensiveTypes::Speed, Types::Werewolf, Tiers::Normal), skill(Skills::None)
 {
 }
 
@@ -18,7 +13,8 @@ WerewolfNormal::~WerewolfNormal()
 
 void WerewolfNormal::Init()
 {
-	Skul::Init();
+	Werewolf::Init();
+	tier = Tiers::Normal;
 	SetSymbol(RESOURCE_MGR->GetTexture("graphics/player/werewolf/normal/symbol.png"));
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("WerewolfNormalIdle"));
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("WerewolfNormalWalk"));
@@ -87,22 +83,13 @@ void WerewolfNormal::Init()
 
 void WerewolfNormal::Reset()
 {
-	Skul::Reset();
-	skill = (Skills)Utils::RandomRange(0, (int)Skills::Count);
-	switch (skill)
-	{
-	case WerewolfNormal::Skills::Predation:
-		SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/werewolf/normal/predation.png"));
-		break;
-	case WerewolfNormal::Skills::Ripper:
-		SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/werewolf/normal/ripper.png"));
-		break;
-	}
+	Werewolf::Reset();
+	SetSkillA(skillSet[Utils::RandomRange(0, skillSet.size())]);
 }
 
 void WerewolfNormal::SkillA()
 {
-	switch (skill)
+	switch (skillA)
 	{
 	case WerewolfNormal::Skills::Predation:
 		animator->Play("WerewolfNormalPredation");
@@ -116,6 +103,22 @@ void WerewolfNormal::SkillA()
 void WerewolfNormal::SkillB()
 {
 	player->SetState(Player::States::Idle);
+}
+
+void WerewolfNormal::SetSkillA(Skills skill)
+{
+	Werewolf::SetSkillA(skill);
+	switch (skillA)
+	{
+	case WerewolfNormal::Skills::Predation:
+		SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/werewolf/normal/predation.png"));
+		break;
+	case WerewolfNormal::Skills::Ripper:
+		SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/werewolf/normal/ripper.png"));
+		break;
+	}
+	if(player != nullptr && player->ResetPlayerUi != nullptr)
+		player->ResetPlayerUi();
 }
 
 void WerewolfNormal::SetAnimEvent()
@@ -135,31 +138,4 @@ void WerewolfNormal::SetAnimEvent()
 	ev3.frame = 2;
 	ev3.onEvent = bind(&Player::NormalAttack, player);
 	animator->AddEvent(ev3);
-}
-
-void WerewolfNormal::Predation()
-{
-	auto playerDirX = Utils::UnitizationFloat(player->GetLastDirX());
-	player->Translate({ player->GetGlobalBounds().width * playerDirX, 0.f});
-	Scene* currScene = SCENE_MGR->GetCurrentScene();
-	auto& layOut = currScene->GetLayout();
-	for (auto obj : *layOut[(int)Scene::Layer::Collider])
-	{
-		if (((Collider*)obj)->GetType() != Collider::Types::AllSide)
-			continue;
-		if (player->GetHitBounds().intersects(obj->GetHitBounds()))
-		{
-			if (playerDirX > 0.f)
-				player->SetPos({ obj->GetHitBounds().left - player->GetHitBounds().width * 0.5f, player->GetPos().y });
-			else
-				player->SetPos({ obj->GetHitBounds().left + obj->GetHitBounds().width + player->GetHitBounds().width * 0.5f, player->GetPos().y });
-			break;
-		}
-	}
-	player->MeleeAttack(player->GetAttackDmg() * 2);
-}
-
-void WerewolfNormal::Ripper()
-{
-	player->MeleeAttack(player->GetAttackDmg() * 2);
 }

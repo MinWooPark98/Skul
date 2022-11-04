@@ -9,6 +9,8 @@ public:
 		Skul::OffensiveTypes offType;
 		Skul::Types type;
 		Skul::Tiers tier;
+		Skul::Skills skillA;
+		Skul::Skills skillB;
 	};
 private:
 	SkulData* mainSkul;

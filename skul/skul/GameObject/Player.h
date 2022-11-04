@@ -90,6 +90,7 @@ public:
 	void SetMainSkul(Skul::Types type, Skul::Tiers tier);
 	void SetSubSkul(Skul::Types type, Skul::Tiers tier);
 	void SwitchSkul();
+	bool EvolveSkul();
 	void SetState(States newState);
 	void SetBoxes();
 
@@ -125,8 +126,8 @@ public:
 	Object* GetPlatform() const { return platform; }
 	void OnCollisionBlock(const FloatRect& blockBound);
 
-	const Skul* GetMainSkul() const { return mainSkul; }
-	const Skul* GetSubSkul() const { return subSkul; }
+	Skul* GetMainSkul() { return mainSkul; }
+	Skul* GetSubSkul() { return subSkul; }
 
 	function<void()> ResetPlayerUi;
 

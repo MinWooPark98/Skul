@@ -25,8 +25,5 @@ void Ogre::Init()
 
 void Ogre::Activate()
 {
-	Scene* currScene = SCENE_MGR->GetCurrentScene();
-	Player* player = (Player*)currScene->FindGameObj("player");
-	player->SetJumpableCount(player->GetJumpableCount() + 1);
-	++effectCnt;
+	// 아이템 생기면 추가
 }

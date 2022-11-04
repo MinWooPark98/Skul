@@ -21,16 +21,31 @@ public:
 	};
 	enum class Tiers
 	{
+		None = -1,
 		Normal,
 		Rare,
 		Unique,
 		Legendary,
+	};
+	enum class Skills
+	{
+		None = -1,
+		SkullThrow,
+		Reborn,
+		Predation,
+		Ripper,
+		Count,
 	};
 
 protected:
 	OffensiveTypes offType;
 	Types type;
 	Tiers tier;
+
+	Skills skillA;
+	Skills skillB;
+
+	vector<Skills> skillSet;
 
 	Animator* animator;
 	Player* player;
@@ -77,6 +92,8 @@ public:
 
 	virtual void SetPlayer(Player* player);
 	virtual void SetAnimEvent() = 0;
+	virtual void SetSkillA(Skills skill) { skillA = skill; }
+	virtual void SetSkillB(Skills skill) { skillB = skill; }
 
 	void SetSymbol(const Texture* tex) { symbol = tex; }
 	const Texture* GetSymbol() const { return symbol; }
@@ -88,5 +105,7 @@ public:
 	OffensiveTypes GetOffType() const{ return offType; }
 	Types GetType() const { return type; }
 	Tiers GetTier() const { return tier; }
+	Skills GetSkillA() const { return skillA; }
+	Skills GetSkillB() const { return skillB; }
 };
 

@@ -214,6 +214,8 @@
     <ClCompile Include="Ui\UiMgr.cpp" />
     <ClCompile Include="GameObject\NPC\Witch.cpp" />
     <ClCompile Include="GameObject\Skul\WerewolfNormal.cpp" />
+    <ClCompile Include="GameObject\Skul\WerewolfRare.cpp" />
+    <ClCompile Include="GameObject\Skul\Werewolf.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rd\rapidcsv.h" />
@@ -286,6 +288,8 @@
     <ClInclude Include="Ui\UiMgr.h" />
     <ClInclude Include="GameObject\NPC\Witch.h" />
     <ClInclude Include="GameObject\Skul\WerewolfNormal.h" />
+    <ClInclude Include="GameObject\Skul\WerewolfRare.h" />
+    <ClInclude Include="GameObject\Skul\Werewolf.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

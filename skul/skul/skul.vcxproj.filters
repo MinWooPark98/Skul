@@ -219,6 +219,12 @@
     <ClCompile Include="DataTable\StatTable.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Skul\WerewolfRare.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Skul\Werewolf.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataTable\DataTable.h">
@@ -429,6 +435,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="DataTable\StatTable.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Skul\WerewolfRare.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Skul\Werewolf.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

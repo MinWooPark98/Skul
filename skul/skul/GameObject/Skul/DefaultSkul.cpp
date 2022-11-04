@@ -19,6 +19,13 @@ DefaultSkul::~DefaultSkul()
 
 void DefaultSkul::Init()
 {
+	Skul::Init();
+
+	skillSet.push_back(Skills::SkullThrow);
+	skillSet.push_back(Skills::Reborn);
+	skillA = Skills::SkullThrow;
+	skillB = Skills::Reborn;
+	
 	SetSymbol(RESOURCE_MGR->GetTexture("graphics/player/default/symbol.png"));
 	SetSkillAIcon(RESOURCE_MGR->GetTexture("graphics/player/default/skull_throw.png"));
 	SetSkillBIcon(RESOURCE_MGR->GetTexture("graphics/player/default/rebone.png"));
@@ -33,7 +40,6 @@ void DefaultSkul::Init()
 	head->SetHitBoxOrigin(Origins::MC);
 	head->SetActive(false);
 
-	Skul::Init();
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulIdle"));
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulWalk"));
 	animator->AddClip(*ResourceMgr::GetInstance()->GetAnimationClip("DefaultSkulDash"));

@@ -87,6 +87,9 @@ void Player::Update(float dt)
 			SwitchSkul();
 	}
 
+	if (InputMgr::GetKeyDown(Keyboard::Q))
+		EvolveSkul();
+
 	mainSkul->Update(dt);
 
 	if (InputMgr::GetKeyDown(Keyboard::A))
@@ -319,18 +322,14 @@ void Player::SetMainSkul(Skul::Types type, Skul::Tiers tier)
 	mainSkul = skulSet->Get(type, tier);
 	mainSkul->SetPlayer(this);
 	mainSkul->SetTarget(&sprite);
-	ResetStat();
-	SetState(States::Idle);
-	mainSkul->Idle();
 	mainSkul->QuitAttackA = bind(&Player::OnCompleteAttackA, this);
 	mainSkul->QuitAttackB = bind(&Player::OnCompleteAttackB, this);
 	mainSkul->QuitAction = bind(&Player::SetState, this, States::Idle);
+	ResetStat();
+	SetState(States::Idle);
+	mainSkul->Idle();
 	if (ResetPlayerUi != nullptr)
 		ResetPlayerUi();
-
-	cout << speed << endl;
-	cout << attackDmg << endl;
-	cout << dashableCount << endl;
 }
 
 void Player::SetSubSkul(Skul::Types type, Skul::Tiers tier)
@@ -349,11 +348,30 @@ void Player::SwitchSkul()
 	subSkul = temp;
 	ResetStat();
 	ResetPlayerUi();
+	SetState(States::Idle);
+	mainSkul->Idle();
 	mainSkul->SwitchSkul();
+}
 
-	cout << speed << endl;
-	cout << attackDmg << endl;
-	cout << dashableCount << endl;
+bool Player::EvolveSkul()
+{
+	if (!skulSet->Evolvable(mainSkul))
+		return false;
+	Skul* newSkul = skulSet->Get(mainSkul->GetType(), (Skul::Tiers)((int)mainSkul->GetTier() + 1));
+	newSkul->SetSkillA(mainSkul->GetSkillA());
+	newSkul->SetSkillB(mainSkul->GetSkillB());
+	mainSkul = newSkul;
+	mainSkul->SetPlayer(this);
+	mainSkul->SetTarget(&sprite);
+	mainSkul->QuitAttackA = bind(&Player::OnCompleteAttackA, this);
+	mainSkul->QuitAttackB = bind(&Player::OnCompleteAttackB, this);
+	mainSkul->QuitAction = bind(&Player::SetState, this, States::Idle);
+	ResetStat();
+	SetState(States::Idle);
+	mainSkul->Idle();
+	ResetPlayerUi();
+	mainSkul->SwitchSkul();
+	return true;
 }
 
 void Player::SetState(States newState)

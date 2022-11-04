@@ -1,0 +1,10 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+WerewolfRareIdle,1,10,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/player/werewolf/rare/werewolf(rare).png,7,15,53,45,26.5,45,0,0
+graphics/player/werewolf/rare/werewolf(rare).png,69,15,52,46,26,46,0,0
+graphics/player/werewolf/rare/werewolf(rare).png,130,15,53,47,26.5,47,0,0
+graphics/player/werewolf/rare/werewolf(rare).png,192,15,53,48,26.5,48,0,0
+graphics/player/werewolf/rare/werewolf(rare).png,254,15,55,46,27.5,46,0,0
+graphics/player/werewolf/rare/werewolf(rare).png,318,15,52,45,26,45,0,0

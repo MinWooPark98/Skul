@@ -64,7 +64,7 @@ void PlayerUi::SetPos(const Vector2f& pos)
 	currHpBar.setPosition({ pos.x + bound.width * 0.25f, pos.y - bound.height * 0.25f });
 }
 
-void PlayerUi::SetPlayer(const Player* player)
+void PlayerUi::SetPlayer(Player* player)
 {
 	this->player = player;
 	ResetUi();
@@ -72,16 +72,18 @@ void PlayerUi::SetPlayer(const Player* player)
 
 void PlayerUi::ResetUi()
 {
-	const Skul* mainSkul = player->GetMainSkul();
+	Skul* mainSkul = player->GetMainSkul();
 	if (mainSkul != nullptr)
 	{
 		symbol.SetTexture(*mainSkul->GetSymbol());
 		symbol.SetOrigin(Origins::MC);
-		skillAIcon.SetTexture(*mainSkul->GetSkillAIcon());
+		if(mainSkul->GetSkillAIcon() != nullptr)
+			skillAIcon.SetTexture(*mainSkul->GetSkillAIcon());
 		skillAIcon.SetOrigin(Origins::MC);
 		if (mainSkul->GetTier() >= Skul::Tiers::Unique || mainSkul->GetType() == Skul::Types::Default)
 		{
-			skillBIcon.SetTexture(*mainSkul->GetSkillBIcon());
+			if(mainSkul->GetSkillBIcon() != nullptr)
+				skillBIcon.SetTexture(*mainSkul->GetSkillBIcon());
 			skillBIcon.SetOrigin(Origins::MC);
 			skillBFrame.SetActive(true);
 			skillBIcon.SetActive(true);

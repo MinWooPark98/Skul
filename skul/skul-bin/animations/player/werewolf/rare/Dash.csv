@@ -1,0 +1,7 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+WerewolfRareDash,0,10,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/player/werewolf/rare/werewolf(rare).png,7,137,72,40,36,40,0,0
+graphics/player/werewolf/rare/werewolf(rare).png,88,137,58,38,29,38,0,0
+graphics/player/werewolf/rare/werewolf(rare).png,155,137,54,38,27,38,0,0

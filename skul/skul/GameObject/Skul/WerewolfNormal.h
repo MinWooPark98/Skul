@@ -1,19 +1,8 @@
 #pragma once
-#include "Skul.h"
+#include "Werewolf.h"
 
-class WerewolfNormal : public Skul
+class WerewolfNormal : public Werewolf
 {
-public:
-	enum class Skills
-	{
-		None = -1,
-		Predation,
-		Ripper,
-		Count,
-	};
-protected:
-	Skills skill;
-
 public:
 	WerewolfNormal();
 	virtual ~WerewolfNormal();
@@ -33,9 +22,7 @@ public:
 	virtual void SkillA();
 	virtual void SkillB();
 
+	virtual void SetSkillA(Skills skill) override;
 	virtual void SetAnimEvent();
-
-	void Predation();
-	void Ripper();
 };
 

@@ -13,7 +13,7 @@ protected:
 
 	RectangleShape currHpBar; 
 
-	const Player* player;
+	Player* player;
 
 public:
 	PlayerUi();
@@ -25,7 +25,7 @@ public:
 
 	virtual void SetPos(const Vector2f& pos) override;
 
-	void SetPlayer(const Player* player);
+	void SetPlayer(Player* player);
 	void ResetUi();
 };
 

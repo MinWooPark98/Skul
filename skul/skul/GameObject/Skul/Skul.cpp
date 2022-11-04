@@ -2,7 +2,8 @@
 #include "../../Framework/SoundMgr.h"
 
 Skul::Skul(OffensiveTypes offType, Types type, Tiers tier)
-	:offType(offType), type(type), tier(tier), animator(nullptr), player(nullptr), symbol(nullptr), skillAIcon(nullptr), skillBIcon(nullptr)
+	:offType(offType), type(type), tier(tier), animator(nullptr), player(nullptr), symbol(nullptr),
+	skillAIcon(nullptr), skillBIcon(nullptr), skillA(Skills::None), skillB(Skills::None)
 {
 }
 
