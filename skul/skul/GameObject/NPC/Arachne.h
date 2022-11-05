@@ -14,6 +14,7 @@ public:
 	virtual ~Arachne();
 
 	virtual void Init() override;
+	virtual void Reset() override;
 	virtual void Update(float dt) override;
 	virtual void Activate() override;
 

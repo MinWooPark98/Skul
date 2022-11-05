@@ -42,12 +42,22 @@ void Arachne::Init()
 	effectLimitCnt = 1;
 }
 
+void Arachne::Reset()
+{
+	NPC::Reset();
+	isActive = false;
+}
+
 void Arachne::Update(float dt)
 {
 	NPC::Update(dt);
 	cocoonAnim->Update(dt);
 	if (isActive)
 	{
+		auto playerDir = Utils::Normalize(evolvingPoint - player->GetPos());
+		player->SetDirection(playerDir);
+		if (!Utils::EqualFloat(playerDir.x, 0.f))
+			player->SetScale({ playerDir.x > 0.f ? 1.f : -1.f, 1.f });
 		if (Utils::Distance(player->GetPos(), evolvingPoint) < 1.f)
 		{
 			player->SetState(Player::States::Idle);
@@ -69,7 +79,6 @@ void Arachne::Activate()
 	player->SetForcedMode(true);
 	player->SetForcedAnimUpdate(true);
 	player->SetState(Player::States::Move);
-	player->SetDirection(Utils::Normalize(evolvingPoint - player->GetPos()));
 }
 
 void Arachne::EvolveSkul()
