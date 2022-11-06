@@ -236,3 +236,11 @@ graphics/boss/elderent/head1.png,0
 graphics/boss/elderent/jaw1.png,0
 animations/boss/elderent/Head1Idle.csv,3
 animations/boss/elderent/Jaw1Idle.csv,3
+graphics/boss/elderent/idle_left1.png,0
+animations/boss/elderent/LeftHand1Idle.csv,3
+graphics/boss/elderent/idle_right1.png,0
+animations/boss/elderent/RightHand1Idle.csv,3
+graphics/boss/elderent/fist_left1.png,0
+animations/boss/elderent/LeftHand1CompleteStomp.csv,3
+graphics/boss/elderent/fist_right1.png,0
+animations/boss/elderent/RightHand1CompleteStomp.csv,3

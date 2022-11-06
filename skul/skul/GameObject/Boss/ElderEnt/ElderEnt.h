@@ -7,6 +7,7 @@ class Collider;
 class SpriteObj;
 class ElderEntHead;
 class ElderEntJaw;
+class ElderEntHand;
 
 class ElderEnt : public Object
 {
@@ -39,10 +40,8 @@ protected:
 	list<Collider*> bodyPlatforms;
 	Vector2f bodyIdlePos;
 
-	SpriteObj* leftHand;
-	Animator* leftHandAnim;
-	SpriteObj* rightHand;
-	Animator* rightHandAnim;
+	ElderEntHand* leftHand;
+	ElderEntHand* rightHand;
 
 	list<SpriteObj*> branches;
 	list<Animator*> branchAnims;
@@ -51,7 +50,8 @@ protected:
 	int totalHp;
 	int currHp;
 
-	bool playerHit;
+	int stompMaxCount;
+	int stompCount;
 
 public:
 	ElderEnt();
@@ -67,7 +67,13 @@ public:
 	virtual void SwitchDevMode() override;
 
 	void SetState(States state);
+	States GetState() const { return currState; }
 	void NextPhase();
+
+	void AddStompCnt() { ++stompCount; }
+	void SetStompCnt(int count) { stompCount = count; }
+	int GetStompCnt() { return stompCount; }
+	int GetStompMaxCnt() { return stompMaxCount; }
 
 	void OnHit(int dmg);
 };

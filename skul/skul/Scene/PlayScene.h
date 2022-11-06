@@ -6,6 +6,8 @@ class PlayScene : public Scene
 protected:
 	string mapFilePath;
 
+	bool viewFollowPlayer;
+
 public:
 	PlayScene(Scenes scene);
 	virtual ~PlayScene();
@@ -20,6 +22,8 @@ public:
 
 	virtual void Enter() override;
 	virtual void Exit() override;
+
+	void SetViewFollowPlayer(bool follow) { viewFollowPlayer = follow; }
 
 	void SetMapFilePath(const string& path) { mapFilePath = path; }
 };

@@ -2,4 +2,4 @@ ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
 DefaultSkulDash_no_head,0,10,,,,,,
 ,,,,,,,,
 TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
-graphics/player/default/default_no_head.png,5,104,35,24,17.5,24,0,0
+graphics/player/default/default_no_head.png,7,106,31,20,15.5,20,0,0

@@ -25,6 +25,7 @@ public:
 	void SetSize(Vector2f size);
 	void SetScale(Vector2f scale);
 	void SetHitBoxOrigin(Origins origin) { Utils::SetOrigin(hitbox, origin); }
+	void SetHitBoxOrigin(const Vector2f& origin) { hitbox.setOrigin(origin); }
 	void Rotate() { sprite.rotate(rotation); }
 
 	FloatRect GetGlobalBounds() const;

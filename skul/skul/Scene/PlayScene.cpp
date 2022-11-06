@@ -24,7 +24,7 @@
 #include "../Ui/UiMgr.h"
 
 PlayScene::PlayScene(Scenes scene)
-	:Scene(scene)
+	:Scene(scene), viewFollowPlayer(true)
 {
 }
 
@@ -178,7 +178,8 @@ void PlayScene::Update(float dt)
 	if (dt >= 0.05f)
 		return;
 	Scene::Update(dt);
-	worldView.setCenter(FindGameObj("player")->GetPos());
+	if(viewFollowPlayer)
+		worldView.setCenter(FindGameObj("player")->GetPos());
 
 	if (InputMgr::GetKeyDown(Keyboard::F1))
 	{

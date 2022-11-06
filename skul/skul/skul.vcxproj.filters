@@ -243,6 +243,18 @@
     <ClCompile Include="GameObject\Boss\ElderEnt\ElderEntJaw.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Boss\ElderEnt\ElderEntLeftHand.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Boss\ElderEnt\ElderEntHand.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Boss\ElderEnt\ElderEntRightHand.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Boss\Boss.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataTable\DataTable.h">
@@ -477,6 +489,18 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Boss\ElderEnt\ElderEntJaw.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Boss\ElderEnt\ElderEntLeftHand.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Boss\ElderEnt\ElderEntHand.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Boss\ElderEnt\ElderEntRightHand.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Boss\Boss.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

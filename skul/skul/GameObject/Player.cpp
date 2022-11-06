@@ -10,6 +10,7 @@
 #include "Skul/SkulSet.h"
 #include "../DataTable/DataTableMGR.h"
 #include "../DataTable/StatTable.h"
+#include "Boss/Boss.h"
 
 Player::Player()
 	:mainSkul(nullptr), subSkul(nullptr),
@@ -517,6 +518,15 @@ void Player::MeleeAttack(int dmg)
 		if (attackBox.getGlobalBounds().intersects(enemy->GetHitBounds()))
 		{
 			((Enemy*)enemy)->OnHit(dmg);
+		}
+	}
+	for (auto boss : *layOut[(int)Scene::Layer::Boss])
+	{
+		if (!boss->GetActive())
+			continue;
+		if (attackBox.getGlobalBounds().intersects(boss->GetHitBounds()))
+		{
+			((Boss*)boss)->OnHit(dmg);
 		}
 	}
 }

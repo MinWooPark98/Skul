@@ -1,12 +1,14 @@
 #pragma once
-#include "../../SpriteObj.h"
+#include "../Boss.h"
 
 class Animator;
 class ElderEnt;
+class SpriteObj;
 
-class ElderEntJaw : public SpriteObj
+class ElderEntJaw : public Boss
 {
 protected:
+	SpriteObj* jaw;
 	Animator* jawAnim;
 
 	ElderEnt* mainBody;
@@ -17,8 +19,10 @@ public:
 
 	virtual void Init() override;
 	virtual void Update(float dt) override;
+	virtual void Draw(RenderWindow& window) override;
 
+	virtual void SetPos(const Vector2f& pos) override;
 	void SetMainBody(ElderEnt* body) { mainBody = body; }
-	void OnHit(int dmg);
+	virtual void OnHit(int dmg) override;
 };
 

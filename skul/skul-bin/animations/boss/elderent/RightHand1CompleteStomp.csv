@@ -1,0 +1,13 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+ElderEntRightHand1CompleteStomp,1,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/boss/elderent/fist_right1.png,0,0,165,144,81,142,0,0
+graphics/boss/elderent/fist_right1.png,0,0,165,144,84,146,0,0
+graphics/boss/elderent/fist_right1.png,0,0,165,144,81,142,0,0
+graphics/boss/elderent/fist_right1.png,0,0,165,144,84,146,0,0
+graphics/boss/elderent/fist_right1.png,0,0,165,144,81,142,0,0
+graphics/boss/elderent/fist_right1.png,0,0,165,144,84,146,0,0
+graphics/boss/elderent/fist_right1.png,0,0,165,144,81,142,0,0
+graphics/boss/elderent/fist_right1.png,0,0,165,144,84,146,0,0
+graphics/boss/elderent/fist_right1.png,0,0,165,144,82.5,144,0,0

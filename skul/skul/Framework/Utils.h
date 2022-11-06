@@ -34,7 +34,7 @@ public:
 	static float RandomRange(float min, float max);
 	static float RandomRange();
 	static Vector2f RandAreaPoint();
-	static Vector2f RandContact(float rad);
+	static Vector2f RandContact();
 
 	static float SqrMagnitude(const Vector2f& vec);
 	static float Magnitude(const Vector2f& vec);

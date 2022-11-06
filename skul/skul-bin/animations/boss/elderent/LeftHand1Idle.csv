@@ -1,0 +1,8 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+ElderEntLeftHand1Idle,1,7,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/boss/elderent/idle_left1.png,0,0,166,147,83,147,0,0
+graphics/boss/elderent/idle_left1.png,166,0,166,147,83,147,0,0
+graphics/boss/elderent/idle_left1.png,332,0,166,147,83,147,0,0
+graphics/boss/elderent/idle_left1.png,498,0,166,147,83,147,0,0

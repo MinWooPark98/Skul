@@ -146,6 +146,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObject\Boss\Boss.cpp" />
+    <ClCompile Include="GameObject\Boss\ElderEnt\ElderEntHand.cpp" />
+    <ClCompile Include="GameObject\Boss\ElderEnt\ElderEntLeftHand.cpp" />
+    <ClCompile Include="GameObject\Boss\ElderEnt\ElderEntRightHand.cpp" />
     <ClCompile Include="GameObject\Boss\ElderEnt\ElderEntHead.cpp" />
     <ClCompile Include="GameObject\Boss\ElderEnt\ElderEntJaw.cpp" />
     <ClCompile Include="GameObject\Boss\ElderEnt\ElderEnt.cpp" />
@@ -226,6 +230,10 @@
   <ItemGroup>
     <ClInclude Include="3rd\rapidcsv.h" />
     <ClInclude Include="3rd\SingleTon.h" />
+    <ClInclude Include="GameObject\Boss\Boss.h" />
+    <ClInclude Include="GameObject\Boss\ElderEnt\ElderEntHand.h" />
+    <ClInclude Include="GameObject\Boss\ElderEnt\ElderEntLeftHand.h" />
+    <ClInclude Include="GameObject\Boss\ElderEnt\ElderEntRightHand.h" />
     <ClInclude Include="GameObject\Boss\ElderEnt\ElderEntHead.h" />
     <ClInclude Include="GameObject\Boss\ElderEnt\ElderEntJaw.h" />
     <ClInclude Include="GameObject\Boss\ElderEnt\ElderEnt.h" />

@@ -67,6 +67,7 @@ public:
 	void SetPause(bool pause) { isPause = pause; }
 	bool GetPause() const { return isPause; }
 
+	void SetWorldViewCenter(const Vector2f& view) { worldView.setCenter(view.x, view.y); }
 	View& GetWorldView() { return worldView; }
 	View& GetUiView() { return uiView; }
 

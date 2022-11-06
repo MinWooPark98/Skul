@@ -1,6 +1,6 @@
-ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
 DefaultSkulFall_no_head,0,6,,,,,,
 ,,,,,,,,
 TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
-graphics/player/default/default_no_head.png,5,182,34,28,17,28,0,0
-graphics/player/default/default_no_head.png,44,182,34,33,17,33,0,0
+graphics/player/default/default_no_head.png,7,184,30,24,15,24,0,0
+graphics/player/default/default_no_head.png,46,184,30,29,15,29,0,0

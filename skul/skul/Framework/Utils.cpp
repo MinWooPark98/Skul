@@ -42,10 +42,10 @@ float Utils::RandomRange()
 
 Vector2f Utils::RandAreaPoint()
 {
-	return RandomRange() * RandContact(1.f);
+	return RandomRange() * RandContact();
 }
 
-Vector2f Utils::RandContact(float rad)
+Vector2f Utils::RandContact()
 {
 	float radian = RandomRange(0.f, M_PI * 2);
 	return Vector2f({ cos(radian),sin(radian) });
