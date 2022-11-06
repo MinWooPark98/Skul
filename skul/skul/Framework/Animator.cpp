@@ -42,7 +42,7 @@ void Animator::Update(float dt)
     if (accumTime < frameDuration)
         return;
 
-    accumTime = 0.f;
+    accumTime = accumTime - frameDuration;
 
     int prevFrame = currFrame;
     ++currFrame;

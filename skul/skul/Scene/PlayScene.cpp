@@ -180,22 +180,6 @@ void PlayScene::Update(float dt)
 	Scene::Update(dt);
 	worldView.setCenter(FindGameObj("player")->GetPos());
 
-	Vector2i size = FRAMEWORK->GetWindowSize();
-	Vector2f worldViewCenter = worldView.getCenter();
-	if (worldViewCenter.x < size.x * 0.25f)
-		worldViewCenter.x = size.x * 0.25f;
-
-	if (worldViewCenter.y < size.y * 0.25f)
-		worldViewCenter.y = size.y * 0.25f;
-
-	if (worldViewCenter.x > size.x * 1.75f)
-		worldViewCenter.x = size.x * 1.75f;
-
-	if (worldViewCenter.y > size.y * 1.75f)
-		worldViewCenter.y = size.y * 1.75f;
-
-	worldView.setCenter(worldViewCenter);
-
 	if (InputMgr::GetKeyDown(Keyboard::F1))
 	{
 		for (auto obj : objList)

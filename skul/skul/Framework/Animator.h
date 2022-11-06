@@ -37,6 +37,7 @@ public:
 
 	int GetCurrentFrame() const;
 	void SetFrame(const AnimationFrame& frame);
+	AnimationFrame& GetFrame() { return currClip->frames[currFrame]; }
 
 	void Play(string id, bool clearQueue = true);
 	void PlayQueue(string id);

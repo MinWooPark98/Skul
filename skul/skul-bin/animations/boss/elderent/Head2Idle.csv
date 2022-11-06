@@ -1,0 +1,24 @@
+ID,LOOPTYPE (0: Single 1: Move),FPS,,,,,,
+ElderEntHead2Idle,1,10,,,,,,
+,,,,,,,,
+TEXTURE ID,L,T,W,H,X,Y,FlipX,FlipY
+graphics/boss/elderent/head2.png,0,0,244,172,140,150,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,151,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,152,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,153,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,154,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,155,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,156,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,157,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,158,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,159,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,160,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,159,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,158,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,157,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,156,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,155,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,154,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,153,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,152,0,0
+graphics/boss/elderent/head2.png,0,0,244,172,140,151,0,0

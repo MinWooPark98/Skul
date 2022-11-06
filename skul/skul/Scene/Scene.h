@@ -28,6 +28,7 @@ public:
 		Reward,
 		NPC,
 		Enemy,
+		Boss,
 		Player,
 		Collider,
 		Front,

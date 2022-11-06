@@ -230,3 +230,9 @@ sound/Arachne_CocoonAwake.wav,2
 sound/Arachne_CocoonAwakeDone.wav,2
 sound/Atk_Sword_Small.wav,2
 sound/Atk_Sword_Large.wav,2
+graphics/mapeditor/background/background_11.png,0
+graphics/boss/elderent/body1.png,0
+graphics/boss/elderent/head1.png,0
+graphics/boss/elderent/jaw1.png,0
+animations/boss/elderent/Head1Idle.csv,3
+animations/boss/elderent/Jaw1Idle.csv,3
